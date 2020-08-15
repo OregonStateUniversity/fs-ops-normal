@@ -7,10 +7,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Hose Jockey',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Hose Jockey: Initial Attack'),
+      home: MyHomePage(title: 'Hose Jockey'),
     );
   }
 }
