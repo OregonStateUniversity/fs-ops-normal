@@ -5,4 +5,5 @@ class Estimate {
   final double acres;
 
   Estimate({this.acres});
+
 }
