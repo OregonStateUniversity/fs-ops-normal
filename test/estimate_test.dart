@@ -15,6 +15,10 @@ void main() {
       expect(estimate.acres, equals(acres));
     });
 
+    test('trunk line length is 1000 + 200 * acres', () {
+      expect(estimate.trunkLineLength, equals(9400));
+    });
+
   });
 
 }

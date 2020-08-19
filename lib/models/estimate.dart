@@ -6,4 +6,6 @@ class Estimate {
 
   Estimate({this.acres});
 
+  double get trunkLineLength => BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;
+  
 }
