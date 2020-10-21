@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'new_estimate.dart';
 
 class MainScreen extends StatelessWidget {
   @override
  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TEMP'),
+        title: Text('Main Screen'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Main Screen'),
-          ],
+        child: ElevatedButton(
+          child: Text('Estimate'),
+          onPressed: (){
+            // Navigate to other page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NewEstimateScreen()),
+            );
+          },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'New estimate',
-        child: Icon(Icons.add),
-      )
     );
   }
 }
