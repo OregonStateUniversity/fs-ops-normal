@@ -5,7 +5,7 @@ class NewEstimateScreen extends StatelessWidget {
  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TEMP'),
+        title: Text('New Estimate'),
       ),
       body: Center(
         child: Column(
@@ -13,6 +13,23 @@ class NewEstimateScreen extends StatelessWidget {
           children: <Widget>[
             Text('TODO: Form',
             ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Enter acreage';
+                }
+                return null;
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric( vertical: 16.0),
+              child: ElevatedButton(
+                onPressed: (){
+                  // do something here when clicked
+                },
+                child: Text('Calculate Estimate'),
+              )
+            )
           ],
         ),
       ),
