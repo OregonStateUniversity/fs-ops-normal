@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'results_screen.dart';
 
 class NewEstimateScreen extends StatelessWidget {
   @override
@@ -25,7 +26,11 @@ class NewEstimateScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric( vertical: 16.0),
               child: ElevatedButton(
                 onPressed: (){
-                  // do something here when clicked
+                  // Show results when clicked
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NewResultsScreen()),
+                  );
                 },
                 child: Text('Calculate Estimate'),
               )
