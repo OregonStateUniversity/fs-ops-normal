@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+var results = "Trunk:   1400ft   \nLat:        700ft   \nToy:       350ft   \n";
 
 class NewResultsScreen extends StatelessWidget {
   @override
@@ -13,7 +14,8 @@ class NewResultsScreen extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Trunk Hose:  \nToy Hose:   \nFittings: \n',
+              Text(results,
+                style: TextStyle(fontSize: 32),
             ),
           ]
         ),
