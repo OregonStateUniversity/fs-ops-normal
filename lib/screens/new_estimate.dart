@@ -11,7 +11,7 @@ class NewEstimateScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('TODO: Form',
+            Text('Enter Acreage',
             ),
             TextFormField(
               validator: (value) {
