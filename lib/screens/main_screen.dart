@@ -7,7 +7,7 @@ class MainScreen extends StatelessWidget {
  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main Screen'),
+        title: Text('Ops Normal'),
       ),
       body: Scrollbar(
         child: ListView(
