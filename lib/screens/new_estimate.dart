@@ -17,9 +17,9 @@ class NewEstimateScreen extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Enter acreage';
+                  return null;
                 }
-                return null;
+                return value;
               },
             ),
             Padding(
