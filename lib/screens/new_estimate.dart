@@ -45,8 +45,8 @@ class NewEstimateScreen extends StatefulWidget{
 }
 
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
-  var acreage;
-
+  var _acreage = '0';
+  final acreageCon = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +58,9 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Enter Acreage',
-            ),
+            Text('Enter Acreage'),
             TextField(
+              controller: acreageCon,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: "Acreage"
@@ -68,14 +68,18 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
             ),
             OutlineButton(
               onPressed: (){
+                setState(() {
+                  _acreage = acreageCon.text;
+                });
                 // Show results when clicked
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NewResultsScreen()),
-                );
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(builder: (context) => NewResultsScreen()),
+//                );
               },
               child: Text('Calculate Estimate'),
-            )
+            ),
+            Text("You entered $_acreage into the text field"),
           ],
         ),
       ),
