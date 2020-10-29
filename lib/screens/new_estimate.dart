@@ -72,10 +72,13 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   _acreage = acreageCon.text;
                 });
                 // Show results when clicked
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => NewResultsScreen()),
-//                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewResultsScreen(
+                    acreage: _acreage,
+                    )
+                  ),
+                );
               },
               child: Text('Calculate Estimate'),
             ),
