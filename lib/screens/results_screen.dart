@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-var results = "Trunk:   1400ft   \nLat:        700ft   \nToy:       350ft   \n";
 
 class NewResultsScreen extends StatelessWidget {
 
   final acreage;
   NewResultsScreen({this.acreage});
 
+
   @override
   Widget build(BuildContext context) {
-
+    var trunkVal = (int.parse(acreage)*400) + 1000;
+    var latVal = trunkVal / 2;
+    var toyVal = latVal / 2;
+    var results = "Trunk:   ${trunkVal.toInt()} ft   \nLat:        ${latVal.toInt()} ft   \nToy:      ${toyVal.toInt()} ft   \n";
     return Scaffold(
         appBar: AppBar(
           title: Text('Estimate Result'),
