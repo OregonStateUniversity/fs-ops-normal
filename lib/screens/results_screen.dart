@@ -81,7 +81,9 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
               ),
               OutlineButton(
                 onPressed: () {
-                  // finalize order
+                  // finalize the order when pressed.
+                  // pass data from fields to new widget that
+                  // will save it somehow.
                 },
                 child: Text("Finalize Order"),
               ),

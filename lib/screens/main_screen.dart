@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewResultsScreen()),
+                  MaterialPageRoute(builder: (context) => NewResultsScreen( acreage: '0',)),
                 );
               },
               child: Container(
