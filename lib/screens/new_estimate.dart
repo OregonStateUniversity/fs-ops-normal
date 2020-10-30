@@ -8,6 +8,7 @@ class NewEstimateScreen extends StatefulWidget{
 }
 
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
+
   var _acreage = '0';
   final acreageCon = new TextEditingController();
 

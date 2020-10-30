@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  number_inc_dec: ^0.6.6
   flutter:
     sdk: flutter
 
