@@ -10,6 +10,7 @@ class NewEstimateScreen extends StatefulWidget{
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
   var _acreage = '0';
+  bool _validate = false;
   final acreageCon = new TextEditingController();
 
   @override
@@ -27,22 +28,24 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               controller: acreageCon,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  hintText: "Acreage"
+                  errorText: _validate ? "Value Can\'t Be Empty" : null,
+                  hintText: "Acreage",
               ),
             ),
             OutlineButton(
               onPressed: (){
                 setState(() {
+                  acreageCon.text.isEmpty ? _validate = true : _validate = false;
                   _acreage = acreageCon.text;
                 });
                 // Show results when clicked
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NewResultsScreen(
-                    acreage: _acreage,
-                    )
-                  ),
-                );
+                _acreage.isNotEmpty ? Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(builder: (context) => NewResultsScreen(
+                                                        acreage: _acreage,
+                                                        )
+                                                      ),
+                ) : ArgumentError.notNull("null");
               },
               child: Text('Calculate Estimate'),
             ),
