@@ -28,24 +28,25 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               controller: acreageCon,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  errorText: _validate ? "Value Can\'t Be Empty" : null,
-                  hintText: "Acreage",
+                  errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                  hintText: 'Acreage',
               ),
             ),
+
             OutlineButton(
               onPressed: (){
                 setState(() {
                   acreageCon.text.isEmpty ? _validate = true : _validate = false;
                   _acreage = acreageCon.text;
                 });
-                // Show results when clicked
+
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
                                                       MaterialPageRoute(builder: (context) => NewResultsScreen(
                                                         acreage: _acreage,
                                                         )
                                                       ),
-                ) : ArgumentError.notNull("null");
+                ) : ArgumentError.notNull('Value Can\'t Be Empty');
               },
               child: Text('Calculate Estimate'),
             ),

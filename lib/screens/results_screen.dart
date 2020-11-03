@@ -46,6 +46,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+
               Text("Trunk Line Estimate"),
               NumberInputWithIncrementDecrement(
                 controller: trunkCon,
@@ -57,6 +58,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                 //buttonArrangement: ButtonArrangement.incRightDecLeft,
                 initialValue: _trunkVal,
               ),
+
               Text("Lat Line Estimate"),
               NumberInputWithIncrementDecrement(
                 controller: latCon,
@@ -68,6 +70,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                 //buttonArrangement: ButtonArrangement.incRightDecLeft,
                 initialValue: _latVal,
               ),
+
               Text("Toy Line Estimate"),
               NumberInputWithIncrementDecrement(
                 controller: toyCon,
@@ -79,6 +82,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                 //buttonArrangement: ButtonArrangement.incRightDecLeft,
                 initialValue: _toyVal,
               ),
+
               OutlineButton(
                 onPressed: () {
                   // finalize the order when pressed.
