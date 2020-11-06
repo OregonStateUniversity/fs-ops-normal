@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'new_estimate.dart';
 
 // TODO: Remove these
 import 'results_screen.dart';
@@ -57,7 +58,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // TODO: Add new order here
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NewEstimateScreen()),
+            );
           },
           tooltip: 'New Order',
           child: Icon(Icons.add),
