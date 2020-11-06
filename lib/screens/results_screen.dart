@@ -31,8 +31,8 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
     final toyCon = new TextEditingController();
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Estimate Result'),
+      appBar: AppBar(
+        title: Text('Estimate Result'),
       ),
       body: Center(
         child: Column(
