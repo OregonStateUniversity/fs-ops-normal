@@ -44,7 +44,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
             itemBuilder: (context, index){
               return ListTile(
                 title: Text('${orders[index].name}'),
-                subtitle: Text('${orders[index].timeStamp}'),
+                subtitle: Text('${orders[index].estimate.acres.toString()} Acres\n${orders[index].timeStamp}\n'),
                 onTap: () {
                   // TODO: show saved item from here this is temporary
                   Navigator.push(
