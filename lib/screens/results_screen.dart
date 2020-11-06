@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
-
+import 'selected_engagement.dart';
 
 class NewResultsScreen extends StatefulWidget{
   var acreage = '0';
@@ -88,6 +88,12 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                   // finalize the order when pressed.
                   // pass data from fields to new widget that
                   // will save it somehow.
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SelectedEngagement()
+                    ),
+                  );
+
                 },
                 child: Text("Finalize Order"),
               ),

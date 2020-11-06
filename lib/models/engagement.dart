@@ -12,11 +12,11 @@ class Engagement{
   }
 
 
-  void appendOrder(Object order){
+  void addOrder(Estimate order){
     orders.add(order);
   }
 
-  void removeOrder(Object order){
+  void removeOrder(Estimate order){
     orders.remove(order);
   }
 }
