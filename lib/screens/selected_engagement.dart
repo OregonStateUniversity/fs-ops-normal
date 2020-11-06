@@ -23,9 +23,9 @@ class SelectedEngagement extends StatefulWidget{
 class _SelectedEngagementState extends State<SelectedEngagement> {
 
   List orders = [
-    Order('Order 1', new DateTime.now().toString(), Estimate(acres: 12)),
+    Order('Order 3', new DateTime.now().toString(), Estimate(acres: 12)),
     Order('Order 2', new DateTime.now().toString(), Estimate(acres: 25)),
-    Order('Order 3', new DateTime.now().toString(), Estimate(acres: 50)),
+    Order('Order 1', new DateTime.now().toString(), Estimate(acres: 50)),
   ];
 
 
@@ -44,7 +44,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
             itemBuilder: (context, index){
               return ListTile(
                 title: Text('${orders[index].name}'),
-                subtitle: Text('${orders[index].estimate.acres.toString()} Acres\n${orders[index].timeStamp}\n'),
+                subtitle: Text('${orders[index].estimate.acres.toString()}    Acres\nCreate on: ${orders[index].timeStamp}\n'),
                 onTap: () {
                   // TODO: show saved item from here this is temporary
                   Navigator.push(
