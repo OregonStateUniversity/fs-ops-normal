@@ -6,13 +6,15 @@ import 'create_new_engagement_screen.dart';
 
 class Fire{
   String name;
+  String fireTimeStamp;
   int size;
 
-  Fire(this.name, this.size);
+
+  Fire(this.name, this.fireTimeStamp, this.size);
 
   @override
   String toString() {
-    return '{ ${this.name}, ${this.size} }';
+    return '{ ${this.name}, ${this.fireTimeStamp}, ${this.size} }';
   }
 }
 
@@ -24,12 +26,35 @@ class MainScreen extends StatefulWidget{
 
 class _MainScreenState extends State<MainScreen> {
   List fires = [
-    Fire('Alpha Fire', 500),
-    Fire('Beta Fire', 1000),
-    Fire('Gamma Fire', 575)
+    Fire('Gamma Fire', '10-23-20', 500),
+    Fire('Beta Fire', '7-4-20', 1000),
+    Fire('Alpha Fire', '5-16-20', 575)
   ];
 
+/////////////////////////////////////////////////////////////////////
+  
+  static const menuItems = <String>[
+    'Edit',
+    'Close(Mark \'Old\')',
+    'Delete',
+  ];
+
+  final List<PopupMenuItem<String>> _popUpMenuItems = menuItems
+      .map(
+        (String value) => PopupMenuItem<String>(
+          value: value,
+          child: Text(value),
+        ),
+      )
+      .toList();
+
+  String _popBtnSelectVal;
+
+/////////////////////////////////////////////////////////////////////////
+
   // _MainScreenState({Key key, @required this.fires}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +81,24 @@ class _MainScreenState extends State<MainScreen> {
                 },
                 child: ListTile(
                   title: Text('${fires[index].name}'),
-                  subtitle: Text('Current Size: ${fires[index].size}'),
+                  subtitle: Text('Created: ${fires[index].fireTimeStamp}    Acreage: ${fires[index].size}'),
+
+                /////3-dot button menu/////////////////////////////////////////////
+                  trailing: PopupMenuButton<String>(
+                    onSelected: (String newVal) {
+                      _popBtnSelectVal = newVal;
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(_popBtnSelectVal),
+                        ),
+                      );
+                    },
+                    itemBuilder: (BuildContext context) => _popUpMenuItems,
+                  ),
+                //////////////////////////////////////////////////////////////////
                 ),
+
+
                 // padding: const EdgeInsets.all(8),
                 // child: Card(
                 //   elevation: 5.0,
