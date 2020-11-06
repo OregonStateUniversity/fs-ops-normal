@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'new_estimate.dart';
+import 'main_screen.dart';
 
 // TODO: Remove these
 import 'results_screen.dart';
@@ -32,41 +33,39 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Name of Engagegment"),
-        ),
-        body: Scrollbar(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: orders.length,
-            itemBuilder: (context, index){
-              return ListTile(
-                title: Text('${orders[index].name}'),
-                subtitle: Text('${orders[index].estimate.acres.toString()}    Acres\nCreate on: ${orders[index].timeStamp}\n'),
-                onTap: () {
-                  // TODO: show saved item from here this is temporary
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NewResultsScreen(acreage: orders[index].estimate.acres.toString(),))
-                  );
-                },
-              );
-            },
-          )
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NewEstimateScreen()),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Name of Engagegment"),
+      ),
+      body: Scrollbar(
+        child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: orders.length,
+          itemBuilder: (context, index){
+            return ListTile(
+              title: Text('${orders[index].name}'),
+              subtitle: Text('${orders[index].estimate.acres.toString()}    Acres\nCreate on: ${orders[index].timeStamp}\n'),
+              onTap: () {
+                // TODO: show saved item from here this is temporary
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewResultsScreen(acreage: orders[index].estimate.acres.toString(),))
+                );
+              },
             );
           },
-          tooltip: 'New Order',
-          child: Icon(Icons.add),
-        ),
-      )
+        )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NewEstimateScreen()),
+          );
+        },
+        tooltip: 'New Order',
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
