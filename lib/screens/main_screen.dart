@@ -52,10 +52,6 @@ class _MainScreenState extends State<MainScreen> {
 
 /////////////////////////////////////////////////////////////////////////
 
-  // _MainScreenState({Key key, @required this.fires}) : super(key: key);
-
-
-
   @override
   Widget build(BuildContext context) {
     final title = 'Ops Normal';    
@@ -68,18 +64,11 @@ class _MainScreenState extends State<MainScreen> {
         ),
         body: Scrollbar(
           child: ListView.builder(
-
+            //padding: const EdgeInsets.all(8),
             itemCount: fires.length,
             itemBuilder: (context, index){
-              //return Padding(
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SelectedEngagement()),
-                  );
-                },
-                child: ListTile(
+
+              return ListTile(
                   title: Text('${fires[index].name}'),
                   subtitle: Text('Created: ${fires[index].fireTimeStamp}    Acreage: ${fires[index].size}'),
 
@@ -95,8 +84,36 @@ class _MainScreenState extends State<MainScreen> {
                     },
                     itemBuilder: (BuildContext context) => _popUpMenuItems,
                   ),
-                //////////////////////////////////////////////////////////////////
-                ),
+                ////////////////////////////////////////////////////////////////////
+
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SelectedEngagement()),
+                    );
+                  },
+              );
+            },
+          )
+        ),
+        
+        floatingActionButton: FloatingActionButton(	
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateNewEngagement()),
+            );
+          },	
+          tooltip: 'New estimate',	
+          child: Icon(Icons.add),	
+        )
+      )
+    );
+  }
+}
+
+
+
 
 
                 // padding: const EdgeInsets.all(8),
@@ -129,29 +146,3 @@ class _MainScreenState extends State<MainScreen> {
                   //   )
                   // ),
                 //),
-              );
-            },
-          )
-        ),
-        
-
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => SelectedEngagement()),
-            //   );
-            // },
-        floatingActionButton: FloatingActionButton(	
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateNewEngagement()),
-            );
-          },	
-          tooltip: 'New estimate',	
-          child: Icon(Icons.add),	
-        )
-      )
-    );
-  }
-}
