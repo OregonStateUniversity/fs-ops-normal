@@ -37,6 +37,9 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Create New Engagement"),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(8.0),
         children: <Widget>[
