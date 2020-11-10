@@ -42,7 +42,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 // TODO: show saved item from here this is temporary
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewResultsScreen(acreage: orders[index].estimate.acres.toString(),))
+                  MaterialPageRoute(builder: (context) => NewResultsScreen(acreage: orders[index].estimate.acres,))
                 );
               },
             );

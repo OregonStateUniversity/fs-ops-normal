@@ -3,7 +3,8 @@ import 'package:number_inc_dec/number_inc_dec.dart';
 import 'selected_engagement.dart';
 
 class NewResultsScreen extends StatefulWidget{
-  var acreage = '0';
+  var acreage;
+
 
   NewResultsScreen({this.acreage});
 
@@ -66,7 +67,6 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                     MaterialPageRoute(builder: (context) => SelectedEngagement()
                     ),
                   );
-
                 },
                 child: Text("Finalize Order"),
               ),
