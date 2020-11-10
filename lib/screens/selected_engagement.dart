@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'new_estimate.dart';
-import 'main_screen.dart';
+import '../models/order.dart';
 
 // TODO: Remove these
 import 'results_screen.dart';
 import '../models/estimate.dart';
 
-class Order{
-  String name;
-  String timeStamp;
-  Estimate estimate;
 
-  Order(this.name, this.timeStamp, this.estimate);
-
-}
 
 class SelectedEngagement extends StatefulWidget{
 

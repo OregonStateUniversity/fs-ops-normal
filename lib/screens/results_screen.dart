@@ -48,40 +48,13 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
               ),
 
               Text("Trunk Line Estimate"),
-              NumberInputWithIncrementDecrement(
-                controller: trunkCon,
-                style: TextStyle(fontSize: 28),
-                scaleHeight: .70,
-                decIconSize: 40,
-                incIconSize: 40,
-                incDecFactor: 100,
-                //buttonArrangement: ButtonArrangement.incRightDecLeft,
-                initialValue: _trunkVal,
-              ),
+              buttonHelper(trunkCon, _trunkVal),
 
               Text("Lat Line Estimate"),
-              NumberInputWithIncrementDecrement(
-                controller: latCon,
-                style: TextStyle(fontSize: 28),
-                scaleHeight: .70,
-                decIconSize: 40,
-                incIconSize: 40,
-                incDecFactor: 100,
-                //buttonArrangement: ButtonArrangement.incRightDecLeft,
-                initialValue: _latVal,
-              ),
+              buttonHelper(latCon, _latVal),
 
               Text("Toy Line Estimate"),
-              NumberInputWithIncrementDecrement(
-                controller: toyCon,
-                style: TextStyle(fontSize: 28),
-                scaleHeight: .70,
-                decIconSize: 40,
-                incIconSize: 40,
-                incDecFactor: 50,
-                //buttonArrangement: ButtonArrangement.incRightDecLeft,
-                initialValue: _toyVal,
-              ),
+              buttonHelper(toyCon, _toyVal),
 
               OutlineButton(
                 onPressed: () {
@@ -100,6 +73,20 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
           ]
         ),
       ),
+    );
+  }
+
+
+  Widget buttonHelper(con, initVal){
+    return NumberInputWithIncrementDecrement(
+      controller: con,
+      style: TextStyle(fontSize: 28),
+      scaleHeight: .70,
+      decIconSize: 40,
+      incIconSize: 40,
+      incDecFactor: 50,
+      //buttonArrangement: ButtonArrangement.incRightDecLeft,
+      initialValue: initVal,
     );
   }
 }
