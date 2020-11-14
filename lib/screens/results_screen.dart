@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'selected_engagement.dart';
+import 'finalized_order.dart';
 
 class NewResultsScreen extends StatefulWidget{
   var acreage;
@@ -61,7 +62,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                   // will save it somehow.
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SelectedEngagement()
+                    MaterialPageRoute(builder: (context) => FinalizedOrder(_trunkVal.toString())
                     ),
                   );
                 },
