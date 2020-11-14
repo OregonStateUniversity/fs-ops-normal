@@ -19,7 +19,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    var copyVal = '';
     var _trunkVal = 0;
     _trunkVal = (int.parse(widget.acreage)*400) + 1000;
     var _latVal = 0;
@@ -57,12 +57,13 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
 
               OutlineButton(
                 onPressed: () {
+                  copyVal = "Trunk Line: " + trunkCon.text + "\n" + "Lat Line: " + latCon.text + "\n" + "Toy Line: " + toyCon.text;
                   // finalize the order when pressed.
                   // pass data from fields to new widget that
                   // will save it somehow.
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => FinalizedOrder(_trunkVal.toString())
+                    MaterialPageRoute(builder: (context) => FinalizedOrder(copyVal)
                     ),
                   );
                 },
