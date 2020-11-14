@@ -48,14 +48,11 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                 ),
               ),
 
-              Text("Trunk Line Estimate"),
-              buttonHelper(trunkCon, _trunkVal),
+              buttonHelper(_trunkVal, trunkCon, 100, "Trunk Line"),
 
-              Text("Lat Line Estimate"),
-              buttonHelper(latCon, _latVal),
+              buttonHelper(_latVal, latCon, 100, "Lat Line"),
 
-              Text("Toy Line Estimate"),
-              buttonHelper(toyCon, _toyVal),
+              buttonHelper(_toyVal, toyCon, 50, "Toy Line"),
 
               OutlineButton(
                 onPressed: () {
@@ -77,16 +74,49 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
   }
 
 
-  Widget buttonHelper(con, initVal){
-    return NumberInputWithIncrementDecrement(
-      controller: con,
-      style: TextStyle(fontSize: 28),
-      scaleHeight: .70,
-      decIconSize: 40,
-      incIconSize: 40,
-      incDecFactor: 50,
-      //buttonArrangement: ButtonArrangement.incRightDecLeft,
-      initialValue: initVal,
+  Widget buttonHelper(val, con, inc, name){
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 5,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 5),
+                  child: Text(
+                    '$name',
+                    style: TextStyle(fontSize: 28),
+                  ),
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 5,
+                child: Column(
+                  children: <Widget> [
+                    NumberInputWithIncrementDecrement(
+                      controller: con,
+                      style: TextStyle(fontSize: 28),
+                      decIconSize: 30,
+                      incIconSize: 30,
+                      incDecFactor: inc,
+                      initialValue: val,
+                      scaleHeight: .90,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Divider(
+            thickness: 2,
+          )
+        ],
+      ),
     );
   }
 }
