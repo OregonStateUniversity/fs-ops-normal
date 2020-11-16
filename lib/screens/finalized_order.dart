@@ -18,7 +18,7 @@ class FinalizedOrder extends StatelessWidget{
            FlatButton(
              onPressed: () {
                 //TODO
-             }
+             }, child: null,
            ),
          ],
        ),
