@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 class CreateNewEngagement extends StatefulWidget{
 
+  static const routeName = 'newEngagement';
+
   _CreateNewEngagementState createState() => _CreateNewEngagementState();
 
 }

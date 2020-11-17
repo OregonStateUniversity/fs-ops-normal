@@ -8,13 +8,24 @@ import 'screens/selected_engagement.dart';
 
 class App extends StatelessWidget {
 
+//   routes: <String, WidgetBuilder> {
+//       '/a': (BuildContext context) => MyPage(title: 'page A'),
+//       '/b': (BuildContext context) => MyPage(title: 'page B'),
+//       '/c': (BuildContext context) => MyPage(title: 'page C'),
+//     },
+//   ));
+// }
+// To show a route by name:
+
+// Navigator.pushNamed(context, '/b');
+
   static final routes = {
-    '/': (context) => MainScreen(),
-    'engagement': (context) => SelectedEngagement(),
-    'newEngagement': (context) => CreateNewEngagement(),
-    'newEstimate': (context) => NewEstimateScreen(),
+    MainScreen.routeName: (context) => MainScreen(),
+    SelectedEngagement.routeName: (BuildContext context) => SelectedEngagement(),
+    CreateNewEngagement.routeName: (context) => CreateNewEngagement(),
+    NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
     //'order': (context) => FinalizedOrder(),
-    'newResults': (context) => NewResultsScreen(),
+    NewResultsScreen.routeName: (context) => NewResultsScreen()
   };
 
   @override

@@ -4,6 +4,8 @@ import 'results_screen.dart';
 
 class NewEstimateScreen extends StatefulWidget{
 
+  static const routeName = 'newEstimate';
+
   _NewEstimateScreenState createState() => _NewEstimateScreenState();
 }
 

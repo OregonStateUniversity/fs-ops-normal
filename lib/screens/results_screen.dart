@@ -4,8 +4,9 @@ import 'selected_engagement.dart';
 import 'finalized_order.dart';
 
 class NewResultsScreen extends StatefulWidget{
+  
+  static const routeName = 'newResults';
   var acreage;
-
 
   NewResultsScreen({this.acreage});
 
@@ -13,9 +14,7 @@ class NewResultsScreen extends StatefulWidget{
   _NewResultsScreenState createState() => _NewResultsScreenState();
 }
 
-
 class _NewResultsScreenState extends State<NewResultsScreen> {
-
 
   @override
   Widget build(BuildContext context) {

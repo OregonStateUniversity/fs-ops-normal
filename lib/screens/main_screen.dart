@@ -20,11 +20,14 @@ class Fire {
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key key}) : super(key: key);
+  static const routeName = '/';
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   List fires = [
     Fire('Gamma Fire', '10-23-20', 500),
     Fire('Beta Fire', '7-4-20', 1000),
@@ -75,14 +78,26 @@ class _MainScreenState extends State<MainScreen> {
                     },
                     itemBuilder: (BuildContext context) => _popUpMenuItems,
                   ),
-                  onTap: () { Navigator.of(context).pushNamed('engagement'); },
+                  //onTap: () {Navigator.pushNamed(context,SelectedEngagement.routeName);},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SelectedEngagement()),
+                    );
+                  },
               );
             },
           )
         ),
         
         floatingActionButton: FloatingActionButton(	
-          onPressed: () {Navigator.of(context).pushNamed('newEngagement');},	
+          //onPressed: () {Navigator.of(context).pushNamed(CreateNewEngagement.routeName);},
+           onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateNewEngagement()),
+            );
+          },
           tooltip: 'New estimate',	
           child: Icon(Icons.add),	
         )
