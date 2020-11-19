@@ -10,6 +10,9 @@ import '../models/estimate.dart';
 
 class SelectedEngagement extends StatefulWidget{
 
+  final List<Estimate> orders;
+  SelectedEngagement(this.orders);
+
   static const routeName = 'engagement';
 
   _SelectedEngagementState createState() => _SelectedEngagementState();
@@ -17,12 +20,6 @@ class SelectedEngagement extends StatefulWidget{
 }
 
 class _SelectedEngagementState extends State<SelectedEngagement> {
-
-  List tmpOrders = [
-    Estimate(name: "Order 3", acres: 12, timeStamp: DateTime.now().toString()),
-    Estimate(name: "Order 2", acres: 120, timeStamp: DateTime.now().toString()),
-    Estimate(name: "Order 1", acres: 50, timeStamp: DateTime.now().toString()),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +31,16 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       body: Scrollbar(
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: tmpOrders.length,
+          itemCount: widget.orders.length,
           itemBuilder: (context, index){
             return ListTile(
-              title: Text('${tmpOrders[index].name}'),
-              subtitle: Text('${tmpOrders[index].acres.toString()} Acres\nCreate on: ${tmpOrders[index].timeStamp}\n'),
+              title: Text('${widget.orders[index].name}'),
+              subtitle: Text('${widget.orders[index].acres.toString()} Acres\nCreate on: ${widget.orders[index].timeStamp}\n'),
               onTap: () {
                 // TODO: show saved item from here this is temporary
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewResultsScreen(acreage: tmpOrders[index].acres.toString(),))
+                  MaterialPageRoute(builder: (context) => NewResultsScreen(acreage: widget.orders[index].acres.toString(),))
                 );
               },
             );

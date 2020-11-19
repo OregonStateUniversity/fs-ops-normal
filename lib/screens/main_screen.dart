@@ -2,21 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'selected_engagement.dart';
 import 'create_new_engagement_screen.dart';
+import '../models/estimate.dart';
+import '../models/engagement.dart';
 //import 'results_screen.dart';
 
-class Fire {
-  String name;
-  String fireTimeStamp;
-  int size;
-
-
-  Fire(this.name, this.fireTimeStamp, this.size);
-
-  @override
-  String toString() {
-    return '{ ${this.name}, ${this.fireTimeStamp}, ${this.size} }';
-  }
-}
+//class Fire {
+//  String name;
+//  String fireTimeStamp;
+//  int size;
+//  List<Estimate> orders;
+//
+//  Fire(this.name, this.fireTimeStamp, this.size, this.orders);
+//
+//  @override
+//  String toString() {
+//    return '{ ${this.name}, ${this.fireTimeStamp}, ${this.size} }';
+//  }
+//}
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key key}) : super(key: key);
@@ -28,10 +30,10 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-  List fires = [
-    Fire('Gamma Fire', '10-23-20', 500),
-    Fire('Beta Fire', '7-4-20', 1000),
-    Fire('Alpha Fire', '5-16-20', 575)
+  List engagement = [
+    Engagement('Bravo Engagement', '10-23-20', 500, []),
+    Engagement('Gamma Engagement', '10-23-20', 500, [Estimate(name: "Order 1", timeStamp: DateTime.now().toString(), acres: 15)]),
+    Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: DateTime.now().toString(), acres: 50),Estimate(name: "Order 2", timeStamp: DateTime.now().toString(), acres: 400),Estimate(name: "Order 1", timeStamp: DateTime.now().toString(), acres: 1),Estimate(name: "Order 0", timeStamp: DateTime.now().toString(), acres: 1000),]),
   ];
   
   static const menuItems = <String>[
@@ -64,11 +66,11 @@ class _MainScreenState extends State<MainScreen> {
         body: Scrollbar(
           child: ListView.builder(
             //padding: const EdgeInsets.all(8),
-            itemCount: fires.length,
+            itemCount: engagement.length,
             itemBuilder: (context, index){
               return ListTile(
-                  title: Text('${fires[index].name}'),
-                  subtitle: Text('Created: ${fires[index].fireTimeStamp}    Acreage: ${fires[index].size}'),
+                  title: Text('${engagement[index].name}'),
+                  subtitle: Text('Created: ${engagement[index].fireTimeStamp}    Acreage: ${engagement[index].size}'),
                   trailing: PopupMenuButton<String>(
                     onSelected: (String newVal) {
                       _popBtnSelectVal = newVal;
@@ -82,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SelectedEngagement()),
+                      MaterialPageRoute(builder: (context) => SelectedEngagement(engagement[index].orders)),
                     );
                   },
               );
