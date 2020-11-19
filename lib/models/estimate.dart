@@ -3,10 +3,10 @@ class Estimate {
   static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
 
   final String name;
-  final String timestamp;
+  final String timeStamp;
   final int acres;
 
-  Estimate({this.name, this.acres, this.timestamp});
+  Estimate({this.name, this.acres, this.timeStamp});
 
   int get trunkLineLength => BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;
 
