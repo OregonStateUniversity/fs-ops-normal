@@ -11,7 +11,8 @@ import '../models/estimate.dart';
 class SelectedEngagement extends StatefulWidget{
 
   final List<Estimate> orders;
-  SelectedEngagement(this.orders);
+  final String name;
+  SelectedEngagement(this.orders, this.name);
 
   static const routeName = 'engagement';
 
@@ -23,10 +24,37 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   @override
   Widget build(BuildContext context) {
-
+    if(widget.orders.isEmpty){
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("${widget.name}"),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("No Orders Created Yet"),
+              ],
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NewEstimateScreen()),
+            );
+          },
+          tooltip: 'New Order',
+          child: Icon(Icons.add),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Name of Engagegment"),
+        title: Text("${widget.name}"),
       ),
       body: Scrollbar(
         child: ListView.builder(

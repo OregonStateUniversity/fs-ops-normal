@@ -84,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SelectedEngagement(engagement[index].orders)),
+                      MaterialPageRoute(builder: (context) => SelectedEngagement(engagement[index].orders, engagement[index].name)),
                     );
                   },
               );
