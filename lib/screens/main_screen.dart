@@ -6,19 +6,6 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 //import 'results_screen.dart';
 
-//class Fire {
-//  String name;
-//  String fireTimeStamp;
-//  int size;
-//  List<Estimate> orders;
-//
-//  Fire(this.name, this.fireTimeStamp, this.size, this.orders);
-//
-//  @override
-//  String toString() {
-//    return '{ ${this.name}, ${this.fireTimeStamp}, ${this.size} }';
-//  }
-//}
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key key}) : super(key: key);
