@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:number_inc_dec/number_inc_dec.dart';
+import '../models/estimate.dart';
 import 'selected_engagement.dart';
 import 'finalized_order.dart';
+
+class OrderFields{
+  String trunkLength;
+  String latLength;
+  String toyLength;
+}
+
 
 class NewResultsScreen extends StatefulWidget{
   
   static const routeName = 'newResults';
-  var acreage;
 
-  NewResultsScreen({this.acreage});
+  Estimate estimate;
+
+  NewResultsScreen({this.estimate});
 
   @override
   _NewResultsScreenState createState() => _NewResultsScreenState();
@@ -16,108 +24,140 @@ class NewResultsScreen extends StatefulWidget{
 
 class _NewResultsScreenState extends State<NewResultsScreen> {
 
+  var formKey = GlobalKey<FormState>();
+  final orderEntryField = OrderFields();
+
   @override
   Widget build(BuildContext context) {
-    var copyVal = '';
-    var _trunkVal = 0;
-    _trunkVal = (int.parse(widget.acreage)*400) + 1000;
-    var _latVal = 0;
-    _latVal = _trunkVal ~/ 2;
-    var _toyVal = 0;
-    _toyVal = _latVal ~/ 2;
-    //var _results = "Trunk: ${_trunkVal.toInt()} ft\nLat: ${_latVal.toInt()} ft\nToy: ${_toyVal.toInt()} ft\n";
-
-    final trunkCon = new TextEditingController();
-    final latCon = new TextEditingController();
-    final toyCon = new TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Estimate Result'),
       ),
       body: Center(
-        child: Column(
+        child: Form(
+          key: formKey,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  "Your estimate order for ${widget.acreage} acres",
-                  style: TextStyle(fontSize: 26),
-                  textAlign: TextAlign.center,
-                ),
-              ),
 
-              buttonHelper(_trunkVal, trunkCon, 100, "Trunk Line"),
+              trunkLineRow(),
+              latLineRow(),
+              toyLineRow(),
 
-              buttonHelper(_latVal, latCon, 100, "Lat Line"),
-
-              buttonHelper(_toyVal, toyCon, 50, "Toy Line"),
-
-              OutlineButton(
-                onPressed: () {
-                  copyVal = "Trunk Line: " + trunkCon.text + "\n" + "Lat Line: " + latCon.text + "\n" + "Toy Line: " + toyCon.text;
-                  // finalize the order when pressed.
-                  // pass data from fields to new widget that
-                  // will save it somehow.
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FinalizedOrder(copyVal)
-                    ),
-                  );
+              RaisedButton(
+                onPressed: (){
+                  if (formKey.currentState.validate()){
+                    formKey.currentState.save();
+                    // save to db here
+                    Navigator.of(context).pop();
+                  }
                 },
-                child: Text("Finalize Order"),
-              ),
+                child: Text("Copy and Save"),
+              )
           ]
         ),
       ),
-    );
+    ));
   }
 
-
-  Widget buttonHelper(val, con, inc, name){
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 5,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 5),
-                  child: Text(
-                    '$name',
-                    style: TextStyle(fontSize: 28),
-                  ),
-                ),
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 5,
-                child: Column(
-                  children: <Widget> [
-                    NumberInputWithIncrementDecrement(
-                      controller: con,
-                      style: TextStyle(fontSize: 28),
-                      decIconSize: 30,
-                      incIconSize: 30,
-                      incDecFactor: inc,
-                      initialValue: val,
-                      scaleHeight: .90,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+  Widget trunkLineRow(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Flexible(
+          flex: 2,
+          child: Text(
+            "Trunk Line",
+            style: TextStyle(fontSize: 24),
           ),
-          Divider(
-            thickness: 2,
-          )
-        ],
-      ),
+        ),
+        Flexible(
+          flex: 2,
+          child: TextFormField(
+            initialValue: widget.estimate.trunkLineLength.toString(),
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            onSaved: (value){
+              orderEntryField.trunkLength = value;
+            },
+            validator: (value){
+              if(value.isEmpty){
+                return "Needs some value";
+              } else{
+                return null;
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
+
+  Widget latLineRow(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Flexible(
+          flex: 2,
+          child: Text(
+            "Lat Line",
+            style: TextStyle(fontSize: 24),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: TextFormField(
+            initialValue: widget.estimate.latLineLength.toString(),
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            onSaved: (value){
+              orderEntryField.trunkLength = value;
+            },
+            validator: (value){
+              if(value.isEmpty){
+                return "Needs some value";
+              } else{
+                return null;
+              }
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget toyLineRow(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Flexible(
+          flex: 2,
+          child: Text(
+            "Toy Line",
+            style: TextStyle(fontSize: 24),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: TextFormField(
+            initialValue: widget.estimate.toyLineLength.toString(),
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            onSaved: (value){
+              orderEntryField.trunkLength = value;
+            },
+            validator: (value){
+              if(value.isEmpty){
+                return "Needs some value";
+              } else{
+                return null;
+              }
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
 }

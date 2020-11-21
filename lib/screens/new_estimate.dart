@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'results_screen.dart';
-
+import '../models/estimate.dart';
 
 class NewEstimateScreen extends StatefulWidget{
 
@@ -10,6 +10,9 @@ class NewEstimateScreen extends StatefulWidget{
 }
 
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
+
+  var tmpEst = Estimate();
+
 
   var _acreage = '0';
   bool _validate = false;
@@ -45,7 +48,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
                                                       MaterialPageRoute(builder: (context) => NewResultsScreen(
-                                                        acreage: _acreage,
+                                                        estimate: tmpEst,
                                                         )
                                                       ),
                 ) : ArgumentError.notNull('Value Can\'t Be Empty');
