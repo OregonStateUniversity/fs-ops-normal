@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'new_estimate_screen.dart';
-
+import 'finalized_order_screen.dart';
 // TODO: Remove these
 import 'order_screen.dart';
 import '../models/estimate.dart';
@@ -67,7 +67,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 // TODO: show saved item from here this is temporary
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewResultsScreen(estimate: widget.orders[index],))
+                  MaterialPageRoute(builder: (context) => FinalizedOrderScreen(widget.orders[index]),)
                 );
               },
             );

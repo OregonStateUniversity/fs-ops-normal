@@ -4,9 +4,9 @@ import 'selected_engagement_screen.dart';
 import 'finalized_order_screen.dart';
 
 class OrderFields{
-  String trunkLength;
-  String latLength;
-  String toyLength;
+  String trunkLineLength;
+  String latLineLength;
+  String toyLineLength;
 }
 
 
@@ -56,7 +56,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                     );
                   }
                 },
-                child: Text("Copy and Save"),
+                child: Text("Save"),
               )
           ]
         ),
@@ -82,7 +82,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.trunkLength = value;
+              orderEntryField.trunkLineLength = value;
             },
             validator: (value){
               if(value.isEmpty){
@@ -115,7 +115,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.latLength = value;
+              orderEntryField.latLineLength = value;
             },
             validator: (value){
               if(value.isEmpty){
@@ -148,7 +148,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.toyLength = value;
+              orderEntryField.toyLineLength = value;
             },
             validator: (value){
               if(value.isEmpty){

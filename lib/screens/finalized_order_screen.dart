@@ -15,9 +15,9 @@ class FinalizedOrderScreen extends StatelessWidget{
        body: Column(
          children: [
            SelectableText(
-               "Trunk Line: ${data.trunkLength} ft\n"
-               "Lat Line: ${data.latLength} ft\n"
-                   "ToyLine: ${data.toyLength} ft\n"),
+               "Trunk Line: ${data.trunkLineLength} ft\n"
+               "Lat Line: ${data.latLineLength} ft\n"
+                   "ToyLine: ${data.toyLineLength} ft\n"),
          ],
        ),
      );
