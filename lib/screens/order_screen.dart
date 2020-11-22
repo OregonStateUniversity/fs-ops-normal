@@ -50,7 +50,10 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
                     // save to db here
-                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orderEntryField))
+                    );
                   }
                 },
                 child: Text("Copy and Save"),
@@ -112,7 +115,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.trunkLength = value;
+              orderEntryField.latLength = value;
             },
             validator: (value){
               if(value.isEmpty){
@@ -145,7 +148,7 @@ class _NewResultsScreenState extends State<NewResultsScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.trunkLength = value;
+              orderEntryField.toyLength = value;
             },
             validator: (value){
               if(value.isEmpty){

@@ -14,12 +14,10 @@ class FinalizedOrderScreen extends StatelessWidget{
        ),
        body: Column(
          children: [
-           Text("$data"),
-           FlatButton(
-             onPressed: () {
-                //TODO
-             }, child: null,
-           ),
+           SelectableText(
+               "Trunk Line: ${data.trunkLength} ft\n"
+               "Lat Line: ${data.latLength} ft\n"
+                   "ToyLine: ${data.toyLength} ft\n"),
          ],
        ),
      );
