@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class FinalizedOrder extends StatelessWidget{
+class FinalizedOrderScreen extends StatelessWidget{
 
-  FinalizedOrder(this.data);
+  FinalizedOrderScreen(this.data);
   final data;
 
   @override
