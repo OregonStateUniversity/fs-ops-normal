@@ -11,7 +11,7 @@ class NewEstimateScreen extends StatefulWidget{
 
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
-  var tmpEst = Estimate();
+  var tmpEst = Estimate(name: "Test", acres: 10, timeStamp: DateTime.now().toString());
 
 
   var _acreage = '0';

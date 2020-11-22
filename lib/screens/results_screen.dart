@@ -14,7 +14,7 @@ class NewResultsScreen extends StatefulWidget{
   
   static const routeName = 'newResults';
 
-  Estimate estimate;
+  final Estimate estimate;
 
   NewResultsScreen({this.estimate});
 
