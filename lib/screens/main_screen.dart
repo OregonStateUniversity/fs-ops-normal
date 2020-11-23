@@ -4,7 +4,6 @@ import 'selected_engagement_screen.dart';
 import 'create_new_engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-//import 'order_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -12,17 +11,26 @@ class MainScreen extends StatefulWidget {
   static const routeName = '/';
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  MainScreenState createState() => MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class MainScreenState extends State<MainScreen> {
 
-  List engagement = [
+  TextEditingController engagementCtrl = TextEditingController();
+  TextEditingController acreageCtrl = TextEditingController();
+  final GlobalKey<MainScreenState> _key = GlobalKey();
+
+
+  List<Engagement> engagements = [
     Engagement('Bravo Engagement', '10-23-20', 500, []),
     Engagement('Gamma Engagement', '10-23-20', 500, [Estimate(name: "Order 1", timeStamp: DateTime.now().toString(), acres: 15)]),
     Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: DateTime.now().toString(), acres: 50),Estimate(name: "Order 2", timeStamp: DateTime.now().toString(), acres: 400),Estimate(name: "Order 1", timeStamp: DateTime.now().toString(), acres: 1),Estimate(name: "Order 0", timeStamp: DateTime.now().toString(), acres: 1000),]),
   ];
-  
+
+  void setEngagement(Engagement engagement) {
+    engagements.add(engagement);
+  }
+
   static const menuItems = <String>[
     'Edit',
     'Close(Mark \'Old\')',
@@ -50,47 +58,89 @@ class _MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: Scrollbar(
-          child: ListView.builder(
-            //padding: const EdgeInsets.all(8),
-            itemCount: engagement.length,
-            itemBuilder: (context, index){
-              return ListTile(
-                  title: Text('${engagement[index].name}'),
-                  subtitle: Text('Created: ${engagement[index].fireTimeStamp}    Acreage: ${engagement[index].size}'),
-                  trailing: PopupMenuButton<String>(
-                    onSelected: (String newVal) {
-                      _popBtnSelectVal = newVal;
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar( content: Text(_popBtnSelectVal)),
-                      );
-                    },
-                    itemBuilder: (BuildContext context) => _popUpMenuItems,
-                  ),
-                  //onTap: () {Navigator.pushNamed(context,SelectedEngagement.routeName);},
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SelectedEngagement(engagement[index].orders, engagement[index].name)),
-                    );
-                  },
-              );
-            },
-          )
+        body: Column(
+          key: _key,
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: engagements.length,
+                itemBuilder: (context, index){
+                  return ListTile(
+                      title: Text('${engagements[index].name}'),
+                      subtitle: Text('Created: ${engagements[index].fireTimeStamp}    Acreage: ${engagements[index].size}'),
+                      trailing: PopupMenuButton<String>(
+                        onSelected: (String newVal) {
+                          _popBtnSelectVal = newVal;
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar( content: Text(_popBtnSelectVal)),
+                          );
+                        },
+                        itemBuilder: (BuildContext context) => _popUpMenuItems,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SelectedEngagement(engagements[index].orders, engagements[index].name)),
+                        );
+                      },
+                  );
+                }
+              )
+            )
+          ]
         ),
         
         floatingActionButton: FloatingActionButton(	
-          //onPressed: () {Navigator.of(context).pushNamed(CreateNewEngagement.routeName);},
-           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateNewEngagement()),
-            );
-          },
+          onPressed: () => _createEngagement(context),
           tooltip: 'New estimate',	
           child: Icon(Icons.add),	
         )
       )
     );
   }
+
+  _createEngagement(context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Create New Engagement'),
+          content: TextField(
+            controller: engagementCtrl,
+            textCapitalization: TextCapitalization.words,
+            decoration: InputDecoration(
+              labelText: 'Engagement Name:',
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          actions: <Widget>[
+            OutlineButton(
+              child: Text('cancel'),
+              onPressed:() {
+                Navigator.of(context).pop();
+              },
+            ),
+            OutlineButton(
+              child: Text('Create'),
+              onPressed: () {
+                _key.currentState
+                    .setEngagement(Engagement(
+                      engagementCtrl.text,
+                      '10-23-20',
+                      250,
+                      [],
+                    ));
+                setState(() {
+
+                });
+                Navigator.of(context).pop();
+              },
+            )
+          ]
+        );
+      }
+    );
+  }
+
 }
