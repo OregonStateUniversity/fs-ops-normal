@@ -10,19 +10,19 @@ class OrderFields{
 }
 
 
-class NewResultsScreen extends StatefulWidget{
+class OrderScreen extends StatefulWidget{
   
-  static const routeName = 'newResults';
+  static const routeName = 'orderScreen';
 
   final Estimate estimate;
 
-  NewResultsScreen({this.estimate});
+  OrderScreen({this.estimate});
 
   @override
-  _NewResultsScreenState createState() => _NewResultsScreenState();
+  _OrderScreenState createState() => _OrderScreenState();
 }
 
-class _NewResultsScreenState extends State<NewResultsScreen> {
+class _OrderScreenState extends State<OrderScreen> {
 
   var formKey = GlobalKey<FormState>();
   final orderEntryField = OrderFields();

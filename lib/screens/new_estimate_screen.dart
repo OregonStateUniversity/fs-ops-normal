@@ -47,7 +47,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
-                                                      MaterialPageRoute(builder: (context) => NewResultsScreen(
+                                                      MaterialPageRoute(builder: (context) => OrderScreen(
                                                         estimate: tmpEst,
                                                         )
                                                       ),
