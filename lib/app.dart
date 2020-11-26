@@ -21,10 +21,10 @@ class App extends StatelessWidget {
 
   static final routes = {
     MainScreen.routeName: (context) => MainScreen(),
-    //SelectedEngagement.routeName: (BuildContext context) => SelectedEngagement(),
+    SelectedEngagement.routeName: (BuildContext context) => SelectedEngagement(),
     CreateNewEngagement.routeName: (context) => CreateNewEngagement(),
     NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
-    //'order': (context) => FinalizedOrder(),
+    //'order': (context) => FinalizedOrderScreen(),
     OrderScreen.routeName: (context) => OrderScreen()
   };
 

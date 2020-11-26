@@ -18,6 +18,12 @@ class FinalizedOrderScreen extends StatelessWidget{
                "Trunk Line: ${data.trunkLineLength} ft\n"
                "Lat Line: ${data.latLineLength} ft\n"
                    "ToyLine: ${data.toyLineLength} ft\n"),
+           RaisedButton(
+             onPressed: (){
+                Navigator.popUntil(context, ModalRoute.withName('engagement'));
+             },
+             child: Text("Back"),
+           )
          ],
        ),
      );

@@ -50,11 +50,9 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final title = 'Ops Normal';    
-    
-    return MaterialApp(
-      title: title,
-      home: Scaffold(
+    final title = 'Ops Normal';
+
+    return Scaffold(
         appBar: AppBar(
           title: Text(title),
         ),
@@ -79,10 +77,11 @@ class MainScreenState extends State<MainScreen> {
                         itemBuilder: (BuildContext context) => _popUpMenuItems,
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SelectedEngagement(engagements[index].orders, engagements[index].name)),
-                        );
+                        Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
+//                        Navigator.push(
+//                          context,
+//                          MaterialPageRoute(builder: (context) => SelectedEngagement(engagements[index].orders, engagements[index].name)),
+//                        );
                       },
                   );
                 }
@@ -96,7 +95,6 @@ class MainScreenState extends State<MainScreen> {
           tooltip: 'New estimate',	
           child: Icon(Icons.add),	
         )
-      )
     );
   }
 

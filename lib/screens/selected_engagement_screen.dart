@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'new_estimate_screen.dart';
 import 'finalized_order_screen.dart';
-// TODO: Remove these
-import 'order_screen.dart';
 import '../models/estimate.dart';
-
+import '../models/engagement.dart';
 
 
 class SelectedEngagement extends StatefulWidget{
 
-  final List<Estimate> orders;
-  final String name;
-  SelectedEngagement(this.orders, this.name);
+  //final List<Estimate> orders;
+  //final String name;
+  //SelectedEngagement(this.orders, this.name);
+
+
 
   static const routeName = 'engagement';
 
@@ -23,11 +23,16 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   @override
   Widget build(BuildContext context) {
-    List<Estimate> orders = widget.orders.reversed.toList();
+
+    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    final List<Estimate> argOrders = engagement.orders;
+    //final String name = ModalRoute.of(context).settings.arguments;
+
+    List<Estimate> orders = argOrders.reversed.toList();
     if(orders.isEmpty){
       return Scaffold(
         appBar: AppBar(
-          title: Text("${widget.name}"),
+          title: Text("${engagement.name}"),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +59,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.name}"),
+        title: Text("${engagement.name}"),
       ),
       body: Scrollbar(
         child: ListView.builder(
@@ -62,10 +67,9 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           itemCount: orders.length,
           itemBuilder: (context, index){
             return ListTile(
-              title: Text('Order ${orders.length - index}'), // TODO: Replace this name with actual name later
+              title: Text('Order ${orders.length - index}'),
               subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),
               onTap: () {
-                // TODO: show saved item from here this is temporary
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orders[index]),)
