@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hose_jockey/time_format.dart';
 import 'order_screen.dart';
 import '../models/estimate.dart';
 
@@ -45,10 +46,12 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   _acreage = acreageCon.text;
                 });
 
+                var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat() );
+
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
                                                       MaterialPageRoute(builder: (context) => OrderScreen(
-                                                        estimate: tmpEst,
+                                                        estimate: estimate,
                                                         )
                                                       ),
                 ) : ArgumentError.notNull('Value Can\'t Be Empty');

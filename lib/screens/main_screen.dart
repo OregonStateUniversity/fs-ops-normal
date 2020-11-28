@@ -25,7 +25,7 @@ class MainScreenState extends State<MainScreen> {
   List<Engagement> engagements = [
     Engagement('Bravo Engagement', '10-23-20', 500, []),
     Engagement('Gamma Engagement', '10-23-20', 500, [Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 15)]),
-    Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: timeFormat(), acres: 50),Estimate(name: "Order 2", timeStamp: timeFormat(), acres: 400),Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 1),Estimate(name: "Order 0", timeStamp: timeFormat(), acres: 1000),]),
+    Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: timeFormat(), acres: 50),Estimate(name: "Order 2", timeStamp: timeFormat(), acres: 400),Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 1),Estimate(name: "Order 0", timeStamp: timeFormat(), acres: 2),]),
   ];
 
   void setEngagement(Engagement engagement) {

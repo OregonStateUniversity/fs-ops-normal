@@ -13,6 +13,7 @@ class Estimate{
   int get latLineLength => trunkLineLength ~/ 2;
 
   int get toyLineLength => latLineLength ~/ 2;
+
 }
 
 
