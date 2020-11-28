@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'selected_engagement_screen.dart';
+import 'package:hose_jockey/time_format.dart';
 import 'create_new_engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
@@ -23,8 +24,8 @@ class MainScreenState extends State<MainScreen> {
 
   List<Engagement> engagements = [
     Engagement('Bravo Engagement', '10-23-20', 500, []),
-    Engagement('Gamma Engagement', '10-23-20', 500, [Estimate(name: "Order 1", timeStamp: DateTime.now().toString(), acres: 15)]),
-    Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: DateTime.now().toString(), acres: 50),Estimate(name: "Order 2", timeStamp: DateTime.now().toString(), acres: 400),Estimate(name: "Order 1", timeStamp: DateTime.now().toString(), acres: 1),Estimate(name: "Order 0", timeStamp: DateTime.now().toString(), acres: 1000),]),
+    Engagement('Gamma Engagement', '10-23-20', 500, [Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 15)]),
+    Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: timeFormat(), acres: 50),Estimate(name: "Order 2", timeStamp: timeFormat(), acres: 400),Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 1),Estimate(name: "Order 0", timeStamp: timeFormat(), acres: 1000),]),
   ];
 
   void setEngagement(Engagement engagement) {
@@ -78,10 +79,6 @@ class MainScreenState extends State<MainScreen> {
                       ),
                       onTap: () {
                         Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
-//                        Navigator.push(
-//                          context,
-//                          MaterialPageRoute(builder: (context) => SelectedEngagement(engagements[index].orders, engagements[index].name)),
-//                        );
                       },
                   );
                 }

@@ -24,7 +24,7 @@ class App extends StatelessWidget {
     SelectedEngagement.routeName: (BuildContext context) => SelectedEngagement(),
     CreateNewEngagement.routeName: (context) => CreateNewEngagement(),
     NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
-    //'order': (context) => FinalizedOrderScreen(),
+    FinalizedOrderScreen.routeName: (context) => FinalizedOrderScreen(),
     OrderScreen.routeName: (context) => OrderScreen()
   };
 

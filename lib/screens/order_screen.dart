@@ -26,6 +26,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
   var formKey = GlobalKey<FormState>();
   final orderEntryField = OrderFields();
+  final orderEntry = Estimate();
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +51,11 @@ class _OrderScreenState extends State<OrderScreen> {
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
                     // save to db here
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orderEntryField))
-                    );
+                    Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: orderEntryField);
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orderEntryField))
+//                    );
                   }
                 },
                 child: Text("Save"),

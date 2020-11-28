@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
+import '../models/estimate.dart';
 
 class FinalizedOrderScreen extends StatelessWidget{
 
-  FinalizedOrderScreen(this.data);
-  final data;
+  static const routeName = 'finalizedOrderScreen';
+  //FinalizedOrderScreen(this.data);
+  //final data;
 
   @override
   Widget build(BuildContext context) {
-
+    final Estimate estimate = ModalRoute.of(context).settings.arguments;
+    //data.initialLineCalculation();
      return Scaffold(
        appBar: AppBar(
          title: Text("Copy Your Order"),
        ),
        body: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
          children: [
-           SelectableText(
-               "Trunk Line: ${data.trunkLineLength} ft\n"
-               "Lat Line: ${data.latLineLength} ft\n"
-                   "ToyLine: ${data.toyLineLength} ft\n"),
+           Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               Padding(
+                 padding: EdgeInsets.all(16),
+                 child: SelectableText(
+                     "Trunk Line: ${estimate.trunkLineLength} ft\n"
+                         "Lat Line: ${estimate.latLineLength} ft\n"
+                         "ToyLine: ${estimate.toyLineLength} ft\n"),
+               ),
+             ],
+           ),
+
+
            RaisedButton(
              onPressed: (){
                 Navigator.popUntil(context, ModalRoute.withName('engagement'));

@@ -70,10 +70,11 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               title: Text('Order ${orders.length - index}'),
               subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orders[index]),)
-                );
+                Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: orders[index]);
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orders[index]),)
+//                );
               },
             );
           },
