@@ -31,13 +31,17 @@ class FinalizedOrderScreen extends StatelessWidget{
              ],
            ),
 
+            Align(
+              alignment: Alignment.bottomCenter,
+              child:
+                RaisedButton(
+                  onPressed: (){
+                    Navigator.popUntil(context, ModalRoute.withName('engagement'));
+                  },
+                  child: Text("Back"),
+                )
+            )
 
-           RaisedButton(
-             onPressed: (){
-                Navigator.popUntil(context, ModalRoute.withName('engagement'));
-             },
-             child: Text("Back"),
-           )
          ],
        ),
      );
