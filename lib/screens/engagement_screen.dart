@@ -33,6 +33,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       return Scaffold(
         appBar: AppBar(
           title: Text("${engagement.name}"),
+          centerTitle: true,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,

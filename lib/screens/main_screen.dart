@@ -56,6 +56,7 @@ class MainScreenState extends State<MainScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
+          centerTitle: true,
         ),
         body: Column(
           key: _key,
