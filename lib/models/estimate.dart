@@ -1,4 +1,4 @@
-class Estimate{
+class Estimate1{
   static const BASE_TRUNK_LINE_LENGTH = 1000;
   static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
 
@@ -6,7 +6,7 @@ class Estimate{
   final String timeStamp;
   final int acres;
 
-  Estimate({this.name, this.acres, this.timeStamp});
+  Estimate1({this.name, this.acres, this.timeStamp});
 
   int get trunkLineLength => BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;
 
@@ -17,7 +17,7 @@ class Estimate{
 }
 
 
-class Estimate2{
+class Estimate{
   static const BASE_TRUNK_LINE_LENGTH = 1000;
   static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
 
@@ -29,7 +29,7 @@ class Estimate2{
   int _latLineLength;
   int _toyLineLength;
 
-  Estimate2({this.name, this.acres, this.timeStamp});
+  Estimate({this.name, this.acres, this.timeStamp});
 
   void initialLineCalculation(){
     _trunkLineLength = BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;

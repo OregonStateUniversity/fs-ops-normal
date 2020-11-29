@@ -46,7 +46,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   _acreage = acreageCon.text;
                 });
 
-                var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat() );
+                var estimate = new Estimate(acres: int.parse(_acreage));
+                estimate.initialLineCalculation();
 
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,

@@ -25,12 +25,11 @@ class OrderScreen extends StatefulWidget{
 class _OrderScreenState extends State<OrderScreen> {
 
   var formKey = GlobalKey<FormState>();
-  final orderEntryField = OrderFields();
-  final orderEntry = Estimate();
+  //final orderEntryField = OrderFields();
 
   @override
   Widget build(BuildContext context) {
-
+    //widget.estimate.initialLineCalculation();
     return Scaffold(
       appBar: AppBar(
         title: Text('Estimate Result'),
@@ -50,12 +49,9 @@ class _OrderScreenState extends State<OrderScreen> {
                 onPressed: (){
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
+                    print('${widget.estimate.trunkLineLength}');
                     // save to db here
-                    Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: orderEntryField);
-//                    Navigator.push(
-//                      context,
-//                      MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orderEntryField))
-//                    );
+                    Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: widget.estimate);
                   }
                 },
                 child: Text("Save"),
@@ -84,7 +80,9 @@ class _OrderScreenState extends State<OrderScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.trunkLineLength = value;
+              print('${widget.estimate.trunkLineLength} => $value');
+              widget.estimate.trunkLineLength = int.parse(value);
+              print('${widget.estimate.trunkLineLength} => $value');
             },
             validator: (value){
               if(value.isEmpty){
@@ -117,7 +115,7 @@ class _OrderScreenState extends State<OrderScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.latLineLength = value;
+              widget.estimate.latLineLength = int.parse(value);
             },
             validator: (value){
               if(value.isEmpty){
@@ -150,7 +148,7 @@ class _OrderScreenState extends State<OrderScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              orderEntryField.toyLineLength = value;
+              widget.estimate.toyLineLength = int.parse(value);
             },
             validator: (value){
               if(value.isEmpty){

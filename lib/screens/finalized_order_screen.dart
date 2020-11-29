@@ -10,7 +10,6 @@ class FinalizedOrderScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final Estimate estimate = ModalRoute.of(context).settings.arguments;
-    //data.initialLineCalculation();
      return Scaffold(
        appBar: AppBar(
          title: Text("Copy Your Order"),
