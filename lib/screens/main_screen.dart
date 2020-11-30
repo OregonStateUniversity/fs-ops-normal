@@ -17,9 +17,11 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> {
 
-  TextEditingController engagementCtrl = TextEditingController();
-  TextEditingController acreageCtrl = TextEditingController();
+  final engagementCtrl = new TextEditingController();
+  final acreageCtrl = TextEditingController();
   final GlobalKey<MainScreenState> _key = GlobalKey();
+
+  var newName;
 
 
   List<Engagement> engagements = [
@@ -28,8 +30,15 @@ class MainScreenState extends State<MainScreen> {
     Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: timeFormat(), acres: 50),Estimate(name: "Order 2", timeStamp: timeFormat(), acres: 400),Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 1),Estimate(name: "Order 0", timeStamp: timeFormat(), acres: 2),]),
   ];
 
-  void setEngagement(Engagement engagement) {
-    engagements.add(engagement);
+  void setEngagement() {
+    if (engagementCtrl.text.isNotEmpty) {
+      setState(() {
+        engagements.add(
+          Engagement( newName, '10-23-20', 250, [] )
+        );
+      });
+      engagementCtrl.clear();
+    }
   }
 
   static const menuItems = <String>[
@@ -63,7 +72,7 @@ class MainScreenState extends State<MainScreen> {
           children: <Widget>[
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 itemCount: engagements.length,
                 itemBuilder: (context, index){
                   return ListTile(
@@ -83,8 +92,9 @@ class MainScreenState extends State<MainScreen> {
                       },
                   );
                 }
-              )
-            )
+              ),
+            ),
+            Divider(),
           ]
         ),
         
@@ -120,16 +130,8 @@ class MainScreenState extends State<MainScreen> {
             OutlineButton(
               child: Text('Create'),
               onPressed: () {
-                _key.currentState
-                    .setEngagement(Engagement(
-                      engagementCtrl.text,
-                      '10-23-20',
-                      250,
-                      [],
-                    ));
-                setState(() {
-
-                });
+                newName = engagementCtrl.text;
+                setEngagement();
                 Navigator.of(context).pop();
               },
             )
