@@ -15,7 +15,6 @@ class OrderScreen extends StatefulWidget{
   static const routeName = 'orderScreen';
 
   final Estimate estimate;
-
   OrderScreen({this.estimate});
 
   @override
@@ -26,7 +25,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
   var formKey = GlobalKey<FormState>();
   //final orderEntryField = OrderFields();
-
+  Estimate est;
   @override
   Widget build(BuildContext context) {
     //widget.estimate.initialLineCalculation();
@@ -49,7 +48,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 onPressed: (){
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
-                    print('${widget.estimate.trunkLineLength}');
+                    print('${widget.estimate}');
                     // save to db here
                     Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: widget.estimate);
                   }
@@ -80,9 +79,9 @@ class _OrderScreenState extends State<OrderScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              print('${widget.estimate.trunkLineLength} => $value');
+              print('before set: ${widget.estimate.trunkLineLength} => $value');
               widget.estimate.trunkLineLength = int.parse(value);
-              print('${widget.estimate.trunkLineLength} => $value');
+              print('after set:  ${widget.estimate.trunkLineLength} => $value');
             },
             validator: (value){
               if(value.isEmpty){

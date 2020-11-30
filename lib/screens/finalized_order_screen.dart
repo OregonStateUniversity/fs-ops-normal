@@ -4,8 +4,6 @@ import '../models/estimate.dart';
 class FinalizedOrderScreen extends StatelessWidget{
 
   static const routeName = 'finalizedOrderScreen';
-  //FinalizedOrderScreen(this.data);
-  //final data;
 
   @override
   Widget build(BuildContext context) {

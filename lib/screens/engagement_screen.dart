@@ -72,10 +72,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),
               onTap: () {
                 Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: orders[index]);
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => FinalizedOrderScreen(orders[index]),)
-//                );
               },
             );
           },

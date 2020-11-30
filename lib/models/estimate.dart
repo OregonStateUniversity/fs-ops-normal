@@ -31,6 +31,12 @@ class Estimate{
 
   Estimate({this.name, this.acres, this.timeStamp});
 
+  Estimate.loadSavedEstimate(this.name, this.acres, this.timeStamp, trunk, lat, toy){
+    _trunkLineLength = trunk;
+    _latLineLength = lat;
+    _toyLineLength = toy;
+  }
+
   void initialLineCalculation(){
     _trunkLineLength = BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;
     _latLineLength = trunkLineLength ~/ 2;
@@ -44,5 +50,4 @@ class Estimate{
   set trunkLineLength(int length) => _trunkLineLength;
   set latLineLength(int length) => _latLineLength;
   set toyLineLength(int length) => _toyLineLength;
-
 }
