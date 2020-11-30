@@ -7,12 +7,6 @@ import '../models/engagement.dart';
 
 class SelectedEngagement extends StatefulWidget{
 
-  //final List<Estimate> orders;
-  //final String name;
-  //SelectedEngagement(this.orders, this.name);
-
-
-
   static const routeName = 'engagement';
 
   _SelectedEngagementState createState() => _SelectedEngagementState();
@@ -26,7 +20,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
     final List<Estimate> argOrders = engagement.orders;
-    //final String name = ModalRoute.of(context).settings.arguments;
 
     List<Estimate> orders = argOrders.reversed.toList();
     if(orders.isEmpty){

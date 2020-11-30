@@ -38,7 +38,6 @@ class FinalizedOrderScreen extends StatelessWidget{
                   child: Text("Back"),
                 )
             )
-
          ],
        ),
      );

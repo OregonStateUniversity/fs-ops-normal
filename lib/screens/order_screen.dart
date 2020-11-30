@@ -28,7 +28,6 @@ class _OrderScreenState extends State<OrderScreen> {
   Estimate est;
   @override
   Widget build(BuildContext context) {
-    //widget.estimate.initialLineCalculation();
     return Scaffold(
       appBar: AppBar(
         title: Text('Estimate Result'),
