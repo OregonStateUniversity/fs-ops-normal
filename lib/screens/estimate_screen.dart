@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/estimate.dart';
 
-class FinalizedOrderScreen extends StatelessWidget{
+class EstimateScreen extends StatelessWidget{
 
-  static const routeName = 'finalizedOrderScreen';
+  static const routeName = 'estimateScreen';
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/estimate.dart';
 import 'engagement_screen.dart';
-import 'finalized_order_screen.dart';
+import 'estimate_screen.dart';
 
 class OrderFields{
   String trunkLineLength;
@@ -10,18 +10,18 @@ class OrderFields{
 }
 
 
-class OrderScreen extends StatefulWidget{
+class ModifyEstimateScreen extends StatefulWidget{
   
-  static const routeName = 'orderScreen';
+  static const routeName = 'modifyEstimateScreen';
 
   final Estimate estimate;
-  OrderScreen({this.estimate});
+  ModifyEstimateScreen({this.estimate});
 
   @override
-  _OrderScreenState createState() => _OrderScreenState();
+  _ModifyEstimateScreenState createState() => _ModifyEstimateScreenState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
   var formKey = GlobalKey<FormState>();
   //final orderEntryField = OrderFields();
@@ -49,7 +49,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     formKey.currentState.save();
                     print('${widget.estimate}');
                     // save to db here
-                    Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: widget.estimate);
+                    Navigator.pushNamed(context, EstimateScreen.routeName, arguments: widget.estimate);
                   }
                 },
                 child: Text("Save"),

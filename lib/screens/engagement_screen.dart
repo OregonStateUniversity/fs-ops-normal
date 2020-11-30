@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'new_estimate_screen.dart';
-import 'finalized_order_screen.dart';
+import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 
@@ -61,10 +61,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           itemCount: orders.length,
           itemBuilder: (context, index){
             return ListTile(
-              title: Text('Order ${orders.length - index}'),
+              title: Text('Estimate ${orders.length - index}'),
               subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),
               onTap: () {
-                Navigator.pushNamed(context, FinalizedOrderScreen.routeName, arguments: orders[index]);
+                Navigator.pushNamed(context, EstimateScreen.routeName, arguments: orders[index]);
               },
             );
           },

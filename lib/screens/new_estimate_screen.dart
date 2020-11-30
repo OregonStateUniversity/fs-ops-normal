@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hose_jockey/time_format.dart';
-import 'order_screen.dart';
+import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 
 class NewEstimateScreen extends StatefulWidget{
@@ -51,7 +51,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
-                                                      MaterialPageRoute(builder: (context) => OrderScreen(
+                                                      MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
                                                         estimate: estimate,
                                                         )
                                                       ),
