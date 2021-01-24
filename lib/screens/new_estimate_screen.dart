@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:hose_jockey/time_format.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
+import '../models/engagement.dart';
 
 class NewEstimateScreen extends StatefulWidget{
 
@@ -21,6 +23,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    print("$engagement from new_estimate_screen modalroute arg");
     return Scaffold(
       appBar: AppBar(
         title: Text('New Estimate'),
@@ -49,10 +53,13 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat());
                 estimate.initialLineCalculation();
 
+                print("$engagement from new_estimate_screen");
+
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
                                                       MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
                                                         estimate: estimate,
+                                                        engagement: engagement,
                                                         )
                                                       ),
                 ) : ArgumentError.notNull('Value Can\'t Be Empty');

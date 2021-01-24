@@ -23,7 +23,7 @@ class EstimateScreen extends StatelessWidget{
                  child: SelectableText(
                      "Trunk Line: ${estimate.trunkLineLength} ft\n"
                          "Lat Line: ${estimate.latLineLength} ft\n"
-                         "ToyLine: ${estimate.toyLineLength} ft\n"),
+                         "Toy Line: ${estimate.toyLineLength} ft\n"),
                ),
              ],
            ),

@@ -19,6 +19,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   Widget build(BuildContext context) {
 
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    print("$engagement from engagement_screen modalroute arg");
     final List<Estimate> argOrders = engagement.orders;
 
     List<Estimate> orders = argOrders.reversed.toList();
@@ -41,10 +42,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NewEstimateScreen()),
-            );
+            print("$engagement from engagement_screen");
+            Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
           },
           tooltip: 'New Order',
           child: Icon(Icons.add),
@@ -72,10 +71,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NewEstimateScreen()),
-          );
+          print("$engagement from engagement_screen");
+          Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
         },
         tooltip: 'New Order',
         child: Icon(Icons.add),
