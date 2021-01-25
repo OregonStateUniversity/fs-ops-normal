@@ -59,6 +59,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           padding: const EdgeInsets.all(8),
           itemCount: orders.length,
           itemBuilder: (context, index){
+            print("${orders[index].timeStamp}");
+            print("${orders[index].acres}");
             return ListTile(
               title: Text('Estimate ${orders.length - index}'),
               subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),

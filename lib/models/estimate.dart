@@ -1,22 +1,3 @@
-class Estimate1{
-  static const BASE_TRUNK_LINE_LENGTH = 1000;
-  static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
-
-  final name;
-  final String timeStamp;
-  final int acres;
-
-  Estimate1({this.name, this.acres, this.timeStamp});
-
-  int get trunkLineLength => BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;
-
-  int get latLineLength => trunkLineLength ~/ 2;
-
-  int get toyLineLength => latLineLength ~/ 2;
-
-}
-
-
 class Estimate{
   static const BASE_TRUNK_LINE_LENGTH = 1000;
   static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
@@ -32,15 +13,18 @@ class Estimate{
   Estimate({this.name = "NoNameNeeded", this.acres, this.timeStamp});
 
   Estimate.jsonConvF(name, acres, timeStamp, trunk, lat, toy){
-    name = name;
-    acres = acres;
-    timeStamp = timeStamp;
+    this.name = name;
+    this.acres = acres;
+    this.timeStamp = timeStamp;
     _trunkLineLength = trunk;
     _latLineLength = lat;
     _toyLineLength = toy;
   }
 
-  Estimate.loadSavedEstimate(this.name, this.acres, this.timeStamp, trunk, lat, toy){
+  Estimate.loadSavedEstimate(name, acres, timeStamp, trunk, lat, toy){
+    this.name = name;
+    this.acres = acres;
+    this.timeStamp = timeStamp;
     _trunkLineLength = trunk;
     _latLineLength = lat;
     _toyLineLength = toy;
@@ -62,7 +46,7 @@ class Estimate{
 
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
     json["name"],
-    json["acre"],
+    json["acres"],
     json["timeStamp"],
     json["trunkLineLength"],
     json["latLineLength"],
@@ -77,25 +61,4 @@ class Estimate{
     'latLineLength': latLineLength,
     'toyLineLength': toyLineLength
   };
-
-  Map<String, dynamic> toMap(){
-    var map = <String, dynamic>{
-      'name': name,
-      'timeStamp': timeStamp,
-      'acres': acres,
-      'trunkLineLength': _trunkLineLength,
-      'latLineLength': _latLineLength,
-      'toyLineLength': _toyLineLength,
-    };
-    return map;
-  }
-
-  Estimate.fromMap(Map<String, dynamic> map){
-    name = map['name'];
-    timeStamp = map['timeStamp'];
-    acres = map['acres'];
-    _trunkLineLength = map['trunkLineLength'];
-    _latLineLength = map['layLineLength'];
-    _toyLineLength = map['toyLineLength'];
-  }
 }

@@ -25,12 +25,6 @@ class MainScreenState extends State<MainScreen> {
   final GlobalKey<MainScreenState> _key = GlobalKey();
 
   var newName;
-//'{{"name", 5, time, 2600, 1300, 650}, {"name", 5, time, 2600, 1300, 650}}'
-////
-//  Engagement('Bravo Engagement', '10-23-20', 500, []),
-//  Engagement('Gamma Engagement', '10-23-20', 500, [Estimate.loadSavedEstimate("name", 5, timeFormat(), 2600, 1300, 650)]),
-//  Engagement('Alpha Engagement', '10-23-20', 500, [Estimate(name: "Order 3", timeStamp: timeFormat(), acres: 50),Estimate(name: "Order 2", timeStamp: timeFormat(), acres: 400),Estimate(name: "Order 1", timeStamp: timeFormat(), acres: 1),Estimate(name: "Order 0", timeStamp: timeFormat(), acres: 2),]),
-
   List<Engagement> engagements = [];
 
   void initState(){
@@ -48,7 +42,6 @@ class MainScreenState extends State<MainScreen> {
       );
     });
     List<Map> engagementRecords = await database.rawQuery('SELECT * FROM engagements');
-    print("{$engagementRecords} ---->");
     if (engagementRecords != null) {
       final engagementEntries = engagementRecords.map((record) {
         return Engagement(
@@ -59,7 +52,6 @@ class MainScreenState extends State<MainScreen> {
           record['id'],
         );
       }).toList();
-      print(engagementEntries);
       setState(() {
         engagements = engagementEntries;
       });
@@ -69,12 +61,8 @@ class MainScreenState extends State<MainScreen> {
   }
 
   List<Estimate> loadOrders(string) {
-    print("$string ---> loadOrders(string)");
-    print(string.runtimeType);
     Iterable i = json.decode(string);
-    print("$i decoded)");
     List<Estimate> orderEntries = List<Estimate>.from(i.map((model) => Estimate.fromJson(model)));
-    print("$orderEntries ---> orderEnteries");
     return orderEntries;
   }
 
@@ -115,8 +103,6 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final title = 'Ops Normal';
-    print(engagements);
-
     if (engagements.isEmpty){
       return Scaffold(
         appBar: AppBar(
@@ -162,7 +148,7 @@ class MainScreenState extends State<MainScreen> {
                 itemBuilder: (context, index){
                   return ListTile(
                       title: Text('${engagements[index].name}'),
-                      subtitle: Text('Created: ${engagements[index].fireTimeStamp}    Acreage: ${engagements[index].size}'),
+                      subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
                       trailing: PopupMenuButton<String>(
                         onSelected: (String newVal) {
                           _popBtnSelectVal = newVal;
@@ -230,13 +216,11 @@ class MainScreenState extends State<MainScreen> {
                     );
                   }
                 );
-                print(engagements);
                 await database.transaction((txn) async {
                   await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, orders) VALUES(?, ?, ?, ?)',
                     [dto.name, dto.fireTimeStamp, dto.size, "[]"]
                   );
                 });
-                print("Created Button Clicked");
                 await database.close();
                 //loadEngagements();
                 Navigator.of(context).pop();
