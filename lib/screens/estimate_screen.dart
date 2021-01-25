@@ -10,6 +10,7 @@ class EstimateScreen extends StatelessWidget{
     final Estimate estimate = ModalRoute.of(context).settings.arguments;
      return Scaffold(
        appBar: AppBar(
+         automaticallyImplyLeading: false,
          title: Text("Copy Your Order"),
        ),
        body: Column(
@@ -28,19 +29,25 @@ class EstimateScreen extends StatelessWidget{
                ),
              ],
            ),
-
-            Align(
-              alignment: Alignment.bottomCenter,
-              child:
-                RaisedButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, ModalRoute.withName('engagement'));
-                  },
-                  child: Text("Back"),
-                )
-            )
          ],
        ),
+       bottomNavigationBar: BottomAppBar(
+         child: new Row(
+           mainAxisSize: MainAxisSize.max,
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children: <Widget>[
+             IconButton(icon: Icon(Icons.home), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/'));},),
+             FlatButton(
+               onPressed: (){
+                 Navigator.popUntil(context, ModalRoute.withName('engagement'));
+               },
+               child: Text("Back"),
+             )
+           ],
+         ),
+       ),
      );
+
   }
 }

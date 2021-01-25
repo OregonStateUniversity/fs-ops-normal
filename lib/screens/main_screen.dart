@@ -133,53 +133,60 @@ class MainScreenState extends State<MainScreen> {
           ),
       );
     } else
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          centerTitle: true,
-        ),
-        body: Column(
-          key: _key,
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(10),
-                itemCount: engagements.length,
-                itemBuilder: (context, index){
-                  return ListTile(
-                      title: Text('${engagements[index].name}'),
-                      subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
-                      trailing: PopupMenuButton<String>(
-                        onSelected: (String newVal) {
-                          _popBtnSelectVal = newVal;
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar( content: Text(_popBtnSelectVal)),
-                          );
-                        },
-                        itemBuilder: (BuildContext context) => _popUpMenuItems,
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
-                      },
-                  );
-                }
+        return Scaffold(
+            appBar: AppBar(
+              title: Text(title),
+              centerTitle: true,
+            ),
+
+            body: Column(
+              key: _key,
+              children: <Widget>[
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(10),
+                    itemCount: engagements.length,
+                    itemBuilder: (context, index){
+                      return ListTile(
+                          title: Text('${engagements[index].name}'),
+                          subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
+                          trailing: PopupMenuButton<String>(
+                            onSelected: (String newVal) {
+                              _popBtnSelectVal = newVal;
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar( content: Text(_popBtnSelectVal)),
+                              );
+                            },
+                            itemBuilder: (BuildContext context) => _popUpMenuItems,
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
+                          },
+                      );
+                    }
+                  ),
+                ),
+              ]
+            ),
+
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () => _createEngagement(context),
+              tooltip: 'New estimate',
+              child: Icon(Icons.add),
+            ),
+
+            bottomNavigationBar: BottomAppBar(
+              child: new Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.settings), onPressed: (){},),
+                ],
               ),
             ),
-            Divider(),
-            FlatButton(
-              //TODO: Remove entire db delete button
-              child: Text("Hold To Clear All Entreries"),
-              onLongPress: deleteDB,
-            ),
-          ]
-        ),
-
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _createEngagement(context),
-          tooltip: 'New estimate',
-          child: Icon(Icons.add),
-        )
-    );
+          );
   }
 
   _createEngagement(context) {

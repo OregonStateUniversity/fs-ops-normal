@@ -26,9 +26,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     if(orders.isEmpty){
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text("${engagement.name}"),
-          centerTitle: true,
         ),
+
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -40,6 +41,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
             )
           ],
         ),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             print("$engagement from engagement_screen");
@@ -48,12 +51,31 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           tooltip: 'New Order',
           child: Icon(Icons.add),
         ),
+
+        bottomNavigationBar: BottomAppBar(
+          child: new Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              IconButton(icon: Icon(Icons.home), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/'));},),
+              FlatButton(
+                onPressed: (){
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                },
+                child: Text("Back"),
+              )
+            ],
+          ),
+        ),
       );
     }
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("${engagement.name}"),
       ),
+
       body: Scrollbar(
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
@@ -71,6 +93,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           },
         )
       ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           print("$engagement from engagement_screen");
@@ -78,6 +102,23 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         },
         tooltip: 'New Order',
         child: Icon(Icons.add),
+      ),
+
+      bottomNavigationBar: BottomAppBar(
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            IconButton(icon: Icon(Icons.home), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/'));},),
+            FlatButton(
+              onPressed: (){
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              },
+              child: Text("Back"),
+            )
+          ],
+        ),
       ),
     );
   }
