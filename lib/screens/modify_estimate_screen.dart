@@ -8,9 +8,10 @@ import 'estimate_screen.dart';
 import 'package:hose_jockey/time_format.dart';
 
 class OrderFields{
-  String trunkLineLength;
-  String latLineLength;
-  String toyLineLength;
+  int acres;
+  int trunkLineLength;
+  int latLineLength;
+  int toyLineLength;
 }
 
 
@@ -27,14 +28,14 @@ class ModifyEstimateScreen extends StatefulWidget{
 }
 
 class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
-
   var formKey = GlobalKey<FormState>();
-  //final orderEntryField = OrderFields();
+  OrderFields orderField = new OrderFields();
+
   Estimate est;
   @override
   Widget build(BuildContext context) {
-    print("${widget.estimate.acres} from modify_estimate_screen");
-    print("${widget.engagement} from modify_estimate_screen");
+
+    orderField.acres = widget.estimate.acres;
     return Scaffold(
       appBar: AppBar(
         title: Text('Estimate Result'),
@@ -52,15 +53,11 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
               RaisedButton(
                 onPressed: (){
-                  print("${widget.estimate} = widget.estimate");
-                  print("${widget.engagement} = widget.engagement");
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
-                    print('${widget.estimate}');
-                    // save to db here
-                    print("passed into addNewEstimate\nEngagement: ${widget.engagement}\n Estimate:${widget.estimate}");
-                    addNewEstimate(widget.engagement, widget.estimate);
-                    Navigator.pushNamed(context, EstimateScreen.routeName, arguments: widget.estimate);
+                    var finalEstimate = new Estimate.loadSavedEstimate("NoNameNeeded", orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength);
+                    addNewEstimate(widget.engagement, finalEstimate);
+                    Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
                   }
                 },
                 child: Text("Save"),
@@ -89,9 +86,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              print('before set: ${widget.estimate.trunkLineLength} => $value');
-              widget.estimate.trunkLineLength = int.parse(value);
-              print('after set:  ${widget.estimate.trunkLineLength} => $value');
+              orderField.trunkLineLength = int.parse(value);
             },
             validator: (value){
               if(value.isEmpty){
@@ -124,7 +119,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              widget.estimate.latLineLength = int.parse(value);
+              orderField.latLineLength = int.parse(value);
             },
             validator: (value){
               if(value.isEmpty){
@@ -157,7 +152,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onSaved: (value){
-              widget.estimate.toyLineLength = int.parse(value);
+              orderField.toyLineLength = int.parse(value);
             },
             validator: (value){
               if(value.isEmpty){

@@ -14,9 +14,6 @@ class NewEstimateScreen extends StatefulWidget{
 
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
-  var tmpEst = Estimate(name: "Test", acres: 10, timeStamp: DateTime.now().toString());
-
-
   var _acreage = '0';
   bool _validate = false;
   final acreageCon = new TextEditingController();
@@ -24,7 +21,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   @override
   Widget build(BuildContext context) {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
-    print("$engagement from new_estimate_screen modalroute arg");
     return Scaffold(
       appBar: AppBar(
         title: Text('New Estimate'),
@@ -51,10 +47,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 });
 
                 var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat());
+                print(estimate.acres);
                 estimate.initialLineCalculation();
-
-                print("$engagement from new_estimate_screen");
-
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,
                                                       MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
