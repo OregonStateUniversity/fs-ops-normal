@@ -67,7 +67,6 @@ class MainScreenState extends State<MainScreen> {
 
   void deleteDB() async{
     await deleteDatabase('engagements.db'); //delete this
-    print("Database deleted");
     loadEngagements();
   }
 
