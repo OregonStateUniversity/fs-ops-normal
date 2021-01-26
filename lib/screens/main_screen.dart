@@ -140,25 +140,45 @@ class MainScreenState extends State<MainScreen> {
                       itemCount: engagements.length,
                       itemBuilder: (context, index){
                         return Dismissible(
-                          direction: DismissDirection.endToStart,
                           key: Key(engagements[index].name),
-                          onDismissed: (direction){
-                            deleteEngagement(engagements[index].primaryKey);
-                            setState((){
-                              engagements.removeAt(index);
-                            });
+                          background: Stack(children: [
+                            Container(color: Colors.red),
+                            Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Icon(Icons.delete_forever, size: 34,),
+                              ),
+                            )
+                          ],
+                          ),
+                          confirmDismiss: (DismissDirection direction) async{
+                            return await showDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AlertDialog(
+                                  title: const Text("Delete Engagement?"),
+                                  content: const Text("This cannot be undone"),
+                                  actions: [
+                                    FlatButton(
+                                      onPressed: () => Navigator.of(context).pop(true),
+                                      child: const Text("Delete"),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () => Navigator.of(context).pop(false),
+                                      child: const Text("Cancel"),
+                                    )
+                                  ],
+                                );
+                              }
+                            );
                           },
-                            background: Stack(children: [
-                              Container(color: Colors.red),
-                              Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(Icons.delete_forever, size: 34,),
-                                ),
-                              )
-                            ],
-                            ),
+                          onDismissed: (direction){
+                              deleteEngagement(engagements[index].primaryKey);
+                              setState((){
+                                engagements.removeAt(index);
+                              });
+                          },
 
                           child: ListTile(
                             title: Text('${engagements[index].name}'),
