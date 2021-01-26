@@ -148,7 +148,17 @@ class MainScreenState extends State<MainScreen> {
                               engagements.removeAt(index);
                             });
                           },
-                            background: Container(color: Colors.red),
+                            background: Stack(children: [
+                              Container(color: Colors.red),
+                              Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(Icons.delete_forever, size: 34,),
+                                ),
+                              )
+                            ],
+                            ),
 
                           child: ListTile(
                             title: Text('${engagements[index].name}'),
