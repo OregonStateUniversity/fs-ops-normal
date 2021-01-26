@@ -4,7 +4,6 @@ import 'package:hose_jockey/time_format.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:convert';
 import 'engagement_screen.dart';
-import 'new_engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 
@@ -86,7 +85,6 @@ class MainScreenState extends State<MainScreen> {
   static const menuItems = <String>[
     'Edit',
     'Close(Mark \'Old\')',
-    'Delete',
   ];
 
   final List<PopupMenuItem<String>> _popUpMenuItems = menuItems
@@ -109,6 +107,7 @@ class MainScreenState extends State<MainScreen> {
           title: Text(title),
           centerTitle: true,
         ),
+
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -118,75 +117,67 @@ class MainScreenState extends State<MainScreen> {
                 Text("No Engagements Created Yet"),
               ],
             ),
-            FlatButton(
-              //TODO: Remove entire db delete button
-              child: Text("Hold To Clear All Entreries"),
-              onLongPress: deleteDB,
-            ),
           ],
-
         ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _createEngagement(context),
-            tooltip: 'New estimate',
-            child: Icon(Icons.add),
-          ),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: floatAccButton(),
+        bottomNavigationBar: bottomNavBar()
       );
-    } else
-        return Scaffold(
-            appBar: AppBar(
-              title: Text(title),
-              centerTitle: true,
-            ),
 
-            body: Column(
-              key: _key,
-              children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(10),
-                    itemCount: engagements.length,
-                    itemBuilder: (context, index){
-                      return ListTile(
-                          title: Text('${engagements[index].name}'),
-                          subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
-                          trailing: PopupMenuButton<String>(
-                            onSelected: (String newVal) {
-                              _popBtnSelectVal = newVal;
-                              Scaffold.of(context).showSnackBar(
-                                SnackBar( content: Text(_popBtnSelectVal)),
-                              );
-                            },
-                            itemBuilder: (BuildContext context) => _popUpMenuItems,
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
-                          },
-                      );
-                    }
-                  ),
-                ),
-              ]
-            ),
-
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () => _createEngagement(context),
-              tooltip: 'New estimate',
-              child: Icon(Icons.add),
-            ),
-
-            bottomNavigationBar: BottomAppBar(
-              child: new Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(icon: Icon(Icons.settings), onPressed: (){},),
-                ],
+      } else
+          return Scaffold(
+              appBar: AppBar(
+                title: Text(title),
+                centerTitle: true,
               ),
-            ),
-          );
+
+              body: Column(
+                key: _key,
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(10),
+                      itemCount: engagements.length,
+                      itemBuilder: (context, index){
+                        return Dismissible(
+                          direction: DismissDirection.endToStart,
+                          key: Key(engagements[index].name),
+                          onDismissed: (direction){
+                            deleteEngagement(engagements[index].primaryKey);
+                            setState((){
+                              engagements.removeAt(index);
+                            });
+                          },
+                            background: Container(color: Colors.red),
+
+                          child: ListTile(
+                            title: Text('${engagements[index].name}'),
+                            subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
+                            trailing: PopupMenuButton<String>(
+                              onSelected: (String newVal) {
+                                _popBtnSelectVal = newVal;
+                                Scaffold.of(context).showSnackBar(
+                                  SnackBar( content: Text(_popBtnSelectVal)),
+                                );
+                              },
+                              itemBuilder: (BuildContext context) => _popUpMenuItems,
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
+                            },
+                          )
+                        );
+                      }
+                    ),
+                  ),
+                ]
+              ),
+
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+              floatingActionButton: floatAccButton(),
+              bottomNavigationBar: bottomNavBar()
+            );
   }
 
   _createEngagement(context) {
@@ -239,4 +230,40 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
+  void deleteEngagement(index) async{
+    final Database database = await openDatabase(
+        'engagements.db', version: 1, onCreate: (Database db, int version) async{
+      await db.execute(
+          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
+      );
+    }
+    );
+    
+    await database.transaction((txn) async {
+      await txn.rawDelete('DELETE FROM engagements WHERE id = $index');
+    });
+
+    await database.close();
+  }
+
+  Widget bottomNavBar(){
+    return BottomAppBar(
+      child: new Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          IconButton(icon: Icon(Icons.settings), onPressed: (){},),
+        ],
+      )
+    );
+  }
+
+  Widget floatAccButton(){
+    return FloatingActionButton(
+      onPressed: () => _createEngagement(context),
+      tooltip: 'New estimate',
+      child: Icon(Icons.add),
+    );
+  }
 }
