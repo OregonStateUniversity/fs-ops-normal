@@ -43,31 +43,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         ),
 
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print("$engagement from engagement_screen");
-            Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
-          },
-          tooltip: 'New Order',
-          child: Icon(Icons.add),
-        ),
-
-        bottomNavigationBar: BottomAppBar(
-          child: new Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              IconButton(icon: Icon(Icons.home), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/'));},),
-              FlatButton(
-                onPressed: (){
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
-                },
-                child: Text("Back"),
-              )
-            ],
-          ),
-        ),
+        floatingActionButton: floatAccButton(engagement),
+        bottomNavigationBar: bottomNavBar(),
       );
     }
     return Scaffold(
@@ -95,31 +72,38 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("$engagement from engagement_screen");
-          Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
-        },
-        tooltip: 'New Order',
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: floatAccButton(engagement),
+      bottomNavigationBar: bottomNavBar()
+    );
+  }
 
-      bottomNavigationBar: BottomAppBar(
-        child: new Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            IconButton(icon: Icon(Icons.home), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/'));},),
-            FlatButton(
-              onPressed: (){
-                Navigator.popUntil(context, ModalRoute.withName('/'));
-              },
-              child: Text("Back"),
-            )
-          ],
-        ),
+  Widget bottomNavBar(){
+    return BottomAppBar(
+      child: new Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          IconButton(icon: Icon(Icons.home), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/'));},),
+          FlatButton(
+            onPressed: (){
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
+            child: Text("Back"),
+          )
+        ],
       ),
+    );
+  }
+
+  Widget floatAccButton(engagement){
+    return FloatingActionButton(
+      onPressed: () {
+        print("$engagement from engagement_screen");
+        Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
+      },
+      tooltip: 'New Order',
+      child: Icon(Icons.add),
     );
   }
 }
