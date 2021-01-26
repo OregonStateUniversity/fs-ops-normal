@@ -19,7 +19,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   Widget build(BuildContext context) {
 
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
-    print("$engagement from engagement_screen modalroute arg");
     final List<Estimate> argOrders = engagement.orders;
 
     List<Estimate> orders = argOrders.reversed.toList();
@@ -58,8 +57,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           padding: const EdgeInsets.all(8),
           itemCount: orders.length,
           itemBuilder: (context, index){
-            print("${orders[index].timeStamp}");
-            print("${orders[index].acres}");
             return ListTile(
               title: Text('Estimate ${orders.length - index}'),
               subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),
@@ -99,7 +96,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   Widget floatAccButton(engagement){
     return FloatingActionButton(
       onPressed: () {
-        print("$engagement from engagement_screen");
         Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
       },
       tooltip: 'New Order',
