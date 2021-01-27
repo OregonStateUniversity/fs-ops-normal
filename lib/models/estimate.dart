@@ -12,6 +12,13 @@ class Estimate{
 
   Estimate({this.name = "NoNameNeeded", this.acres, this.timeStamp});
 
+  @override
+  String toString(){
+    return "Trunk Line: ${this.trunkLineLength}\n"
+        "Lat Line: ${this.latLineLength}\n"
+        "Toy Line: ${this.toyLineLength}\n";
+  }
+
   Estimate.jsonConvF(name, acres, timeStamp, trunk, lat, toy){
     this.name = name;
     this.acres = acres;
