@@ -220,7 +220,7 @@ packages:
       name: node_preamble
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.12"
+    version: "1.4.13"
   number_inc_dec:
     dependency: "direct main"
     description:
@@ -330,7 +330,7 @@ packages:
       name: sqflite_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.3+1"
   stack_trace:
     dependency: transitive
     description:

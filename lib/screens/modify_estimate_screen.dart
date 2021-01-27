@@ -165,7 +165,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     );
   }
 
-
   void addNewEstimate(engage, order) async{
     final Database database = await openDatabase(
         'engagements.db', version: 1, onCreate: (Database db, int version) async{

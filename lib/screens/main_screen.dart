@@ -152,6 +152,10 @@ class MainScreenState extends State<MainScreen> {
                             )
                           ],
                           ),
+                          dismissThresholds: {
+                            DismissDirection.startToEnd: 1.0,
+                            DismissDirection.endToStart: 0.25
+                          },
                           confirmDismiss: (DismissDirection direction) async{
                             return await showDialog(
                               context: context,
