@@ -59,7 +59,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           itemBuilder: (context, index){
             return ListTile(
               title: Text('Estimate ${orders.length - index}'),
-              subtitle: Text('${orders[index].acres.toString()} Acres\nCreate on: ${orders[index].timeStamp}\n'),
+              subtitle: Text('${orders[index].acres.toString()} Acres\nCreated: ${orders[index].timeStamp}\n'),
               onTap: () {
                 Navigator.pushNamed(context, EstimateScreen.routeName, arguments: orders[index]);
               },
