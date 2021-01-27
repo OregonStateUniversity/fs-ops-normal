@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/estimate.dart';
 
 class EstimateScreen extends StatelessWidget{
@@ -22,14 +23,20 @@ class EstimateScreen extends StatelessWidget{
                Padding(
                  padding: EdgeInsets.all(16),
                  child: SelectableText(
-                     "Trunk Line: ${estimate.trunkLineLength} ft\n"
-                         "Lat Line: ${estimate.latLineLength} ft\n"
-                         "Toy Line: ${estimate.toyLineLength} ft\n"
+                     estimate.toString()
                  ),
                ),
              ],
            ),
          ],
+       ),
+       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+       floatingActionButton: FloatingActionButton.extended(
+         onPressed: (){
+           Clipboard.setData(ClipboardData(text: estimate.toString())).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Copied to Clipboard"),)));
+         },
+         icon: Icon(Icons.copy),
+         label: Text("Tap Here To Copy"),
        ),
        bottomNavigationBar: BottomAppBar(
          child: new Row(
