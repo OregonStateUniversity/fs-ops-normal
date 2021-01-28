@@ -287,7 +287,7 @@ class MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          IconButton(icon: Icon(Icons.settings), onPressed: deleteDB,),
+          IconButton(icon: Icon(Icons.settings), onPressed: (){},),
         ],
       )
     );
