@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-
+import 'package:sqflite/sqflite.dart';
 
 class SelectedEngagement extends StatefulWidget{
 
@@ -21,7 +22,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
     final List<Estimate> argOrders = engagement.orders;
 
-    List<Estimate> orders = argOrders.reversed.toList();
+    //List<Estimate> orders = argOrders.reversed.toList();
+    List<Estimate> orders = argOrders;
     if(orders.isEmpty){
       return Scaffold(
         appBar: AppBar(
@@ -56,16 +58,63 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: orders.length,
-          itemBuilder: (context, index){
-            return ListTile(
-              title: Text('Estimate ${orders.length - index}'),
-              subtitle: Text('${orders[index].acres.toString()} Acres\nCreated: ${orders[index].timeStamp}\n'),
-              onTap: () {
-                Navigator.pushNamed(context, EstimateScreen.routeName, arguments: orders[index]);
+          itemBuilder: (context, index) {
+            return Dismissible(
+              key: Key(engagement.orders[index].timeStamp),
+              background: Stack(
+                children: [
+                  Container(color: Colors.red,),
+                  Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.delete_forever, size: 34),
+                    ),
+                  )
+                ],
+              ),
+              // confirmDismiss: (DismissDirection direction) async {
+              //   return await showDialog(
+              //       context: context,
+              //       builder: (BuildContext context) {
+              //         return AlertDialog(
+              //           title: const Text("Delete Order?"),
+              //           content: const Text("This cannot be undone"),
+              //           actions: [
+              //             FlatButton(
+              //               onPressed: () => Navigator.of(context).pop(true),
+              //               child: const Text("Delete"),
+              //             ),
+              //             FlatButton(
+              //               onPressed: () => Navigator.of(context).pop(false),
+              //               child: const Text("Cancel"),
+              //             )
+              //           ],
+              //         );
+              //       }
+              //   );
+              //},
+              onDismissed: (direction) async{
+                deleteOrder(engagement, engagement.orders[index]);
+                setState((){
+                  print("length: ${orders.length}");
+                  print("index: $index");
+                  orders.removeAt(index);
+                  print("length: ${orders.length}");
+                });
               },
+              child: ListTile(
+                title: Text('Estimate ${index + 1}'),
+                subtitle: Text('${orders[index].acres
+                    .toString()} Acres\nCreated: ${orders[index].timeStamp}\n'),
+                onTap: () {
+                  Navigator.pushNamed(context, EstimateScreen.routeName,
+                      arguments: orders[index]);
+                },
+              ),
             );
-          },
-        )
+          }
+          )
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -101,5 +150,30 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
+  }
+
+  void deleteOrder(engage, order) async{
+    engage.orders.reversed.toList().remove(order);
+    var newOrderList = engage.orders;
+    final Database database = await openDatabase(
+        'engagements.db', version: 1, onCreate: (Database db, int version) async{
+      await db.execute(
+          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
+      );
+    }
+    );
+
+    await database.transaction((txn) async {
+      String tmp = "'[";
+      newOrderList.forEach((value) {
+        tmp += json.encode(value.toJson());
+        if(newOrderList.last != value){
+          tmp += ", ";
+        }
+      });
+      tmp += "]'";
+      await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${engage.primaryKey}');
+    });
+    await database.close();
   }
 }

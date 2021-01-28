@@ -66,6 +66,7 @@ class MainScreenState extends State<MainScreen> {
   }
 
   void deleteDB() async{
+    print("DB Deleted");
     await deleteDatabase('engagements.db'); //delete this
     loadEngagements();
   }
@@ -286,7 +287,7 @@ class MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          IconButton(icon: Icon(Icons.settings), onPressed: (){},),
+          IconButton(icon: Icon(Icons.settings), onPressed: deleteDB,),
         ],
       )
     );

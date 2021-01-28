@@ -23,7 +23,7 @@ class EstimateScreen extends StatelessWidget{
                Padding(
                  padding: EdgeInsets.all(16),
                  child: SelectableText(
-                     estimate.toString()
+                     estimate.toCopyString()
                  ),
                ),
              ],
@@ -33,7 +33,7 @@ class EstimateScreen extends StatelessWidget{
        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
        floatingActionButton: FloatingActionButton.extended(
          onPressed: (){
-           Clipboard.setData(ClipboardData(text: estimate.toString())).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Copied to Clipboard"),)));
+           Clipboard.setData(ClipboardData(text: estimate.toCopyString())).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Copied to Clipboard"),)));
          },
          icon: Icon(Icons.copy),
          label: Text("Tap Here To Copy"),
