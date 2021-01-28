@@ -73,6 +73,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   )
                 ],
               ),
+              dismissThresholds: {
+                DismissDirection.startToEnd: 1.0,
+                DismissDirection.endToStart: 0.25
+              },
               confirmDismiss: (DismissDirection direction) async {
                 return await showDialog(
                     context: context,
@@ -97,10 +101,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               onDismissed: (direction) async{
                 deleteOrder(engagement, engagement.orders[index]);
                 setState((){
-                  print("length: ${orders.length}");
-                  print("index: $index");
                   orders.removeAt(index);
-                  print("length: ${orders.length}");
                 });
               },
               child: ListTile(
