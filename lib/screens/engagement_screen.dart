@@ -73,27 +73,27 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   )
                 ],
               ),
-              // confirmDismiss: (DismissDirection direction) async {
-              //   return await showDialog(
-              //       context: context,
-              //       builder: (BuildContext context) {
-              //         return AlertDialog(
-              //           title: const Text("Delete Order?"),
-              //           content: const Text("This cannot be undone"),
-              //           actions: [
-              //             FlatButton(
-              //               onPressed: () => Navigator.of(context).pop(true),
-              //               child: const Text("Delete"),
-              //             ),
-              //             FlatButton(
-              //               onPressed: () => Navigator.of(context).pop(false),
-              //               child: const Text("Cancel"),
-              //             )
-              //           ],
-              //         );
-              //       }
-              //   );
-              //},
+              confirmDismiss: (DismissDirection direction) async {
+                return await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Delete Order?"),
+                        content: const Text("This cannot be undone"),
+                        actions: [
+                          FlatButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: const Text("Delete"),
+                          ),
+                          FlatButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text("Cancel"),
+                          )
+                        ],
+                      );
+                    }
+                );
+              },
               onDismissed: (direction) async{
                 deleteOrder(engagement, engagement.orders[index]);
                 setState((){
