@@ -55,7 +55,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
                     var finalEstimate = new Estimate.loadSavedEstimate("NoNameNeeded", orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength);
-                    addNewEstimate(widget.engagement, finalEstimate);
+                    DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
                     Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
                   }
                 },
@@ -164,23 +164,5 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         ),
       ],
     );
-  }
-
-  void addNewEstimate(engage, order) async{
-    final Database database = await DatabaseHelper.getDBConnector();
-    engage.orders.add(order);
-    await database.transaction((txn) async {
-      String tmp = "'[";
-      engage.orders.forEach((value) {
-        tmp += json.encode(value.toJson());
-        if((engage.orders.last != value)){
-          tmp += ", ";
-        }
-      });
-      tmp += "]'";
-      await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${engage.primaryKey}',
-      );
-    });
-    await database.close();
   }
 }
