@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 import 'dart:convert';
+import 'package:hose_jockey/database_helper.dart';
 import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-import 'package:sqflite/sqflite.dart';
+
 
 class SelectedEngagement extends StatefulWidget{
 
@@ -156,13 +158,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   void deleteOrder(engage, order) async{
     engage.orders.reversed.toList().remove(order);
     var newOrderList = engage.orders;
-    final Database database = await openDatabase(
-        'engagements.db', version: 1, onCreate: (Database db, int version) async{
-      await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
-      );
-    }
-    );
+    final Database database = await DatabaseHelper.getDBConnector();
 
     await database.transaction((txn) async {
       String tmp = "'[";
