@@ -35,12 +35,7 @@ class MainScreenState extends State<MainScreen> {
   var dto;
 
   void loadEngagements() async{
-    final Database database = await openDatabase(
-        'engagements.db', version: 1, onCreate: (Database db, int version) async{
-      await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
-      );
-    });
+    final Database database = await DatabaseHelper.getDBConnector();
     List<Map> engagementRecords = await database.rawQuery('SELECT * FROM engagements');
     if (engagementRecords != null) {
       final engagementEntries = engagementRecords.map((record) {
@@ -180,7 +175,7 @@ class MainScreenState extends State<MainScreen> {
                             );
                           },
                           onDismissed: (direction){
-                              deleteEngagement(engagements[index].primaryKey);
+                              DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
                               setState((){
                                 engagements.removeAt(index);
                               });
@@ -241,13 +236,7 @@ class MainScreenState extends State<MainScreen> {
               onPressed: () async {
                 newName = engagementCtrl.text;
                 setEngagement();
-                final Database database = await DatabaseHelper.getDBConnector();
-                await database.transaction((txn) async {
-                  await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, orders) VALUES(?, ?, ?, ?)',
-                    [dto.name, dto.fireTimeStamp, dto.size, "[]"]
-                  );
-                });
-                await database.close();
+                DatabaseHelper.insertEngagement(dto);
                 //loadEngagements();
                 Navigator.of(context).pop();
               },
@@ -256,16 +245,6 @@ class MainScreenState extends State<MainScreen> {
         );
       }
     );
-  }
-
-  void deleteEngagement(index) async{
-    final Database database = await DatabaseHelper.getDBConnector();
-    
-    await database.transaction((txn) async {
-      await txn.rawDelete('DELETE FROM engagements WHERE id = $index');
-    });
-
-    await database.close();
   }
 
   Widget bottomNavBar(){

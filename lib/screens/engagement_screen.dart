@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-import 'dart:convert';
 import 'package:hose_jockey/database_helper.dart';
 import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
@@ -101,7 +99,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 );
               },
               onDismissed: (direction) async{
-                deleteOrder(engagement, engagement.orders[index]);
+                DatabaseHelper.deleteOrder(engagement, engagement.orders[index]);
                 setState((){
                   orders.removeAt(index);
                 });
@@ -153,24 +151,5 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
-  }
-
-  void deleteOrder(engage, order) async{
-    engage.orders.reversed.toList().remove(order);
-    var newOrderList = engage.orders;
-    final Database database = await DatabaseHelper.getDBConnector();
-
-    await database.transaction((txn) async {
-      String tmp = "'[";
-      newOrderList.forEach((value) {
-        tmp += json.encode(value.toJson());
-        if(newOrderList.last != value){
-          tmp += ", ";
-        }
-      });
-      tmp += "]'";
-      await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${engage.primaryKey}');
-    });
-    await database.close();
   }
 }
