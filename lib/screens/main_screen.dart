@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
+import 'package:hose_jockey/database_helper.dart';
 
 
 
@@ -240,14 +241,7 @@ class MainScreenState extends State<MainScreen> {
               onPressed: () async {
                 newName = engagementCtrl.text;
                 setEngagement();
-
-                final Database database = await openDatabase(
-                    'engagements.db', version: 1, onCreate: (Database db, int version) async{
-                  await db.execute(
-                      'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
-                    );
-                  }
-                );
+                final Database database = await DatabaseHelper.getDBConnector();
                 await database.transaction((txn) async {
                   await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, orders) VALUES(?, ?, ?, ?)',
                     [dto.name, dto.fireTimeStamp, dto.size, "[]"]
@@ -265,13 +259,7 @@ class MainScreenState extends State<MainScreen> {
   }
 
   void deleteEngagement(index) async{
-    final Database database = await openDatabase(
-        'engagements.db', version: 1, onCreate: (Database db, int version) async{
-      await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
-      );
-    }
-    );
+    final Database database = await DatabaseHelper.getDBConnector();
     
     await database.transaction((txn) async {
       await txn.rawDelete('DELETE FROM engagements WHERE id = $index');

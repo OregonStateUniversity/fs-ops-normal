@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import 'estimate_screen.dart';
+import 'package:hose_jockey/database_helper.dart';
 
 class OrderFields{
   int acres;
@@ -166,12 +167,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   }
 
   void addNewEstimate(engage, order) async{
-    final Database database = await openDatabase(
-        'engagements.db', version: 1, onCreate: (Database db, int version) async{
-      await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
-      );
-    });
+    final Database database = await DatabaseHelper.getDBConnector();
     engage.orders.add(order);
     await database.transaction((txn) async {
       String tmp = "'[";
