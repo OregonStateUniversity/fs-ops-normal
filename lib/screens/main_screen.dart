@@ -218,6 +218,7 @@ class MainScreenState extends State<MainScreen> {
         return AlertDialog(
           title: Text('Create New Engagement'),
           content: TextField(
+            autofocus: true,
             controller: engagementCtrl,
             textCapitalization: TextCapitalization.words,
             decoration: InputDecoration(

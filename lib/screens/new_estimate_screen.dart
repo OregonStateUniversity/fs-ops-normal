@@ -30,6 +30,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           children: <Widget>[
             Text('Enter Acreage'),
             TextField(
+              autofocus: true,
               controller: acreageCon,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
