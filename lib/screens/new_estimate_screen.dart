@@ -20,7 +20,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   @override
   Widget build(BuildContext context) {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
-    print("Engagement on new_estimate_screen : ${engagement.primaryKey}");
     return Scaffold(
       appBar: AppBar(
         title: Text('New Estimate'),
@@ -47,7 +46,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 });
 
                 var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat());
-                print(estimate.acres);
                 estimate.initialLineCalculation();
                 _acreage.isNotEmpty ? Navigator.push(
                                                       context,

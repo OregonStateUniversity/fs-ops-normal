@@ -37,7 +37,6 @@ class DatabaseHelper{
   }
 
   static Future<void> deleteEngagement(index) async{
-    print("index to delete : $index");
     final Database db = await getDBConnector();
 
     await db.transaction((txn) async {
@@ -47,10 +46,8 @@ class DatabaseHelper{
 
   static Future<void> insertOrder(eng, order) async{
     final Database db = await getDBConnector();
-    print("Engagement on database_helper : ${eng.primaryKey}");
     eng.orders.add(order);
     await db.transaction((txn) async {
-      print("inside db.transaction() function");
       String tmp = "'[";
       eng.orders.forEach((value) {
         tmp += json.encode(value.toJson());

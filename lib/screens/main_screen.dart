@@ -69,7 +69,6 @@ class MainScreenState extends State<MainScreen> {
 
   void setEngagement() {
     if (engagementCtrl.text.isNotEmpty) {
-      print("Engagements length: ${engagements.length}");
       setState(() {
         //engagements.add(
             dto = Engagement( newName, timeFormat(), 250, []);
