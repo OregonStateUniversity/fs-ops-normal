@@ -138,7 +138,7 @@ class MainScreenState extends State<MainScreen> {
                       itemCount: engagements.length,
                       itemBuilder: (context, index){
                         return Dismissible(
-                          key: Key(engagements[index].name),
+                          key: Key(engagements[index].primaryKey.toString()),
                           background: Stack(children: [
                             Container(color: Colors.red),
                             Padding(
