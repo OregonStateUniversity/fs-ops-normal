@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 
+// https://www.youtube.com/watch?v=GZfFRv9VWtU
+
 class DatabaseHelper{
   static Database _database;
 
@@ -17,7 +19,7 @@ class DatabaseHelper{
         'engagements.db', version: 1, onCreate: (Database db, int version) async{
       await db.execute(
           'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
-      );
+          );
         }
     );
 
@@ -35,6 +37,7 @@ class DatabaseHelper{
   }
 
   static Future<void> deleteEngagement(index) async{
+    print("index to delete : $index");
     final Database db = await getDBConnector();
 
     await db.transaction((txn) async {
@@ -44,9 +47,10 @@ class DatabaseHelper{
 
   static Future<void> insertOrder(eng, order) async{
     final Database db = await getDBConnector();
-
+    print("Engagement on database_helper : ${eng.primaryKey}");
     eng.orders.add(order);
     await db.transaction((txn) async {
+      print("inside db.transaction() function");
       String tmp = "'[";
       eng.orders.forEach((value) {
         tmp += json.encode(value.toJson());
@@ -55,7 +59,7 @@ class DatabaseHelper{
         }
       });
       tmp += "]'";
-      await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${eng.primaryKey}',
+      await txn.rawUpdate('UPDATE engagements SET orders = ${tmp.toString()} WHERE id = ${eng.primaryKey}',
       );
     });
   }

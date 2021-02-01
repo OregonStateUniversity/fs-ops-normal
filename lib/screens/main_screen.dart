@@ -69,10 +69,11 @@ class MainScreenState extends State<MainScreen> {
 
   void setEngagement() {
     if (engagementCtrl.text.isNotEmpty) {
+      print("Engagements length: ${engagements.length}");
       setState(() {
-        engagements.add(
-            dto = Engagement( newName, timeFormat(), 250, [] )
-        );
+        //engagements.add(
+            dto = Engagement( newName, timeFormat(), 250, []);
+        //);
       });
       engagementCtrl.clear();
     }
@@ -176,9 +177,10 @@ class MainScreenState extends State<MainScreen> {
                           },
                           onDismissed: (direction){
                               DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
-                              setState((){
-                                engagements.removeAt(index);
-                              });
+                              loadEngagements();
+                              //setState((){
+                                //engagements.removeAt(index);
+                              //});
                           },
 
                           child: ListTile(
@@ -237,7 +239,7 @@ class MainScreenState extends State<MainScreen> {
                 newName = engagementCtrl.text;
                 setEngagement();
                 DatabaseHelper.insertEngagement(dto);
-                //loadEngagements();
+                loadEngagements();
                 Navigator.of(context).pop();
               },
             )

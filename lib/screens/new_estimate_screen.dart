@@ -20,6 +20,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   @override
   Widget build(BuildContext context) {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    print("Engagement on new_estimate_screen : ${engagement.primaryKey}");
     return Scaffold(
       appBar: AppBar(
         title: Text('New Estimate'),
