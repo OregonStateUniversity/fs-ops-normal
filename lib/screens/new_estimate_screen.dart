@@ -21,6 +21,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   Widget build(BuildContext context) {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('New Estimate'),
       ),
