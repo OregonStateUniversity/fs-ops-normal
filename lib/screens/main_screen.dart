@@ -73,28 +73,12 @@ class MainScreenState extends State<MainScreen> {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {
         //engagements.add(
-            dto = Engagement( newName, timeFormat(), 250, []);
+            dto = Engagement( newName, timeFormat(), 250, [], 1);
         //);
       });
       engagementCtrl.clear();
     }
   }
-
-  static const menuItems = <String>[
-    'Edit',
-    'Close(Mark \'Old\')',
-  ];
-
-  final List<PopupMenuItem<String>> _popUpMenuItems = menuItems
-      .map(
-        (String value) => PopupMenuItem<String>(
-          value: value,
-          child: Text(value),
-        ),
-      )
-      .toList();
-
-  String _popBtnSelectVal;
 
   @override
   Widget build(BuildContext context) {
@@ -188,15 +172,6 @@ class MainScreenState extends State<MainScreen> {
                           child: ListTile(
                             title: Text('${engagements[index].name}'),
                             subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
-                            trailing: PopupMenuButton<String>(
-                              onSelected: (String newVal) {
-                                _popBtnSelectVal = newVal;
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar( content: Text(_popBtnSelectVal)),
-                                );
-                              },
-                              itemBuilder: (BuildContext context) => _popUpMenuItems,
-                            ),
                             onTap: () {
                               Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
                             },

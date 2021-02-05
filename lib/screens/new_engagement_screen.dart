@@ -73,6 +73,7 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
                     '10-23-20',
                     int.parse(acreageCtrl.text),
                     [],
+                    1,
                   ));
               setState(() {
 
