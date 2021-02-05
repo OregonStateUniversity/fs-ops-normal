@@ -36,6 +36,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
     orderField.acres = widget.estimate.acres;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Estimate Result'),
       ),

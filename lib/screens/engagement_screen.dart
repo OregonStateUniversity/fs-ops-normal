@@ -28,7 +28,21 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("${engagement.name}"),
+          title: RichText(
+            text: TextSpan(
+              style: TextStyle(fontSize: 20, color: Colors.white),
+              children: <TextSpan> [
+                TextSpan(
+                  text: "${engagement.name}",
+                  style: TextStyle(fontSize: 20),
+                ),
+                TextSpan(
+                  text: "\nCreated: ${engagement.fireTimeStamp}",
+                  style: TextStyle(fontSize: 14)
+                )
+              ]
+            ),
+          ),
         ),
 
         body: Column(
@@ -51,7 +65,21 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("${engagement.name}"),
+        title: RichText(
+          text: TextSpan(
+              style: TextStyle(fontSize: 20, color: Colors.white),
+              children: <TextSpan> [
+                TextSpan(
+                  text: "${engagement.name}",
+                  style: TextStyle(fontSize: 20),
+                ),
+                TextSpan(
+                    text: "\nCreated: ${engagement.fireTimeStamp}",
+                    style: TextStyle(fontSize: 14)
+                )
+              ]
+          ),
+        ),
       ),
 
       body: Scrollbar(

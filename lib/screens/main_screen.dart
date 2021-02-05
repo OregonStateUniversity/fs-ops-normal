@@ -39,11 +39,13 @@ class MainScreenState extends State<MainScreen> {
     List<Map> engagementRecords = await database.rawQuery('SELECT * FROM engagements');
     if (engagementRecords != null) {
       final engagementEntries = engagementRecords.map((record) {
+        print("active: ${record['active']}");
         return Engagement(
           record['name'],
           record['timeStamp'],
           record['acres'],
           loadOrders(record['orders']),
+          record['active'],
           record['id'],
         );
       }).toList();
@@ -123,6 +125,7 @@ class MainScreenState extends State<MainScreen> {
 
       } else
           return Scaffold(
+            resizeToAvoidBottomInset: false,
               appBar: AppBar(
                 title: Text(title),
                 centerTitle: true,
@@ -200,6 +203,7 @@ class MainScreenState extends State<MainScreen> {
                           )
                         );
                       }
+
                     ),
                   ),
                 ]

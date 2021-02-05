@@ -18,7 +18,7 @@ class DatabaseHelper{
     _database = await openDatabase(
         'engagements.db', version: 1, onCreate: (Database db, int version) async{
       await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, orders TEXT NOT NULL);'
+          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);'
           );
         }
     );
@@ -30,8 +30,8 @@ class DatabaseHelper{
     final Database db = await getDBConnector();
 
     await db.transaction((txn) async {
-      await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, orders) VALUES(?, ?, ?, ?)',
-          [dto.name, dto.fireTimeStamp, dto.size, "[]"]
+      await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, active, orders) VALUES(?, ?, ?, ?, ?)',
+          [dto.name, dto.fireTimeStamp, dto.size, 1, "[]"]
       );
     });
   }
@@ -41,6 +41,14 @@ class DatabaseHelper{
 
     await db.transaction((txn) async {
       await txn.rawDelete('DELETE FROM engagements WHERE id = $index');
+    });
+  }
+
+  static Future<void> archiveEngagement(index) async{
+    final Database db = await getDBConnector();
+
+    await db.transaction((txn) async{
+      await txn.rawUpdate('UPDATE engagements SET active = 0 WHERE id = $index');
     });
   }
 
@@ -79,4 +87,5 @@ class DatabaseHelper{
       await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${eng.primaryKey}');
     });
   }
+
 }
