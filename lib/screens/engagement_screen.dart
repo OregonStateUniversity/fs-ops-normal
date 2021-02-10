@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hose_jockey/time_format.dart';
 import 'package:hose_jockey/database_helper.dart';
 import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
+import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 
@@ -15,6 +17,10 @@ class SelectedEngagement extends StatefulWidget{
 }
 
 class _SelectedEngagementState extends State<SelectedEngagement> {
+
+  var _acreage = '0';
+  bool _validate = false;
+  final acreageCon = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -152,6 +158,57 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     );
   }
 
+  _createOrder(context) {
+    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Create New Order'),
+          content: TextField(
+            autofocus: true,
+            controller: acreageCon,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: 'Enter Acreage',
+              border: const OutlineInputBorder(),
+              errorText: _validate ? 'Value Can\'t Be Empty' : null,
+              hintText: 'Acreage',
+            ),
+          ),
+          actions: <Widget>[
+            OutlineButton(
+              child: Text('cancel'),
+              onPressed:() {
+                Navigator.of(context).pop();
+              },
+            ),
+            OutlineButton(
+              child: Text('Calculate Estimate'),
+              onPressed: () {
+                setState(() {
+                  acreageCon.text.isEmpty ? _validate = true : _validate = false;
+                  _acreage = acreageCon.text;
+                });
+
+                var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat());
+                estimate.initialLineCalculation();
+                _acreage.isNotEmpty ? Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
+                    estimate: estimate,
+                    engagement: engagement,
+                    )
+                  ),
+                ) : ArgumentError.notNull('Value Can\'t Be Empty');
+              },
+            )
+          ]
+        );
+      }
+    );
+  } 
+
   Widget bottomNavBar(){
     return BottomAppBar(
       child: new Row(
@@ -173,9 +230,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   Widget floatAccButton(engagement){
     return FloatingActionButton(
-      onPressed: () {
-        Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
-      },
+      onPressed: () => _createOrder(context),
+      // {
+      //   Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
+      // },
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
