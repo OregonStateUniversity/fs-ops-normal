@@ -50,12 +50,12 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat());
                 estimate.initialLineCalculation();
                 _acreage.isNotEmpty ? Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
-                                                        estimate: estimate,
-                                                        engagement: engagement,
-                                                        )
-                                                      ),
+                  context,
+                  MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
+                    estimate: estimate,
+                    engagement: engagement,
+                    )
+                  ),
                 ) : ArgumentError.notNull('Value Can\'t Be Empty');
               },
               child: Text('Calculate Estimate'),
