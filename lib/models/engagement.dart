@@ -8,7 +8,7 @@ class Engagement {
   int size;
   List<Estimate> orders;
 
-  Engagement(this.name, this.fireTimeStamp, this.size, this.orders, this.active,[ this.primaryKey]);
+  Engagement(this.name, this.fireTimeStamp, this.size, this.orders, this.active, [this.primaryKey]);
 
   @override
   String toString() {

@@ -37,7 +37,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   style: TextStyle(fontSize: 20),
                 ),
                 TextSpan(
-                  text: "\nCreated: ${engagement.fireTimeStamp}",
+                  text: "\nCreated on: ${engagement.fireTimeStamp}",
                   style: TextStyle(fontSize: 14)
                 )
               ]
@@ -74,7 +74,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   style: TextStyle(fontSize: 20),
                 ),
                 TextSpan(
-                    text: "\nCreated: ${engagement.fireTimeStamp}",
+                    text: "\nCreated on: ${engagement.fireTimeStamp}",
                     style: TextStyle(fontSize: 14)
                 )
               ]
@@ -133,9 +133,9 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 });
               },
               child: ListTile(
-                title: Text('Estimate ${index + 1}'),
+                title: Text('Estimate ${orders.length - index}'),
                 subtitle: Text('${orders[index].acres
-                    .toString()} Acres\nCreated: ${orders[index].timeStamp}\n'),
+                    .toString()} Acres\nCreated on: ${orders[index].timeStamp}\n'),
                 onTap: () {
                   Navigator.pushNamed(context, EstimateScreen.routeName,
                       arguments: orders[index]);

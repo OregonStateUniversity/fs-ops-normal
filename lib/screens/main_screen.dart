@@ -9,7 +9,6 @@ import '../models/engagement.dart';
 import 'package:hose_jockey/database_helper.dart';
 
 
-
 class MainScreen extends StatefulWidget {
   const MainScreen({Key key}) : super(key: key);
   static const routeName = '/';
@@ -50,7 +49,7 @@ class MainScreenState extends State<MainScreen> {
         );
       }).toList();
       setState(() {
-        engagements = engagementEntries;
+        engagements = engagementEntries.reversed.toList();
       });
     } else{
       engagements = new List<Engagement>();
@@ -72,9 +71,7 @@ class MainScreenState extends State<MainScreen> {
   void setEngagement() {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {
-        //engagements.add(
             dto = Engagement( newName, timeFormat(), 250, [], 1);
-        //);
       });
       engagementCtrl.clear();
     }
@@ -164,13 +161,10 @@ class MainScreenState extends State<MainScreen> {
                           onDismissed: (direction){
                               DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
                               loadEngagements();
-                              //setState((){
-                                //engagements.removeAt(index);
-                              //});
                           },
 
                           child: ListTile(
-                            title: Text('${engagements[index].name}'),
+                            title: Text('${engagements[index].name}', style: TextStyle(fontSize: 22),),
                             subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
                             onTap: () {
                               Navigator.pushNamed(context, SelectedEngagement.routeName, arguments: engagements[index]);
