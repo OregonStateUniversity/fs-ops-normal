@@ -54,7 +54,7 @@ class DatabaseHelper{
 
   static Future<void> insertOrder(eng, order) async{
     final Database db = await getDBConnector();
-    eng.orders.add(order);
+    eng.orders.insert(0,order);
     await db.transaction((txn) async {
       String tmp = "'[";
       eng.orders.forEach((value) {
@@ -72,7 +72,7 @@ class DatabaseHelper{
   static Future<void> deleteOrder(eng, order) async{
     final Database db = await getDBConnector();
 
-    eng.orders.reversed.toList().remove(order);
+    eng.orders.toList().remove(order);
     var newOrderList = eng.orders;
 
     await db.transaction((txn) async {
