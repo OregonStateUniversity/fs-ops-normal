@@ -10,8 +10,9 @@ import 'package:hose_jockey/database_helper.dart';
 
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key key}) : super(key: key);
+  MainScreen({Key key}) : super(key: key);
   static const routeName = '/';
+  final List<Engagement> engagements = [];
 
   @override
   MainScreenState createState() => MainScreenState();
@@ -22,11 +23,12 @@ class MainScreenState extends State<MainScreen> {
   final engagementCtrl = new TextEditingController();
   final acreageCtrl = TextEditingController();
   final GlobalKey<MainScreenState> _key = GlobalKey();
-
-  var newName;
   List<Engagement> engagements = [];
+  
+  var newName;
 
   void initState(){
+    engagements = widget.engagements;
     super.initState();
     loadEngagements();
   }
@@ -229,9 +231,22 @@ class MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          IconButton(icon: Icon(Icons.settings), onPressed: (){},),
+          IconButton(icon: Icon(Icons.arrow_upward), 
+          onPressed: (){
+            setState(() {
+                engagements.sort((a,b) => a.name.compareTo(b.name));
+              });
+            },
+          ),
+          IconButton(icon: Icon(Icons.arrow_downward), 
+          onPressed: (){
+            setState(() {
+                engagements.sort((a,b) => b.name.compareTo(a.name));
+              });
+            },
+          ),
         ],
-      )
+      ),
     );
   }
 
