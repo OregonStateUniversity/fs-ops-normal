@@ -230,7 +230,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   Widget floatAccButton(engagement){
     return FloatingActionButton(
-      onPressed: () => _createOrder(context),
+      onPressed: () => _createOrder(context).then((value) => setState((){})),
       // {
       //   Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
       // },
