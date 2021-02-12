@@ -12,7 +12,6 @@ import 'package:hose_jockey/database_helper.dart';
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
   static const routeName = '/';
-  final List<Engagement> engagements = [];
 
   @override
   MainScreenState createState() => MainScreenState();
@@ -28,7 +27,6 @@ class MainScreenState extends State<MainScreen> {
   var newName;
 
   void initState(){
-    engagements = widget.engagements;
     super.initState();
     loadEngagements();
   }
