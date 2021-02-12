@@ -62,12 +62,6 @@ class MainScreenState extends State<MainScreen> {
     return orderEntries;
   }
 
-  void deleteDB() async{
-    print("DB Deleted");
-    await deleteDatabase('engagements.db'); //delete this
-    loadEngagements();
-  }
-
   void setEngagement() {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {

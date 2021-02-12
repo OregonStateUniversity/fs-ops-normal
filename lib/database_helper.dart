@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 
+import 'models/engagement.dart';
+import 'models/estimate.dart';
+
 // https://www.youtube.com/watch?v=GZfFRv9VWtU
 
 class DatabaseHelper{
@@ -24,6 +27,11 @@ class DatabaseHelper{
     );
 
     return _database;
+  }
+
+  static Future<void> deleteALLDataFromDatabase() async{
+    print("Database Deleted");
+    await deleteDatabase('engagements.db');
   }
 
   static Future<void> insertEngagement(dto) async{
