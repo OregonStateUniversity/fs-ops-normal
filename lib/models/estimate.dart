@@ -15,18 +15,35 @@ class Estimate{
 
   @override
   String toCopyString(){
-    if(this.fittings <= 0){
-      return "Trunk Line: ${this.trunkLineLength} ft.\n"
-          "Lat Line: ${this.latLineLength} ft.\n"
-          "Toy Line: ${this.toyLineLength} ft.\n";
-    }
-    return "Trunk Line: ${this.trunkLineLength} ft.\n"
+    String str =
+        "Trunk Line: ${this.trunkLineLength} ft.\n"
         "Lat Line: ${this.latLineLength} ft.\n"
-        "Toy Line: ${this.toyLineLength} ft.\n\n"
-        "Y fittings:${this.fittings}\n"
-        "FN fittings: ${this.fittings}\n"
-        "TN fittings: ${this.fittings}\n"
-        "TY fittings: ${this.fittings}\n";
+        "Toy Hose: ${this.toyLineLength} ft.\n\n";
+
+    if(this.fittings >= 0){
+      str +=
+          "1.5\" Gated Wye:${this.fittings}\n"
+          "1.5\" Reducers:${this.fittings}\n"
+          "1\"-3/4\" Reducers: ${this.fittings}\n"
+          "Forester Nozzles: ${this.fittings}\n"
+          "Toy Nozzles: ${this.fittings}\n"
+          "Toy Wye: ${this.fittings}\n\n";
+    }
+    if(this.acres >= 10){
+      str +=
+          "Folda-tank: ${acres ~/ 5}\n"
+          "Mark 3 + Kits: ${acres ~/ 5}\n"
+          "Pump Mix (Gallons): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
+    }
+    if(this.acres >= 20){
+      str +=
+            "Water (Pallets): ${acres ~/ 20}\n"
+            "Gatorade (Pallets): ${acres ~/ 20}\n"
+            "MRE (Pallets): ${acres ~/ 20}\n"
+            "Port-a-Potties: ${acres ~/ 2}\n\n";
+
+    }
+    return str;
   }
 
   Estimate.jsonConvF(name, acres, timeStamp, trunk, lat, toy, [fittings = 0]){
