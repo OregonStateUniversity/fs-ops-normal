@@ -203,6 +203,7 @@ class MainScreenState extends State<MainScreen> {
             OutlineButton(
               child: Text('cancel'),
               onPressed:() {
+                engagementCtrl.clear();
                 Navigator.of(context).pop();
               },
             ),
