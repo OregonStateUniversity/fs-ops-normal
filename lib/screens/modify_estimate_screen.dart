@@ -9,8 +9,8 @@ class OrderFields{
   int trunkLineLength;
   int latLineLength;
   int toyLineLength;
+  int fittingsField;
 }
-
 
 class ModifyEstimateScreen extends StatefulWidget{
   
@@ -48,12 +48,13 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               trunkLineRow(),
               latLineRow(),
               toyLineRow(),
+              fittingsRow(),
 
               RaisedButton(
                 onPressed: (){
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
-                    var finalEstimate = new Estimate.loadSavedEstimate("NoNameNeeded", orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength);
+                    var finalEstimate = new Estimate.loadSavedEstimate("NoNameNeeded", orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
                     DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
                     Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
                   }
@@ -95,6 +96,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
+        Text("ft."),
       ],
     );
   }
@@ -116,6 +118,9 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             initialValue: widget.estimate.latLineLength.toString(),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
+            onChanged: (value) {
+              orderField.fittingsField = int.parse(value) ~/ 100;
+            },
             onSaved: (value){
               orderField.latLineLength = int.parse(value);
             },
@@ -128,6 +133,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
+        Text("ft."),
       ],
     );
   }
@@ -161,6 +167,41 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
+        Text("ft."),
+      ],
+    );
+  }
+
+  Widget fittingsRow(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Flexible(
+          flex: 2,
+          child: Text(
+            "Various Fittings",
+            style: TextStyle(fontSize: 24),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: TextFormField(
+            initialValue: widget.estimate.fittings.toString(),
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            onSaved: (value){
+              orderField.fittingsField = int.parse(value);
+            },
+            validator: (value){
+              if(value.isEmpty){
+                return "Needs some value";
+              } else{
+                return null;
+              }
+            },
+          ),
+        ),
+        Text("ea."),
       ],
     );
   }
