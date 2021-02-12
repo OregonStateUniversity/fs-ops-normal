@@ -13,7 +13,6 @@ class SelectedEngagement extends StatefulWidget{
   static const routeName = 'engagement';
 
   _SelectedEngagementState createState() => _SelectedEngagementState();
-
 }
 
 class _SelectedEngagementState extends State<SelectedEngagement> {
@@ -28,7 +27,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
     final List<Estimate> argOrders = engagement.orders;
 
-    //List<Estimate> orders = argOrders.reversed.toList();
     List<Estimate> orders = argOrders;
     if(orders.isEmpty){
       return Scaffold(
@@ -231,9 +229,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   Widget floatAccButton(engagement){
     return FloatingActionButton(
       onPressed: () => _createOrder(context).then((value) => setState((){})),
-      // {
-      //   Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement).then((value) => setState((){}));
-      // },
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
