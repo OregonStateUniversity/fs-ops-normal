@@ -192,6 +192,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
                 var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: timeFormat());
                 estimate.initialLineCalculation();
+                acreageCon.clear();
                 _acreage.isNotEmpty ? Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ModifyEstimateScreen(
