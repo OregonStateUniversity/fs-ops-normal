@@ -178,6 +178,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
             OutlineButton(
               child: Text('cancel'),
               onPressed:() {
+                acreageCon.clear();
                 Navigator.of(context).pop();
               },
             ),
@@ -228,7 +229,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   Widget floatAccButton(engagement){
     return FloatingActionButton(
-      onPressed: () => _createOrder(context).then((value) => setState((){})),
+      onPressed: () => _createOrder(context).then((value) => setState(() {})),
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
