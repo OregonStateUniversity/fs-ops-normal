@@ -186,44 +186,97 @@ class MainScreenState extends State<MainScreen> {
                         return Dismissible(
                           key: Key(engagements[index].primaryKey.toString()),
                           background: Stack(children: [
-                            Container(color: Colors.red),
-                            Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(Icons.delete_forever, size: 34,),
-                              ),
-                            )
+                            Container(
+                                color: Colors.green,
+                                child: Align(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.arrow_downward, color: Colors.white,),
+                                      Text(activeOrArchived == false ? "Unarchive?" : "Archive", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                                      SizedBox(
+                                        width: 20,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                            ),
                           ],
                           ),
+                          secondaryBackground: Stack(
+                            children: [
+                              Container(
+                                color: Colors.red,
+                                child: Align(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(Icons.delete_forever_outlined, color: Colors.white,),
+                                      Text("Delete", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                                      SizedBox(
+                                        width: 20,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           dismissThresholds: {
-                            DismissDirection.startToEnd: 1.0,
+                            DismissDirection.startToEnd: 0.25,
                             DismissDirection.endToStart: 0.25
                           },
                           confirmDismiss: (DismissDirection direction) async{
-                            return await showDialog(
-                              context: context,
-                              builder: (BuildContext context){
-                                return AlertDialog(
-                                  title: const Text("Delete Engagement?"),
-                                  content: const Text("This cannot be undone"),
-                                  actions: [
-                                    FlatButton(
-                                      onPressed: () => Navigator.of(context).pop(true),
-                                      child: const Text("Delete"),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () => Navigator.of(context).pop(false),
-                                      child: const Text("Cancel"),
-                                    )
-                                  ],
-                                );
-                              }
-                            );
+                            if (direction == DismissDirection.endToStart){
+                              return await showDialog(
+                                  context: context,
+                                  builder: (BuildContext context){
+                                    return AlertDialog(
+                                      title: const Text("Delete Engagement?"),
+                                      content: const Text("This cannot be undone"),
+                                      actions: [
+                                        FlatButton(
+                                          onPressed: () => Navigator.of(context).pop(true),
+                                          child: const Text("Delete"),
+                                        ),
+                                        FlatButton(
+                                          onPressed: () => Navigator.of(context).pop(false),
+                                          child: const Text("Cancel"),
+                                        )
+                                      ],
+                                    );
+                                  }
+                              );
+                            } else{
+                              return await showDialog(
+                                context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                    title: activeOrArchived == true ? Text("Archive Engagement") : Text("Unarchive Engagement"),
+                                    actions: [
+                                      FlatButton(
+                                        onPressed: () => Navigator.of(context).pop(true),
+                                        child: activeOrArchived == true ? const Text("Archive") : Text("Unarchive"),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () => Navigator.of(context).pop(false),
+                                        child: const Text("Cancel"),
+                                      )
+                                    ],
+                                  );
+                                }
+                              );
+                            }
                           },
                           onDismissed: (direction){
+                            if(direction == DismissDirection.endToStart){
                               DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
-                              loadEngagements();
+                            } else if(activeOrArchived == true){
+                              DatabaseHelper.archiveEngagement(engagements[index].primaryKey);
+                            } else if(activeOrArchived == false){
+                              DatabaseHelper.unarchiveEngagement(engagements[index].primaryKey);
+                            }
+                            loadEngagements();
                           },
 
                           child: ListTile(
