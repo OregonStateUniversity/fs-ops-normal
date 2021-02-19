@@ -104,6 +104,37 @@ class MainScreenState extends State<MainScreen> {
               appBar: AppBar(
                 title: Text(title),
                 centerTitle: true,
+                actions: <Widget>[
+                  PopupMenuButton(
+                    icon: Transform.rotate(
+                      angle: 90*3.1415927/180,
+                      child: Icon(Icons.code),
+                    ),
+                    offset: Offset(0, 30),
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: 1,
+                        child: Text("Old"),
+                      ),
+                      PopupMenuItem(
+                        value: 2,
+                        child: Text("New"),
+                      ),
+                    ],
+                    onSelected: (value) {
+                      if (value == 1) {
+                        setState(() {
+                          engagements.sort((a,b) => a.fireTimeStamp.compareTo(b.fireTimeStamp));
+                        });
+                      }
+                      else if (value == 2) {
+                        setState(() {
+                          engagements.sort((a,b) => b.fireTimeStamp.compareTo(a.fireTimeStamp));
+                        });
+                      }
+                    }
+                  ),
+                ],
               ),
 
               body: Column(
@@ -231,11 +262,12 @@ class MainScreenState extends State<MainScreen> {
               });
             },
           ),
-          IconButton(icon: Icon(Icons.arrow_downward), 
-          onPressed: (){
-            setState(() {
-                engagements.sort((a,b) => b.name.compareTo(a.name));
-              });
+          IconButton(
+            icon: Icon(Icons.arrow_downward), 
+            onPressed: (){
+              setState(() {
+                  engagements.sort((a,b) => b.name.compareTo(a.name));
+                });
             },
           ),
         ],

@@ -6,6 +6,7 @@ import 'estimate_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
+import '../models/sort_menu.dart';
 
 
 class SelectedEngagement extends StatefulWidget{
@@ -84,6 +85,46 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               ]
           ),
         ),
+        actions: <Widget>[
+          PopupMenuButton(
+            icon: Transform.rotate(
+              angle: 90*3.1415927/180,
+              child: Icon(Icons.code),
+            ),
+            offset: Offset(0, 30),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 1,
+                child: Text("Old"),
+              ),
+              PopupMenuItem(
+                value: 2,
+                child: Text("New"),
+              ),
+              PopupMenuItem(
+                value: 3,
+                child: Text("Size"),
+              ),
+            ],
+            onSelected: (value) {
+              if (value == 1) {
+                setState(() {
+                  orders.sort((a,b) => a.timeStamp.compareTo(b.timeStamp));
+                });
+              }
+              else if (value == 2) {
+                setState(() {
+                  orders.sort((a,b) => b.timeStamp.compareTo(a.timeStamp));
+                });
+              }
+              else if (value == 3) {
+                setState(() {
+                  orders.sort((a,b) => b.acres.compareTo(a.acres));
+                });
+              }
+            }
+          ),
+        ],
       ),
 
       body: Scrollbar(
