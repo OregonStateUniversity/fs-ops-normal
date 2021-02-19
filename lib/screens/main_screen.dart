@@ -23,16 +23,13 @@ class MainScreenState extends State<MainScreen> {
   final acreageCtrl = TextEditingController();
   final GlobalKey<MainScreenState> _key = GlobalKey();
   List<Engagement> engagements = [];
-  List<Engagement> _activeEngagements = [];
-  List<Engagement> _archivedEngagements = [];
-  
+
   var newName;
+  var activeOrArchived = true;
 
   void initState(){
     super.initState();
     loadEngagements();
-    // _activeEngagements = engagements.where((a) => a.active!=true);
-    // _archivedEngagements = engagements.where((a) => a.active!=true);
   }
 
   var dto;
@@ -53,7 +50,9 @@ class MainScreenState extends State<MainScreen> {
         );
       }).toList();
       setState(() {
-        engagements = engagementEntries.reversed.toList();
+        activeOrArchived == true ? engagements = engagementEntries.reversed.toList().where((a) => a.active == 1).toList() : engagements = engagementEntries.reversed.toList().where((a) => a.active == 0).toList();
+
+        //engagements = engagementEntries.reversed.toList();
       });
     } else{
       engagements = new List<Engagement>();
@@ -99,12 +98,16 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final title = 'Ops Normal';
+    final title = activeOrArchived == true ? "Ops Normal" : "Ops Archive";
     if (engagements.isEmpty){
       return Scaffold(
         appBar: AppBar(
           title: Text(title),
           centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.archive_outlined),
+            onPressed: () { setState((){activeOrArchived == true ? activeOrArchived = false : activeOrArchived = true;}); loadEngagements();},
+          ),
         ),
 
         body: Column(
@@ -132,7 +135,7 @@ class MainScreenState extends State<MainScreen> {
                 centerTitle: true,
                 leading: IconButton(
                   icon: Icon(Icons.archive_outlined), 
-                  onPressed: () { },
+                  onPressed: () { setState((){activeOrArchived == true ? activeOrArchived = false : activeOrArchived = true;}); loadEngagements();},
                 ),
                 actions: <Widget>[
                   PopupMenuButton(
@@ -149,10 +152,6 @@ class MainScreenState extends State<MainScreen> {
                       PopupMenuItem(
                         value: 2,
                         child: Text("New"),
-                      ),
-                      PopupMenuItem(
-                        value: 3,
-                        child: Text("Archived"),
                       ),
                     ],
                     onSelected: (value) {
@@ -252,6 +251,7 @@ class MainScreenState extends State<MainScreen> {
     return showDialog(
       context: context,
       builder: (context) {
+        changeBackToActive();
         return AlertDialog(
           title: Text('Create New Engagement'),
           content: TextField(
@@ -281,16 +281,6 @@ class MainScreenState extends State<MainScreen> {
                 Navigator.of(context).pop();
               },
             ),
-            OutlineButton(
-              child: Text('Archive'),
-              onPressed: () async {
-                newName = engagementCtrl.text;
-                setArchived();
-                DatabaseHelper.insertEngagement(dto);
-                loadEngagements();
-                Navigator.of(context).pop();
-              },
-            )
           ]
         );
       }
@@ -318,6 +308,11 @@ class MainScreenState extends State<MainScreen> {
       tooltip: 'New estimate',
       child: Icon(Icons.add),
     );
+  }
+
+  void changeBackToActive(){
+    activeOrArchived = true;
+    loadEngagements();
   }
 
   // Widget isActive(){
