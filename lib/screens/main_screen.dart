@@ -192,8 +192,8 @@ class MainScreenState extends State<MainScreen> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Icon(Icons.arrow_downward, color: Colors.white,),
-                                      Text(activeOrArchived == false ? "Unarchive?" : "Archive", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                                      Icon(activeOrArchived == false ? Icons.unarchive_rounded : Icons.archive_rounded, color: Colors.white,),
+                                      Text(activeOrArchived == false ? "Unarchive" : "Archive", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
                                       SizedBox(
                                         width: 20,
                                       )
