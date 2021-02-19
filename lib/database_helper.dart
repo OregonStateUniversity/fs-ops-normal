@@ -109,5 +109,4 @@ class DatabaseHelper{
       await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${eng.primaryKey}');
     });
   }
-
 }

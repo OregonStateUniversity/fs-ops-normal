@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hose_jockey/time_format.dart';
-import 'package:sqflite/sqflite.dart';
 import 'dart:convert';
 import 'engagement_screen.dart';
 import '../models/estimate.dart';
@@ -51,8 +50,6 @@ class MainScreenState extends State<MainScreen> {
       }).toList();
       setState(() {
         activeOrArchived == true ? engagements = engagementEntries.reversed.toList().where((a) => a.active == 1).toList() : engagements = engagementEntries.reversed.toList().where((a) => a.active == 0).toList();
-
-        //engagements = engagementEntries.reversed.toList();
       });
     } else{
       engagements = new List<Engagement>();
@@ -73,28 +70,6 @@ class MainScreenState extends State<MainScreen> {
       engagementCtrl.clear();
     }
   }
-
-  void setArchived() {
-    if (engagementCtrl.text.isNotEmpty) {
-      setState(() {
-            dto = Engagement( newName, timeFormat(), 250, [], 0);
-      });
-      engagementCtrl.clear();
-    }
-  }
-
-//  activeEngagements
-  // void activeList() {
-  //   List<Engagement> tempSearchList = [];
-  //   tempSearchList.addAll(engagements);
-  //   List<Engagement> tempListData = [];
-  //   tempSearchList.forEach((tempSearchList.))
-  // }
-
-  // void archivedList() {
-
-  // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -164,11 +139,6 @@ class MainScreenState extends State<MainScreen> {
                         setState(() {
                           engagements.sort((a,b) => b.fireTimeStamp.compareTo(a.fireTimeStamp));
                         });
-                      }
-                      else if (value == 3) {
-                        // setState(() {
-                        //   engagements.where((a) => a.active!=1);
-                        // });
                       }
                     }
                   ),
@@ -288,7 +258,6 @@ class MainScreenState extends State<MainScreen> {
                           )
                         );
                       }
-
                     ),
                   ),
                 ]
@@ -367,8 +336,4 @@ class MainScreenState extends State<MainScreen> {
     activeOrArchived = true;
     loadEngagements();
   }
-
-  // Widget isActive(){
-  //   if (engagements.active.contains)
-  // }
 }
