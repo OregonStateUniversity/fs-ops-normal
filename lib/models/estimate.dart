@@ -13,6 +13,36 @@ class Estimate{
 
   Estimate({this.name = "NoNameNeeded", this.acres, this.timeStamp});
 
+  Estimate.jsonConvF(name, acres, timeStamp, trunk, lat, toy, [fittings = 0]){
+    this.name = name;
+    this.acres = acres;
+    this.timeStamp = timeStamp;
+    _trunkLineLength = trunk;
+    _latLineLength = lat;
+    _toyLineLength = toy;
+    _fittings = fittings;
+  }
+
+  Estimate.loadSavedEstimate(name, acres, timeStamp, trunk, lat, toy, [fittings = 0]){
+    this.name = name;
+    this.acres = acres;
+    this.timeStamp = timeStamp;
+    _trunkLineLength = trunk;
+    _latLineLength = lat;
+    _toyLineLength = toy;
+    _fittings = fittings;
+  }
+
+  int get trunkLineLength => _trunkLineLength;
+  int get latLineLength => _latLineLength;
+  int get toyLineLength => _toyLineLength;
+  int get fittings => _fittings;
+
+  set trunkLineLength(int length) => _trunkLineLength;
+  set latLineLength(int length) => _latLineLength;
+  set toyLineLength(int length) => _toyLineLength;
+  set fittings(int count) => _fittings;
+
   @override
   String toCopyString(){
     String str =
@@ -22,8 +52,8 @@ class Estimate{
 
     if(this.fittings >= 0){
       str +=
-          "1.5\" Gated Wye:${this.fittings}\n"
-          "1.5\" Reducers:${this.fittings}\n"
+          "1.5\" Gated Wye: ${this.fittings}\n"
+          "1.5\" Reducers: ${this.fittings}\n"
           "1\"-3/4\" Reducers: ${this.fittings}\n"
           "Forester Nozzles: ${this.fittings}\n"
           "Toy Nozzles: ${this.fittings}\n"
@@ -46,42 +76,12 @@ class Estimate{
     return str;
   }
 
-  Estimate.jsonConvF(name, acres, timeStamp, trunk, lat, toy, [fittings = 0]){
-    this.name = name;
-    this.acres = acres;
-    this.timeStamp = timeStamp;
-    _trunkLineLength = trunk;
-    _latLineLength = lat;
-    _toyLineLength = toy;
-    _fittings = fittings;
-  }
-
-  Estimate.loadSavedEstimate(name, acres, timeStamp, trunk, lat, toy, [fittings = 0]){
-    this.name = name;
-    this.acres = acres;
-    this.timeStamp = timeStamp;
-    _trunkLineLength = trunk;
-    _latLineLength = lat;
-    _toyLineLength = toy;
-    _fittings = fittings;
-  }
-
   void initialLineCalculation(){
     _trunkLineLength = BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres;
     _latLineLength = trunkLineLength ~/ 2;
     _toyLineLength = latLineLength ~/ 2;
     _fittings = latLineLength ~/ 100;
   }
-
-  int get trunkLineLength => _trunkLineLength;
-  int get latLineLength => _latLineLength;
-  int get toyLineLength => _toyLineLength;
-  int get fittings => _fittings;
-
-  set trunkLineLength(int length) => _trunkLineLength;
-  set latLineLength(int length) => _latLineLength;
-  set toyLineLength(int length) => _toyLineLength;
-  set fittings(int count) => _fittings;
 
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
     json["name"],
