@@ -80,7 +80,7 @@ class MainScreenState extends State<MainScreen> {
           title: Text(title),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.archive_outlined),
+            icon: Icon(Icons.archive_outlined, color: active == true ? Colors.white : Colors.yellow),
             onPressed: () { setState((){active == true ? active = false : active = true;}); loadEngagements();},
           ),
         ),
@@ -91,7 +91,8 @@ class MainScreenState extends State<MainScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("No Engagements Created Yet"),
+                active == true ? Text("No Engagements Created Yet") : Text("No Engagements Archived Yet")
+
               ],
             ),
           ],
