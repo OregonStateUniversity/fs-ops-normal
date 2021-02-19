@@ -71,6 +71,16 @@ class MainScreenState extends State<MainScreen> {
     }
   }
 
+  void setArchived() {
+    if (engagementCtrl.text.isNotEmpty) {
+      setState(() {
+            dto = Engagement( newName, timeFormat(), 250, [], 0);
+      });
+      engagementCtrl.clear();
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final title = 'Ops Normal';
@@ -104,6 +114,10 @@ class MainScreenState extends State<MainScreen> {
               appBar: AppBar(
                 title: Text(title),
                 centerTitle: true,
+                leading: IconButton(
+                  icon: Icon(Icons.archive_outlined), 
+                  onPressed: () { },
+                ),
                 actions: <Widget>[
                   PopupMenuButton(
                     icon: Transform.rotate(
@@ -237,6 +251,16 @@ class MainScreenState extends State<MainScreen> {
               onPressed: () async {
                 newName = engagementCtrl.text;
                 setEngagement();
+                DatabaseHelper.insertEngagement(dto);
+                loadEngagements();
+                Navigator.of(context).pop();
+              },
+            ),
+            OutlineButton(
+              child: Text('Archive'),
+              onPressed: () async {
+                newName = engagementCtrl.text;
+                setArchived();
                 DatabaseHelper.insertEngagement(dto);
                 loadEngagements();
                 Navigator.of(context).pop();
