@@ -29,6 +29,12 @@ class DatabaseHelper{
     return _database;
   }
 
+  static Future<List<Map>> getAllEngagements() async{
+    final Database db = await getDBConnector();
+    var records = await db.rawQuery('SELECT * FROM engagements');
+    return records;
+  }
+
   static Future<void> deleteALLDataFromDatabase() async{
     print("Database Deleted");
     await deleteDatabase('engagements.db');
