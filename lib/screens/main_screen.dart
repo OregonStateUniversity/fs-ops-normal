@@ -26,6 +26,7 @@ class MainScreenState extends State<MainScreen> {
 
   var newName;
   var activeOrArchived = true;
+  var engagementOrder = 0;
 
   void initState(){
     super.initState();
@@ -35,8 +36,7 @@ class MainScreenState extends State<MainScreen> {
   var dto;
 
   void loadEngagements() async{
-    final Database database = await DatabaseHelper.getDBConnector();
-    List<Map> engagementRecords = await database.rawQuery('SELECT * FROM engagements');
+    List<Map> engagementRecords = await DatabaseHelper.getAllEngagements();
     if (engagementRecords != null) {
       final engagementEntries = engagementRecords.map((record) {
         print("active: ${record['active']}");
