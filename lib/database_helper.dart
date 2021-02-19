@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 
-import 'models/engagement.dart';
-import 'models/estimate.dart';
-
 // https://www.youtube.com/watch?v=GZfFRv9VWtU
 
 class DatabaseHelper{
