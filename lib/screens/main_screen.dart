@@ -31,8 +31,8 @@ class MainScreenState extends State<MainScreen> {
   void initState(){
     super.initState();
     loadEngagements();
-    _activeEngagements = engagements.where((a) => a.active!=true);
-    _archivedEngagements = engagements.where((a) => a.active!=true);
+    // _activeEngagements = engagements.where((a) => a.active!=true);
+    // _archivedEngagements = engagements.where((a) => a.active!=true);
   }
 
   var dto;
@@ -43,7 +43,6 @@ class MainScreenState extends State<MainScreen> {
     if (engagementRecords != null) {
       final engagementEntries = engagementRecords.map((record) {
         print("active: ${record['active']}");
-        //if(record['active'] != 0) {
         return Engagement(
           record['name'],
           record['timeStamp'],
@@ -168,9 +167,9 @@ class MainScreenState extends State<MainScreen> {
                         });
                       }
                       else if (value == 3) {
-                        setState(() {
-                          engagements.where((a) => a.active!=1);
-                        });
+                        // setState(() {
+                        //   engagements.where((a) => a.active!=1);
+                        // });
                       }
                     }
                   ),
@@ -320,4 +319,8 @@ class MainScreenState extends State<MainScreen> {
       child: Icon(Icons.add),
     );
   }
+
+  // Widget isActive(){
+  //   if (engagements.active.contains)
+  // }
 }
