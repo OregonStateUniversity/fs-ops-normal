@@ -60,6 +60,14 @@ class DatabaseHelper{
     });
   }
 
+  static Future<void> unarchiveEngagement(index) async{
+    final Database db = await getDBConnector();
+
+    await db.transaction((txn) async{
+      await txn.rawUpdate('UPDATE engagements SET active = 1 WHERE id = $index');
+    });
+  }
+
   static Future<void> insertOrder(eng, order) async{
     final Database db = await getDBConnector();
     eng.orders.insert(0,order);
