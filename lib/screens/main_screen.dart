@@ -24,7 +24,7 @@ class MainScreenState extends State<MainScreen> {
   List<Engagement> engagements = [];
 
   var newName;
-  var activeOrArchived = true;
+  var active = true; // always starts on active orders
   var engagementOrder = 0;
 
   void initState(){
@@ -49,7 +49,7 @@ class MainScreenState extends State<MainScreen> {
         );
       }).toList();
       setState(() {
-        activeOrArchived == true ? engagements = engagementEntries.reversed.toList().where((a) => a.active == 1).toList() : engagements = engagementEntries.reversed.toList().where((a) => a.active == 0).toList();
+        active == true ? engagements = engagementEntries.reversed.toList().where((a) => a.active == 1).toList() : engagements = engagementEntries.reversed.toList().where((a) => a.active == 0).toList();
       });
     } else{
       engagements = new List<Engagement>();
@@ -73,7 +73,7 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final title = activeOrArchived == true ? "Ops Normal" : "Ops Archive";
+    final title = active == true ? "Ops Normal" : "Ops Archive";
     if (engagements.isEmpty){
       return Scaffold(
         appBar: AppBar(
@@ -81,7 +81,7 @@ class MainScreenState extends State<MainScreen> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.archive_outlined),
-            onPressed: () { setState((){activeOrArchived == true ? activeOrArchived = false : activeOrArchived = true;}); loadEngagements();},
+            onPressed: () { setState((){active == true ? active = false : active = true;}); loadEngagements();},
           ),
         ),
 
@@ -109,8 +109,8 @@ class MainScreenState extends State<MainScreen> {
                 title: Text(title),
                 centerTitle: true,
                 leading: IconButton(
-                  icon: Icon(Icons.archive_outlined), 
-                  onPressed: () { setState((){activeOrArchived == true ? activeOrArchived = false : activeOrArchived = true;}); loadEngagements();},
+                  icon: Icon(Icons.archive_outlined, color: active == true ? Colors.white : Colors.yellow),
+                  onPressed: () { setState((){active == true ? active = false : active = true;}); loadEngagements();},
                 ),
                 actions: <Widget>[
                   PopupMenuButton(
@@ -162,8 +162,8 @@ class MainScreenState extends State<MainScreen> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Icon(activeOrArchived == false ? Icons.unarchive_rounded : Icons.archive_rounded, color: Colors.white,),
-                                      Text(activeOrArchived == false ? "Unarchive" : "Archive", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+                                      Icon(active == false ? Icons.unarchive_rounded : Icons.archive_rounded, color: Colors.white,),
+                                      Text(active == false ? "Unarchive" : "Archive", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
                                       SizedBox(
                                         width: 20,
                                       )
@@ -222,11 +222,11 @@ class MainScreenState extends State<MainScreen> {
                                 context: context,
                                 builder: (BuildContext context){
                                   return AlertDialog(
-                                    title: activeOrArchived == true ? Text("Archive Engagement") : Text("Unarchive Engagement"),
+                                    title: active == true ? Text("Archive Engagement") : Text("Unarchive Engagement"),
                                     actions: [
                                       FlatButton(
                                         onPressed: () => Navigator.of(context).pop(true),
-                                        child: activeOrArchived == true ? const Text("Archive") : Text("Unarchive"),
+                                        child: active == true ? const Text("Archive") : Text("Unarchive"),
                                       ),
                                       FlatButton(
                                         onPressed: () => Navigator.of(context).pop(false),
@@ -241,9 +241,9 @@ class MainScreenState extends State<MainScreen> {
                           onDismissed: (direction){
                             if(direction == DismissDirection.endToStart){
                               DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
-                            } else if(activeOrArchived == true){
+                            } else if(active == true){
                               DatabaseHelper.archiveEngagement(engagements[index].primaryKey);
-                            } else if(activeOrArchived == false){
+                            } else if(active == false){
                               DatabaseHelper.unarchiveEngagement(engagements[index].primaryKey);
                             }
                             loadEngagements();
@@ -333,7 +333,7 @@ class MainScreenState extends State<MainScreen> {
   }
 
   void changeBackToActive(){
-    activeOrArchived = true;
+    active = true;
     loadEngagements();
   }
 }
