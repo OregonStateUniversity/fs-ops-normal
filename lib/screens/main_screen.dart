@@ -23,12 +23,16 @@ class MainScreenState extends State<MainScreen> {
   final acreageCtrl = TextEditingController();
   final GlobalKey<MainScreenState> _key = GlobalKey();
   List<Engagement> engagements = [];
+  List<Engagement> _activeEngagements = [];
+  List<Engagement> _archivedEngagements = [];
   
   var newName;
 
   void initState(){
     super.initState();
     loadEngagements();
+    _activeEngagements = engagements.where((a) => a.active!=true);
+    _archivedEngagements = engagements.where((a) => a.active!=true);
   }
 
   var dto;
@@ -39,6 +43,7 @@ class MainScreenState extends State<MainScreen> {
     if (engagementRecords != null) {
       final engagementEntries = engagementRecords.map((record) {
         print("active: ${record['active']}");
+        //if(record['active'] != 0) {
         return Engagement(
           record['name'],
           record['timeStamp'],
@@ -79,6 +84,18 @@ class MainScreenState extends State<MainScreen> {
       engagementCtrl.clear();
     }
   }
+
+//  activeEngagements
+  // void activeList() {
+  //   List<Engagement> tempSearchList = [];
+  //   tempSearchList.addAll(engagements);
+  //   List<Engagement> tempListData = [];
+  //   tempSearchList.forEach((tempSearchList.))
+  // }
+
+  // void archivedList() {
+
+  // }
 
 
   @override
@@ -134,6 +151,10 @@ class MainScreenState extends State<MainScreen> {
                         value: 2,
                         child: Text("New"),
                       ),
+                      PopupMenuItem(
+                        value: 3,
+                        child: Text("Archived"),
+                      ),
                     ],
                     onSelected: (value) {
                       if (value == 1) {
@@ -144,6 +165,11 @@ class MainScreenState extends State<MainScreen> {
                       else if (value == 2) {
                         setState(() {
                           engagements.sort((a,b) => b.fireTimeStamp.compareTo(a.fireTimeStamp));
+                        });
+                      }
+                      else if (value == 3) {
+                        setState(() {
+                          engagements.where((a) => a.active!=1);
                         });
                       }
                     }
@@ -279,20 +305,8 @@ class MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          IconButton(icon: Icon(Icons.arrow_upward), 
-          onPressed: (){
-            setState(() {
-                engagements.sort((a,b) => a.name.compareTo(b.name));
-              });
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.arrow_downward), 
-            onPressed: (){
-              setState(() {
-                  engagements.sort((a,b) => b.name.compareTo(a.name));
-                });
-            },
+          IconButton(icon: Icon(Icons.home), 
+          onPressed: (){},
           ),
         ],
       ),
