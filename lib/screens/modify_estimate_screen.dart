@@ -27,12 +27,13 @@ class ModifyEstimateScreen extends StatefulWidget{
 class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   var formKey = GlobalKey<FormState>();
   OrderFields orderField = new OrderFields();
-
   Estimate est;
+
   @override
   Widget build(BuildContext context) {
-
+    
     orderField.acres = widget.estimate.acres;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
