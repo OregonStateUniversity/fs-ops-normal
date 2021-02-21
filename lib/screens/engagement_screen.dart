@@ -40,7 +40,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   style: TextStyle(fontSize: 20),
                 ),
                 TextSpan(
-                  text: "\nCreated on: ${engagement.fireTimeStamp}",
+                  text: "\nCreated on: ${engagement.timeStamp}",
                   style: TextStyle(fontSize: 14)
                 )
               ]
@@ -77,7 +77,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   style: TextStyle(fontSize: 20),
                 ),
                 TextSpan(
-                    text: "\nCreated on: ${engagement.fireTimeStamp}",
+                    text: "\nCreated on: ${engagement.timeStamp}",
                     style: TextStyle(fontSize: 14)
                 )
               ]
@@ -268,6 +268,9 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   }
 
   Widget floatAccButton(engagement){
+    if(engagement.active == 0){
+      return null;
+    }
     return FloatingActionButton(
       onPressed: () => _createOrder(context).then((value) => setState(() {})),
       tooltip: 'New Order',

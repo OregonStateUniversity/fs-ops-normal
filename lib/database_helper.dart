@@ -42,7 +42,7 @@ class DatabaseHelper{
 
     await db.transaction((txn) async {
       await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, active, orders) VALUES(?, ?, ?, ?, ?)',
-          [dto.name, dto.fireTimeStamp, dto.size, 1, "[]"]
+          [dto.name, dto.timeStamp, dto.size, 1, "[]"]
       );
     });
   }
