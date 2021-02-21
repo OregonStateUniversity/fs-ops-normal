@@ -55,7 +55,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                 onPressed: (){
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
-                    var finalEstimate = new Estimate.loadSavedEstimate("NoNameNeeded", orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
+                    var finalEstimate = new Estimate.loadSavedEstimate((widget.engagement.orders.length+1).toString(), orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
                     DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
                     Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
                   }
