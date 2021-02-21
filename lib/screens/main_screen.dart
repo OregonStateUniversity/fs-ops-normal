@@ -63,8 +63,7 @@ class MainScreenState extends State<MainScreen> {
 
   List<Estimate> loadOrders(string) {
     Iterable i = json.decode(string);
-    List<Estimate> orderEntries = List<Estimate>.from(i.map((model) 
-      => Estimate.fromJson(model)));
+    List<Estimate> orderEntries = List<Estimate>.from(i.map((model) => Estimate.fromJson(model)));
     return orderEntries;
   }
 
@@ -92,9 +91,7 @@ class MainScreenState extends State<MainScreen> {
             ),
             onPressed: () { 
               setState((){
-                active == true ? 
-                active = false : 
-                active = true; }); 
+                active == true ? active = false : active = true; });
               loadEngagements();
             },
           ),
@@ -133,9 +130,7 @@ class MainScreenState extends State<MainScreen> {
             ),
             onPressed: () { 
               setState((){
-                active == true ? 
-                active = false : 
-                active = true; }); 
+                active == true ? active = false : active = true; });
               loadEngagements();
             },
           ),
@@ -160,13 +155,13 @@ class MainScreenState extends State<MainScreen> {
                 if (value == 1) {
                   setState(() {
                     engagements.sort((a,b) 
-                      => a.fireTimeStamp.compareTo(b.fireTimeStamp));
+                      => a.timeStamp.compareTo(b.timeStamp));
                   });
                 }
                 else if (value == 2) {
                   setState(() {
                     engagements.sort((a,b) 
-                      => b.fireTimeStamp.compareTo(a.fireTimeStamp));
+                      => b.timeStamp.compareTo(a.timeStamp));
                   });
                 }
               }
@@ -257,9 +252,7 @@ class MainScreenState extends State<MainScreen> {
                           context: context,
                           builder: (BuildContext context){
                             return AlertDialog(
-                              title: active == true ? 
-                                     Text("Archive Engagement") : 
-                                     Text("Unarchive Engagement"),
+                              title: active == true ? Text("Archive Engagement") : Text("Unarchive Engagement"),
                               actions: [
                                 FlatButton(
                                   onPressed: () => Navigator.of(context).pop(true),
@@ -288,7 +281,7 @@ class MainScreenState extends State<MainScreen> {
 
                     child: ListTile(
                       title: Text('${engagements[index].name}', style: TextStyle(fontSize: 22),),
-                      subtitle: Text('Created: ${engagements[index].fireTimeStamp}'),
+                      subtitle: Text('Created: ${engagements[index].timeStamp}'),
                       onTap: () {
                         Navigator.pushNamed(
                           context, 
@@ -314,7 +307,6 @@ class MainScreenState extends State<MainScreen> {
     return showDialog(
       context: context,
       builder: (context) {
-        changeBackToActive();
         return AlertDialog(
           title: Text('Create New Engagement'),
           content: TextField(
@@ -358,7 +350,7 @@ class MainScreenState extends State<MainScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           IconButton(icon: Icon(Icons.home), 
-          onPressed: (){},
+          onPressed: changeBackToActive,
           ),
         ],
       ),
@@ -366,6 +358,9 @@ class MainScreenState extends State<MainScreen> {
   }
 
   Widget floatAccButton(){
+    if(active == false){
+      return null;
+    }
     return FloatingActionButton(
       onPressed: () => _createEngagement(context),
       tooltip: 'New estimate',
