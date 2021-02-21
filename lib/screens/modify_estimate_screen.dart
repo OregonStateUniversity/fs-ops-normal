@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:core';
+import 'dart:math';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import 'estimate_screen.dart';
@@ -55,7 +57,8 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                 onPressed: (){
                   if (formKey.currentState.validate()){
                     formKey.currentState.save();
-                    var finalEstimate = new Estimate.loadSavedEstimate((widget.engagement.orders.length+1).toString(), orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
+                    var newNum = checkNamingNumber();
+                    var finalEstimate = new Estimate.loadSavedEstimate(newNum, orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
                     DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
                     Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
                   }
@@ -206,4 +209,15 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       ],
     );
   }
+
+  int checkNamingNumber() { // not the most ideal, will replace later with better solution
+    var newNum = 0;
+    List<int> listCurNum = [];
+    widget.engagement.orders.forEach((value){
+      listCurNum.add(value.name);
+    });
+    listCurNum.isEmpty ? newNum = 1 : newNum = listCurNum.reduce(max) + 1;
+    return newNum;
+  }
+
 }
