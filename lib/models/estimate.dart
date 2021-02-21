@@ -2,7 +2,7 @@ class Estimate{
   static const BASE_TRUNK_LINE_LENGTH = 1000;
   static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
 
-  String name;
+  int name;
   String timeStamp;
   int acres;
 
@@ -11,7 +11,7 @@ class Estimate{
   int _toyLineLength;
   int _fittings;
 
-  Estimate({this.name = "NoNameNeeded", this.acres, this.timeStamp});
+  Estimate({this.name = -1, this.acres, this.timeStamp});
 
   Estimate.jsonConvF(name, acres, timeStamp, trunk, lat, toy, [fittings = 0]){
     this.name = name;
