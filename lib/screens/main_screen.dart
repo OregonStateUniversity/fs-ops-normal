@@ -350,7 +350,7 @@ class MainScreenState extends State<MainScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           IconButton(icon: Icon(Icons.home), 
-          onPressed: DatabaseHelper.deleteALLDataFromDatabase,
+          onPressed: changeBackToActive,
           ),
         ],
       ),

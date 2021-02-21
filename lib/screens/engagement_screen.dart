@@ -134,24 +134,27 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               key: Key(engagement.orders[index].timeStamp),
               background: Stack(
                 children: [
-                  Container(color: Colors.red,),
+                  Container(color: engagement.active == 1 ? Colors.red : Colors.black12,),
                   Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Icon(Icons.delete_forever, size: 34),
+                      child: engagement.active == 1 ? Icon(Icons.delete_forever, size: 34) : Text("Can't Delete Orders In Archive Mode"),
                     ),
                   )
                 ],
               ),
               dismissThresholds: {
-                DismissDirection.startToEnd: 1.0,
-                DismissDirection.endToStart: 0.25
+                DismissDirection.startToEnd: 2.0,
+                DismissDirection.endToStart: engagement.active == 1 ? .25 : 2.0
               },
               confirmDismiss: (DismissDirection direction) async {
                 return await showDialog(
                     context: context,
                     builder: (BuildContext context) {
+                      if(engagement.active == 0){
+                        return null;
+                      }
                       return AlertDialog(
                         title: const Text("Delete Order?"),
                         content: const Text("This cannot be undone"),
