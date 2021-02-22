@@ -43,7 +43,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "lib/assets/icon/web_hi_res_512.png"
+  image_path: "lib/assets/icon/android/mipmap-hdpi/OpsNormal_Launcher.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
