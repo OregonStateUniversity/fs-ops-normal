@@ -23,7 +23,7 @@ class App extends StatelessWidget {
       title: 'Ops Normal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
