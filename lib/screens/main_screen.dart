@@ -1,12 +1,16 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
 import 'package:hose_jockey/time_format.dart';
 import 'dart:convert';
 import 'engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import 'package:hose_jockey/database_helper.dart';
+
 
 
 class MainScreen extends StatefulWidget {
@@ -342,18 +346,58 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
+  int activeIndex;
+  var _bottomNavIndex = 0;
+  final autoSizeGroup = AutoSizeGroup();
+
+  List<BottomIcons> iconList = [
+    BottomIcons("Home", Icons.home_filled),
+    BottomIcons("Orders", Icons.post_add),
+    BottomIcons("Sort", Icons.sort),
+    BottomIcons("Archive", Icons.archive),
+  ];
+
+  void _onTap(int index) {
+    setState((){
+      _bottomNavIndex = index;
+    });
+  }
+
   Widget bottomNavBar(){
-    return BottomAppBar(
-      child: new Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          IconButton(icon: Icon(Icons.home), 
-          onPressed: changeBackToActive,
-          ),
-        ],
-      ),
+    return AnimatedBottomNavigationBar.builder(
+      itemCount: iconList.length,
+      activeIndex: _bottomNavIndex,
+      gapLocation: GapLocation.center,
+      notchSmoothness: NotchSmoothness.softEdge,
+      tabBuilder: (int index, bool isActive) {
+          final color = isActive ? Colors.red : Colors.white;
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                iconList[index].icon,
+                size: 24,
+                color: color,
+              ),
+              const SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: AutoSizeText(
+                  iconList[index].name,
+                  maxLines: 1,
+                  style: TextStyle(color: color),
+                  group: autoSizeGroup,
+                ),
+              )
+            ],
+          );
+        },
+      backgroundColor: Colors.blueGrey[900],
+      onTap: (index) { 
+        _onTap(index);
+        changeBackToActive();
+      },
     );
   }
 
@@ -365,6 +409,8 @@ class MainScreenState extends State<MainScreen> {
       onPressed: () => _createEngagement(context),
       tooltip: 'New estimate',
       child: Icon(Icons.add),
+      backgroundColor: Colors.red,
+      foregroundColor: Colors.black,
     );
   }
 
