@@ -6,7 +6,6 @@ void main() {
   group('An Estimate', () {
 
     test('using loadSavedEstimate named constructor', () {
-
       //Arrange
       Estimate estimate;
 
@@ -23,7 +22,6 @@ void main() {
     });
 
     test('using jsonConvF named constructor', () {
-
       //Arrange
       Estimate estimate;
 
@@ -40,7 +38,6 @@ void main() {
     });
 
     test('toJson', () {
-
       //Arrange
       Estimate estimate = new Estimate();
       estimate.acres = 1;
@@ -55,7 +52,6 @@ void main() {
     });
 
     test('fromJson', () {
-
       //Arrange
       Estimate estimate = new Estimate();
       estimate.acres = 1;
@@ -75,7 +71,6 @@ void main() {
     });
 
     test('has initial calculations', () {
-
       //Arrange
       Estimate estimate = new Estimate();
       estimate.acres = 1;
@@ -92,7 +87,6 @@ void main() {
     });
 
     test('toCopyString that is 1-9 acres', () {
-
       //Arrange
       Estimate estimate = new Estimate();
       estimate.acres = 1;
@@ -117,7 +111,6 @@ void main() {
     });
 
     test('toCopyString that is 1-9 acres', () {
-
       //Arrange
       Estimate estimate = new Estimate();
       int acres = 10;
@@ -146,7 +139,6 @@ void main() {
     });
 
     test('toCopyString that is 1-9 acres', () {
-
       //Arrange
       Estimate estimate = new Estimate();
       int acres = 20;
