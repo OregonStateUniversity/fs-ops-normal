@@ -74,7 +74,7 @@ class MainScreenState extends State<MainScreen> {
   void setEngagement() {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {
-            dto = Engagement( newName, timeFormat(), 250, [], 1);
+            dto = Engagement( newName, TimeFormat().getTime(), 250, [], 1);
       });
       engagementCtrl.clear();
     }
