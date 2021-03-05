@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import  'package:hose_jockey/time_format.dart';
+import 'package:hose_jockey/time_format.dart';
 
 void main() {
   group('Time', () {
@@ -12,7 +12,7 @@ void main() {
       var expected = format.format(now);
 
       //Act
-      String actual = TimeFormat().getTime();
+      String actual = TimeFormat.currentTime;
 
       //Assert
       expect(actual, equals(expected));

@@ -232,7 +232,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   _acreage = acreageCon.text;
                 });
 
-                var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: TimeFormat().getTime());
+                var estimate = new Estimate(acres: int.parse(_acreage), timeStamp: TimeFormat.currentTime);
                 estimate.initialLineCalculation();
                 acreageCon.clear();
                 _acreage.isNotEmpty ? Navigator.push(
