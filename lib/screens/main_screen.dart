@@ -10,6 +10,7 @@ import 'engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import 'package:hose_jockey/database_helper.dart';
+import '../Widgets/drawer.dart';
 
 
 
@@ -88,18 +89,19 @@ class MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text(title),
           centerTitle: true,
-          leading: IconButton(
-            icon: Icon(
-              Icons.archive_outlined, 
-              color: active == true ? Colors.white : Colors.yellow
-            ),
-            onPressed: () { 
-              setState((){
-                active == true ? active = false : active = true; });
-              loadEngagements();
-            },
-          ),
+          // leading: IconButton(
+          //   icon: Icon(
+          //     Icons.archive_outlined,
+          //     color: active == true ? Colors.white : Colors.yellow
+          //   ),
+          //   onPressed: () {
+          //     setState((){
+          //       active == true ? active = false : active = true; });
+          //     loadEngagements();
+          //   },
+          // ),
         ),
+        drawer: SideDrawer(),
 
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -124,20 +126,21 @@ class MainScreenState extends State<MainScreen> {
     else
       return Scaffold(
         resizeToAvoidBottomInset: false,
+        drawer: SideDrawer(),
         appBar: AppBar(
           title: Text(title),
           centerTitle: true,
-          leading: IconButton(
-            icon: Icon(
-              Icons.archive_outlined, 
-              color: active == true ? Colors.white : Colors.yellow
-            ),
-            onPressed: () { 
-              setState((){
-                active == true ? active = false : active = true; });
-              loadEngagements();
-            },
-          ),
+          // leading: IconButton(
+          //   icon: Icon(
+          //     Icons.archive_outlined,
+          //     color: active == true ? Colors.white : Colors.yellow
+          //   ),
+          //   onPressed: () {
+          //     setState((){
+          //       active == true ? active = false : active = true; });
+          //     loadEngagements();
+          //   },
+          // ),
           actions: <Widget> [
             PopupMenuButton(
               icon: Transform.rotate(
