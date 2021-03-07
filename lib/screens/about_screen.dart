@@ -16,6 +16,7 @@ class AboutScreen extends StatelessWidget{
           Align(
             alignment: FractionalOffset.center,
             child: Container(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   Text("Created By Josh C. and Kyle H. for"),
