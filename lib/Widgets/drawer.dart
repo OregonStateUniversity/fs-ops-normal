@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hose_jockey/screens/about_screen.dart';
 import 'package:hose_jockey/screens/how_to_screen.dart';
+import 'package:yaml/yaml.dart';
+import 'dart:io';
 
 class SideDrawer extends StatefulWidget {
 
@@ -14,8 +16,11 @@ class SideDrawerState extends State<SideDrawer> {
 
   static const _email = "issues@opsnormal.com";
 
+  var appVersion = "0.0.0";
+
   @override
   Widget build(BuildContext context) {
+    //getAppVersion();
     return Drawer(
         child: Column(
           children: [
@@ -24,8 +29,8 @@ class SideDrawerState extends State<SideDrawer> {
                 padding: EdgeInsets.zero,
                 children: [
                   _drawerHeader(),
-                  _drawerItem(
-                      Icons.slideshow, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
+                  _drawerItem(Icons.slideshow, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
+                  _drawerItem(Icons.settings_applications_outlined, "Visual Settings", ()=>{})
                   //_drawerItem(Icons.article_outlined, "Documentation", ()=>{}),
                 ],
               ),
@@ -40,10 +45,10 @@ class SideDrawerState extends State<SideDrawer> {
                       _drawerItem(Icons.info_outline, "About", () =>
                           Navigator.pushNamed(context, AboutScreen.routeName)),
                       _drawerItem(Icons.bug_report, "Report An Issue", () =>
-                          launch("mailto:$_email")),
+                          launch("mailto:$_email?subject=Version $appVersion&body=Describe the issue below\n")),
 
                       Container(
-                        child: Text("Version 0.0.0"),
+                        child: Text("Version $appVersion"),
                         color: Colors.red[200],
                       ),
                     ],
@@ -53,7 +58,6 @@ class SideDrawerState extends State<SideDrawer> {
             )
           ],
         )
-
     );
   }
 
@@ -99,6 +103,16 @@ class SideDrawerState extends State<SideDrawer> {
         ),
         onTap: onTap
     );
+  }
+
+  void getAppVersion(){
+    File f = new File("../pubspec.yaml");
+    f.readAsString().then((String text) {
+      Map yaml = loadYaml(text);
+      setState((){
+        appVersion = yaml['version'];
+      });
+    });
   }
 }
 
