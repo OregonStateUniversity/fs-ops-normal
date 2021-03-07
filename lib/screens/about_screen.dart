@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget{
   static const routeName = 'about';
@@ -27,7 +28,8 @@ class AboutScreen extends StatelessWidget{
                   Text("Ops Normal is an application designed for wild land firefighters to "
                       "quickly estimate the amount of equipment that they will need to fight a fire", textAlign: align,),
                   Divider(),
-                  Text("The source code for this project can be found at https://github.com/osu-cascades/fs-hose-jockey", textAlign: align,)
+                  Text("\nThe source code for this project can be found at: ", textAlign: align,),
+                  TextButton(onPressed: ()=>launch('https://github.com/osu-cascades/fs-hose-jockey'), child: Text("https://github.com/osu-cascades/fs-hose-jockey"))
                 ],
               ),
             ),
