@@ -28,15 +28,13 @@ class MainScreenState extends State<MainScreen> {
   List<Engagement> engagements = [];
 
   var newName;
+  var dto;
   var active = true; // always starts on active orders
-  var engagementOrder = 0;
 
   void initState(){
     super.initState();
     loadEngagements();
   }
-
-  var dto;
 
   void loadEngagements() async{
     List<Map> engagementRecords = await DatabaseHelper.getAllEngagements();
@@ -87,17 +85,6 @@ class MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text(title),
           centerTitle: true,
-          // leading: IconButton(
-          //   icon: Icon(
-          //     Icons.archive_outlined,
-          //     color: active == true ? Colors.white : Colors.yellow
-          //   ),
-          //   onPressed: () {
-          //     setState((){
-          //       active == true ? active = false : active = true; });
-          //     loadEngagements();
-          //   },
-          // ),
         ),
         drawer: SideDrawer(),
 
@@ -119,8 +106,8 @@ class MainScreenState extends State<MainScreen> {
         floatingActionButton: floatAccButton(),
         bottomNavigationBar: bottomNavBar()
       );
+    }
 
-    } 
     else
       return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -128,49 +115,8 @@ class MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text(title),
           centerTitle: true,
-          // leading: IconButton(
-          //   icon: Icon(
-          //     Icons.archive_outlined,
-          //     color: active == true ? Colors.white : Colors.yellow
-          //   ),
-          //   onPressed: () {
-          //     setState((){
-          //       active == true ? active = false : active = true; });
-          //     loadEngagements();
-          //   },
-          // ),
           actions: <Widget> [
-            PopupMenuButton(
-              icon: Transform.rotate(
-                angle: 90*3.1415927/180,
-                child: Icon(Icons.code),
-              ),
-              offset: Offset(0, 30),
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  value: 1,
-                  child: Text("Old"),
-                ),
-                PopupMenuItem(
-                  value: 2,
-                  child: Text("New"),
-                ),
-              ],
-              onSelected: (value) {
-                if (value == 1) {
-                  setState(() {
-                    engagements.sort((a,b) 
-                      => a.timeStamp.compareTo(b.timeStamp));
-                  });
-                }
-                else if (value == 2) {
-                  setState(() {
-                    engagements.sort((a,b) 
-                      => b.timeStamp.compareTo(a.timeStamp));
-                  });
-                }
-              }
-            ),
+            _sortByOptions()
           ],
         ),
 
@@ -182,120 +128,7 @@ class MainScreenState extends State<MainScreen> {
                 padding: const EdgeInsets.all(10),
                 itemCount: engagements.length,
                 itemBuilder: (context, index){
-                  return Dismissible(
-                    key: Key(engagements[index].primaryKey.toString()),
-                    background: Stack(children: [
-                      Container(
-                        color: Colors.green,
-                        child: Align(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                active == false ? Icons.unarchive_rounded : Icons.archive_rounded, 
-                                color: Colors.white),
-                              Text(
-                                active == false ? "Unarchive" : "Archive", 
-                                style: TextStyle(
-                                  color: Colors.white, 
-                                  fontWeight: FontWeight.w700
-                                )),
-                              SizedBox(width: 20)
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],),
-                    secondaryBackground: Stack(children: [
-                      Container(
-                        color: Colors.red,
-                        child: Align(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(Icons.delete_forever_outlined, color: Colors.white),
-                              Text(
-                                "Delete", 
-                                style: TextStyle(
-                                  color: Colors.white, 
-                                  fontWeight: FontWeight.w700
-                                )),
-                              SizedBox(width: 20)
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],),
-                    dismissThresholds: {
-                      DismissDirection.startToEnd: 0.25,
-                      DismissDirection.endToStart: 0.25
-                    },
-                    confirmDismiss: (DismissDirection direction) async{
-                      if (direction == DismissDirection.endToStart) {
-                        return await showDialog(
-                          context: context,
-                          builder: (BuildContext context){
-                            return AlertDialog(
-                              title: const Text("Delete Engagement?"),
-                              content: const Text("This cannot be undone"),
-                              actions: [
-                                FlatButton(
-                                  onPressed: () => Navigator.of(context).pop(true),
-                                  child: const Text("Delete"),
-                                ),
-                                FlatButton(
-                                  onPressed: () => Navigator.of(context).pop(false),
-                                  child: const Text("Cancel"),
-                                )
-                              ],
-                            );
-                          }
-                        );
-                      } 
-                      else{
-                        return await showDialog(
-                          context: context,
-                          builder: (BuildContext context){
-                            return AlertDialog(
-                              title: active == true ? Text("Archive Engagement") : Text("Unarchive Engagement"),
-                              actions: [
-                                FlatButton(
-                                  onPressed: () => Navigator.of(context).pop(true),
-                                  child: active == true ? const Text("Archive") : Text("Unarchive"),
-                                ),
-                                FlatButton(
-                                  onPressed: () => Navigator.of(context).pop(false),
-                                  child: const Text("Cancel"),
-                                )
-                              ],
-                            );
-                          }
-                        );
-                      }
-                    },
-                    onDismissed: (direction){
-                      if(direction == DismissDirection.endToStart){
-                        DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
-                      } else if(active == true){
-                        DatabaseHelper.archiveEngagement(engagements[index].primaryKey);
-                      } else if(active == false){
-                        DatabaseHelper.unarchiveEngagement(engagements[index].primaryKey);
-                      }
-                      loadEngagements();
-                    },
-
-                    child: ListTile(
-                      title: Text('${engagements[index].name}', style: TextStyle(fontSize: 22),),
-                      subtitle: Text('Created: ${engagements[index].timeStamp}'),
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context, 
-                          SelectedEngagement.routeName, 
-                          arguments: engagements[index]
-                        );
-                      },
-                    )
-                  );
+                  return _dismissible(engagements, index);
                 }
               ),
             ),
@@ -306,6 +139,167 @@ class MainScreenState extends State<MainScreen> {
         floatingActionButton: floatAccButton(),
         bottomNavigationBar: bottomNavBar()
       );
+  }
+
+  Widget _sortByOptions(){
+    return PopupMenuButton(
+        icon: Transform.rotate(
+          angle: 90*3.1415927/180,
+          child: Icon(Icons.code),
+        ),
+        offset: Offset(0, 30),
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Old"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("New"),
+          ),
+        ],
+        onSelected: (value) {
+          if (value == 1) {
+            setState(() {
+              engagements.sort((a,b)
+              => a.timeStamp.compareTo(b.timeStamp));
+            });
+          }
+          else if (value == 2) {
+            setState(() {
+              engagements.sort((a,b)
+              => b.timeStamp.compareTo(a.timeStamp));
+            });
+          }
+        }
+    );
+  }
+
+  Widget _dismissible(engagements,index){
+    return Dismissible(
+        key: Key(engagements[index].primaryKey.toString()),
+        background: _primaryBackground(),
+        secondaryBackground: _secondaryBackground(),
+        dismissThresholds: {
+          DismissDirection.startToEnd: 0.25,
+          DismissDirection.endToStart: 0.25
+        },
+        confirmDismiss: (DismissDirection direction) async{
+          return await _confirmDismiss(direction);
+        },
+        onDismissed: (direction){
+          _onDismissed(direction, index);
+        },
+        child: _listTile(engagements, index)
+    );
+  }
+
+  Widget _listTile(engagements, index){
+    return ListTile(
+      title: Text('${engagements[index].name}', style: TextStyle(fontSize: 22),),
+      subtitle: Text('Created: ${engagements[index].timeStamp}'),
+      onTap: () {
+        Navigator.pushNamed(
+            context,
+            SelectedEngagement.routeName,
+            arguments: engagements[index]
+        );
+      },
+    );
+  }
+
+  Widget _primaryBackground(){
+    return Stack(children: [
+      Container(
+        color: Colors.green,
+        child: Align(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                  active == false ? Icons.unarchive_rounded : Icons.archive_rounded,
+                  color: Colors.white),
+              Text(
+                  active == false ? "Unarchive" : "Archive",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700
+                  )),
+              SizedBox(width: 20)
+            ],
+          ),
+        ),
+      ),
+    ]);
+  }
+
+  Widget _secondaryBackground(){
+    return Stack(children: [
+      Container(
+        color: Colors.red,
+        child: Align(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(Icons.delete_forever_outlined, color: Colors.white),
+              Text(
+                  "Delete",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700
+                  )),
+              SizedBox(width: 20)
+            ],
+          ),
+        ),
+      ),
+    ],);
+  }
+
+  Future<bool> _confirmDismiss(direction) async{
+    if (direction == DismissDirection.endToStart) {
+      return await showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return _alertDialog("Delete");
+          }
+      );
+    }
+    else{
+      return await showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return _alertDialog("Archive");
+          }
+      );
+    }
+  }
+
+  void _onDismissed(direction, index){
+    if(direction == DismissDirection.endToStart){
+      DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
+    } else if(active == true){
+      DatabaseHelper.archiveEngagement(engagements[index].primaryKey);
+    } else if(active == false){
+      DatabaseHelper.unarchiveEngagement(engagements[index].primaryKey);
+    }
+    loadEngagements();
+  }
+
+  Widget _alertDialog(deleteOrArchive){
+    return AlertDialog(
+      title: active == true ? deleteOrArchive == "Archive" ? Text("Archive Engagement") : Text("Delete Engagement") : deleteOrArchive == "Delete" ? Text("Delete Engagement") : Text("Unarchive"),
+      actions: [
+        FlatButton(
+          onPressed: () => Navigator.of(context).pop(true),
+          child: Text("Yes"),
+        ),
+        FlatButton(
+          onPressed: () => Navigator.of(context).pop(false),
+          child: const Text("No"),
+        )
+      ],
+    );
   }
 
   _createEngagement(context) {
@@ -396,8 +390,18 @@ class MainScreenState extends State<MainScreen> {
         },
       backgroundColor: Colors.blueGrey[900],
       onTap: (index) { 
-        _onTap(index);
-        changeBackToActive();
+        switch(index){
+          case 0:
+            active = true;
+            loadEngagements();
+            _onTap(index);
+            break;
+          case 3:
+            active = false;
+            loadEngagements();
+            _onTap(index);
+            break;
+        }
       },
     );
   }
