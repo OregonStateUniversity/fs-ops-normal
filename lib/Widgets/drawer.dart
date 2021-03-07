@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hose_jockey/screens/about_screen.dart';
+import 'package:hose_jockey/screens/how_to_screen.dart';
 
 class SideDrawer extends StatefulWidget {
 
@@ -24,7 +25,7 @@ class SideDrawerState extends State<SideDrawer> {
                 children: [
                   _drawerHeader(),
                   _drawerItem(
-                      Icons.slideshow, "How To Use Ops Normal", () => {}),
+                      Icons.slideshow, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
                   //_drawerItem(Icons.article_outlined, "Documentation", ()=>{}),
                 ],
               ),
@@ -40,7 +41,11 @@ class SideDrawerState extends State<SideDrawer> {
                           Navigator.pushNamed(context, AboutScreen.routeName)),
                       _drawerItem(Icons.bug_report, "Report An Issue", () =>
                           launch("mailto:$_email")),
-                      Text("App version 0.0.0"),
+
+                      Container(
+                        child: Text("Version 0.0.0"),
+                        color: Colors.red[200],
+                      ),
                     ],
                   ),
                 ),

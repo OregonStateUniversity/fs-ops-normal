@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class AboutScreen extends StatelessWidget{
   static const routeName = 'about';
   static const title = "About";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
