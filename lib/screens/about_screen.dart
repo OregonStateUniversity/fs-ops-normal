@@ -5,6 +5,8 @@ class AboutScreen extends StatelessWidget{
   static const routeName = 'about';
   static const title = "About";
 
+  static const TextAlign align = TextAlign.center;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +21,13 @@ class AboutScreen extends StatelessWidget{
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text("Created By Josh C. and Kyle H. for"),
-                  Text("OSU-Cascades Computer Science Final Project"),
+                  Text("Created By Josh C. and Kyle H. for", textAlign: align,),
+                  Text("OSU-Cascades Computer Science Final Project", textAlign: align,),
                   Divider(),
-                  Text("Ops Normal is an application designed for wild land firefighters to \n"
-                      "quickly estimate the amount of equipment that they will need to fight a fire.\n"
-                      ""),
+                  Text("Ops Normal is an application designed for wild land firefighters to "
+                      "quickly estimate the amount of equipment that they will need to fight a fire", textAlign: align,),
                   Divider(),
-                  Text("The source code for this project can be found at https://github.com/osu-cascades/fs-hose-jockey")
+                  Text("The source code for this project can be found at https://github.com/osu-cascades/fs-hose-jockey", textAlign: align,)
                 ],
               ),
             ),
