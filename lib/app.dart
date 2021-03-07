@@ -6,6 +6,7 @@ import 'screens/estimate_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/engagement_screen.dart';
 import 'screens/about_screen.dart';
+import 'screens/how_to_screen.dart';
 
 class App extends StatelessWidget {
 
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
     EstimateScreen.routeName: (context) => EstimateScreen(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
+    HowTo.routeName: (context) => HowTo(),
   };
 
   @override 

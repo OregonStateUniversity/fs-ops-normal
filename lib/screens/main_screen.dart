@@ -12,8 +12,6 @@ import '../models/engagement.dart';
 import 'package:hose_jockey/database_helper.dart';
 import '../Widgets/drawer.dart';
 
-
-
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
   static const routeName = '/';
