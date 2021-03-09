@@ -52,8 +52,8 @@ class SideDrawerState extends State<SideDrawer> {
               Divider(),
               _drawerItem(Icons.info_outline, "About", () =>
                   Navigator.pushNamed(context, AboutScreen.routeName)),
-              _drawerItem(Icons.bug_report, "Report An Issue", () =>
-                  launch("mailto:$_email?subject=Version $appVersion&body=Describe the issue below\n")),
+              // _drawerItem(Icons.bug_report, "Report An Issue", () =>
+              //     launch("mailto:$_email?subject=Version $appVersion&body=Describe the issue below\n")),
 
               Container(
                 child: Text("Version $appVersion"),
