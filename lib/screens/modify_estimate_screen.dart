@@ -37,38 +37,52 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     orderField.acres = widget.estimate.acres;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text('Estimate Result'),
       ),
       body: Center(
-        child: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
 
-              trunkLineRow(),
-              latLineRow(),
-              toyLineRow(),
-              fittingsRow(),
+                trunkLineRow(),
+                const SizedBox(height: 24.0),
+                latLineRow(),
+                const SizedBox(height: 24.0),
+                toyLineRow(),
+                const SizedBox(height: 24.0),
+                fittingsRow(),
+                const SizedBox(height: 24.0),
 
-              RaisedButton(
-                onPressed: (){
-                  if (formKey.currentState.validate()){
-                    formKey.currentState.save();
-                    var newNum = checkNamingNumber();
-                    var finalEstimate = new Estimate.loadSavedEstimate(newNum, orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
-                    DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
-                    Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
-                  }
-                },
-                child: Text("Save"),
-              )
-          ]
+                ElevatedButton(
+                  onPressed: (){
+                    if (formKey.currentState.validate()){
+                      formKey.currentState.save();
+                      var newNum = checkNamingNumber();
+                      var finalEstimate = new Estimate.loadSavedEstimate(newNum, orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
+                      DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
+                      Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  ),
+                  child: Text('Save', 
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                  ),
+                )
+            ]
+          ),
         ),
       ),
-    ));
+    )
+    );
   }
 
   Widget trunkLineRow(){
@@ -77,17 +91,18 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       children: [
         Flexible(
           flex: 2,
-          child: Text(
-            "Trunk Line",
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-        Flexible(
-          flex: 2,
           child: TextFormField(
             initialValue: widget.estimate.trunkLineLength.toString(),
+            style: TextStyle(
+              fontSize: 35.0,
+            ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Trunk Line',
+              suffixText: 'ft.',
+            ),
             onSaved: (value){
               orderField.trunkLineLength = int.parse(value);
             },
@@ -100,7 +115,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
-        Text("ft."),
       ],
     );
   }
@@ -111,17 +125,18 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       children: [
         Flexible(
           flex: 2,
-          child: Text(
-            "Lat Line",
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-        Flexible(
-          flex: 2,
           child: TextFormField(
             initialValue: widget.estimate.latLineLength.toString(),
+            style: TextStyle(
+              fontSize: 35.0,
+            ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Lat Line',
+              suffixText: 'ft.',
+            ),
             onChanged: (value) {
               orderField.fittingsField = int.parse(value) ~/ 100;
             },
@@ -137,7 +152,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
-        Text("ft."),
       ],
     );
   }
@@ -148,17 +162,18 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       children: [
         Flexible(
           flex: 2,
-          child: Text(
-            "Toy Line",
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-        Flexible(
-          flex: 2,
           child: TextFormField(
             initialValue: widget.estimate.toyLineLength.toString(),
+            style: TextStyle(
+              fontSize: 35.0,
+            ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Toy Line',
+              suffixText: 'ft.',
+            ),
             onSaved: (value){
               orderField.toyLineLength = int.parse(value);
             },
@@ -171,7 +186,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
-        Text("ft."),
       ],
     );
   }
@@ -182,17 +196,18 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       children: [
         Flexible(
           flex: 2,
-          child: Text(
-            "Various Fittings",
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-        Flexible(
-          flex: 2,
           child: TextFormField(
             initialValue: widget.estimate.fittings.toString(),
+            style: TextStyle(
+              fontSize: 35.0,
+            ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Various Fittings',
+              suffixText: 'ea.',
+            ),
             onSaved: (value){
               orderField.fittingsField = int.parse(value);
             },
@@ -205,7 +220,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
           ),
         ),
-        Text("ea."),
       ],
     );
   }
