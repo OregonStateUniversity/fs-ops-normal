@@ -50,12 +50,6 @@ class EstimateScreen extends StatelessWidget{
     BottomIcons("Back", Icons.arrow_back),
   ];
 
-  // void _onTap(int index) {
-  //   setState((){
-  //     _bottomNavIndex = index;
-  //   });
-  // }
-
   Widget bottomNavBar(context){
     return AnimatedBottomNavigationBar.builder(
       itemCount: iconList.length,
@@ -91,11 +85,9 @@ class EstimateScreen extends StatelessWidget{
         switch(index){
           case 0:
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            //_onTap(index);
             break;
           case 1:
             Navigator.popUntil(context, ModalRoute.withName('engagement'));
-            //_onTap(index);
             break;
         }
       },
