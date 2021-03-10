@@ -202,7 +202,7 @@ class MainScreenState extends State<MainScreen> {
         Navigator.pushNamed(
             context,
             SelectedEngagement.routeName,
-            arguments: engagements[index]
+            arguments: engagements[index],
         );
       },
     );
@@ -412,8 +412,6 @@ class MainScreenState extends State<MainScreen> {
       onPressed: () => _createEngagement(context),
       tooltip: 'New estimate',
       child: Icon(Icons.add),
-      backgroundColor: Colors.red,
-      foregroundColor: Colors.black,
     );
   }
 
