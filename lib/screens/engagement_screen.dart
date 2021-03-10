@@ -162,11 +162,11 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                         title: const Text("Delete Order?"),
                         content: const Text("This cannot be undone"),
                         actions: [
-                          FlatButton(
+                          TextButton(
                             onPressed: () => Navigator.of(context).pop(true),
                             child: const Text("Delete"),
                           ),
-                          FlatButton(
+                          TextButton(
                             onPressed: () => Navigator.of(context).pop(false),
                             child: const Text("Cancel"),
                           )
