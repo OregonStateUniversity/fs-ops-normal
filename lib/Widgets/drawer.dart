@@ -1,11 +1,13 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hose_jockey/screens/about_screen.dart';
 import 'package:hose_jockey/screens/how_to_screen.dart';
 
-class SideDrawer extends StatefulWidget {
 
+class SideDrawer extends StatefulWidget {
   @override
   SideDrawerState createState() => SideDrawerState();
 }
@@ -15,6 +17,8 @@ class SideDrawerState extends State<SideDrawer> {
   static const _email = "issues@opsnormal.com"; // doesn't actually exist.
 
   var appVersion = "0.0.0";
+  bool state =  false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +38,8 @@ class SideDrawerState extends State<SideDrawer> {
         padding: EdgeInsets.zero,
         children: [
           _drawerHeader(),
-          _drawerItem(Icons.slideshow, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
-          _drawerItem(Icons.settings_applications_outlined, "Visual Settings", ()=>{})
+          _drawerItem(Icons.question_answer_outlined, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
+          _expandingDrawerList(Icons.settings_applications_outlined, "Settings")
           //_drawerItem(Icons.article_outlined, "Documentation", ()=>{}),
         ],
       ),
@@ -54,7 +58,6 @@ class SideDrawerState extends State<SideDrawer> {
                   Navigator.pushNamed(context, AboutScreen.routeName)),
               // _drawerItem(Icons.bug_report, "Report An Issue", () =>
               //     launch("mailto:$_email?subject=Version $appVersion&body=Describe the issue below\n")),
-
               Container(
                 child: Text("Version $appVersion"),
                 color: Colors.red[200],
@@ -95,7 +98,7 @@ class SideDrawerState extends State<SideDrawer> {
       );
   }
 
-  Widget _drawerItem(IconData icon, text, onTap) {
+  Widget _drawerItem(IconData icon, String text, Function onTap) {
     return ListTile(
         title: Row(
           children: [
@@ -109,5 +112,43 @@ class SideDrawerState extends State<SideDrawer> {
         onTap: onTap
     );
   }
+
+  Widget _expandingDrawerList(IconData icon, String text){
+    return ExpansionTile(
+      title: Row(
+        children: [
+          Icon(icon),
+          Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Text(text),
+          )
+        ],
+      ),
+      children: [
+        _switchListItem("Dark Mode", Icons.brightness_6_outlined ,state),
+      ],
+    );
+  }
+
+  Widget _switchListItem(String text, IconData icon, state){
+    return SwitchListTile(
+      title: Row(
+        children: [
+          Icon(icon),
+          Padding(
+            padding: EdgeInsets.only(left: 16.0),
+            child: Text(text),
+          ),
+        ],
+      ),
+      value: state,
+      onChanged: (value) {
+        setState((){
+          state = value;
+        });
+      },
+    );
+  }
+
 }
 
