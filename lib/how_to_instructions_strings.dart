@@ -26,7 +26,7 @@ class HowToArchiveEngagement{
   static const title = "How to Archive an Engagement";
   static const description = "1. On the main page find the engagement that you wish to archive.\n"
       "\t\t\ta. Tap and hold the left side of the screen on the engagement and slide to the right.\n"
-      "\t\t\tb. A popup will ask you to confirm the archive. Tap on the 'Archive' button to confirm.\n";
+      "\t\t\tb. A popup will ask you to confirm the archive. Tap on the 'Yes' button to confirm.\n";
 }
 
 class HowToUnarchiveEngagement{
@@ -34,6 +34,11 @@ class HowToUnarchiveEngagement{
   static const description = "1. First you need to get to the archive page by tapping on the 'Archive' button in the bottom left corner.\n"
       "\t\t\ta. Once you are on this page you now need to locate the engagement that you want to un archive.\n"
       "\t\t\tb. Once located you need to tap and hold the left side of the screen on the engagement and slide it to the right.\n"
-      "\t\t\tc. A popup will ask you to confirm the un archive. Tap on the 'Un Archive' button\n";
+      "\t\t\tc. A popup will ask you to confirm the unarchive. Tap on the 'Yes' button to confirm.\n";
+}
+
+class HowToChangeVisualSettings{
+  static const title = "How to Change Visual Settings";
+  static const description = "To change the view of the application tap on the 'Visual Settings' button inside the left hand slide out drawer ";
 }
 
