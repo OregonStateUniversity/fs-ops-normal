@@ -347,8 +347,6 @@ class MainScreenState extends State<MainScreen> {
 
   List<BottomIcons> iconList = [
     BottomIcons("Home", Icons.home_filled),
-    BottomIcons("Orders", Icons.post_add),
-    BottomIcons("Sort", Icons.sort),
     BottomIcons("Archive", Icons.archive),
   ];
 
@@ -396,7 +394,7 @@ class MainScreenState extends State<MainScreen> {
             loadEngagements();
             _onTap(index);
             break;
-          case 3:
+          case 1:
             active = false;
             loadEngagements();
             _onTap(index);
