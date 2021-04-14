@@ -28,7 +28,7 @@ dependencies:
   circular_reveal_animation: ^1.1.5
   url_launcher: ^6.0.2
   shared_preferences: ^2.0.3
-
+  responsive_framework: ^0.1.0
 
   flutter:
     sdk: flutter

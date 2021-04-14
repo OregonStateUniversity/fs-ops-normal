@@ -197,7 +197,7 @@ class MainScreenState extends State<MainScreen> {
   Widget _listTile(engagements, index){
     return ListTile(
       title: Text('${engagements[index].name}', style: TextStyle(fontSize: 22),),
-      subtitle: Text('Created: ${engagements[index].timeStamp}'),
+      subtitle: Text('Created: ${engagements[index].timeStamp}',  style: TextStyle(fontSize: 18)),
       onTap: () {
         Navigator.pushNamed(
             context,

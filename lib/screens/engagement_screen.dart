@@ -36,11 +36,11 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
           automaticallyImplyLeading: false,
           title: RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan> [
                 TextSpan(
                   text: "${engagement.name}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 22),
                 ),
                 TextSpan(
                   text: "\nCreated on: ${engagement.timeStamp}",
@@ -73,11 +73,11 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         automaticallyImplyLeading: false,
         title: RichText(
           text: TextSpan(
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan> [
                 TextSpan(
                   text: "${engagement.name}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 22),
                 ),
                 TextSpan(
                     text: "\nCreated on: ${engagement.timeStamp}",
@@ -130,7 +130,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
       body: Scrollbar(
         child: ListView.builder(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           itemCount: orders.length,
           itemBuilder: (context, index) {
             return Dismissible(
@@ -182,9 +182,9 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 });
               },
               child: ListTile(
-                title: Text('Estimate ${orders[index].name}'),
+                title: Text('Estimate ${orders[index].name}', style: TextStyle(fontSize: 22)),
                 subtitle: Text('${orders[index].acres
-                    .toString()} Acres\nCreated on: ${orders[index].timeStamp}\n'),
+                    .toString()} Acres\nCreated on: ${orders[index].timeStamp}\n', style: TextStyle(fontSize: 18),),
                 onTap: () {
                   Navigator.pushNamed(context, EstimateScreen.routeName,
                       arguments: orders[index]);

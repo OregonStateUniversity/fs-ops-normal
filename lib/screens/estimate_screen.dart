@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +28,7 @@ class EstimateScreen extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(8),
                 child: SelectableText(
                     estimate.toCopyString()
                 ),
