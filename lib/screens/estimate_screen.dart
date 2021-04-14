@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
 import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
 import '../models/estimate.dart';
 
@@ -35,8 +38,8 @@ class EstimateScreen extends StatelessWidget{
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: floatAccButton(estimate, context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: floatingActionButton(estimate, context),
       bottomNavigationBar: bottomNavBar(context)
     );
   }
@@ -92,7 +95,23 @@ class EstimateScreen extends StatelessWidget{
         }
       },
     );
+  }
 
+  Widget floatingActionButton(estimate, context){
+    return FloatingActionButton(
+      child: Icon(Icons.copy),
+        onPressed: (){
+      Clipboard.setData(
+              ClipboardData(text: estimate.toCopyString())
+          )
+                .then((value)
+            => ScaffoldMessenger.of(context)
+                .showSnackBar(
+                const SnackBar(content: Text("Copied to Clipboard"),)
+            )
+            );
+          }
+      );
   }
 
   Widget floatAccButton(estimate, context){
