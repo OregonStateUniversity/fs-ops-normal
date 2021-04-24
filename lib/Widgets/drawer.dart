@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hose_jockey/screens/handbookpdf_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hose_jockey/screens/about_screen.dart';
@@ -39,6 +40,7 @@ class SideDrawerState extends State<SideDrawer> {
         children: [
           _drawerHeader(),
           _drawerItem(Icons.question_answer_outlined, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
+          _drawerItem(Icons.book_online_outlined, "Hand Book PDF", () => Navigator.pushNamed(context, HandBookPdf.routeName)),
           _expandingDrawerList(Icons.settings_applications_outlined, "Settings")
           //_drawerItem(Icons.article_outlined, "Documentation", ()=>{}),
         ],
