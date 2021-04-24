@@ -31,7 +31,7 @@ class HowTo extends StatelessWidget{
                           _cardItem(HowToArchiveEngagement.title, HowToArchiveEngagement.description),
                           _cardItem(HowToUnarchiveEngagement.title, HowToUnarchiveEngagement.description),
                           Divider(),
-                          _cardItem(HowToChangeVisualSettings.title,HowToChangeVisualSettings.description),
+                          //_cardItem(HowToChangeVisualSettings.title,HowToChangeVisualSettings.description),
                         ],
                       ),
                     ),
