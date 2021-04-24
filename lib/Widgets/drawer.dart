@@ -40,8 +40,8 @@ class SideDrawerState extends State<SideDrawer> {
         children: [
           _drawerHeader(),
           _drawerItem(Icons.question_answer_outlined, "How To Use Ops Normal", () => Navigator.pushNamed(context, HowTo.routeName)),
-          _drawerItem(Icons.book_online_outlined, "Hand Book PDF", () => Navigator.pushNamed(context, HandBookPdf.routeName)),
-          _expandingDrawerList(Icons.settings_applications_outlined, "Settings")
+          _drawerItem(Icons.book_outlined, "Hand Book PDF", () => Navigator.pushNamed(context, HandBookPdf.routeName)),
+          //_expandingDrawerList(Icons.settings_applications_outlined, "Settings")
           //_drawerItem(Icons.article_outlined, "Documentation", ()=>{}),
         ],
       ),
