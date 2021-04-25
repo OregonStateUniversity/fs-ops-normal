@@ -7,6 +7,7 @@ class HandBookPdf extends StatelessWidget{
   static const title = "Red Book PDF";
 
   final pdfController = PdfController(document: PdfDocument.openAsset('lib/assets/RedBook.pdf'));
+  final pageController = TextEditingController();
 
   @override
   Widget build(BuildContext context){
@@ -14,7 +15,41 @@ class HandBookPdf extends StatelessWidget{
       appBar: AppBar(
         title: Text(title),
       ),
-      body: pdfView(),
+      body: Column(
+        children: [
+          Expanded(child: pdfView()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(12),
+                child: ElevatedButton(
+                  child: Text("Go To"),
+                  onPressed: () {
+                    pdfController.jumpToPage(int.parse(pageController.text));
+                    FocusScope.of(context).unfocus();
+                    pageController.clear();
+                  }
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(12),
+                  child: TextField(
+                    controller: pageController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: "Page Number"
+                    ),
+                  ),
+                ),
+              )
+
+            ],
+          )
+        ],
+      ),
       bottomNavigationBar: RU_BottomNavBar(goBack: '/',),
     );
   }
