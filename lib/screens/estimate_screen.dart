@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
-import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
+import '../Widgets/ru_bottom_nav_bar.dart';
 import '../models/estimate.dart';
 
 class EstimateScreen extends StatelessWidget{
@@ -39,7 +39,7 @@ class EstimateScreen extends StatelessWidget{
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatingActionButton(estimate, context),
-      bottomNavigationBar: bottomNavBar(context)
+      bottomNavigationBar: RU_BottomNavBar(goBack: 'engagement')
     );
   }
 

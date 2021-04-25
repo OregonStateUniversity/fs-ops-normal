@@ -4,6 +4,7 @@ import 'package:hose_jockey/time_format.dart';
 import 'package:hose_jockey/database_helper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
+import '../Widgets/ru_bottom_nav_bar.dart';
 import 'estimate_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
@@ -65,7 +66,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: floatAccButton(engagement),
-        bottomNavigationBar: bottomNavBar(),
+        bottomNavigationBar: RU_BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
