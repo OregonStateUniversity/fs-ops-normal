@@ -6,7 +6,7 @@ class HandBookPdf extends StatelessWidget{
   static const routeName = 'handbook';
   static const title = "Hand Book";
 
-  final pdfController = PdfController(document: PdfDocument.openAsset('assets/redbook.pdf'));
+  final pdfController = PdfController(document: PdfDocument.openAsset('lib/assets/RedBook.pdf'));
 
   @override
   Widget build(BuildContext context){
