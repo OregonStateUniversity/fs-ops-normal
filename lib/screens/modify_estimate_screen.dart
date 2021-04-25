@@ -3,6 +3,7 @@ import 'dart:core';
 import 'dart:math';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
+import '../Widgets/ru_bottom_nav_bar.dart';
 import 'estimate_screen.dart';
 import 'package:hose_jockey/database_helper.dart';
 
@@ -81,7 +82,8 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           ),
         ),
       ),
-    )
+    ),
+      bottomNavigationBar: RU_BottomNavBar(goBack: 'engagement'),
     );
   }
 

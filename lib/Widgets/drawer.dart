@@ -2,8 +2,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hose_jockey/screens/handbookpdf_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:hose_jockey/screens/about_screen.dart';
 import 'package:hose_jockey/screens/how_to_screen.dart';
 
