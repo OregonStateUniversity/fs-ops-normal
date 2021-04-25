@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Widgets/ru_bottom_nav_bar.dart';
 
 class AboutScreen extends StatelessWidget{
   static const routeName = 'about';
@@ -36,6 +37,7 @@ class AboutScreen extends StatelessWidget{
           )
         ],
       ),
+      bottomNavigationBar: RU_BottomNavBar(goBack: '/'),
     );
   }
 }
