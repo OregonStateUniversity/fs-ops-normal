@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import '../Widgets/ru_bottom_nav_bar.dart';
 
-class HandBookPdf extends StatelessWidget{
-  static const routeName = 'handbook';
-  static const title = "Red Book PDF";
+class OpenPdfRedBook extends StatelessWidget{
+  static const title = "PDF";
 
-  final pdfController = PdfController(document: PdfDocument.openAsset('lib/assets/RedBook.pdf'));
+  var pdfController = PdfController(document: PdfDocument.openAsset('lib/assets/RedBook.pdf'));
   final pageController = TextEditingController();
 
   @override

@@ -20,7 +20,6 @@ class App extends StatelessWidget {
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
     HowTo.routeName: (context) => HowTo(),
-    HandBookPdf.routeName: (context) => HandBookPdf(),
   };
 
   @override 
