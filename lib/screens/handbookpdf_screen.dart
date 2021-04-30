@@ -25,7 +25,7 @@ class OpenPdfRedBook extends StatelessWidget{
                 child: ElevatedButton(
                   child: Text("Go To"),
                   onPressed: () {
-                    pdfController.jumpToPage(int.parse(pageController.text));
+                    pdfController.jumpToPage(int.parse(pageController.text)+22);
                     FocusScope.of(context).unfocus();
                     pageController.clear();
                   }
