@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="hose_jockey"
+        android:label="Ops Normal"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
