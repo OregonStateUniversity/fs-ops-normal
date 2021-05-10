@@ -25,7 +25,6 @@ class BottomNavBar extends StatelessWidget {
       onTap: (index) => onTap(index),
     );
   }
-
 }
 
 class BottomIcons {

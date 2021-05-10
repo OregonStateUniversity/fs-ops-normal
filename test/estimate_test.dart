@@ -110,7 +110,7 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('toCopyString that is 1-9 acres', () {
+    test('toCopyString that is 10-19 acres', () {
       //Arrange
       Estimate estimate = new Estimate();
       int acres = 10;
@@ -138,7 +138,7 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('toCopyString that is 1-9 acres', () {
+    test('toCopyString that is 20+ acres', () {
       //Arrange
       Estimate estimate = new Estimate();
       int acres = 20;

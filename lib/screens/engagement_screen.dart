@@ -26,7 +26,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
     final List<Estimate> argOrders = engagement.orders;
-
     List<Estimate> orders = argOrders;
     if(orders.isEmpty){
       return Scaffold(
