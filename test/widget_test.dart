@@ -21,4 +21,23 @@ void main() {
     expect(find.text('Home'), findsOneWidget);
     expect(find.text('Archive'), findsOneWidget);
   });
+
+  testWidgets('main_screen add engagement', (WidgetTester tester) async {
+
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()) );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+    print("Found text box");
+    await tester.enterText(find.byType(TextField), "Test Fire");
+    print("Found text box, typed in test fire");
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Create"));
+    print("Clicked create");
+    await tester.pumpAndSettle();
+    expect(find.text('Test Fire'), findsOneWidget);
+    expect(find.text('Ops Normal'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Archive'), findsOneWidget);
+  });
 }
