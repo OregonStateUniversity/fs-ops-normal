@@ -42,6 +42,14 @@ void main() {
   });
 
   testWidgets('main_screen delete engagement', (WidgetTester tester) async{
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), "Test Fire");
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Create"));
+    await tester.pumpAndSettle();
 
   });
 }
