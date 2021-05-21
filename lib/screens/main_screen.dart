@@ -326,6 +326,7 @@ class MainScreenState extends State<MainScreen> {
               },
             ),
             OutlineButton(
+              key: Key('create engagement'),
               child: Text('Create'),
               onPressed: () async {
                 newName = engagementCtrl.text;
@@ -409,6 +410,7 @@ class MainScreenState extends State<MainScreen> {
       return null;
     }
     return FloatingActionButton(
+      key: Key("add engagement"),
       onPressed: () => _createEngagement(context),
       tooltip: 'New estimate',
       child: Icon(Icons.add),
