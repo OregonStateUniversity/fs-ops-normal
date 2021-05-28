@@ -1,7 +1,7 @@
 # hose_jockey (Ops Normal)
 Hose Jockey, now known as Ops Normal, is an application to help assist wildland firefighters to accurately and quickly estimate the amount of equipment (various hoses and lengths, hose fittings, water, etc.) that is needed to put out a specific fire.
 
-Created by Josh Crowley and Kyle Hannon
+©Josh Crowley and Kyle Hannon
 
 ## How to setup Ops Normal for development
 1. Flutter is well documented on how to setup your development environment. Follow their instructions here https://flutter.dev/docs/get-started/install and set up your IDE, install Flutter, and Dart.
