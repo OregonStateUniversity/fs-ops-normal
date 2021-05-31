@@ -16,7 +16,7 @@ Hose Jockey, now known as Ops Normal, is an application to help assist wildland 
 
 ### Physical Device
 There are two options main options to put the application on a physical device.
-1. Download it from the Google Play store here https://play.google.com/store/apps/details?id=com.osu.hose_jockey&hl=en_US&gl=US or from the Apple App store here (NOT YET RELEASED ON APPLE)
+1. Download it from the Google Play store here https://play.google.com/store/apps/details?id=com.osu.hose_jockey&hl=en_US&gl=US or from the Apple App store here https://apps.apple.com/us/app/ops-normal/id1567139756
 2. Build an APK with 'flutter build apk' and transfer the file onto your physical device and run it. (This only works on Android devices)
 
 
