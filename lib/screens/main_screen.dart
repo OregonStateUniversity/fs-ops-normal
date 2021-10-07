@@ -51,10 +51,10 @@ class MainScreenState extends State<MainScreen> {
         );
       }).toList();
       setState(() {
-        active == true ? 
-        engagements = engagementEntries.reversed.toList().where((a) 
-          => a.active == 1).toList() : 
-        engagements = engagementEntries.reversed.toList().where((a) 
+        active == true ?
+        engagements = engagementEntries.reversed.toList().where((a)
+          => a.active == 1).toList() :
+        engagements = engagementEntries.reversed.toList().where((a)
           => a.active == 0).toList();
       });
     } else{
@@ -94,8 +94,8 @@ class MainScreenState extends State<MainScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                active == true ? 
-                Text("No Engagements Created Yet") : 
+                active == true ?
+                Text("No Engagements Created Yet") :
                 Text("No Engagements Archived Yet")
               ],
             ),
@@ -388,7 +388,7 @@ class MainScreenState extends State<MainScreen> {
           );
         },
       backgroundColor: Colors.blueGrey[900],
-      onTap: (index) { 
+      onTap: (index) {
         switch(index){
           case 0:
             active = true;
