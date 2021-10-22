@@ -22,7 +22,7 @@ class App extends StatelessWidget {
     HowTo.routeName: (context) => HowTo(),
   };
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/',
