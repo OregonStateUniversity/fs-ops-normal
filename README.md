@@ -1,8 +1,6 @@
 # hose_jockey (Ops Normal)
 Hose Jockey, now known as Ops Normal, is an application to help assist wildland firefighters to accurately and quickly estimate the amount of equipment (various hoses and lengths, hose fittings, water, etc.) that is needed to put out a specific fire.
 
-©Josh Crowley and Kyle Hannon
-
 ## How to setup Ops Normal for development
 1. Flutter is well documented on how to setup your development environment. Follow their instructions here https://flutter.dev/docs/get-started/install and set up your IDE, install Flutter, and Dart.
 2. Clone the GitHub Repo. Check the branch and make sure you're cloning the correct branch!
@@ -15,23 +13,9 @@ Hose Jockey, now known as Ops Normal, is an application to help assist wildland 
 2. Run the application
 
 ### Physical Device
-There are two options main options to put the application on a physical device, at least that i've used.
+There are two options main options to put the application on a physical device, at least that I've used.
+
 1. Download it from the Google Play store here https://play.google.com/store/apps/details?id=com.osu.hose_jockey&hl=en_US&gl=US or from the Apple App store here https://apps.apple.com/us/app/ops-normal/id1567139756
 2. Build an APK with 'flutter build apk' and transfer the file onto your physical device and run it. (This only works on Android devices)
 
-
-
-
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+© Josh Crowley and Kyle Hannon
