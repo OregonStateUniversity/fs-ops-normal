@@ -64,13 +64,13 @@ class Estimate {
           "Mark 3 + Kits: ${mark3s}\n"
           "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
 
-      //"Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
+      //Old calculation : "Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
     }
     if (this.acres >= 20) {
       str += "Water (Pallets): ${acres ~/ 20}\n"
           "Gatorade (Pallets): ${acres ~/ 20}\n"
           "MRE (Pallets): ${acres ~/ 20}\n"
-          "Port-a-Potties: ${acres ~/ 20}\n\n";
+          "Port-a-Potties: ${acres ~/ 10}\n\n";
     }
     return str;
   }
