@@ -67,7 +67,7 @@ class Estimate {
       str += "Water (Pallets): ${acres ~/ 20}\n"
           "Gatorade (Pallets): ${acres ~/ 20}\n"
           "MRE (Pallets): ${acres ~/ 20}\n"
-          "Port-a-Potties: ${acres ~/ 2}\n\n";
+          "Port-a-Potties: ${acres ~/ 20}\n\n";
     }
     return str;
   }
