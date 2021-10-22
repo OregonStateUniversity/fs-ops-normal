@@ -59,9 +59,12 @@ class Estimate {
           "Toy Wye: ${this.fittings}\n\n";
     }
     if (this.acres >= 10) {
+      var mark3s = acres ~/ 10;
       str += "Folda-tank: ${acres ~/ 5}\n"
-          "Mark 3 + Kits: ${acres ~/ 10}\n"
-          "Pump Mix (Gallons): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
+          "Mark 3 + Kits: ${mark3s}\n"
+          "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+
+      //"Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
     }
     if (this.acres >= 20) {
       str += "Water (Pallets): ${acres ~/ 20}\n"
