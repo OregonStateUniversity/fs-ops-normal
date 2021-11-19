@@ -216,6 +216,17 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               hintText: 'Acreage',
             ),
           ),
+          content: TextField(
+            autofocus: true,
+            // controller: acreageCon,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: 'Enter Shape',
+              border: const OutlineInputBorder(),
+              errorText: _validate ? 'Value Can\'t Be Empty' : null,
+              hintText: 'Timber',
+            ),
+          ),
           actions: <Widget>[
             OutlineButton(
               child: Text('cancel'),
