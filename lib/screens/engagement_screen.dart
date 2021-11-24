@@ -7,6 +7,9 @@ import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 
+String dropdownValue = 'Timber';
+String dropdownValue2 = 'Shape';
+
 class SelectedEngagement extends StatefulWidget {
   static const routeName = 'engagement';
 
@@ -205,34 +208,62 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextField(
-                  autofocus: true,
-                  controller: acreageCon,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Enter Acreage',
-                    border: const OutlineInputBorder(),
-                    errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                    hintText: 'Acreage',
-                    ),
-                  ), 
-                  TextField(
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: 'Enter Fire Type',
-                    border: const OutlineInputBorder(),
-                    errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                    hintText: 'Fire Type',
+                    autofocus: true,
+                    controller: acreageCon,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Enter Acreage',
+                      border: const OutlineInputBorder(),
+                      errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                      hintText: 'Acreage',
                     ),
                   ),
-                  TextField(
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Enter Fire Shape',
-                        border: const OutlineInputBorder(),
-                        errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                        hintText: 'Fire Shape',
+                  DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
                     ),
-                  ),  
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = "Defualt";
+                      });
+                    },
+                    items: <String>['Timber', 'Grass']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                  DropdownButton<String>(
+                    value: dropdownValue2,
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = "Defualt";
+                      });
+                    },
+                    items: <String>['Shape', 'ShapeTwo']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
                 ],
               ),
               actions: <Widget>[
