@@ -24,9 +24,9 @@ void main() {
     test('using jsonConvF named constructor', () {
       //Arrange
       Estimate estimate;
-
+      
       //Act
-      estimate = new Estimate.jsonConvF(1, 1, "time", 1200, 600, 300, 6);
+      estimate = new Estimate.jsonConvF(1, 1, "Square", "Tiber", "time", 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));

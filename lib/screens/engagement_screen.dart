@@ -18,6 +18,8 @@ class SelectedEngagement extends StatefulWidget {
 
 class _SelectedEngagementState extends State<SelectedEngagement> {
   var _acreage = '0';
+  var _shape = 'Sqaure';
+  var _type = 'Timber';
   bool _validate = false;
   final acreageCon = new TextEditingController();
 
@@ -263,6 +265,15 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                         child: Text(value),
                       );
                     }).toList(),
+                  ),
+                  DropdownButton<String>(
+                    items: <String>['Grass', 'Timber'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (_) {},
                   )
                 ],
               ),
