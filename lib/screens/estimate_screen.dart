@@ -15,7 +15,7 @@ class EstimateScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Copy Your Order"),
+        title: Text(""),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

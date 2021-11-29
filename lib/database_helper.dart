@@ -3,51 +3,49 @@ import 'package:sqflite/sqflite.dart';
 
 // https://www.youtube.com/watch?v=GZfFRv9VWtU
 
-class DatabaseHelper{
+class DatabaseHelper {
   static Database _database;
 
-  static Future<Database> getDBConnector() async{
-    if (_database != null){
+  static Future<Database> getDBConnector() async {
+    if (_database != null) {
       return _database;
     }
 
     return await _initDatabase();
   }
 
-  static Future<Database> _initDatabase() async{
-    _database = await openDatabase(
-        'engagements.db', version: 1, onCreate: (Database db, int version) async{
+  static Future<Database> _initDatabase() async {
+    _database = await openDatabase('engagements.db', version: 1,
+        onCreate: (Database db, int version) async {
       await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);'
-          );
-        }
-    );
+          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);');
+    });
 
     return _database;
   }
 
-  static Future<List<Map>> getAllEngagements() async{
+  static Future<List<Map>> getAllEngagements() async {
     final Database db = await getDBConnector();
     var records = await db.rawQuery('SELECT * FROM engagements');
     return records;
   }
 
-  static Future<void> deleteALLDataFromDatabase() async{
+  static Future<void> deleteALLDataFromDatabase() async {
     print("Database Deleted");
     await deleteDatabase('engagements.db');
   }
 
-  static Future<void> insertEngagement(dto) async{
+  static Future<void> insertEngagement(dto) async {
     final Database db = await getDBConnector();
 
     await db.transaction((txn) async {
-      await txn.rawInsert('INSERT INTO engagements(name, timeStamp, acres, active, orders) VALUES(?, ?, ?, ?, ?)',
-          [dto.name, dto.timeStamp, dto.size, 1, "[]"]
-      );
+      await txn.rawInsert(
+          'INSERT INTO engagements(name, timeStamp, acres, active, orders) VALUES(?, ?, ?, ?, ?)',
+          [dto.name, dto.timeStamp, dto.size, 1, "[]"]);
     });
   }
 
-  static Future<void> deleteEngagement(index) async{
+  static Future<void> deleteEngagement(index) async {
     final Database db = await getDBConnector();
 
     await db.transaction((txn) async {
@@ -55,40 +53,43 @@ class DatabaseHelper{
     });
   }
 
-  static Future<void> archiveEngagement(index) async{
+  static Future<void> archiveEngagement(index) async {
     final Database db = await getDBConnector();
 
-    await db.transaction((txn) async{
-      await txn.rawUpdate('UPDATE engagements SET active = 0 WHERE id = $index');
+    await db.transaction((txn) async {
+      await txn
+          .rawUpdate('UPDATE engagements SET active = 0 WHERE id = $index');
     });
   }
 
-  static Future<void> unarchiveEngagement(index) async{
+  static Future<void> unarchiveEngagement(index) async {
     final Database db = await getDBConnector();
 
-    await db.transaction((txn) async{
-      await txn.rawUpdate('UPDATE engagements SET active = 1 WHERE id = $index');
+    await db.transaction((txn) async {
+      await txn
+          .rawUpdate('UPDATE engagements SET active = 1 WHERE id = $index');
     });
   }
 
-  static Future<void> insertOrder(eng, order) async{
+  static Future<void> insertOrder(eng, order) async {
     final Database db = await getDBConnector();
-    eng.orders.insert(0,order);
+    eng.orders.insert(0, order);
     await db.transaction((txn) async {
       String tmp = "'[";
       eng.orders.forEach((value) {
         tmp += json.encode(value.toJson());
-        if((eng.orders.last != value)){
+        if ((eng.orders.last != value)) {
           tmp += ", ";
         }
       });
       tmp += "]'";
-      await txn.rawUpdate('UPDATE engagements SET orders = ${tmp.toString()} WHERE id = ${eng.primaryKey}',
+      await txn.rawUpdate(
+        'UPDATE engagements SET orders = ${tmp.toString()} WHERE id = ${eng.primaryKey}',
       );
     });
   }
 
-  static Future<void> deleteOrder(eng, order) async{
+  static Future<void> deleteOrder(eng, order) async {
     final Database db = await getDBConnector();
 
     eng.orders.toList().remove(order);
@@ -98,12 +99,13 @@ class DatabaseHelper{
       String tmp = "'[";
       newOrderList.forEach((value) {
         tmp += json.encode(value.toJson());
-        if(newOrderList.last != value){
+        if (newOrderList.last != value) {
           tmp += ", ";
         }
       });
       tmp += "]'";
-      await txn.rawUpdate('UPDATE engagements SET orders = $tmp WHERE id = ${eng.primaryKey}');
+      await txn.rawUpdate(
+          'UPDATE engagements SET orders = $tmp WHERE id = ${eng.primaryKey}');
     });
   }
 }
