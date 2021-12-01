@@ -6,7 +6,7 @@ import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
 
 class RU_BottomNavBar extends StatefulWidget{
   String goBack;
-  RU_BottomNavBar({Key key, @required this.goBack}) : super(key:key);
+  RU_BottomNavBar({Key? key, required this.goBack}) : super(key:key);
 
   @override
   RU_BottomNavBarState createState() => RU_BottomNavBarState();
@@ -60,7 +60,7 @@ class RU_BottomNavBarState extends State<RU_BottomNavBar>{
     );
   }
 
-  int activeIndex;
+  int? activeIndex;
   var _bottomNavIndex = 3;
   final autoSizeGroup = AutoSizeGroup();
 

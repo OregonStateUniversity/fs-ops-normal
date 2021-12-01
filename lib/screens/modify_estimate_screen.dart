@@ -8,19 +8,19 @@ import 'estimate_screen.dart';
 import 'package:hose_jockey/database_helper.dart';
 
 class OrderFields{
-  int acres;
-  int trunkLineLength;
-  int latLineLength;
-  int toyLineLength;
-  int fittingsField;
+  int? acres;
+  int? trunkLineLength;
+  int? latLineLength;
+  int? toyLineLength;
+  int? fittingsField;
 }
 
 class ModifyEstimateScreen extends StatefulWidget{
   
   static const routeName = 'modifyEstimateScreen';
 
-  final Estimate estimate;
-  final Engagement engagement;
+  final Estimate? estimate;
+  final Engagement? engagement;
   ModifyEstimateScreen({this.estimate, this.engagement});
 
   @override
@@ -30,12 +30,12 @@ class ModifyEstimateScreen extends StatefulWidget{
 class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   var formKey = GlobalKey<FormState>();
   OrderFields orderField = new OrderFields();
-  Estimate est;
+  Estimate? est;
 
   @override
   Widget build(BuildContext context) {
     
-    orderField.acres = widget.estimate.acres;
+    orderField.acres = widget.estimate!.acres;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -63,10 +63,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
                 ElevatedButton(
                   onPressed: (){
-                    if (formKey.currentState.validate()){
-                      formKey.currentState.save();
+                    if (formKey.currentState!.validate()){
+                      formKey.currentState!.save();
                       var newNum = checkNamingNumber();
-                      var finalEstimate = new Estimate.loadSavedEstimate(newNum, orderField.acres, widget.estimate.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
+                      var finalEstimate = new Estimate.loadSavedEstimate(newNum, orderField.acres, widget.estimate!.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
                       DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
                       Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
                     }
@@ -94,7 +94,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate.trunkLineLength.toString(),
+            initialValue: widget.estimate!.trunkLineLength.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -106,10 +106,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ft.',
             ),
             onSaved: (value){
-              orderField.trunkLineLength = int.parse(value);
+              orderField.trunkLineLength = int.parse(value!);
             },
             validator: (value){
-              if(value.isEmpty){
+              if(value!.isEmpty){
                 return "Needs some value";
               } else{
                 return null;
@@ -128,7 +128,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate.latLineLength.toString(),
+            initialValue: widget.estimate!.latLineLength.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -143,10 +143,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               orderField.fittingsField = int.parse(value) ~/ 100;
             },
             onSaved: (value){
-              orderField.latLineLength = int.parse(value);
+              orderField.latLineLength = int.parse(value!);
             },
             validator: (value){
-              if(value.isEmpty){
+              if(value!.isEmpty){
                 return "Needs some value";
               } else{
                 return null;
@@ -165,7 +165,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate.toyLineLength.toString(),
+            initialValue: widget.estimate!.toyLineLength.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -177,10 +177,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ft.',
             ),
             onSaved: (value){
-              orderField.toyLineLength = int.parse(value);
+              orderField.toyLineLength = int.parse(value!);
             },
             validator: (value){
-              if(value.isEmpty){
+              if(value!.isEmpty){
                 return "Needs some value";
               } else{
                 return null;
@@ -199,7 +199,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate.fittings.toString(),
+            initialValue: widget.estimate!.fittings.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -211,10 +211,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ea.',
             ),
             onSaved: (value){
-              orderField.fittingsField = int.parse(value);
+              orderField.fittingsField = int.parse(value!);
             },
             validator: (value){
-              if(value.isEmpty){
+              if(value!.isEmpty){
                 return "Needs some value";
               } else{
                 return null;
@@ -227,12 +227,12 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   }
 
   int checkNamingNumber() { // not the most ideal, will replace later with better solution
-    var newNum = 0;
-    List<int> listCurNum = [];
-    widget.engagement.orders.forEach((value){
+    int newNum = 0;
+    List<int?> listCurNum = [];
+    widget.engagement!.orders.forEach((value){
       listCurNum.add(value.name);
     });
-    listCurNum.isEmpty ? newNum = 1 : newNum = listCurNum.reduce(max) + 1;
+    listCurNum.isEmpty ? newNum = 1 : newNum = listCurNum.reduce(max)! + 1;
     return newNum;
   }
 

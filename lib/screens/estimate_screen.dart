@@ -10,7 +10,7 @@ class EstimateScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    final Estimate estimate = ModalRoute.of(context).settings.arguments;
+    final Estimate estimate = ModalRoute.of(context)!.settings.arguments as Estimate;
 
     return Scaffold(
       appBar: AppBar(

@@ -2,10 +2,10 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
-  final AnimationController controller;
-  final int index;
-  final Key key;
-  final Function onTap;
+  final AnimationController? controller;
+  final int? index;
+  final Key? key;
+  final Function? onTap;
 
   const BottomNavBar({ this.controller, this.index, this.key, this.onTap}) : super(key:key);
 
@@ -19,10 +19,10 @@ class BottomNavBar extends StatelessWidget {
         Icons.archive_outlined
       ],
       notchAndCornersAnimation: controller,
-      activeIndex: this.index,
+      activeIndex: this.index!,
       gapLocation: GapLocation.center,
       notchSmoothness: NotchSmoothness.softEdge,
-      onTap: (index) => onTap(index),
+      onTap: (index) => onTap!(index),
     );
   }
 }

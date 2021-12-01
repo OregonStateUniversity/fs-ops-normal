@@ -1,12 +1,13 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 
 // https://www.youtube.com/watch?v=GZfFRv9VWtU
 
 class DatabaseHelper {
-  static Database _database;
+  static Database? _database;
 
-  static Future<Database> getDBConnector() async {
+  static Future<Database?> getDBConnector() async {
     if (_database != null) {
       return _database;
     }
@@ -14,7 +15,7 @@ class DatabaseHelper {
     return await _initDatabase();
   }
 
-  static Future<Database> _initDatabase() async {
+  static Future<Database?> _initDatabase() async {
     _database = await openDatabase('engagements.db', version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
@@ -25,7 +26,7 @@ class DatabaseHelper {
   }
 
   static Future<List<Map>> getAllEngagements() async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
     var records = await db.rawQuery('SELECT * FROM engagements');
     return records;
   }
@@ -36,7 +37,7 @@ class DatabaseHelper {
   }
 
   static Future<void> insertEngagement(dto) async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
 
     await db.transaction((txn) async {
       await txn.rawInsert(
@@ -46,7 +47,7 @@ class DatabaseHelper {
   }
 
   static Future<void> deleteEngagement(index) async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
 
     await db.transaction((txn) async {
       await txn.rawDelete('DELETE FROM engagements WHERE id = $index');
@@ -54,7 +55,7 @@ class DatabaseHelper {
   }
 
   static Future<void> archiveEngagement(index) async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
 
     await db.transaction((txn) async {
       await txn
@@ -63,7 +64,7 @@ class DatabaseHelper {
   }
 
   static Future<void> unarchiveEngagement(index) async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
 
     await db.transaction((txn) async {
       await txn
@@ -72,7 +73,7 @@ class DatabaseHelper {
   }
 
   static Future<void> insertOrder(eng, order) async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
     eng.orders.insert(0, order);
     await db.transaction((txn) async {
       String tmp = "'[";
@@ -90,7 +91,7 @@ class DatabaseHelper {
   }
 
   static Future<void> deleteOrder(eng, order) async {
-    final Database db = await getDBConnector();
+    final Database db = await (getDBConnector() as FutureOr<Database>);
 
     eng.orders.toList().remove(order);
     var newOrderList = eng.orders;

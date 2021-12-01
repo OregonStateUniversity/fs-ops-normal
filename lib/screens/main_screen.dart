@@ -13,7 +13,7 @@ import 'package:hose_jockey/database_helper.dart';
 import '../Widgets/drawer.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
+  MainScreen({Key? key}) : super(key: key);
   static const routeName = '/';
 
   @override
@@ -60,7 +60,7 @@ class MainScreenState extends State<MainScreen> {
           => a.active == 0).toList();
       });
     } else{
-      engagements = new List<Engagement>();
+      engagements = <Engagement>[];
     }
   }
 
@@ -160,17 +160,17 @@ class MainScreenState extends State<MainScreen> {
             child: Text("New"),
           ),
         ],
-        onSelected: (value) {
+        onSelected: (dynamic value) {
           if (value == 1) {
             setState(() {
               engagements.sort((a,b)
-              => a.timeStamp.compareTo(b.timeStamp));
+              => a.timeStamp!.compareTo(b.timeStamp!));
             });
           }
           else if (value == 2) {
             setState(() {
               engagements.sort((a,b)
-              => b.timeStamp.compareTo(a.timeStamp));
+              => b.timeStamp!.compareTo(a.timeStamp!));
             });
           }
         }
@@ -258,7 +258,7 @@ class MainScreenState extends State<MainScreen> {
     ],);
   }
 
-  Future<bool> _confirmDismiss(direction) async{
+  Future<bool?> _confirmDismiss(direction) async{
     if (direction == DismissDirection.endToStart) {
       return await showDialog(
           context: context,
@@ -344,7 +344,7 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
-  int activeIndex;
+  int? activeIndex;
   var _bottomNavIndex = 0;
   final autoSizeGroup = AutoSizeGroup();
 
@@ -407,7 +407,7 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget floatAccButton(){
+  Widget? floatAccButton(){
     if(active == false){
       return null;
     }

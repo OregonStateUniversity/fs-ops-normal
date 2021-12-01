@@ -67,7 +67,7 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
               child: Text('Create'),
               onPressed: () {
                 
-                _key.currentState.setEngagement(Engagement(
+                _key.currentState!.setEngagement(Engagement(
                   engagementCtrl.text,
                   '10-23-20',
                   int.parse(acreageCtrl.text),
