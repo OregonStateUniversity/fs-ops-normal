@@ -44,7 +44,7 @@ class RU_BottomNavBarState extends State<RU_BottomNavBar>{
           ],
         );
       },
-      backgroundColor: Colors.blueGrey[900],
+      backgroundColor: (Colors.blueGrey[900]!),
       onTap: (index) {
         switch(index){
           case 0:
