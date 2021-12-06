@@ -9,6 +9,9 @@
 .history
 .svn/
 
+# Key
+**/anrdoid/key.properties
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -42,3 +45,4 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+lib/screens/test.dart

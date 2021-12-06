@@ -1,22 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hose_jockey/app.dart';
+import 'package:hose_jockey/app.dart';
+import 'package:hose_jockey/screens/main_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(App());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  Widget createWidgetForTesting({Widget child}){
+    return MaterialApp(
+      home: child,
+    );
+  }
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('main_screen with no engagements', (WidgetTester tester) async {
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()) );
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+    expect(find.text('Ops Normal'), findsOneWidget);
+    expect(find.text('No Engagements Created Yet'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Archive'), findsOneWidget);
+  });
+
+  testWidgets('main_screen add engagement', (WidgetTester tester) async {
+
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()) );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+    print("Found text box");
+    await tester.enterText(find.byType(TextField), "Test Fire");
+    print("Found text box, typed in test fire");
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Create"));
+    print("Clicked create");
+    await tester.pumpAndSettle();
+    expect(find.text('Test Fire'), findsOneWidget);
+    expect(find.text('Ops Normal'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Archive'), findsOneWidget);
+  });
+
+  testWidgets('main_screen delete engagement', (WidgetTester tester) async{
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), "Test Fire");
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Create"));
+    await tester.pumpAndSettle();
+
+
   });
 }
