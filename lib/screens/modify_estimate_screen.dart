@@ -7,7 +7,7 @@ import '../Widgets/ru_bottom_nav_bar.dart';
 import 'estimate_screen.dart';
 import 'package:hose_jockey/database_helper.dart';
 
-class OrderFields{
+class OrderFields {
   int? acres;
   int? trunkLineLength;
   int? latLineLength;
@@ -15,8 +15,7 @@ class OrderFields{
   int? fittingsField;
 }
 
-class ModifyEstimateScreen extends StatefulWidget{
-  
+class ModifyEstimateScreen extends StatefulWidget {
   static const routeName = 'modifyEstimateScreen';
 
   final Estimate? estimate;
@@ -34,7 +33,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     orderField.acres = widget.estimate!.acres;
 
     return Scaffold(
@@ -48,46 +46,54 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           child: Form(
             key: formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-
-                trunkLineRow(),
-                const SizedBox(height: 24.0),
-                latLineRow(),
-                const SizedBox(height: 24.0),
-                toyLineRow(),
-                const SizedBox(height: 24.0),
-                fittingsRow(),
-                const SizedBox(height: 24.0),
-
-                ElevatedButton(
-                  onPressed: (){
-                    if (formKey.currentState!.validate()){
-                      formKey.currentState!.save();
-                      var newNum = checkNamingNumber();
-                      var finalEstimate = new Estimate.loadSavedEstimate(newNum, orderField.acres, widget.estimate!.timeStamp, orderField.trunkLineLength, orderField.latLineLength, orderField.toyLineLength, orderField.fittingsField);
-                      DatabaseHelper.insertOrder(widget.engagement, finalEstimate);
-                      Navigator.pushNamed(context, EstimateScreen.routeName, arguments: finalEstimate);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                  ),
-                  child: Text('Save', 
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
-                  ),
-                )
-            ]
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  trunkLineRow(),
+                  const SizedBox(height: 24.0),
+                  latLineRow(),
+                  const SizedBox(height: 24.0),
+                  toyLineRow(),
+                  const SizedBox(height: 24.0),
+                  fittingsRow(),
+                  const SizedBox(height: 24.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        // var newNum = checkNamingNumber();
+                        var newNum = 0;
+                        var finalEstimate = new Estimate.loadSavedEstimate(
+                            newNum,
+                            orderField.acres,
+                            widget.estimate!.timeStamp,
+                            orderField.trunkLineLength,
+                            orderField.latLineLength,
+                            orderField.toyLineLength,
+                            orderField.fittingsField);
+                        DatabaseHelper.insertOrder(
+                            widget.engagement, finalEstimate);
+                        Navigator.pushNamed(context, EstimateScreen.routeName,
+                            arguments: finalEstimate);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                    ),
+                    child: Text('Save',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)),
+                  )
+                ]),
           ),
         ),
       ),
-    ),
       bottomNavigationBar: RU_BottomNavBar(goBack: 'engagement'),
     );
   }
 
-  Widget trunkLineRow(){
+  Widget trunkLineRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -105,13 +111,13 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               labelText: 'Trunk Line',
               suffixText: 'ft.',
             ),
-            onSaved: (value){
+            onSaved: (value) {
               orderField.trunkLineLength = int.parse(value!);
             },
-            validator: (value){
-              if(value!.isEmpty){
+            validator: (value) {
+              if (value!.isEmpty) {
                 return "Needs some value";
-              } else{
+              } else {
                 return null;
               }
             },
@@ -121,7 +127,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     );
   }
 
-  Widget latLineRow(){
+  Widget latLineRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -142,13 +148,13 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             onChanged: (value) {
               orderField.fittingsField = int.parse(value) ~/ 100;
             },
-            onSaved: (value){
+            onSaved: (value) {
               orderField.latLineLength = int.parse(value!);
             },
-            validator: (value){
-              if(value!.isEmpty){
+            validator: (value) {
+              if (value!.isEmpty) {
                 return "Needs some value";
-              } else{
+              } else {
                 return null;
               }
             },
@@ -158,7 +164,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     );
   }
 
-  Widget toyLineRow(){
+  Widget toyLineRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -176,13 +182,13 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               labelText: 'Toy Line',
               suffixText: 'ft.',
             ),
-            onSaved: (value){
+            onSaved: (value) {
               orderField.toyLineLength = int.parse(value!);
             },
-            validator: (value){
-              if(value!.isEmpty){
+            validator: (value) {
+              if (value!.isEmpty) {
                 return "Needs some value";
-              } else{
+              } else {
                 return null;
               }
             },
@@ -192,7 +198,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     );
   }
 
-  Widget fittingsRow(){
+  Widget fittingsRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -210,13 +216,13 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               labelText: 'Various Fittings',
               suffixText: 'ea.',
             ),
-            onSaved: (value){
+            onSaved: (value) {
               orderField.fittingsField = int.parse(value!);
             },
-            validator: (value){
-              if(value!.isEmpty){
+            validator: (value) {
+              if (value!.isEmpty) {
                 return "Needs some value";
-              } else{
+              } else {
                 return null;
               }
             },
@@ -226,14 +232,14 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     );
   }
 
-  int checkNamingNumber() { // not the most ideal, will replace later with better solution
-    int newNum = 0;
-    List<int?> listCurNum = [];
-    widget.engagement!.orders.forEach((value){
-      listCurNum.add(value.name);
-    });
-    listCurNum.isEmpty ? newNum = 1 : newNum = listCurNum.reduce(max)! + 1;
-    return newNum;
-  }
+  // int checkNamingNumber() { // not the most ideal, will replace later with better solution
+  //   int newNum = 0;
+  //   List<int> listCurNum = [];
+  //   widget.engagement!.orders.forEach((value){
+  //     listCurNum.add((value.name!));
+  //   });
+  //   listCurNum.isEmpty ? newNum = 1 : newNum = listCurNum.reduce(max)! + 1;
+  //   return newNum;
+  // }
 
 }
