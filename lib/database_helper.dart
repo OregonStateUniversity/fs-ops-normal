@@ -25,11 +25,7 @@ class DatabaseHelper {
     return _database;
   }
 
-  // static Future<List<Map>> getAllEngagements() async {
-  //   final Database db = await getDBConnector();
-  //   var records = await db.rawQuery('SELECT * FROM engagements');
-  //   return records;
-  // }
+// This is causing a runtime error
 
   static Future<List<Map>> getAllEngagements() async {
     final Database db = await (getDBConnector() as FutureOr<Database>);
