@@ -18,7 +18,7 @@ class BottomNavBar extends StatelessWidget {
         Icons.sort,
         Icons.archive_outlined
       ],
-      notchAndCornersAnimation: controller,
+      notchAndCornersAnimation: controller!,
       activeIndex: this.index!,
       gapLocation: GapLocation.center,
       notchSmoothness: NotchSmoothness.softEdge,
