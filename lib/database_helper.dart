@@ -25,7 +25,7 @@ class DatabaseHelper {
     return _database;
   }
 
-// This is causing a runtime error
+// This block below is causing a runtime error
 
   static Future<List<Map>> getAllEngagements() async {
     final Database db = await (getDBConnector() as FutureOr<Database>);
