@@ -11,13 +11,15 @@ void main() {
       List<Estimate> estimates = new List<Estimate>();
 
       //Act
-      Engagement engagement = new Engagement("Test", "Time", 15, estimates, 1);
+      Engagement engagement = new Engagement("Test", "Time", 15, "Sqaure", "Timber", estimates, 1);
 
       //Assert
       expect(engagement.active, equals(1));
       expect(engagement.name, equals("Test"));
       expect(engagement.timeStamp, equals("Time"));
       expect(engagement.size, equals(15));
+      expect(engagement.shape, equals("Square"));
+      expect(engagement.type, equals("Timber"));
       expect(engagement.orders, equals(estimates));
     });
 
@@ -29,20 +31,22 @@ void main() {
       estimates.add(estimate);
 
       //Act
-      Engagement engagement = new Engagement("Test", "Time", 15, estimates, 1);
+      Engagement engagement = new Engagement("Test", "Time", 15, "Sqaure", "Timber", estimates, 1);
 
       //Assert
       expect(engagement.active, equals(1));
       expect(engagement.name, equals("Test"));
       expect(engagement.timeStamp, equals("Time"));
       expect(engagement.size, equals(15));
+      expect(engagement.shape, equals("Square"));
+      expect(engagement.type, equals("Timber"));
       expect(engagement.orders, equals(estimates));
     });
 
     test('toString', () {
       //Arrange
-      Engagement engagement = new Engagement("Test", "Time", 15, [], 1);
-      String expected = "{ Test, Time, 15 }";
+      Engagement engagement = new Engagement("Test", "Time", 15, "Sqaure", "Timber", [], 1);
+      String expected = "{ Test, Time, 15, Square, Timber }";
 
       //Act
       String actual = engagement.toString();
