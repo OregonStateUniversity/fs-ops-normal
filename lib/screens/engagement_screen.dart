@@ -198,13 +198,28 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     );
   }
 
+  _chooseOrderType(context) {
+    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("What type of order"),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+            ),
+          );
+        });
+  }
+
   _createOrder(context) {
     final Engagement engagement = ModalRoute.of(context).settings.arguments;
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-              title: Text('Create New Order'),
+              title: Text('Create a Order'),
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
