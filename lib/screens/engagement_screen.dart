@@ -336,7 +336,9 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       return null;
     }
     return FloatingActionButton(
-      onPressed: () => _createOrder(context).then((value) => setState(() {})),
+      //onPressed: () => _createOrder(context).then((value) => setState(() {})),
+      onPressed: () =>
+          _chooseOrderType(context).then((value) => setState(() {})),
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
