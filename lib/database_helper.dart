@@ -25,8 +25,6 @@ class DatabaseHelper {
     return _database!;
   }
 
-// This block below is causing a runtime error
-
   static Future<List<Map>> getAllEngagements() async {
     final Database? db = await getDBConnector();
     var records = await db!.rawQuery('SELECT * FROM engagements');
