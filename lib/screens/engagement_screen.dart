@@ -212,27 +212,97 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 ButtonBar(
                   children: <Widget>[
                     FlatButton(
-                      child: Text('Order'),
+                      child: Text('Basic Order'),
                       color: Colors.red,
                       onPressed: () {
                         //TODO
+                        ////onPressed: () => _createOrder(context).then((value) => setState(() {})),
                       },
                     ),
                     FlatButton(
-                      child: Text('Strcuture Protection'),
+                      child: Text('Structure Protection'),
                       color: Colors.red,
                       onPressed: () {
                         //TODO
+                        //onPressed: () => _createStructureProtection(context).then((value) => setState(() {})),
                       },
                     )
                   ],
                 )
               ],
-
-              // if order button is pressed make a line like this:
-              ////onPressed: () => _createOrder(context).then((value) => setState(() {})),
             ),
           );
+        });
+  }
+
+  _createStructureProtection(context) {
+    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text('Create a Structure Protection Order'),
+              content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      autofocus: true,
+                      controller: acreageCon,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Enter Acreage',
+                        border: const OutlineInputBorder(),
+                        errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                        hintText: 'Acreage',
+                      ),
+                    ),
+                    TextField(
+                      autofocus: true,
+                      controller: acreageCon,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Amount of Structures',
+                        border: const OutlineInputBorder(),
+                        errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                        hintText: 'Structures',
+                      ),
+                    ),
+                    OutlineButton(
+                      child: Text('cancel'),
+                      onPressed: () {
+                        acreageCon.clear();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    OutlineButton(
+                      child: Text('Calculate Estimate'),
+                      onPressed: () {
+                        setState(() {
+                          acreageCon.text.isEmpty
+                              ? _validate = true
+                              : _validate = false;
+                          _acreage = acreageCon.text;
+                        });
+
+                        var estimate = new Estimate(
+                            acres: int.parse(_acreage),
+                            timeStamp: TimeFormat.currentTime);
+                        estimate.initialLineCalculation();
+                        acreageCon.clear();
+                        _acreage.isNotEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ModifyEstimateScreen(
+                                          estimate: estimate,
+                                          engagement: engagement,
+                                        )),
+                              )
+                            : ArgumentError.notNull('Value Can\'t Be Empty');
+                      },
+                    )
+                  ]));
         });
   }
 
