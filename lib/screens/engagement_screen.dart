@@ -213,14 +213,14 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   children: <Widget>[
                     FlatButton(
                       child: Text('Order'),
-                      color: Colors.orange,
+                      color: Colors.red,
                       onPressed: () {
                         //TODO
                       },
                     ),
                     FlatButton(
                       child: Text('Strcuture Protection'),
-                      color: Colors.orange,
+                      color: Colors.red,
                       onPressed: () {
                         //TODO
                       },
