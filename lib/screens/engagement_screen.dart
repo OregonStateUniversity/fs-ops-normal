@@ -208,6 +208,29 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ButtonBar(
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text('Order'),
+                      color: Colors.orange,
+                      onPressed: () {
+                        //TODO
+                      },
+                    ),
+                    FlatButton(
+                      child: Text('Strcuture Protection'),
+                      color: Colors.orange,
+                      onPressed: () {
+                        //TODO
+                      },
+                    )
+                  ],
+                )
+              ],
+
+              // if order button is pressed make a line like this:
+              ////onPressed: () => _createOrder(context).then((value) => setState(() {})),
             ),
           );
         });
