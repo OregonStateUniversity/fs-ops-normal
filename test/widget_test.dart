@@ -6,7 +6,7 @@ import 'package:hose_jockey/screens/main_screen.dart';
 
 void main() {
 
-  Widget createWidgetForTesting({Widget child}){
+  Widget createWidgetForTesting({Widget? child}){
     return MaterialApp(
       home: child,
     );

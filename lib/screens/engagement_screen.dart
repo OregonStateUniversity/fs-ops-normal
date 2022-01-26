@@ -7,7 +7,7 @@ import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 
-String dropdownValue = 'Timber';
+String? dropdownValue = 'Timber';
 String dropdownValue2 = 'Shape';
 
 class SelectedEngagement extends StatefulWidget {
@@ -25,7 +25,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   @override
   Widget build(BuildContext context) {
-    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    final Engagement engagement =
+        ModalRoute.of(context)!.settings.arguments as Engagement;
     final List<Estimate> argOrders = engagement.orders;
     List<Estimate> orders = argOrders;
     if (orders.isEmpty) {
@@ -99,18 +100,18 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                       child: Text("Size"),
                     ),
                   ],
-              onSelected: (value) {
+              onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    orders.sort((a, b) => a.timeStamp.compareTo(b.timeStamp));
+                    orders.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    orders.sort((a, b) => b.timeStamp.compareTo(a.timeStamp));
+                    orders.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
-                    orders.sort((a, b) => b.acres.compareTo(a.acres));
+                    orders.sort((a, b) => b.acres!.compareTo(a.acres!));
                   });
                 }
               }),
@@ -122,7 +123,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(engagement.orders[index].timeStamp),
+                  key: Key(engagement.orders[index].timeStamp!),
                   background: Stack(
                     children: [
                       Container(
@@ -151,7 +152,9 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                         context: context,
                         builder: (BuildContext context) {
                           if (engagement.active == 0) {
-                            return null;
+                            return AlertDialog(
+                              title: const Text("This engagement isn't active")
+                            );
                           }
                           return AlertDialog(
                             title: const Text("Delete Order?"),
@@ -199,7 +202,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   }
 
   _createOrder(context) {
-    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    final Engagement? engagement =
+        ModalRoute.of(context)!.settings.arguments as Engagement?;
     return showDialog(
         context: context,
         builder: (context) {
@@ -230,7 +234,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                       height: 2,
                       color: Colors.deepPurpleAccent,
                     ),
-                    onChanged: (String newValue) {
+                    onChanged: (String? newValue) {
                       setState(() {
                         dropdownValue = "Defualt";
                       });
@@ -316,7 +320,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         });
   }
 
-  Widget floatAccButton(engagement) {
+  Widget? floatAccButton(engagement) {
     if (engagement.active == 0) {
       return null;
     }
