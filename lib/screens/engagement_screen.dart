@@ -202,7 +202,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   }
 
   _chooseOrderType(context) {
-    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    final Engagement engagement =
+        ModalRoute.of(context)!.settings.arguments as Engagement;
     return showDialog(
         context: context,
         builder: (context) {
@@ -239,7 +240,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
   }
 
   _createStructureProtection(context) {
-    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    final Engagement engagement =
+        ModalRoute.of(context)!.settings.arguments as Engagement;
     return showDialog(
         context: context,
         builder: (context) {
@@ -366,7 +368,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                       height: 2,
                       color: Colors.deepPurpleAccent,
                     ),
-                    onChanged: (String newValue) {
+                    onChanged: (String? newValue) {
                       setState(() {
                         dropdownValue = newValue;
                       });
