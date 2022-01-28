@@ -153,8 +153,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                         builder: (BuildContext context) {
                           if (engagement.active == 0) {
                             return AlertDialog(
-                              title: const Text("This engagement isn't active")
-                            );
+                                title:
+                                    const Text("This engagement isn't active"));
                           }
                           return AlertDialog(
                             title: const Text("Delete Order?"),
@@ -199,122 +199,6 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       floatingActionButton: floatAccButton(engagement),
       bottomNavigationBar: RU_BottomNavBar(goBack: '/'),
     );
-  }
-
-  _chooseOrderType(context) {
-    final Engagement engagement =
-        ModalRoute.of(context)!.settings.arguments as Engagement;
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("What type of order"),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                      child: Text('Basic Order'),
-                      color: Colors.red,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => _createOrder(context)),
-                        );
-                        //TODO
-                        ////onPressed: () => _createOrder(context).then((value) => setState(() {})),
-                      },
-                    ),
-                    FlatButton(
-                      child: Text('Structure Protection'),
-                      color: Colors.red,
-                      onPressed: () {
-                        //TODO
-                        //onPressed: () => _createStructureProtection(context).then((value) => setState(() {})),
-                      },
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-        });
-  }
-
-  _createStructureProtection(context) {
-    final Engagement engagement =
-        ModalRoute.of(context)!.settings.arguments as Engagement;
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              title: Text('Create a Structure Protection Order'),
-              content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    TextField(
-                      autofocus: true,
-                      controller: acreageCon,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Enter Acreage',
-                        border: const OutlineInputBorder(),
-                        errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                        hintText: 'Acreage',
-                      ),
-                    ),
-                    TextField(
-                      autofocus: true,
-                      controller: acreageCon,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Amount of Structures',
-                        border: const OutlineInputBorder(),
-                        errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                        hintText: 'Structures',
-                      ),
-                    ),
-                    OutlineButton(
-                      child: Text('cancel'),
-                      onPressed: () {
-                        acreageCon.clear();
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    OutlineButton(
-                      child: Text('Calculate Estimate'),
-                      onPressed: () {
-                        setState(() {
-                          acreageCon.text.isEmpty
-                              ? _validate = true
-                              : _validate = false;
-                          _acreage = acreageCon.text;
-                        });
-
-                        var estimate = new Estimate(
-                            acres: int.parse(_acreage),
-                            timeStamp: TimeFormat.currentTime);
-                        estimate.initialLineCalculation();
-                        acreageCon.clear();
-                        _acreage.isNotEmpty
-                            ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    //TODO once this is working, reroute to ModifyEstimateProtectionScreen
-                                    builder: (context) => ModifyEstimateScreen(
-                                          estimate: estimate,
-                                          engagement: engagement,
-                                        )),
-                              )
-                            : ArgumentError.notNull('Value Can\'t Be Empty');
-                      },
-                    )
-                  ]));
-        });
   }
 
   _createOrder(context) {
@@ -441,9 +325,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       return null;
     }
     return FloatingActionButton(
-      //onPressed: () => _createOrder(context).then((value) => setState(() {})),
-      onPressed: () =>
-          _chooseOrderType(context).then((value) => setState(() {})),
+      onPressed: () => _createOrder(context).then((value) => setState(() {})),
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
