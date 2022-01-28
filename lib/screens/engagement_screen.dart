@@ -218,6 +218,17 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                     controller: acreageCon,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
+                      labelText: 'Structures',
+                      border: const OutlineInputBorder(),
+                      errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                      hintText: 'Structures',
+                    ),
+                  ),
+                  TextField(
+                    autofocus: true,
+                    controller: acreageCon,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
                       labelText: 'Enter Acreage',
                       border: const OutlineInputBorder(),
                       errorText: _validate ? 'Value Can\'t Be Empty' : null,
