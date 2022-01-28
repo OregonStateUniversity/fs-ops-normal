@@ -215,6 +215,11 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                       child: Text('Basic Order'),
                       color: Colors.red,
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => _createOrder(context)),
+                        );
                         //TODO
                         ////onPressed: () => _createOrder(context).then((value) => setState(() {})),
                       },
