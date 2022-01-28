@@ -8,7 +8,7 @@ void main() {
 
     test('constructor with empty order list', () {
       //Arrange
-      List<Estimate> estimates = new List<Estimate>();
+      List<Estimate> estimates = <Estimate>[];
 
       //Act
       Engagement engagement = new Engagement("Test", "Time", 15, "Sqaure", "Timber", estimates, 1);
@@ -25,7 +25,7 @@ void main() {
 
     test('constructor with orders in list', () {
       //Arrange
-      List<Estimate> estimates = new List<Estimate>();
+      List<Estimate> estimates = <Estimate>[];
       Estimate estimate = new Estimate();
       estimate.acres = 1;
       estimates.add(estimate);

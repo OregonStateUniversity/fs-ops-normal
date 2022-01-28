@@ -19,7 +19,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Engagement engagement = ModalRoute.of(context).settings.arguments;
+    final Engagement? engagement = ModalRoute.of(context)!.settings.arguments as Engagement?;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

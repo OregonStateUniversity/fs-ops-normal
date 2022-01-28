@@ -11,11 +11,11 @@ import 'estimate_screen.dart';
 import 'package:hose_jockey/database_helper.dart';
 
 class OrderFields {
-  int acres;
-  int trunkLineLength;
-  int latLineLength;
-  int toyLineLength;
-  int fittingsField;
+  int? trunkLineLength;
+  int? latLineLength;
+  int? acres;
+  int? toyLineLength;
+  int? fittingsField;
 }
 
 class ModifyEstimateScreen extends StatefulWidget {

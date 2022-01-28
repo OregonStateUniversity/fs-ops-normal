@@ -111,7 +111,7 @@ class SideDrawerState extends State<SideDrawer> {
             ),
           ],
         ),
-        onTap: onTap
+        onTap: onTap as void Function()?
     );
   }
 
