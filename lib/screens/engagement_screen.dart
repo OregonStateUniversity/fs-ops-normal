@@ -218,10 +218,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                     controller: acreageCon,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Structures',
+                      labelText: 'Enter Acreage',
                       border: const OutlineInputBorder(),
                       errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                      hintText: 'Structures',
+                      hintText: 'Acreage',
                     ),
                   ),
                   TextField(
@@ -229,10 +229,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                     controller: acreageCon,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Enter Acreage',
+                      labelText: 'Structures',
                       border: const OutlineInputBorder(),
                       errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                      hintText: 'Acreage',
+                      hintText: 'Structures',
                     ),
                   ),
                   DropdownButton<String>(
