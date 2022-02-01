@@ -8,7 +8,6 @@ class Estimate {
   String? shape;
   String? type;
   int? structures;
-
   int? _trunkLineLength;
   int? _latLineLength;
   int? _toyLineLength;
