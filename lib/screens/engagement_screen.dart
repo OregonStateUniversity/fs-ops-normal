@@ -8,7 +8,7 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 
 String? dropdownValue = 'Timber';
-String dropdownValue2 = 'Shape';
+String? dropdownValue2 = 'Shape';
 
 class SelectedEngagement extends StatefulWidget {
   static const routeName = 'engagement';
