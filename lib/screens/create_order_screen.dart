@@ -7,10 +7,10 @@ import '../models/engagement.dart';
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimate';
 
-  _NewEstimateScreenState createState() => _NewEstimateScreenState();
+  _NewOrderScreenState createState() => _NewOrderScreenState();
 }
 
-class _NewEstimateScreenState extends State<NewEstimateScreen> {
+class _NewOrderScreenState extends State<NewOrderScreen> {
   var _acreage = '0';
   bool _validate = false;
   final acreageCon = new TextEditingController();
