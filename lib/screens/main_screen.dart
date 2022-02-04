@@ -285,11 +285,11 @@ class MainScreenState extends State<MainScreen> {
               ? Text("Delete Engagement")
               : Text("Unarchive"),
       actions: [
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(true),
           child: Text("Yes"),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(false),
           child: const Text("No"),
         )
@@ -313,14 +313,14 @@ class MainScreenState extends State<MainScreen> {
                 ),
               ),
               actions: <Widget>[
-                OutlineButton(
+                OutlinedButton(
                   child: Text('cancel'),
                   onPressed: () {
                     engagementCtrl.clear();
                     Navigator.of(context).pop();
                   },
                 ),
-                OutlineButton(
+                OutlinedButton(
                   key: Key('create engagement'),
                   child: Text('Create'),
                   onPressed: () async {
