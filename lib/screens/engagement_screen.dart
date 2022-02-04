@@ -227,14 +227,14 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                 ],
               ),
               actions: <Widget>[
-                OutlineButton(
+                OutlinedButton(
                   child: Text('cancel'),
                   onPressed: () {
                     acreageCon.clear();
                     Navigator.of(context).pop();
                   },
                 ),
-                OutlineButton(
+                OutlinedButton(
                   child: Text('Calculate Estimate'),
                   onPressed: () {
                     setState(() {
