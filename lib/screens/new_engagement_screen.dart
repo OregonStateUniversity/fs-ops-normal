@@ -54,7 +54,7 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
               ),
             ),
 
-            OutlineButton(
+            OutlinedButton(
               child: Text('cancel'),
               onPressed: () {
                 Navigator.push(
@@ -63,10 +63,9 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
                 );
               },
             ),
-            OutlineButton(
+            OutlinedButton(
               child: Text('Create'),
               onPressed: () {
-                
                 _key.currentState!.setEngagement(Engagement(
                   engagementCtrl.text,
                   '10-23-20',
