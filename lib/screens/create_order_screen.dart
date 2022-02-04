@@ -38,6 +38,16 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 hintText: 'Acreage',
               ),
             ),
+            Text('Enter Strcutures'),
+            TextField(
+              autofocus: true,
+              controller: acreageCon,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                hintText: 'Structures',
+              ),
+            ),
             OutlineButton(
               onPressed: () {
                 setState(() {
