@@ -48,7 +48,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 hintText: 'Structures',
               ),
             ),
-            OutlineButton(
+            OutlinedButton(
               onPressed: () {
                 setState(() {
                   acreageCon.text.isEmpty
