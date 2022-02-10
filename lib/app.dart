@@ -8,18 +8,21 @@ import 'screens/modify_estimate_screen.dart';
 import 'screens/engagement_screen.dart';
 import 'screens/about_screen.dart';
 import 'screens/how_to_screen.dart';
+import 'screens/create_order_screen.dart';
 
 class App extends StatelessWidget {
-
   static final routes = {
     MainScreen.routeName: (context) => MainScreen(),
-    SelectedEngagement.routeName: (BuildContext context) => SelectedEngagement(),
+    SelectedEngagement.routeName: (BuildContext context) =>
+        SelectedEngagement(),
     CreateNewEngagement.routeName: (context) => CreateNewEngagement(),
     NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
     EstimateScreen.routeName: (context) => EstimateScreen(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
     HowTo.routeName: (context) => HowTo(),
+    // Apparently flutter thinks this key is equal to another. Its simply not.
+    CreateOrderScreen.routeName: (context) => CreateOrderScreen(),
   };
 
   @override

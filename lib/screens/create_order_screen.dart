@@ -4,13 +4,13 @@ import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 
-class NewEstimateScreen extends StatefulWidget {
+class CreateOrderScreen extends StatefulWidget {
   static const routeName = 'newEstimate';
 
-  _NewOrderScreenState createState() => _NewOrderScreenState();
+  _CreateOrderScreenState createState() => _CreateOrderScreenState();
 }
 
-class _NewOrderScreenState extends State<NewOrderScreen> {
+class _CreateOrderScreenState extends State<CreateOrderScreen> {
   var _acreage = '0';
   bool _validate = false;
   final acreageCon = new TextEditingController();
