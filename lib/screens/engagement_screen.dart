@@ -274,8 +274,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     }
     return FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, CreateOrderScreen.routeName,
-            arguments: orders[index]);
+        Navigator.pushNamed(context, '/CreateOrderScreen');
       },
       tooltip: 'New Order',
       child: Icon(Icons.add),
