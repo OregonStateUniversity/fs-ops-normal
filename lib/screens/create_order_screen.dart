@@ -5,7 +5,7 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 
 class NewEstimateScreen extends StatefulWidget {
-  static const routeName = 'newEstimate';
+  static const routeName = 'newOrder';
 
   _NewOrderScreenState createState() => _NewOrderScreenState();
 }
