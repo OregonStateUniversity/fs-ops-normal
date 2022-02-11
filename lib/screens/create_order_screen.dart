@@ -14,17 +14,20 @@ class CreateOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Order Screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SelectedEngagement.routeName);
-          },
-          child: const Text('Go back!'),
+        appBar: AppBar(
+          title: const Text('Create Order Screen'),
         ),
-      ),
-    );
+        body: ListView(
+          children: <Widget>[TextField()],
+        )
+        // Center(
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, SelectedEngagement.routeName);
+        //     },
+        //     child: const Text('Go back!'),
+        //   ),
+        // ),
+        );
   }
 }
