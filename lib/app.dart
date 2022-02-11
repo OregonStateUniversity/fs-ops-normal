@@ -18,14 +18,14 @@ class App extends StatelessWidget {
     SelectedEngagement.routeName: (BuildContext context) =>
         SelectedEngagement(),
     CreateNewEngagement.routeName: (context) => CreateNewEngagement(),
-    NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
+    CreateOrderScreen.routeName: (context) => CreateOrderScreen(),
+    //NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
     EstimateScreen.routeName: (context) => EstimateScreen(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
-    CreateOrderScreen.routeName: (context) => CreateOrderScreen(),
-    HowTo.routeName: (context) => HowTo(),
+    // HowTo.routeName: (context) => HowTo(),
     // Apparently flutter thinks this key is equal to another. Its simply not.
-    '/createOrderScreen': (context) => CreateOrderScreen(),
+    //'/createOrderScreen': (context) => CreateOrderScreen(),
   };
 
   @override
