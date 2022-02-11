@@ -11,6 +11,9 @@ class CreateOrderScreen extends StatelessWidget {
 
   static const routeName = 'createOrderScreen';
   static const title = "CreateOrderScreen";
+
+  final bool _acreageInputIsValid = true;
+  //after we encapsulate into a different class, this will need to change from 'final'
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +24,12 @@ class CreateOrderScreen extends StatelessWidget {
           children: <Widget>[
             Padding(padding: const EdgeInsets.all(10)),
             TextField(
-              controller: null,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Enter acreage'),
-            )
+                controller: null,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: 'Enter acreage',
+                    errorText: _acreageInputIsValid ? null : 'error',
+                    border: const OutlineInputBorder()))
           ],
         )
         // Center(
