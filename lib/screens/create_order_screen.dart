@@ -5,6 +5,7 @@ import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import 'engagement_screen.dart';
+import 'main_screen.dart';
 
 class CreateOrderScreen extends StatelessWidget {
   const CreateOrderScreen({Key? key}) : super(key: key);
@@ -39,7 +40,15 @@ class CreateOrderScreen extends StatelessWidget {
                     labelText: 'Enter Structures',
                     errorText: _structureInputIsValid ? null : 'error',
                     border: const OutlineInputBorder())),
-            OutlinedButton(onPressed: () {}, child: Text("Create Order"))
+            OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ModifyEstimateScreen()),
+                  );
+                },
+                child: Text("Create Order"))
           ],
         ));
   }
