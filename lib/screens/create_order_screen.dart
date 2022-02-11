@@ -18,7 +18,14 @@ class CreateOrderScreen extends StatelessWidget {
           title: const Text('Create Order Screen'),
         ),
         body: ListView(
-          children: <Widget>[TextField()],
+          children: <Widget>[
+            Padding(padding: const EdgeInsets.all(10)),
+            TextField(
+              controller: null,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Enter acreage'),
+            )
+          ],
         )
         // Center(
         //   child: ElevatedButton(
