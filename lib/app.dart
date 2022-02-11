@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:hose_jockey/screens/handbookpdf_screen.dart';
 import 'screens/main_screen.dart';
@@ -24,7 +22,6 @@ class App extends StatelessWidget {
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
     HowTo.routeName: (context) => HowTo(),
-    CreateOrderScreen.routeName: (context) => CreateOrderScreen(),
   };
 
   @override
