@@ -6,6 +6,7 @@ import 'estimate_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
+import 'create_order_screen.dart';
 
 String? dropdownValue = 'Timber';
 String? dropdownValue2 = 'Shape';
@@ -201,6 +202,8 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     );
   }
 
+  // This should be changed to sending the app the the new create order screen.
+  // Right now it uses an alert dialog.
   _createOrder(context) {
     final Engagement? engagement =
         ModalRoute.of(context)!.settings.arguments as Engagement?;
@@ -270,7 +273,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
       return null;
     }
     return FloatingActionButton(
-      onPressed: () => _createOrder(context).then((value) => setState(() {})),
+      onPressed: () {},
       tooltip: 'New Order',
       child: Icon(Icons.add),
     );
