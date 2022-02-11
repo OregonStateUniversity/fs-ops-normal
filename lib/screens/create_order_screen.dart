@@ -39,6 +39,7 @@ class CreateOrderScreen extends StatelessWidget {
                     labelText: 'Enter Structures',
                     errorText: _structureInputIsValid ? null : 'error',
                     border: const OutlineInputBorder())),
+            OutlinedButton(onPressed: () {}, child: Text("Create Order"))
           ],
         ));
   }
