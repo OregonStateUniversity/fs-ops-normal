@@ -8,7 +8,7 @@ class Engagement {
   final int? size;
   final String? shape;
   final String? type;
-  final List<Estimate> orders;
+  final List<Estimate>? orders;
 
   Engagement(this.name, this.timeStamp, this.size, this.shape, this.type,
       this.orders, this.active,

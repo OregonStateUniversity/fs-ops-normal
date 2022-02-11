@@ -21,8 +21,7 @@ class App extends StatelessWidget {
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
     HowTo.routeName: (context) => HowTo(),
-    // Apparently flutter thinks this key is equal to another. Its simply not.
-    '/createOrderScreen': (context) => CreateOrderScreen(),
+    CreateOrderScreen.routeName: (context) => CreateOrderScreen(),
   };
 
   @override

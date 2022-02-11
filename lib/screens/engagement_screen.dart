@@ -26,10 +26,10 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
 
   @override
   Widget build(BuildContext context) {
-    final Engagement engagement =
-        ModalRoute.of(context)!.settings.arguments as Engagement;
-    final List<Estimate> argOrders = engagement.orders;
-    List<Estimate> orders = argOrders;
+    final Engagement? engagement =
+        ModalRoute.of(context)!.settings.arguments as Engagement?;
+    final List<Estimate>? argOrders = engagement!.orders;
+    List<Estimate> orders = argOrders!;
     if (orders.isEmpty) {
       return Scaffold(
         appBar: AppBar(
@@ -124,7 +124,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(engagement.orders[index].timeStamp!),
+                  key: Key(engagement.orders![index].timeStamp!),
                   background: Stack(
                     children: [
                       Container(
@@ -177,7 +177,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
                   },
                   onDismissed: (direction) async {
                     DatabaseHelper.deleteOrder(
-                        engagement, engagement.orders[index]);
+                        engagement, engagement.orders![index]);
                     setState(() {
                       orders.removeAt(index);
                     });
@@ -274,7 +274,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
     }
     return FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, '/CreateOrderScreen');
+        Navigator.pushNamed(context, CreateOrderScreen.routeName);
       },
       tooltip: 'New Order',
       child: Icon(Icons.add),
