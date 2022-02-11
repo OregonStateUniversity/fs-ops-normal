@@ -10,7 +10,7 @@ class CreateOrderScreen extends StatelessWidget {
   const CreateOrderScreen({Key? key}) : super(key: key);
 
   static const routeName = 'createOrderScreen';
-
+  static const title = "CreateOrderScreen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
