@@ -33,7 +33,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    orderField.acres = widget.estimate!.acres;
+    orderField.acres = widget.estimate?.acres;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -66,7 +66,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                         var finalEstimate = new Estimate.loadSavedEstimate(
                             newNum,
                             orderField.acres,
-                            widget.estimate!.timeStamp,
+                            widget.estimate?.timeStamp,
                             orderField.trunkLineLength,
                             orderField.latLineLength,
                             orderField.toyLineLength,
@@ -100,7 +100,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate!.trunkLineLength.toString(),
+            initialValue: widget.estimate?.trunkLineLength.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -134,7 +134,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate!.latLineLength.toString(),
+            initialValue: widget.estimate?.latLineLength.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -171,7 +171,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate!.toyLineLength.toString(),
+            initialValue: widget.estimate?.toyLineLength.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
@@ -205,7 +205,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         Flexible(
           flex: 2,
           child: TextFormField(
-            initialValue: widget.estimate!.fittings.toString(),
+            initialValue: widget.estimate?.fittings.toString(),
             style: TextStyle(
               fontSize: 35.0,
             ),
