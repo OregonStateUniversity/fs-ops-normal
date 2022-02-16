@@ -42,6 +42,10 @@ class CreateOrderScreen extends StatelessWidget {
                     border: const OutlineInputBorder())),
             OutlinedButton(
                 onPressed: () {
+                  var estimate = new Estimate(
+                      acres: int.parse(_acreage),
+                      timeStamp: TimeFormat.currentTime);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
