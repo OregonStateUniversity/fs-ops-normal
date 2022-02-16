@@ -16,6 +16,10 @@ class CreateOrderScreen extends StatelessWidget {
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
   //after we encapsulate into a different class, this will need to change from 'final'
+
+  final _acreage = '5';
+  //this will need to be changed from final as well
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +48,7 @@ class CreateOrderScreen extends StatelessWidget {
                 onPressed: () {
                   var estimate = new Estimate(
                       acres: int.parse(_acreage),
+                      //this is hardcoded to 5 until we encapsulate and can have non final variables
                       timeStamp: TimeFormat.currentTime);
 
                   Navigator.push(
