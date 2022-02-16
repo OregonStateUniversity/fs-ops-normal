@@ -46,6 +46,7 @@ class MainScreenState extends State<MainScreen> {
           record['acres'],
           record['shape'],
           record['type'],
+          record['structuers'],
           loadOrders(record['orders']),
           record['active'],
           record['id'],
@@ -78,7 +79,7 @@ class MainScreenState extends State<MainScreen> {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {
         dto = Engagement(
-            newName, TimeFormat.currentTime, 250, 'Square', 'Timber', [], 1);
+            newName, TimeFormat.currentTime, 250, 'Square', 'Timber', 0, [], 1);
       });
       engagementCtrl.clear();
     }

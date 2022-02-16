@@ -72,6 +72,7 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
                   int.parse(acreageCtrl.text),
                   'Sqaure',
                   'Timber',
+                  0,
                   [],
                   1,
                 ));
