@@ -50,12 +50,17 @@ class CreateOrderScreen extends StatelessWidget {
                       acres: int.parse(_acreage),
                       //this is hardcoded to 5 until we encapsulate and can have non final variables
                       timeStamp: TimeFormat.currentTime);
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ModifyEstimateScreen()),
-                  );
+                  estimate.initialLineCalculation();
+                  _acreage.isNotEmpty
+                      ? Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ModifyEstimateScreen(
+                                    estimate: estimate,
+                                    engagement: engagement,
+                                  )),
+                        )
+                      : ArgumentError.notNull('Value Can\'t Be Empty');
                 },
                 child: Text("Create Order"))
           ],
