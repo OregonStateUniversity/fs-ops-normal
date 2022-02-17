@@ -13,7 +13,7 @@ class Estimate {
   int? _toyLineLength;
   int? _fittings;
 
-  Estimate({this.name = -1, this.acres, this.timeStamp});
+  Estimate({this.name = -1, this.acres, this.timeStamp, this.structures});
 
   Estimate.jsonConvF(
       name, acres, shape, type, structures, timeStamp, trunk, lat, toy,

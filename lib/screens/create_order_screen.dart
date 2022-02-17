@@ -49,7 +49,7 @@ class CreateOrderScreen extends StatelessWidget {
                 onPressed: () {
                   var estimate = new Estimate(
                       acres: int.parse(_acreage),
-                      //structures: int.parse(_structures),
+                      structures: int.parse(_structures),
                       //this is hardcoded to 5 until we encapsulate and can have non final variables
                       timeStamp: TimeFormat.currentTime);
                   estimate.initialLineCalculation();
