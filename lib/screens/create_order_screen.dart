@@ -18,6 +18,7 @@ class CreateOrderScreen extends StatelessWidget {
   //after we encapsulate into a different class, this will need to change from 'final'
 
   final _acreage = '5';
+  final _structures = '5';
   //this will need to be changed from final as well
 
   @override
@@ -48,6 +49,7 @@ class CreateOrderScreen extends StatelessWidget {
                 onPressed: () {
                   var estimate = new Estimate(
                       acres: int.parse(_acreage),
+                      //structures: int.parse(_structures),
                       //this is hardcoded to 5 until we encapsulate and can have non final variables
                       timeStamp: TimeFormat.currentTime);
                   estimate.initialLineCalculation();
@@ -57,7 +59,7 @@ class CreateOrderScreen extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => ModifyEstimateScreen(
                                     estimate: estimate,
-                                    engagement: engagement,
+                                    // engagement: engagement,
                                   )),
                         )
                       : ArgumentError.notNull('Value Can\'t Be Empty');
