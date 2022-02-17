@@ -30,11 +30,13 @@ class Estimate {
     _fittings = fittings;
   }
 
-  Estimate.loadSavedEstimate(name, acres, timeStamp, trunk, lat, toy,
+  Estimate.loadSavedEstimate(
+      name, acres, timeStamp, structures, trunk, lat, toy,
       [fittings = 0]) {
     this.name = name;
     this.acres = acres;
     this.timeStamp = timeStamp;
+    this.structures = structures;
     _trunkLineLength = trunk;
     _latLineLength = lat;
     _toyLineLength = toy;
