@@ -37,35 +37,31 @@ class MainScreenState extends State<MainScreen> {
 
   void loadEngagements() async {
     List<Map> engagementRecords = await DatabaseHelper.getAllEngagements();
-    if (engagementRecords != null) {
-      final engagementEntries = engagementRecords.map((record) {
-        print("active: ${record['active']}");
-        return Engagement(
-          record['name'],
-          record['timeStamp'],
-          record['acres'],
-          record['shape'],
-          record['type'],
-          record['structuers'],
-          loadOrders(record['orders']),
-          record['active'],
-          record['id'],
-        );
-      }).toList();
-      setState(() {
-        active == true
-            ? engagements = engagementEntries.reversed
-                .toList()
-                .where((a) => a.active == 1)
-                .toList()
-            : engagements = engagementEntries.reversed
-                .toList()
-                .where((a) => a.active == 0)
-                .toList();
-      });
-    } else {
-      engagements = <Engagement>[];
-    }
+    final engagementEntries = engagementRecords.map((record) {
+      print("active: ${record['active']}");
+      return Engagement(
+        record['name'],
+        record['timeStamp'],
+        record['acres'],
+        record['shape'],
+        record['type'],
+        record['structuers'],
+        loadOrders(record['orders']),
+        record['active'],
+        record['id'],
+      );
+    }).toList();
+    setState(() {
+      active == true
+          ? engagements = engagementEntries.reversed
+              .toList()
+              .where((a) => a.active == 1)
+              .toList()
+          : engagements = engagementEntries.reversed
+              .toList()
+              .where((a) => a.active == 0)
+              .toList();
+    });
   }
 
   List<Estimate> loadOrders(string) {
