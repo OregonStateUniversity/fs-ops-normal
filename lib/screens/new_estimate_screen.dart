@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hose_jockey/time_format.dart';
+import '../utils/time_format.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';

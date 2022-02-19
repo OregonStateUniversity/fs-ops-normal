@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hose_jockey/time_format.dart';
+import 'package:hose_jockey/utils/time_format.dart';
 
 void main() {
   group('Time', () {

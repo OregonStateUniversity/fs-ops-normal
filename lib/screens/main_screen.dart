@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
-import 'package:hose_jockey/time_format.dart';
+import '../utils/time_format.dart';
 import 'dart:convert';
 import 'engagement_screen.dart';
 import '../models/estimate.dart';
