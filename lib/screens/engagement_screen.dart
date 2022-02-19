@@ -8,9 +8,6 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 import 'create_order_screen.dart';
 
-String? dropdownValue = 'Timber';
-String? dropdownValue2 = 'Shape';
-
 class SelectedEngagement extends StatefulWidget {
   static const routeName = 'engagement';
 
@@ -19,8 +16,6 @@ class SelectedEngagement extends StatefulWidget {
 
 class _SelectedEngagementState extends State<SelectedEngagement> {
   var _acreage = '0';
-  var _shape = 'Sqaure';
-  var _type = 'Timber';
   bool _validate = false;
   final acreageCon = new TextEditingController();
 
