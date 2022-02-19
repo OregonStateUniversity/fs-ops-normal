@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hose_jockey/app.dart';
-import 'package:hose_jockey/app.dart';
 import 'package:hose_jockey/screens/main_screen.dart';
 
 void main() {
-
-  Widget createWidgetForTesting({Widget? child}){
+  Widget createWidgetForTesting({Widget? child}) {
     return MaterialApp(
       home: child,
     );
   }
 
   testWidgets('main_screen with no engagements', (WidgetTester tester) async {
-
-    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()) );
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()));
     await tester.pumpAndSettle(const Duration(seconds: 5));
     expect(find.text('Ops Normal'), findsOneWidget);
     expect(find.text('No Engagements Created Yet'), findsOneWidget);
@@ -23,8 +19,7 @@ void main() {
   });
 
   testWidgets('main_screen add engagement', (WidgetTester tester) async {
-
-    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()) );
+    await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FloatingActionButton));
     await tester.pumpAndSettle();
@@ -41,7 +36,7 @@ void main() {
     expect(find.text('Archive'), findsOneWidget);
   });
 
-  testWidgets('main_screen delete engagement', (WidgetTester tester) async{
+  testWidgets('main_screen delete engagement', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new MainScreen()));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FloatingActionButton));
@@ -50,7 +45,5 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text("Create"));
     await tester.pumpAndSettle();
-
-
   });
 }
