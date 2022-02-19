@@ -19,7 +19,7 @@ class DatabaseHelper {
     _database = await openDatabase('engagements.db', version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);');
+          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, shape TEXT NOT NULL, type TEXT NOT NULL, structures INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);');
     });
 
     return _database!;
@@ -41,8 +41,17 @@ class DatabaseHelper {
 
     await db!.transaction((txn) async {
       await txn.rawInsert(
-          'INSERT INTO engagements(name, timeStamp, acres, active, orders) VALUES(?, ?, ?, ?, ?)',
-          [dto.name, dto.timeStamp, dto.size, 1, "[]"]);
+          'INSERT INTO engagements(name, timeStamp, acres, shape, type, structures, active, orders) VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
+          [
+            dto.name,
+            dto.timeStamp,
+            dto.size,
+            dto.shape,
+            dto.type,
+            dto.structures,
+            1,
+            "[]"
+          ]);
     });
   }
 
@@ -64,7 +73,8 @@ class DatabaseHelper {
   }
 
   static Future<void> unarchiveEngagement(index) async {
-    final Database? db = await getDBConnector();;
+    final Database? db = await getDBConnector();
+    ;
 
     await db!.transaction((txn) async {
       await txn

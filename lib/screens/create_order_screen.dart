@@ -13,6 +13,8 @@ class CreateOrderScreen extends StatelessWidget {
   static const routeName = 'createOrderScreen';
   static const title = "CreateOrderScreen";
 
+  // final acreageCon = new TextEditingController();
+
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
   //after we encapsulate into a different class, this will need to change from 'final'
@@ -45,6 +47,21 @@ class CreateOrderScreen extends StatelessWidget {
                     labelText: 'Enter Structures',
                     errorText: _structureInputIsValid ? null : 'error',
                     border: const OutlineInputBorder())),
+            // Place holders for fire type and shape fields below 
+            // TextField(
+            //     controller: null,
+            //     keyboardType: TextInputType.number,
+            //     decoration: InputDecoration(
+            //         labelText: 'Choose Fire Shape',
+            //         errorText: _structureInputIsValid ? null : 'error',
+            //         border: const OutlineInputBorder())),
+            // TextField(
+            //     controller: null,
+            //     keyboardType: TextInputType.number,
+            //     decoration: InputDecoration(
+            //         labelText: 'Enter Fire Type',
+            //         errorText: _structureInputIsValid ? null : 'error',
+            //         border: const OutlineInputBorder())),
             OutlinedButton(
                 onPressed: () {
                   var estimate = new Estimate(
