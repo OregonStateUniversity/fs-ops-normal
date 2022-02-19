@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
-import '../widgets/ru_bottom_nav_bar.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class OpenPdfRedBook extends StatelessWidget {
   static const title = "PDF";
@@ -48,9 +48,7 @@ class OpenPdfRedBook extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: RU_BottomNavBar(
-        goBack: '/',
-      ),
+      bottomNavigationBar: BottomNavBar(goBack: '/'),
     );
   }
 

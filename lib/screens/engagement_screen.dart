@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/time_format.dart';
 import '../persistence/database_helper.dart';
-import '../widgets/ru_bottom_nav_bar.dart';
+import '../widgets/bottom_nav_bar.dart';
 import 'estimate_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
@@ -56,7 +56,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: floatAccButton(engagement),
-        bottomNavigationBar: RU_BottomNavBar(goBack: '/'),
+        bottomNavigationBar: BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
@@ -193,7 +193,7 @@ class _SelectedEngagementState extends State<SelectedEngagement> {
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatAccButton(engagement),
-      bottomNavigationBar: RU_BottomNavBar(goBack: '/'),
+      bottomNavigationBar: BottomNavBar(goBack: '/'),
     );
   }
 

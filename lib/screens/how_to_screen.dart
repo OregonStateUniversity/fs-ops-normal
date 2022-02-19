@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/how_to_instructions_strings.dart';
-import '../widgets/ru_bottom_nav_bar.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class HowTo extends StatelessWidget {
   static const routeName = 'howto';
@@ -44,7 +44,7 @@ class HowTo extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: RU_BottomNavBar(goBack: '/'),
+      bottomNavigationBar: BottomNavBar(goBack: '/'),
     );
   }
 
