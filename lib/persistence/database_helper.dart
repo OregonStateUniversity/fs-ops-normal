@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 
-// https://www.youtube.com/watch?v=GZfFRv9VWtU
-
 class DatabaseHelper {
   static Database? _database;
 
@@ -11,7 +9,6 @@ class DatabaseHelper {
     if (_database != null) {
       return _database;
     }
-
     return await _initDatabase();
   }
 
@@ -21,7 +18,6 @@ class DatabaseHelper {
       await db.execute(
           'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, shape TEXT NOT NULL, type TEXT NOT NULL, structures INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);');
     });
-
     return _database!;
   }
 
@@ -31,14 +27,13 @@ class DatabaseHelper {
     return records;
   }
 
-  static Future<void> deleteALLDataFromDatabase() async {
-    print("Database Deleted");
+  static Future<void> deleteDatabaseFile() async {
     await deleteDatabase('engagements.db');
+    print("Database Deleted");
   }
 
   static Future<void> insertEngagement(dto) async {
     final Database? db = await getDBConnector();
-
     await db!.transaction((txn) async {
       await txn.rawInsert(
           'INSERT INTO engagements(name, timeStamp, acres, shape, type, structures, active, orders) VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
@@ -57,7 +52,6 @@ class DatabaseHelper {
 
   static Future<void> deleteEngagement(index) async {
     final Database? db = await getDBConnector();
-
     await db!.transaction((txn) async {
       await txn.rawDelete('DELETE FROM engagements WHERE id = $index');
     });
@@ -65,7 +59,6 @@ class DatabaseHelper {
 
   static Future<void> archiveEngagement(index) async {
     final Database? db = await getDBConnector();
-
     await db!.transaction((txn) async {
       await txn
           .rawUpdate('UPDATE engagements SET active = 0 WHERE id = $index');
@@ -74,8 +67,6 @@ class DatabaseHelper {
 
   static Future<void> unarchiveEngagement(index) async {
     final Database? db = await getDBConnector();
-    ;
-
     await db!.transaction((txn) async {
       await txn
           .rawUpdate('UPDATE engagements SET active = 1 WHERE id = $index');
@@ -102,10 +93,8 @@ class DatabaseHelper {
 
   static Future<void> deleteOrder(eng, order) async {
     final Database? db = await getDBConnector();
-
     eng.orders.toList().remove(order);
     var newOrderList = eng.orders;
-
     await db!.transaction((txn) async {
       String tmp = "'[";
       newOrderList.forEach((value) {
