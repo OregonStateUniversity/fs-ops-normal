@@ -3,7 +3,7 @@ import 'dart:core';
 import 'dart:math';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-import '../Widgets/ru_bottom_nav_bar.dart';
+import '../widgets/ru_bottom_nav_bar.dart';
 import 'estimate_screen.dart';
 import '../persistence/database_helper.dart';
 

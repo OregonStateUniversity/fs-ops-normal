@@ -1,20 +1,19 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
+import 'package:hose_jockey/widgets/bottom_nav_bar.dart';
 
-
-class RU_BottomNavBar extends StatefulWidget{
+class RU_BottomNavBar extends StatefulWidget {
   String goBack;
-  RU_BottomNavBar({Key? key, required this.goBack}) : super(key:key);
+  RU_BottomNavBar({Key? key, required this.goBack}) : super(key: key);
 
   @override
   RU_BottomNavBarState createState() => RU_BottomNavBarState();
 }
 
-class RU_BottomNavBarState extends State<RU_BottomNavBar>{
+class RU_BottomNavBarState extends State<RU_BottomNavBar> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return AnimatedBottomNavigationBar.builder(
       itemCount: iconList.length,
       activeIndex: _bottomNavIndex,
@@ -46,14 +45,15 @@ class RU_BottomNavBarState extends State<RU_BottomNavBar>{
       },
       backgroundColor: (Colors.blueGrey[900]!),
       onTap: (index) {
-        switch(index){
+        switch (index) {
           case 0:
             Navigator.popUntil(context, ModalRoute.withName('/'));
             _onTap(index);
             break;
           case 1:
-              Navigator.popUntil(context, ModalRoute.withName(widget.goBack.toString()));
-              _onTap(index);
+            Navigator.popUntil(
+                context, ModalRoute.withName(widget.goBack.toString()));
+            _onTap(index);
             break;
         }
       },
@@ -70,10 +70,8 @@ class RU_BottomNavBarState extends State<RU_BottomNavBar>{
   ];
 
   void _onTap(int index) {
-    setState((){
+    setState(() {
       _bottomNavIndex = index;
     });
   }
 }
-
-

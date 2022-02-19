@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
-import '../Widgets/ru_bottom_nav_bar.dart';
+import '../widgets/ru_bottom_nav_bar.dart';
 
-class OpenPdfRedBook extends StatelessWidget{
+class OpenPdfRedBook extends StatelessWidget {
   static const title = "PDF";
 
-  var pdfController = PdfController(document: PdfDocument.openAsset('lib/assets/RedBook.pdf'));
+  var pdfController =
+      PdfController(document: PdfDocument.openAsset('lib/assets/RedBook.pdf'));
   final pageController = TextEditingController();
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -23,13 +24,13 @@ class OpenPdfRedBook extends StatelessWidget{
               Padding(
                 padding: EdgeInsets.all(12),
                 child: ElevatedButton(
-                  child: Text("Go To"),
-                  onPressed: () {
-                    pdfController.jumpToPage(int.parse(pageController.text)+22);
-                    FocusScope.of(context).unfocus();
-                    pageController.clear();
-                  }
-                ),
+                    child: Text("Go To"),
+                    onPressed: () {
+                      pdfController
+                          .jumpToPage(int.parse(pageController.text) + 22);
+                      FocusScope.of(context).unfocus();
+                      pageController.clear();
+                    }),
               ),
               Expanded(
                 child: Padding(
@@ -39,20 +40,21 @@ class OpenPdfRedBook extends StatelessWidget{
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         border: UnderlineInputBorder(),
-                        labelText: "Page Number"
-                    ),
+                        labelText: "Page Number"),
                   ),
                 ),
               )
-
             ],
           )
         ],
       ),
-      bottomNavigationBar: RU_BottomNavBar(goBack: '/',),
+      bottomNavigationBar: RU_BottomNavBar(
+        goBack: '/',
+      ),
     );
   }
+
   Widget pdfView() => PdfView(
-    controller: pdfController,
-  );
+        controller: pdfController,
+      );
 }

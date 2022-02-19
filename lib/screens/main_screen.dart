@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:hose_jockey/Widgets/bottom_nav_bar.dart';
+import 'package:hose_jockey/widgets/bottom_nav_bar.dart';
 import '../utils/time_format.dart';
 import 'dart:convert';
 import 'engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
-import '../Widgets/drawer.dart';
+import '../widgets/drawer.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key? key}) : super(key: key);
