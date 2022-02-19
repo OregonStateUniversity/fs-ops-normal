@@ -11,12 +11,12 @@ class Engagement {
   final int? structures;
   final List<Estimate>? orders;
 
-  Engagement(this.name, this.timeStamp, this.size, this.shape, this.type, this.structures,
-      this.orders, this.active,
+  Engagement(this.name, this.timeStamp, this.size, this.shape, this.type,
+      this.structures, this.orders, this.active,
       [this.primaryKey]);
 
   @override
   String toString() {
-    return '{ ${this.name}, ${this.timeStamp}, ${this.size}, ${this.shape}, ${this.type} ${this.structures} }';
+    return '{ ${this.name}, ${this.timeStamp}, Size: ${this.size}, ${this.shape}, ${this.type}, Structures: ${this.structures} }';
   }
 }
