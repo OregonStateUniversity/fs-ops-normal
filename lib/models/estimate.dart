@@ -53,7 +53,6 @@ class Estimate {
   set toyLineLength(int? length) => _toyLineLength;
   set fittings(int? count) => _fittings;
 
-  @override
   String toCopyString() {
     String str = "Trunk Line: ${this.trunkLineLength} ft.\n"
         "Lat Line: ${this.latLineLength} ft.\n"
@@ -70,7 +69,7 @@ class Estimate {
     if (this.acres! >= 10) {
       var mark3s = acres! ~/ 10;
       str += "Folda-tank: ${acres! ~/ 5}\n"
-          "Mark 3 + Kits: ${mark3s}\n"
+          "Mark 3 + Kits: $mark3s\n"
           "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
 
       //Old calculation : "Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
