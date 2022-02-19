@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:hose_jockey/widgets/bottom_nav_bar.dart';
+import '../widgets/bottom_icon.dart';
 import '../utils/time_format.dart';
 import 'dart:convert';
 import 'engagement_screen.dart';
@@ -336,9 +336,9 @@ class MainScreenState extends State<MainScreen> {
   var _bottomNavIndex = 0;
   final autoSizeGroup = AutoSizeGroup();
 
-  List<BottomIcons> iconList = [
-    BottomIcons("Home", Icons.home_filled),
-    BottomIcons("Archive", Icons.archive),
+  List<BottomIcon> iconList = [
+    BottomIcon("Home", Icons.home_filled),
+    BottomIcon("Archive", Icons.archive),
   ];
 
   void _onTap(int index) {

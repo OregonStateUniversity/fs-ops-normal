@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:hose_jockey/widgets/bottom_nav_bar.dart';
+import 'bottom_icon.dart';
 
 class RU_BottomNavBar extends StatefulWidget {
   String goBack;
@@ -64,9 +64,9 @@ class RU_BottomNavBarState extends State<RU_BottomNavBar> {
   var _bottomNavIndex = 3;
   final autoSizeGroup = AutoSizeGroup();
 
-  List<BottomIcons> iconList = [
-    BottomIcons("Home", Icons.home_filled),
-    BottomIcons("Back", Icons.arrow_back),
+  List<BottomIcon> iconList = [
+    BottomIcon("Home", Icons.home_filled),
+    BottomIcon("Back", Icons.arrow_back),
   ];
 
   void _onTap(int index) {
