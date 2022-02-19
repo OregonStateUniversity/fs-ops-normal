@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hose_jockey/dark_theme_provider.dart';
+import '../theme/dark_theme_provider.dart';
 
 class SwitchListItem extends StatefulWidget {
   SwitchListItem({
