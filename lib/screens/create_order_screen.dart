@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hose_jockey/screens/engagement_screen.dart';
-import '../utils/time_format.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
-import '../models/engagement.dart';
-import 'engagement_screen.dart';
-import 'main_screen.dart';
+import '../utils/time_format.dart';
 
 class CreateOrderScreen extends StatelessWidget {
   const CreateOrderScreen({Key? key}) : super(key: key);
@@ -13,15 +9,11 @@ class CreateOrderScreen extends StatelessWidget {
   static const routeName = 'createOrderScreen';
   static const title = "CreateOrderScreen";
 
-  // final acreageCon = new TextEditingController();
-
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
-  //after we encapsulate into a different class, this will need to change from 'final'
 
   final _acreage = '5';
   final _structures = '5';
-  //this will need to be changed from final as well
 
   @override
   Widget build(BuildContext context) {
@@ -47,27 +39,11 @@ class CreateOrderScreen extends StatelessWidget {
                     labelText: 'Enter Structures',
                     errorText: _structureInputIsValid ? null : 'error',
                     border: const OutlineInputBorder())),
-            // Place holders for fire type and shape fields below
-            // TextField(
-            //     controller: null,
-            //     keyboardType: TextInputType.number,
-            //     decoration: InputDecoration(
-            //         labelText: 'Choose Fire Shape',
-            //         errorText: _structureInputIsValid ? null : 'error',
-            //         border: const OutlineInputBorder())),
-            // TextField(
-            //     controller: null,
-            //     keyboardType: TextInputType.number,
-            //     decoration: InputDecoration(
-            //         labelText: 'Enter Fire Type',
-            //         errorText: _structureInputIsValid ? null : 'error',
-            //         border: const OutlineInputBorder())),
             OutlinedButton(
                 onPressed: () {
                   var estimate = new Estimate(
                       acres: int.parse(_acreage),
                       structures: int.parse(_structures),
-                      //this is hardcoded to 5 until we encapsulate and can have non final variables
                       timeStamp: TimeFormat.currentTime);
                   estimate.initialLineCalculation();
                   _acreage.isNotEmpty
