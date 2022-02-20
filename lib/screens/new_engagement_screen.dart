@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/engagement.dart';
 import 'main_screen.dart';
+import '../models/engagement.dart';
 
 class CreateNewEngagement extends StatefulWidget {
   static const routeName = 'newEngagement';
@@ -29,8 +29,6 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
         body: ListView(
           padding: const EdgeInsets.all(8.0),
           children: <Widget>[
-            //const ListTile(title: Text('Name Fire')),
-            //_buildNameField(),
             TextField(
               controller: engagementCtrl,
               autofocus: true,
@@ -42,14 +40,12 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
               ),
             ),
             const ListTile(title: Text('Set initial acreage')),
-            //_buildAcreageField(),
             TextField(
               controller: acreageCtrl,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Enter acreage:',
-                errorText:
-                    _acreageInputIsValid ? null : 'Please enter a number',
+                errorText: 'Please enter a number',
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -86,43 +82,4 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
           ],
         ));
   }
-}
-
-Widget _buildNameField(context) {
-  return TextField(
-    //controller: engagementCtrl,
-    autofocus: true,
-    textCapitalization: TextCapitalization.words,
-    maxLines: 1,
-    decoration: InputDecoration(
-      labelText: 'Enter fire name:',
-      border: const OutlineInputBorder(),
-    ),
-  );
-}
-
-bool _acreageInputIsValid = true;
-
-Widget _buildAcreageField() {
-  return TextField(
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-      labelText: 'Enter acreage:',
-      errorText: _acreageInputIsValid ? null : 'Please enter a number',
-      border: const OutlineInputBorder(),
-    ),
-  );
-}
-
-Widget _buildShapeField() {
-  return TextField(
-    //controller: engagementCtrl,
-    autofocus: true,
-    textCapitalization: TextCapitalization.words,
-    maxLines: 1,
-    decoration: InputDecoration(
-      labelText: 'Enter fire Shape:',
-      border: const OutlineInputBorder(),
-    ),
-  );
 }
