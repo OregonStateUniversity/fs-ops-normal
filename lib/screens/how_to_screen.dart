@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/how_to_instructions_strings.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class HowTo extends StatelessWidget {
+
   static const routeName = 'howto';
   static const title = "How To Use Ops Normal";
 
@@ -35,7 +35,6 @@ class HowTo extends StatelessWidget {
                       _cardItem(HowToUnarchiveEngagement.title,
                           HowToUnarchiveEngagement.description),
                       Divider(),
-                      //_cardItem(HowToChangeVisualSettings.title,HowToChangeVisualSettings.description),
                     ],
                   ),
                 ),
@@ -62,4 +61,5 @@ class HowTo extends StatelessWidget {
               )),
         ));
   }
+  
 }
