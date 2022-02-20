@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:core';
-import 'dart:math';
+import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-import '../widgets/bottom_nav_bar.dart';
-import 'estimate_screen.dart';
 import '../persistence/database_helper.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class OrderFields {
   int? acres;
@@ -231,15 +229,5 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       ],
     );
   }
-
-  // int checkNamingNumber() { // not the most ideal, will replace later with better solution
-  //   int newNum = 0;
-  //   List<int> listCurNum = [];
-  //   widget.engagement!.orders.forEach((value){
-  //     listCurNum.add((value.name!));
-  //   });
-  //   listCurNum.isEmpty ? newNum = 1 : newNum = listCurNum.reduce(max)! + 1;
-  //   return newNum;
-  // }
 
 }
