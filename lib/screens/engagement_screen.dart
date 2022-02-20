@@ -13,8 +13,7 @@ class SelectedEngagement extends StatefulWidget {
 }
 
 class _SelectedEngagementState extends State<SelectedEngagement> {
-  var _acreage = '0';
-  bool _validate = false;
+
   final acreageCon = new TextEditingController();
 
   @override
