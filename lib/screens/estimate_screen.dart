@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../widgets/bottom_nav_bar.dart';
 import '../models/estimate.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class EstimateScreen extends StatelessWidget {
   static const routeName = 'estimateScreen';
