@@ -1,12 +1,14 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class OpenPdfIRPG extends StatelessWidget {
   static final title = "Pocket Guide";
+  static const file = 'lib/assets/IRPG_2018.pdf';
 
-  final pdfController = PdfController(
-      document: PdfDocument.openAsset('lib/assets/IRPG_2018.pdf'));
+  final pdfController = PdfController(document: PdfDocument.openAsset(file));
   final pageController = TextEditingController();
 
   @override
