@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import '../widgets/bottom_nav_bar.dart';
 
-class OpenPdfRedBook extends StatelessWidget {
+class RedBookScreen extends StatelessWidget {
   static final title = "Red Book";
 
   final pdfController =

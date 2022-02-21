@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/about_screen.dart';
-import '../screens/handbookpdf_screen.dart';
+import '../screens/redbook_screen.dart';
 import '../screens/how_to_screen.dart';
 import '../screens/irpg_handbook_screen.dart';
 
@@ -31,12 +31,12 @@ class SideDrawerState extends State<SideDrawer> {
         children: [
           _drawerHeader(),
           _drawerItem(Icons.question_answer_outlined, "How To Use Ops Normal",
-              () => Navigator.pushNamed(context, HowTo.routeName)),
+              () => Navigator.pushNamed(context, HowToScreen.routeName)),
           _drawerItem(
               Icons.book_outlined,
               "Interagency Standard for Fire\nand Fire Aviation Operations",
               () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OpenPdfRedBook()))),
+                  MaterialPageRoute(builder: (context) => RedBookScreen()))),
           _drawerItem(
             Icons.book_outlined,
             "Incident Response Pocket Guide",
