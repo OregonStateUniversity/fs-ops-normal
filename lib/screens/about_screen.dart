@@ -32,8 +32,8 @@ class AboutScreen extends StatelessWidget {
                   ),
                   Divider(),
                   Text(
-                    "Ops Normal is an application designed for wild land firefighters to "
-                    "quickly estimate the amount of equipment that they will need to fight a fire",
+                    "Ops Normal is an application designed for wildland firefighters to "
+                    "quickly estimate the amount of equipment that they will need to fight a fire.",
                     textAlign: align,
                   ),
                   Divider(),
