@@ -7,6 +7,8 @@ class AboutScreen extends StatelessWidget {
   static const title = "About";
 
   static const TextAlign align = TextAlign.center;
+  static const SOURCE_CODE_URL =
+      "https://github.com/osu-cascades/fs-hose-jockey";
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,8 @@ class AboutScreen extends StatelessWidget {
                     textAlign: align,
                   ),
                   TextButton(
-                      onPressed: () => launch(
-                          'https://github.com/osu-cascades/fs-hose-jockey'),
-                      child: Text(
-                          "https://github.com/osu-cascades/fs-hose-jockey"))
+                      onPressed: () => launch(SOURCE_CODE_URL),
+                      child: Text(SOURCE_CODE_URL))
                 ],
               ),
             ),
