@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/about_screen.dart';
 import '../screens/red_book_screen.dart';
 import '../screens/how_to_screen.dart';
-import '../screens/irpg_handbook_screen.dart';
+import '../screens/incident_response_pocket_guide_screen.dart';
 
 class SideDrawer extends StatefulWidget {
   @override
@@ -40,8 +40,10 @@ class SideDrawerState extends State<SideDrawer> {
           _drawerItem(
             Icons.book_outlined,
             "Incident Response Pocket Guide",
-            () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => OpenPdfIRPG())),
+            () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => IncidentResponsePocketGuideScreen())),
           )
         ],
       ),

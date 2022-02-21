@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import '../widgets/bottom_nav_bar.dart';
 
-class OpenPdfIRPG extends StatelessWidget {
+class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static final title = "Pocket Guide";
   static final file = 'lib/assets/IRPG_2018.pdf';
 
