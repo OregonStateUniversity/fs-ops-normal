@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 
 class TimeFormat {
-  
   static var format = new DateFormat("dd/MM/yyyy HH:mm:ss");
 
   static get currentTime {
@@ -9,5 +8,7 @@ class TimeFormat {
     var date = format.format(now);
     return date;
   }
-  
+
+  //dynamic currentTime = DateFormat.jm().format(DateTime.now());
+  //but it cannot be dynamic
 }
