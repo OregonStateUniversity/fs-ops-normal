@@ -8,7 +8,6 @@ import 'screens/how_to_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/new_engagement_screen.dart';
-//import 'screens/new_estimate_screen.dart';
 
 class App extends StatelessWidget {
   static final routes = {
@@ -19,7 +18,6 @@ class App extends StatelessWidget {
     EstimateScreen.routeName: (context) => EstimateScreen(),
     HowTo.routeName: (context) => HowTo(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
-    //NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
     SelectedEngagement.routeName: (context) => SelectedEngagement(),
   };
 
