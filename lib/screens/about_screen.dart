@@ -27,7 +27,7 @@ class AboutScreen extends StatelessWidget {
                     textAlign: align,
                   ),
                   Text(
-                    "OSU-Cascades Computer Science Final Project",
+                    "U.S. Forest Service",
                     textAlign: align,
                   ),
                   Divider(),
