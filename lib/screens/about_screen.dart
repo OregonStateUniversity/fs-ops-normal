@@ -23,7 +23,7 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Created By Josh C. and Kyle H. for",
+                    "Created By Ian Snyder, Erin O'Connell, Josh C., Kyle H. for",
                     textAlign: align,
                   ),
                   Text(
