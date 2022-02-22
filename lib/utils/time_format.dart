@@ -4,11 +4,6 @@ class TimeFormat {
   static var format = new DateFormat("dd/MM/yyyy HH:mm:ss");
 
   static get currentTime {
-    DateTime now = new DateTime.now();
-    var date = format.format(now);
-    return date;
+    return DateFormat.jm().format(DateTime.now());
   }
-
-  //dynamic currentTime = DateFormat.jm().format(DateTime.now());
-  //but it cannot be dynamic
 }
