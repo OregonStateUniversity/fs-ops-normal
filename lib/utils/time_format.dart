@@ -6,6 +6,6 @@ class TimeFormat {
   static var format = new DateFormat(FULL_DATE_AND_TIME_FORMAT);
 
   static get currentTime {
-    return DateFormat.jm().format(DateTime.now());
+    return format.format(DateTime.now());
   }
 }
