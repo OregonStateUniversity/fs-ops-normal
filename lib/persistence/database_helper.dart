@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  
+
   static Database? _database;
 
   static Future<Database?> getDBConnector() async {
@@ -50,26 +50,26 @@ class DatabaseHelper {
     });
   }
 
-  static Future<void> deleteEngagement(index) async {
+  static Future<void> deleteEngagement(id) async {
     final Database? db = await getDBConnector();
     await db!.transaction((txn) async {
-      await txn.rawDelete('DELETE FROM engagements WHERE id = $index');
+      await txn.rawDelete('DELETE FROM engagements WHERE id = $id');
     });
   }
 
-  static Future<void> archiveEngagement(index) async {
+  static Future<void> archiveEngagement(id) async {
     final Database? db = await getDBConnector();
     await db!.transaction((txn) async {
       await txn
-          .rawUpdate('UPDATE engagements SET active = 0 WHERE id = $index');
+          .rawUpdate('UPDATE engagements SET active = 0 WHERE id = $id');
     });
   }
 
-  static Future<void> unarchiveEngagement(index) async {
+  static Future<void> unarchiveEngagement(id) async {
     final Database? db = await getDBConnector();
     await db!.transaction((txn) async {
       await txn
-          .rawUpdate('UPDATE engagements SET active = 1 WHERE id = $index');
+          .rawUpdate('UPDATE engagements SET active = 1 WHERE id = $id');
     });
   }
 
