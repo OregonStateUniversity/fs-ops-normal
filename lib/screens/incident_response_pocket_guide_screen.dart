@@ -4,9 +4,10 @@ import '../widgets/bottom_nav_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static final title = "Pocket Guide";
-  static final file = 'lib/assets/IRPG_2018.pdf';
+  static final PDF_FILE_NAME = 'lib/assets/IRPG_2018.pdf';
 
-  final pdfController = PdfController(document: PdfDocument.openAsset(file));
+  final pdfController =
+      PdfController(document: PdfDocument.openAsset(PDF_FILE_NAME));
   final pageController = TextEditingController();
 
   @override
