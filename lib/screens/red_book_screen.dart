@@ -3,8 +3,8 @@ import 'package:native_pdf_view/native_pdf_view.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class RedBookScreen extends StatelessWidget {
-  static final title = "Red Book";
-  static final PDF_FILE_NAME = 'lib/assets/RedBook.pdf';
+  static const title = "Red Book";
+  static const PDF_FILE_NAME = 'lib/assets/RedBook.pdf';
 
   final pdfController =
       PdfController(document: PdfDocument.openAsset(PDF_FILE_NAME));
