@@ -3,6 +3,7 @@ import 'package:native_pdf_view/native_pdf_view.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
+  static const routeName = 'pocket guide';
   static const title = "Pocket Guide";
   static const PDF_FILE_NAME = 'lib/assets/IRPG_2018.pdf';
 
