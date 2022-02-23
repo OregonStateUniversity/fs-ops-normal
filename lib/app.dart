@@ -5,6 +5,7 @@ import 'screens/create_order_screen.dart';
 import 'screens/engagement_screen.dart';
 import 'screens/estimate_screen.dart';
 import 'screens/how_to_screen.dart';
+import 'screens/incident_response_pocket_guide_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/new_engagement_screen.dart';
@@ -17,6 +18,8 @@ class App extends StatelessWidget {
     CreateOrderScreen.routeName: (context) => CreateOrderScreen(),
     EstimateScreen.routeName: (context) => EstimateScreen(),
     HowToScreen.routeName: (context) => HowToScreen(),
+    IncidentResponsePocketGuideScreen.routeName: (context) =>
+        IncidentResponsePocketGuideScreen(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     SelectedEngagement.routeName: (context) => SelectedEngagement(),
   };
