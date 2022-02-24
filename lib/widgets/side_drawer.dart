@@ -37,13 +37,10 @@ class SideDrawerState extends State<SideDrawer> {
               "Interagency Standard for Fire\nand Fire Aviation Operations",
               () => Navigator.pushNamed(context, RedBookScreen.routeName)),
           _drawerItem(
-            Icons.book_outlined,
-            "Incident Response Pocket Guide",
-            () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => IncidentResponsePocketGuideScreen())),
-          )
+              Icons.book_outlined,
+              "Incident Response Pocket Guide",
+              () => Navigator.pushNamed(
+                  context, IncidentResponsePocketGuideScreen.routeName)),
         ],
       ),
     );
