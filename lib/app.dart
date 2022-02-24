@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 import 'screens/about_screen.dart';
@@ -9,6 +11,7 @@ import 'screens/incident_response_pocket_guide_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/new_engagement_screen.dart';
+import 'screens/red_book_screen.dart';
 
 class App extends StatelessWidget {
   static final routes = {
@@ -22,6 +25,7 @@ class App extends StatelessWidget {
         IncidentResponsePocketGuideScreen(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
     SelectedEngagement.routeName: (context) => SelectedEngagement(),
+    RedBookScreen.routeName: (context) => RedBookScreen(),
   };
 
   @override
