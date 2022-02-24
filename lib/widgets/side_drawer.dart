@@ -35,8 +35,7 @@ class SideDrawerState extends State<SideDrawer> {
           _drawerItem(
               Icons.book_outlined,
               "Interagency Standard for Fire\nand Fire Aviation Operations",
-              () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RedBookScreen()))),
+              () => Navigator.pushNamed(context, RedBookScreen.routeName)),
           _drawerItem(
             Icons.book_outlined,
             "Incident Response Pocket Guide",
