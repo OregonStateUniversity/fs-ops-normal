@@ -10,7 +10,6 @@ class SideDrawer extends StatefulWidget {
 }
 
 class SideDrawerState extends State<SideDrawer> {
-  static const APP_VERSION = "0.0.0";
   bool state = false;
 
   @override
@@ -56,10 +55,6 @@ class SideDrawerState extends State<SideDrawer> {
               Divider(),
               _drawerItem(Icons.info_outline, "About",
                   () => Navigator.pushNamed(context, AboutScreen.routeName)),
-              Container(
-                child: Text("Version $APP_VERSION"),
-                color: Colors.red[200],
-              ),
             ],
           ),
         ),
