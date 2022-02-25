@@ -22,7 +22,7 @@ class App extends StatelessWidget {
     IncidentResponsePocketGuideScreen.routeName: (context) =>
         IncidentResponsePocketGuideScreen(),
     ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
-    SelectedEngagement.routeName: (context) => SelectedEngagement(),
+    EngagementScreen.routeName: (context) => EngagementScreen(),
     RedBookScreen.routeName: (context) => RedBookScreen(),
   };
 

@@ -6,13 +6,13 @@ import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
 import '../widgets/bottom_nav_bar.dart';
 
-class SelectedEngagement extends StatefulWidget {
+class EngagementScreen extends StatefulWidget {
   static const routeName = 'engagement';
 
-  _SelectedEngagementState createState() => _SelectedEngagementState();
+  _EngagementScreenState createState() => _EngagementScreenState();
 }
 
-class _SelectedEngagementState extends State<SelectedEngagement> {
+class _EngagementScreenState extends State<EngagementScreen> {
   final acreageCon = new TextEditingController();
 
   @override
