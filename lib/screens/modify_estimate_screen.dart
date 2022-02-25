@@ -87,7 +87,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(goBack: 'engagement'),
     );
   }
 
