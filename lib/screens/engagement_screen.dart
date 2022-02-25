@@ -81,11 +81,11 @@ class _EngagementScreenState extends State<EngagementScreen> {
               itemBuilder: (context) => [
                     PopupMenuItem(
                       value: 1,
-                      child: Text("Old"),
+                      child: Text("Oldest"),
                     ),
                     PopupMenuItem(
                       value: 2,
-                      child: Text("New"),
+                      child: Text("Newest"),
                     ),
                     PopupMenuItem(
                       value: 3,
