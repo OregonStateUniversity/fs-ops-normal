@@ -51,8 +51,7 @@ class BottomNavBarState extends State<BottomNavBar> {
             _onTap(index);
             break;
           case 1:
-            Navigator.popUntil(
-                context, ModalRoute.withName(widget.goBack.toString()));
+            Navigator.popUntil(context, ModalRoute.withName(widget.goBack));
             _onTap(index);
             break;
         }
