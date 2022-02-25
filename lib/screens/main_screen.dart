@@ -190,7 +190,7 @@ class MainScreenState extends State<MainScreen> {
       onTap: () {
         Navigator.pushNamed(
           context,
-          SelectedEngagement.routeName,
+          EngagementScreen.routeName,
           arguments: engagements[index],
         );
       },

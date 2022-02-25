@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'bottom_icon.dart';
 
 class BottomNavBar extends StatefulWidget {
-  String goBack;
+  final String goBack;
   BottomNavBar({Key? key, required this.goBack}) : super(key: key);
 
   @override
