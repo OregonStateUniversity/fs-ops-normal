@@ -64,30 +64,10 @@ class SideDrawerState extends State<SideDrawer> {
 
   Widget _drawerHeader() {
     return DrawerHeader(
-      margin: EdgeInsets.zero,
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage('lib/assets/icon/OpsNormal_IOS.png'),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 12.0,
-            left: 16.0,
-            child: Text(
-              "",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500),
-            ),
-          )
-        ],
-      ),
-    );
+        margin: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
+        decoration: BoxDecoration(color: Colors.black),
+        child: Image(image: AssetImage('lib/assets/icon/OpsNormal_IOS.png')));
   }
 
   Widget _drawerItem(IconData icon, String text, Function onTap) {
