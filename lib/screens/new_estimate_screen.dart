@@ -3,11 +3,11 @@ import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../utils/time_format.dart';
 
-class CreateOrderScreen extends StatelessWidget {
-  const CreateOrderScreen({Key? key}) : super(key: key);
+class NewEstimateScreen extends StatelessWidget {
+  const NewEstimateScreen({Key? key}) : super(key: key);
 
-  static const routeName = 'createOrderScreen';
-  static const title = "CreateOrderScreen";
+  static const routeName = 'newEstimateScreen';
+  static const title = "NewEstimateScreen";
 
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
@@ -19,7 +19,7 @@ class CreateOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Create Order Screen'),
+          title: const Text('New Estimate Screen'),
         ),
         body: ListView(
           children: <Widget>[
@@ -57,7 +57,7 @@ class CreateOrderScreen extends StatelessWidget {
                         )
                       : ArgumentError.notNull('Value Can\'t Be Empty');
                 },
-                child: Text("Create Order"))
+                child: Text("New Estimate"))
           ],
         ));
   }
