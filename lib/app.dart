@@ -6,14 +6,14 @@ import 'screens/engagement_screen.dart';
 import 'screens/estimate_screen.dart';
 import 'screens/how_to_screen.dart';
 import 'screens/incident_response_pocket_guide_screen.dart';
-import 'screens/main_screen.dart';
+import 'screens/estimate_list_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/new_engagement_screen.dart';
 import 'screens/red_book_screen.dart';
 
 class App extends StatelessWidget {
   static final routes = {
-    MainScreen.routeName: (context) => MainScreen(),
+    EstimateListScreen.routeName: (context) => EstimateListScreen(),
     AboutScreen.routeName: (context) => AboutScreen(),
     CreateNewEngagement.routeName: (context) => CreateNewEngagement(),
     NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: MainScreen.routeName,
+      initialRoute: EstimateListScreen.routeName,
       title: 'Ops Normal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

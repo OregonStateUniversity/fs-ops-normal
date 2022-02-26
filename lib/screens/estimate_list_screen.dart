@@ -10,18 +10,18 @@ import '../utils/time_format.dart';
 import '../widgets/bottom_icon.dart';
 import '../widgets/side_drawer.dart';
 
-class MainScreen extends StatefulWidget {
-  MainScreen({Key? key}) : super(key: key);
+class EstimateListScreen extends StatefulWidget {
+  EstimateListScreen({Key? key}) : super(key: key);
   static const routeName = '/';
 
   @override
-  MainScreenState createState() => MainScreenState();
+  EstimateListScreenState createState() => EstimateListScreenState();
 }
 
-class MainScreenState extends State<MainScreen> {
+class EstimateListScreenState extends State<EstimateListScreen> {
   final engagementCtrl = new TextEditingController();
   final acreageCtrl = TextEditingController();
-  final GlobalKey<MainScreenState> _key = GlobalKey();
+  final GlobalKey<EstimateListScreenState> _key = GlobalKey();
   List<Engagement> engagements = [];
 
   var newName;

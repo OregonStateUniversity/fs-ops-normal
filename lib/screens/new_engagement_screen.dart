@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main_screen.dart';
+import 'estimate_list_screen.dart';
 import '../models/engagement.dart';
 
 class CreateNewEngagement extends StatefulWidget {
@@ -49,13 +49,12 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
                 border: const OutlineInputBorder(),
               ),
             ),
-
             OutlinedButton(
               child: Text('cancel'),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  MaterialPageRoute(builder: (context) => EstimateListScreen()),
                 );
               },
             ),
@@ -75,7 +74,7 @@ class _CreateNewEngagementState extends State<CreateNewEngagement> {
                 setState(() {});
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  MaterialPageRoute(builder: (context) => EstimateListScreen()),
                 );
               },
             )
