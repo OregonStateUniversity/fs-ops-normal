@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../utils/time_format.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class NewEstimateScreen extends StatelessWidget {
   const NewEstimateScreen({Key? key}) : super(key: key);
@@ -56,8 +57,11 @@ class NewEstimateScreen extends StatelessWidget {
                         )
                       : ArgumentError.notNull('Value Can\'t Be Empty');
                 },
-                child: Text("New Estimate"))
+                child: Text("New Estimate")),
           ],
-        ));
+        ),
+        bottomNavigationBar: BottomNavBar(goBack: '/'),
+        );
+        
   }
 }
