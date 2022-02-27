@@ -24,7 +24,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
     if (orders.isEmpty) {
       return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           title: RichText(
             text: TextSpan(
                 style: TextStyle(fontSize: 22, color: Colors.white),
