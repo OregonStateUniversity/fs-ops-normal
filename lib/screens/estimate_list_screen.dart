@@ -43,7 +43,7 @@ class EstimateListScreenState extends State<EstimateListScreen> {
         record['acres'],
         record['shape'],
         record['type'],
-        record['structuers'],
+        record['structures'],
         loadOrders(record['orders']),
         record['active'],
         record['id'],
