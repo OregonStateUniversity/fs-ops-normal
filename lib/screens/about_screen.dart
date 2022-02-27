@@ -52,7 +52,6 @@ class AboutScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
     );
   }
 }
