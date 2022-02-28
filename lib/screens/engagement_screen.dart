@@ -199,7 +199,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
     }
     return FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, NewEstimateScreen.routeName);
+        Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement);
       },
       tooltip: 'New Order',
       child: Icon(Icons.add),
