@@ -4,26 +4,22 @@ import '../screens/red_book_screen.dart';
 import '../screens/how_to_screen.dart';
 import '../screens/incident_response_pocket_guide_screen.dart';
 
-class SideDrawer extends StatefulWidget {
-  @override
-  SideDrawerState createState() => SideDrawerState();
-}
-
-class SideDrawerState extends State<SideDrawer> {
-  bool state = false;
+class SideDrawer extends StatelessWidget {
+  // @override
+  const SideDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
         child: Column(
       children: [
-        _topOfDrawer(),
-        _bottomOfDrawer(),
+        _topOfDrawer(context),
+        _bottomOfDrawer(context),
       ],
     ));
   }
 
-  Widget _topOfDrawer() {
+  Widget _topOfDrawer(BuildContext context) {
     return Expanded(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -45,7 +41,7 @@ class SideDrawerState extends State<SideDrawer> {
     );
   }
 
-  Widget _bottomOfDrawer() {
+  Widget _bottomOfDrawer(BuildContext context) {
     return Container(
       child: Align(
         alignment: FractionalOffset.bottomCenter,
