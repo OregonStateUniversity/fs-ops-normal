@@ -9,7 +9,8 @@ void main() {
     );
   }
 
-  testWidgets('main_screen with no engagements', (WidgetTester tester) async {
+  testWidgets('estimate_list_screen with no engagements',
+      (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new EstimateListScreen()));
     await tester.pumpAndSettle(const Duration(seconds: 5));
@@ -19,7 +20,8 @@ void main() {
     expect(find.text('Archive'), findsOneWidget);
   });
 
-  testWidgets('main_screen add engagement', (WidgetTester tester) async {
+  testWidgets('estimate_list_screen add engagement',
+      (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new EstimateListScreen()));
     await tester.pumpAndSettle();
@@ -38,7 +40,8 @@ void main() {
     expect(find.text('Archive'), findsOneWidget);
   });
 
-  testWidgets('main_screen delete engagement', (WidgetTester tester) async {
+  testWidgets('estimate_list_screen delete engagement',
+      (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new EstimateListScreen()));
     await tester.pumpAndSettle();
