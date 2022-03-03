@@ -15,6 +15,16 @@ class Estimate {
 
   Estimate({this.name = -1, this.acres, this.timeStamp, this.structures});
 
+  String calculateTrunkLineLength() {
+    if (acres! > 0) {
+      // BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!;
+      return (BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
   Estimate.jsonConvF(
       name, acres, shape, type, structures, timeStamp, trunk, lat, toy,
       [fittings = 0]) {
