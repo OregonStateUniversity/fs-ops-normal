@@ -65,7 +65,7 @@ class BottomNavBarState extends State<BottomNavBar> {
 
   List<BottomIcon> iconList = [
     BottomIcon("Home", Icons.home_filled),
-    BottomIcon("Archive", Icons.archive),
+    BottomIcon("Archive", Icons.archive)
   ];
 
   void _onTap(int index) {
