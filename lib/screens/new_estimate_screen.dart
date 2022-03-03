@@ -15,7 +15,8 @@ class NewEstimateScreen extends StatefulWidget {
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
   var formKey = GlobalKey<FormState>();
 
-  final myController = TextEditingController();
+  final myControllerAcreage = TextEditingController();
+  final myControllerStructure = TextEditingController();
 
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
