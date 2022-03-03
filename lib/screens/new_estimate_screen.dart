@@ -36,7 +36,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         children: <Widget>[
           Padding(padding: const EdgeInsets.all(10)),
           TextField(
-              controller: null,
+              controller: myControllerAcreage,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: 'Enter acreage',
@@ -44,7 +44,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   border: const OutlineInputBorder())),
           Padding(padding: const EdgeInsets.all(10)),
           TextField(
-              controller: null,
+              controller: myControllerStructure,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: 'Enter Structures',
