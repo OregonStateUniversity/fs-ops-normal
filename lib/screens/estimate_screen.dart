@@ -14,7 +14,7 @@ class EstimateScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(""),
+          title: Text("Estimate Screen"),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
