@@ -8,15 +8,16 @@ class Estimate {
   String? shape;
   String? type;
   int? structures;
+
   int? _trunkLineLength;
   int? _latLineLength;
   int? _toyLineLength;
   int? _fittings;
 
-  int? _1_5GatedWye;
-  int? _1_5Reducers;
-  int? _1_3_4Reducers;
-  int? ForesterNozzles;
+  int? _1and1HalfGatedWye;
+  int? _1and1HalfReducers;
+  int? _1and3quatersReducers;
+  int? _ForesterNozzles;
   int? _ToyNozzles;
   int? _ToyWye;
 
@@ -29,7 +30,11 @@ class Estimate {
   int? _MREPallets;
   int? _PortaPotties;
 
-  Estimate({this.name = -1, this.acres, this.timeStamp, this.structures});
+  Estimate({this.name = -1,
+            this.acres, 
+            this.timeStamp, 
+            this.structures = 0,
+            this.trunkLineLength = 10});
 
   String calculateTrunkLineLength() {
     if (acres! >= 0) {
@@ -184,8 +189,6 @@ class Estimate {
       str += "Folda-tank: ${acres! ~/ 5}\n"
           "Mark 3 + Kits: $mark3s\n"
           "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
-
-      //Old calculation : "Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
     }
     if (this.acres! >= 20) {
       str += "Water (Pallets): ${acres! ~/ 20}\n"
