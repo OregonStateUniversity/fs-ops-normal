@@ -65,6 +65,16 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                                 )),
                       )
                     : ArgumentError.notNull('Value Can\'t Be Empty');
+                myControllerStructure.text.isNotEmpty
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ModifyEstimateScreen(
+                                  estimate: estimate,
+                                  engagement: engagement,
+                                )),
+                      )
+                    : ArgumentError.notNull('Value Can\'t Be Empty');
               },
               child: Text("New Estimate")),
         ],
