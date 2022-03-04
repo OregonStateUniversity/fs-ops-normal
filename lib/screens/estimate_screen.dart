@@ -13,7 +13,7 @@ class EstimateScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           title: Text("Estimate Screen"),
         ),
         body: Column(
