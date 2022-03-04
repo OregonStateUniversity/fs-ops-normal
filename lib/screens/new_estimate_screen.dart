@@ -4,7 +4,6 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../utils/time_format.dart';
 import '../widgets/bottom_nav_bar.dart';
-import 'dart:convert';
 
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimateScreen';
@@ -22,8 +21,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
 
-  static const _acreage = '5';
-  static const _structures = '5';
   @override
   Widget build(BuildContext context) {
     final Engagement? engagement =
@@ -55,11 +52,10 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               onPressed: () {
                 var estimate = new Estimate(
                     acres: int.parse(myControllerAcreage.text),
-                    structures: int.parse(_structures),
+                    structures: int.parse(myControllerStructure.text),
                     timeStamp: TimeFormat.currentTime);
                 estimate.initialLineCalculation();
-
-                _acreage.isNotEmpty
+                myControllerAcreage.text.isNotEmpty
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(
