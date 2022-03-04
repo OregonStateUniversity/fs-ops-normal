@@ -54,8 +54,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           OutlinedButton(
               onPressed: () {
                 var estimate = new Estimate(
-
-                    //acres: int.parse(_acreage),
+                    acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(_structures),
                     timeStamp: TimeFormat.currentTime);
                 estimate.initialLineCalculation();
