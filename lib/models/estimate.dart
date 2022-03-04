@@ -144,7 +144,7 @@ class Estimate {
   }
 
   Estimate.loadSavedEstimate(
-      name, acres, shape, type, timeStamp, structures, trunk, lat, toy,
+      name, acres, timeStamp, structures, trunk, lat, toy,
       [fittings = 0]) {
     this.name = name;
     this.acres = acres;
@@ -184,13 +184,41 @@ class Estimate {
       str += "Folda-tank: ${acres! ~/ 5}\n"
           "Mark 3 + Kits: $mark3s\n"
           "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+
+      //Old calculation : "Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
     }
-    str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
-        "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
-        "MRE (Pallets): ${this.calculateMREPallets()}\n"
-        "Port-a-Potties: ${this.calculatePortaPotties()}\n\n";
+    if (this.acres! >= 20) {
+      str += "Water (Pallets): ${acres! ~/ 20}\n"
+          "Gatorade (Pallets): ${acres! ~/ 20}\n"
+          "MRE (Pallets): ${acres! ~/ 20}\n"
+          "Port-a-Potties: ${acres! ~/ 10}\n\n";
+    }
     return str;
   }
+
+  // String toCopyString() {
+  //   String str = "Trunk Line: ${this.trunkLineLength} ft.\n"
+  //       "Lat Line: ${this.latLineLength} ft.\n"
+  //       "Toy Hose: ${this.toyLineLength} ft.\n\n";
+
+  //   str += "1.5\" Gated Wye: ${this.fittings}\n"
+  //       "1.5\" Reducers: ${this.fittings}\n"
+  //       "1\"-3/4\" Reducers: ${this.fittings}\n"
+  //       "Forester Nozzles: ${this.fittings}\n"
+  //       "Toy Nozzles: ${this.fittings}\n"
+  //       "Toy Wye: ${this.fittings}\n\n";
+    
+  //   var mark3s = acres! ~/ 10;
+  //   str += "Folda-tank: ${acres! ~/ 5}\n"
+  //       "Mark 3 + Kits: $mark3s\n"
+  //       "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+
+  //   str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
+  //       "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
+  //       "MRE (Pallets): ${this.calculateMREPallets()}\n"
+  //       "Port-a-Potties: ${this.calculatePortaPotties()}\n\n";
+  //   return str;
+  // }
 
   void initialLineCalculation() {
     _trunkLineLength =
