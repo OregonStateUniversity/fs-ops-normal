@@ -21,8 +21,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   final bool _acreageInputIsValid = true;
   final bool _structureInputIsValid = true;
 
-  final _acreage = '5';
-  final _structures = '5';
+  static const _acreage = '5';
+  static const _structures = '5';
   @override
   Widget build(BuildContext context) {
     final Engagement? engagement =
