@@ -18,8 +18,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   static var myControllerAcreage = TextEditingController(text: "0");
   static var myControllerStructure = TextEditingController(text: "0");
 
-  final bool _acreageInputIsValid = true;
-  final bool _structureInputIsValid = true;
+  static const bool _acreageInputIsValid = true;
+  static const bool _structureInputIsValid = true;
 
   @override
   Widget build(BuildContext context) {
