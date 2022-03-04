@@ -4,6 +4,7 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../utils/time_format.dart';
 import '../widgets/bottom_nav_bar.dart';
+import 'dart:convert';
 
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimateScreen';
@@ -53,7 +54,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           OutlinedButton(
               onPressed: () {
                 var estimate = new Estimate(
-                    acres: int.parse(_acreage),
+
+                    //acres: int.parse(_acreage),
                     structures: int.parse(_structures),
                     timeStamp: TimeFormat.currentTime);
                 estimate.initialLineCalculation();
