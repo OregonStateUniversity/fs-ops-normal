@@ -15,11 +15,11 @@ class NewEstimateScreen extends StatefulWidget {
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
   var formKey = GlobalKey<FormState>();
 
-  final myControllerAcreage = TextEditingController();
-  final myControllerStructure = TextEditingController();
+  static var myControllerAcreage = TextEditingController(text: "0");
+  static var myControllerStructure = TextEditingController(text: "0");
 
-  final bool _acreageInputIsValid = true;
-  final bool _structureInputIsValid = true;
+  static const bool _acreageInputIsValid = true;
+  static const bool _structureInputIsValid = true;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +56,16 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                     timeStamp: TimeFormat.currentTime);
                 estimate.initialLineCalculation();
                 myControllerAcreage.text.isNotEmpty
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ModifyEstimateScreen(
+                                  estimate: estimate,
+                                  engagement: engagement,
+                                )),
+                      )
+                    : ArgumentError.notNull('Value Can\'t Be Empty');
+                myControllerStructure.text.isNotEmpty
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(
