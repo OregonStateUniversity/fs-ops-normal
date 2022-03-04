@@ -16,9 +16,74 @@ class Estimate {
   Estimate({this.name = -1, this.acres, this.timeStamp, this.structures});
 
   String calculateTrunkLineLength() {
-    if (acres! > 0) {
-      // BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!;
+    if (acres! >= 0) {
       return (BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  String calculateLatLineLength() {
+    if (acres! >= 0) {
+      return (trunkLineLength! ~/ 2)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  String calculateToyLineLength() {
+    if (acres! >= 0) {
+      return (latLineLength! ~/ 2)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  String calculateFittings() {
+    if (acres! >= 0) {
+      return (latLineLength! ~/ 100)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  
+
+
+  String calculateWaterPallets() {
+    if (acres! >= 20) {
+      return (acres! ~/ 20)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  String calculateGatoradePallets() {
+    if (acres! >= 20) {
+      return (acres! ~/ 20)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  String calculateMREPallets() {
+    if (acres! >= 20) {
+      return (acres! ~/ 20)
+          .toString();
+    } else {
+      return '0';
+    }
+  }
+
+  String calculatePortaPotties() {
+    if (acres! >= 20) {
+      return (acres! ~/ 10)
           .toString();
     } else {
       return '0';
@@ -41,7 +106,7 @@ class Estimate {
   }
 
   Estimate.loadSavedEstimate(
-      name, acres, timeStamp, structures, trunk, lat, toy,
+      name, acres, shape, type, timeStamp, structures, trunk, lat, toy,
       [fittings = 0]) {
     this.name = name;
     this.acres = acres;
@@ -81,15 +146,11 @@ class Estimate {
       str += "Folda-tank: ${acres! ~/ 5}\n"
           "Mark 3 + Kits: $mark3s\n"
           "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
-
-      //Old calculation : "Pump Mix (Cans): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
     }
-    if (this.acres! >= 20) {
-      str += "Water (Pallets): ${acres! ~/ 20}\n"
-          "Gatorade (Pallets): ${acres! ~/ 20}\n"
-          "MRE (Pallets): ${acres! ~/ 20}\n"
-          "Port-a-Potties: ${acres! ~/ 10}\n\n";
-    }
+      str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
+          "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
+          "MRE (Pallets): ${this.calculateMREPallets()}\n"
+          "Port-a-Potties: ${this.calculatePortaPotties()}\n\n";
     return str;
   }
 
