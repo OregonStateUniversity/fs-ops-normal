@@ -37,7 +37,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               controller: myControllerAcreage,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: 'Enter acreage',
+                  labelText: 'Enter Acreage',
                   errorText: _acreageInputIsValid ? null : 'error',
                   border: const OutlineInputBorder())),
           Padding(padding: const EdgeInsets.all(10)),
