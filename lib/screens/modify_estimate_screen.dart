@@ -31,7 +31,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     orderField.acres = widget.estimate?.acres;
 
     return Scaffold(
@@ -70,7 +69,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                             orderField.latLineLength,
                             orderField.toyLineLength,
                             orderField.fittingsField);
-                        
                         DatabaseHelper.insertOrder(
                             widget.engagement, finalEstimate);
                         Navigator.pushNamed(context, EstimateScreen.routeName,
@@ -231,5 +229,4 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
       ],
     );
   }
-
 }
