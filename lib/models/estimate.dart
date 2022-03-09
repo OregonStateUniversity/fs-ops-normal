@@ -30,106 +30,110 @@ class Estimate {
   int? _MREPallets;
   int? _PortaPotties;
 
-  Estimate({this.name = -1,
-            this.acres, 
-            this.timeStamp, 
-            this.structures = 0,
-            this.trunkLineLength = 10});
+  Estimate({
+    this.name = -1,
+    this.timeStamp,
+    this.acres,
+    this.structures = 0,
+    
+  });
 
-  String calculateTrunkLineLength() {
+
+
+  int calculateTrunkLineLength() {
     if (acres! >= 0) {
       return (BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!)
-          .toString();
+          .toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateLatLineLength() {
+  int calculateLatLineLength() {
     if (acres! >= 0) {
-      return (trunkLineLength! ~/ 2).toString();
+      return (trunkLineLength! ~/ 2).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateToyLineLength() {
+  int calculateToyLineLength() {
     if (acres! >= 0) {
-      return (latLineLength! ~/ 2).toString();
+      return (latLineLength! ~/ 2).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateFittings() {
+  int calculateFittings() {
     if (fittings! >= 0) {
-      return (latLineLength! ~/ 100).toString();
+      return (latLineLength! ~/ 100).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateMark3s() {
+  int calculateMark3s() {
     if (acres! >= 10) {
-      return (acres! ~/ 10).toString();
+      return (acres! ~/ 10).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateFoldaTanks() {
+  int calculateFoldaTanks() {
     if (acres! >= 10) {
-      return (acres! ~/ 5).toString();
+      return (acres! ~/ 5).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateMark3Kits() {
+  int calculateMark3Kits() {
     if (acres! >= 10) {
-      return (this.calculateMark3s()).toString();
+      return (this.calculateMark3s()).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculatePumpMixCans() {
+  int calculatePumpMixCans() {
     if (acres! >= 10) {
-      return (_Mark3s! * 6).toString();
+      return (_Mark3s! * 6).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateWaterPallets() {
+  int calculateWaterPallets() {
     if (acres! >= 20) {
-      return (acres! ~/ 20).toString();
+      return (acres! ~/ 20).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateGatoradePallets() {
+  int calculateGatoradePallets() {
     if (acres! >= 20) {
-      return (acres! ~/ 20).toString();
+      return (acres! ~/ 20).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculateMREPallets() {
+  int calculateMREPallets() {
     if (acres! >= 20) {
-      return (acres! ~/ 20).toString();
+      return (acres! ~/ 20).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
-  String calculatePortaPotties() {
+  int calculatePortaPotties() {
     if (acres! >= 20) {
-      return (acres! ~/ 10).toString();
+      return (acres! ~/ 10).toInt();
     } else {
-      return '0';
+      return 0;
     }
   }
 
@@ -199,12 +203,28 @@ class Estimate {
     return str;
   }
 
-  void initialLineCalculation() {
+  void initialEquipmentCalculation() {
     _trunkLineLength =
         BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!;
     _latLineLength = trunkLineLength! ~/ 2;
     _toyLineLength = latLineLength! ~/ 2;
     _fittings = latLineLength! ~/ 100;
+
+    // _1and1HalfGatedWye = this.fittings;
+    // _1and1HalfReducers = this.fittings;
+    // _1and3quatersReducers = this.fittings;
+    // _ForesterNozzles = this.fittings;
+    // _ToyNozzles = this.fittings;
+    // _ToyWye = this.fittings;
+
+    // _FoldaTank = acres! ~/ 10;
+    // _Mark3s = acres! ~/ 10;
+    // _PumpMixCans = _Mark3s! * 6;
+
+    // _WaterPallets = acres! ~/ 20;
+    // _GatoradePallets = acres! ~/ 20;
+    // _MREPallets = acres! ~/ 20;
+    // _PortaPotties = acres! ~/ 10;
   }
 
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
