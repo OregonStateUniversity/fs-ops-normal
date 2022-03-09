@@ -19,6 +19,7 @@ class EstimateScreen extends StatelessWidget {
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Padding(padding: EdgeInsets.all(35)),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
