@@ -12,27 +12,33 @@ class EstimateScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Estimate;
 
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          title: Text("Estimate Screen"),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: SelectableText(estimate.toCopyString()),
-                ),
-              ],
-            ),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: floatingActionButton(estimate, context),
-        bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: Text("Estimate Screen"),
+      ),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8),
+                    child: SelectableText(estimate.toCopyString()),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+      //  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //  floatingActionButton: floatingActionButton(estimate, context),
+      // bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
+    );
   }
 
   Widget floatingActionButton(estimate, context) {
