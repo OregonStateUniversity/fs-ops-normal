@@ -22,6 +22,10 @@ class EstimateScreen extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  "Acres Order",
+                  style: TextStyle(color: Colors.orange, fontSize: 16.0),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -36,6 +40,10 @@ class EstimateScreen extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  "Structure Order",
+                  style: TextStyle(color: Colors.orange, fontSize: 16.0),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
