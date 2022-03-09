@@ -19,13 +19,13 @@ class EstimateScreen extends StatelessWidget {
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(padding: EdgeInsets.all(35)),
+            Padding(padding: EdgeInsets.all(25)),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Acres Order",
-                  style: TextStyle(color: Colors.orange, fontSize: 16.0),
+                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -38,12 +38,13 @@ class EstimateScreen extends StatelessWidget {
                 ),
               ],
             ),
+            Padding(padding: EdgeInsets.all(10)),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Structure Order",
-                  style: TextStyle(color: Colors.orange, fontSize: 16.0),
+                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
