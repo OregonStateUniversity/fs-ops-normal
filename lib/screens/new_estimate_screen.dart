@@ -54,7 +54,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                     acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(myControllerStructure.text),
                     timeStamp: TimeFormat.currentTime);
-                estimate.initialLineCalculation();
+                estimate.initialEquipmentCalculation();
                 myControllerAcreage.text.isNotEmpty
                     ? Navigator.push(
                         context,
