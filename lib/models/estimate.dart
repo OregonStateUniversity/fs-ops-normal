@@ -35,22 +35,14 @@ class Estimate {
     this.timeStamp,
     this.acres,
     this.structures = 0,
-    
   });
 
-
-
   int calculateTrunkLineLength() {
-    if (acres! >= 0) {
-      return (BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!)
-          .toInt();
-    } else {
-      return 0;
-    }
+    return (BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!);
   }
 
   int calculateLatLineLength() {
-    if (acres! >= 0) {
+    if (this.acres! >= 0) {
       return (trunkLineLength! ~/ 2).toInt();
     } else {
       return 0;
@@ -58,7 +50,7 @@ class Estimate {
   }
 
   int calculateToyLineLength() {
-    if (acres! >= 0) {
+    if (this.acres! >= 0) {
       return (latLineLength! ~/ 2).toInt();
     } else {
       return 0;
@@ -66,16 +58,12 @@ class Estimate {
   }
 
   int calculateFittings() {
-    if (fittings! >= 0) {
-      return (latLineLength! ~/ 100).toInt();
-    } else {
-      return 0;
-    }
+    return (this.latLineLength! ~/ 100).toInt();
   }
 
   int calculateMark3s() {
     if (acres! >= 10) {
-      return (acres! ~/ 10).toInt();
+      return acres! ~/ 10.toInt();
     } else {
       return 0;
     }
@@ -98,7 +86,7 @@ class Estimate {
   }
 
   int calculatePumpMixCans() {
-    if (acres! >= 10) {
+    if (this.acres! >= 10) {
       return (_Mark3s! * 6).toInt();
     } else {
       return 0;
@@ -106,7 +94,7 @@ class Estimate {
   }
 
   int calculateWaterPallets() {
-    if (acres! >= 20) {
+    if (this.acres! >= 20) {
       return (acres! ~/ 20).toInt();
     } else {
       return 0;
@@ -114,7 +102,7 @@ class Estimate {
   }
 
   int calculateGatoradePallets() {
-    if (acres! >= 20) {
+    if (this.acres! >= 20) {
       return (acres! ~/ 20).toInt();
     } else {
       return 0;
@@ -122,7 +110,7 @@ class Estimate {
   }
 
   int calculateMREPallets() {
-    if (acres! >= 20) {
+    if (this.acres! >= 20) {
       return (acres! ~/ 20).toInt();
     } else {
       return 0;
@@ -130,7 +118,7 @@ class Estimate {
   }
 
   int calculatePortaPotties() {
-    if (acres! >= 20) {
+    if (this.acres! >= 20) {
       return (acres! ~/ 10).toInt();
     } else {
       return 0;
@@ -180,37 +168,31 @@ class Estimate {
         "Lat Line: ${this.latLineLength} ft.\n"
         "Toy Hose: ${this.toyLineLength} ft.\n\n";
 
-    if (this.fittings! >= 0) {
-      str += "1.5\" Gated Wye: ${this.fittings}\n"
-          "1.5\" Reducers: ${this.fittings}\n"
-          "1\"-3/4\" Reducers: ${this.fittings}\n"
-          "Forester Nozzles: ${this.fittings}\n"
-          "Toy Nozzles: ${this.fittings}\n"
-          "Toy Wye: ${this.fittings}\n\n";
-    }
-    if (this.acres! >= 10) {
-      var mark3s = acres! ~/ 10;
-      str += "Folda-tank: ${acres! ~/ 5}\n"
-          "Mark 3 + Kits: $mark3s\n"
-          "Pump Mix (Cans): ${mark3s * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
-    }
-    if (this.acres! >= 20) {
-      str += "Water (Pallets): ${acres! ~/ 20}\n"
-          "Gatorade (Pallets): ${acres! ~/ 20}\n"
-          "MRE (Pallets): ${acres! ~/ 20}\n"
-          "Port-a-Potties: ${acres! ~/ 10}\n\n";
-    }
+    str += "1.5\" Gated Wye: ${this.fittings}\n"
+        "1.5\" Reducers: ${this.fittings}\n"
+        "1\"-3/4\" Reducers: ${this.fittings}\n"
+        "Forester Nozzles: ${this.fittings}\n"
+        "Toy Nozzles: ${this.fittings}\n"
+        "Toy Wye: ${this.fittings}\n\n";
+    str += "Folda-tank: ${this.calculateFoldaTanks()}\n"
+        "Mark 3 + Kits: ${this.calculateMark3s()}\n"
+        "Pump Mix (Cans): ${this.calculateMark3s() * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+
+    str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
+        "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
+        "MRE (Pallets): ${this.calculateMREPallets()}\n"
+        "Port-a-Potties: ${this.calculatePortaPotties()}\n\n";
+
     return str;
   }
 
   void initialEquipmentCalculation() {
-    _trunkLineLength =
-        BASE_TRUNK_LINE_LENGTH + TRUNK_LINE_LENGTH_PER_ACRE * acres!;
+    _trunkLineLength = calculateTrunkLineLength();
     _latLineLength = trunkLineLength! ~/ 2;
     _toyLineLength = latLineLength! ~/ 2;
     _fittings = latLineLength! ~/ 100;
 
-    // _1and1HalfGatedWye = this.fittings;
+    calculateLatLineLength();
     // _1and1HalfReducers = this.fittings;
     // _1and3quatersReducers = this.fittings;
     // _ForesterNozzles = this.fittings;
