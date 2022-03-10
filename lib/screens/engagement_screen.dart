@@ -23,6 +23,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
     List<Estimate> orders = argOrders!;
     if (orders.isEmpty) {
       return Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           automaticallyImplyLeading: true,
           title: RichText(
@@ -199,7 +200,8 @@ class _EngagementScreenState extends State<EngagementScreen> {
     }
     return FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, NewEstimateScreen.routeName, arguments: engagement);
+        Navigator.pushNamed(context, NewEstimateScreen.routeName,
+            arguments: engagement);
       },
       tooltip: 'New Order',
       child: Icon(Icons.add),

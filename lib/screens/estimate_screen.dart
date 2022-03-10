@@ -16,15 +16,44 @@ class EstimateScreen extends StatelessWidget {
           automaticallyImplyLeading: true,
           title: Text("Estimate Screen"),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
+            Padding(padding: EdgeInsets.all(25)),
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: SelectableText(estimate.toCopyString()),
+                Text(
+                  "Acres Order",
+                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: SelectableText(estimate.toCopyString()),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Structure Order",
+                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: SelectableText(estimate.toCopyString()),
+                    ),
+                  ],
                 ),
               ],
             ),
