@@ -9,7 +9,7 @@ void main() {
 
       //Act
       estimate =
-          new Estimate.loadSavedEstimate(1, 1, "time", 1200, 600, 300, 6);
+          new Estimate.loadSavedEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -26,7 +26,7 @@ void main() {
 
       //Act
       estimate = new Estimate.jsonConvF(
-          1, 1, "Square", "Tiber", 2, "time", 1200, 600, 300, 6);
+          1, 1, "Square", "Timber", 2, "time", 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -43,7 +43,7 @@ void main() {
       estimate.acres = 1;
       estimate.initialEquipmentCalculation();
       var expected =
-          "{name: -1, acres: 1, timeStamp: null, shape: null, type: null, structures: null, trunkLineLength: 1200, latLineLength: 600, toyLineLength: 300, fittings: 6}";
+          "{name: -1, acres: 1, timeStamp: null, shape: null, type: null, structures: 0, trunkLineLength: 1200, latLineLength: 600, toyLineLength: 300, fittings: 6}";
 
       //Act
       var estimateJson = estimate.toJson().toString();
@@ -152,7 +152,7 @@ void main() {
           "Toy Nozzles: 25\n"
           "Toy Wye: 25\n\n"
           "Folda-tank: ${acres ~/ 5}\n"
-          "Mark 3 + Kits: ${acres ~/ 5}\n"
+          "Mark 3 + Kits: ${acres ~/ 10 * 6}\n"
           "Pump Mix (Gallons): ${((acres ~/ 5) ~/ 2) * 3}\n\n"
           "Water (Pallets): ${acres ~/ 20}\n"
           "Gatorade (Pallets): ${acres ~/ 20}\n"

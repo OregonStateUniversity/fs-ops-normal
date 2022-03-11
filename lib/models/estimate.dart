@@ -79,7 +79,7 @@ class Estimate {
 
   int calculateMark3Kits() {
     if (acres! >= 10) {
-      return (this.calculateMark3s()).toInt();
+      return (acres! ~/ 10).toInt();
     } else {
       return 0;
     }
@@ -87,7 +87,7 @@ class Estimate {
 
   int calculatePumpMixCans() {
     if (this.acres! >= 10) {
-      return (_Mark3s! * 6).toInt();
+      return (this.calculateMark3s() * 6).toInt();
     } else {
       return 0;
     }
@@ -176,7 +176,7 @@ class Estimate {
         "Toy Wye: ${this.fittings}\n\n";
     str += "Folda-tank: ${this.calculateFoldaTanks()}\n"
         "Mark 3 + Kits: ${this.calculateMark3s()}\n"
-        "Pump Mix (Cans): ${this.calculateMark3s() * 6}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+        "Pump Mix (Cans): ${this.calculatePumpMixCans()}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
 
     str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
         "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
@@ -193,20 +193,6 @@ class Estimate {
     _fittings = latLineLength! ~/ 100;
 
     calculateLatLineLength();
-    // _1and1HalfReducers = this.fittings;
-    // _1and3quatersReducers = this.fittings;
-    // _ForesterNozzles = this.fittings;
-    // _ToyNozzles = this.fittings;
-    // _ToyWye = this.fittings;
-
-    // _FoldaTank = acres! ~/ 10;
-    // _Mark3s = acres! ~/ 10;
-    // _PumpMixCans = _Mark3s! * 6;
-
-    // _WaterPallets = acres! ~/ 20;
-    // _GatoradePallets = acres! ~/ 20;
-    // _MREPallets = acres! ~/ 20;
-    // _PortaPotties = acres! ~/ 10;
   }
 
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
