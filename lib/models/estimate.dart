@@ -126,6 +126,17 @@ class Estimate {
     }
   }
 
+  int? calculateSprinklers() {
+    if (this.structures! < 10) {
+      return 10;
+    } else if (this.structures! < 40) {
+      return 40;
+    } else if (this.structures! > 40) {
+      return 50;
+    }
+    return 0;
+  }
+
   Estimate.jsonConvF(
       name, acres, shape, type, structures, timeStamp, trunk, lat, toy,
       [fittings = 0]) {
@@ -164,7 +175,7 @@ class Estimate {
   set toyLineLength(int? length) => _toyLineLength;
   set fittings(int? count) => _fittings;
 
-  String toCopyString() {
+  String toCopyStringAcres() {
     String str = "Trunk Line: ${this.trunkLineLength} ft.\n"
         "Lat Line: ${this.latLineLength} ft.\n"
         "Toy Hose: ${this.toyLineLength} ft.\n\n";
@@ -184,6 +195,11 @@ class Estimate {
         "MRE (Pallets): ${this.calculateMREPallets()}\n"
         "Port-a-Potties: ${this.calculatePortaPotties()}\n\n";
 
+    return str;
+  }
+
+  String toCopyStringStructures() {
+    String str = "Sprinkler Kits: ${calculateSprinklers()}\n";
     return str;
   }
 

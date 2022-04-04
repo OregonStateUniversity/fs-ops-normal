@@ -32,7 +32,7 @@ class EstimateScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.all(8),
-                      child: SelectableText(estimate.toCopyString()),
+                      child: SelectableText(estimate.toCopyStringAcres()),
                     ),
                   ],
                 ),
@@ -51,7 +51,7 @@ class EstimateScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.all(8),
-                      child: SelectableText(estimate.toCopyString()),
+                      child: SelectableText(estimate.toCopyStringStructures()),
                     ),
                   ],
                 ),
