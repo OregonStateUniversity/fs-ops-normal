@@ -163,7 +163,7 @@ class Estimate {
   set toyLineLength(int? length) => _toyLineLength;
   set fittings(int? count) => _fittings;
 
-  String toCopyString() {
+  String toCopyStringAcres() {
     String str = "Trunk Line: ${this.trunkLineLength} ft.\n"
         "Lat Line: ${this.latLineLength} ft.\n"
         "Toy Hose: ${this.toyLineLength} ft.\n\n";
