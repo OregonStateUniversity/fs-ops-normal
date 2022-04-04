@@ -125,6 +125,17 @@ class Estimate {
     }
   }
 
+  int? calculateSprinklers() {
+    if (this.structures! < 10) {
+      return 10;
+    } else if (this.structures! < 40) {
+      return 40;
+    } else if (this.structures! > 40) {
+      return 50;
+    }
+    return 0;
+  }
+
   Estimate.jsonConvF(
       name, acres, shape, type, structures, timeStamp, trunk, lat, toy,
       [fittings = 0]) {
@@ -199,7 +210,7 @@ class Estimate {
         "Toy Wye: ${this.fittings}\n\n";
     str += "Folda-tank: ${this.calculateFoldaTanks()}\n"
         "Mark 3 + Kits: ${this.calculateMark3s()}\n"
-        "Pump Mix (Cans): ${this.calculatePumpMixCans()}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+        "Pump Mix (Cans): ${this.calculatePumpMixCans()}\n\n";
 
     str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
         "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
