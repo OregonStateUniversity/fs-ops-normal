@@ -186,6 +186,29 @@ class Estimate {
     return str;
   }
 
+  String toCopyStringStructures() {
+    String str = "Trunk Line: ${this.trunkLineLength} ft.\n"
+        "Lat Line: ${this.latLineLength} ft.\n"
+        "Toy Hose: ${this.toyLineLength} ft.\n\n";
+
+    str += "1.5\" Gated Wye: ${this.fittings}\n"
+        "1.5\" Reducers: ${this.fittings}\n"
+        "1\"-3/4\" Reducers: ${this.fittings}\n"
+        "Forester Nozzles: ${this.fittings}\n"
+        "Toy Nozzles: ${this.fittings}\n"
+        "Toy Wye: ${this.fittings}\n\n";
+    str += "Folda-tank: ${this.calculateFoldaTanks()}\n"
+        "Mark 3 + Kits: ${this.calculateMark3s()}\n"
+        "Pump Mix (Cans): ${this.calculatePumpMixCans()}\n\n"; //one mark 3 for every 30 gallons of pump mix or 6 cans
+
+    str += "Water (Pallets): ${this.calculateWaterPallets()}\n"
+        "Gatorade (Pallets): ${this.calculateGatoradePallets()}\n"
+        "MRE (Pallets): ${this.calculateMREPallets()}\n"
+        "Port-a-Potties: ${this.calculatePortaPotties()}\n\n";
+
+    return str;
+  }
+
   void initialEquipmentCalculation() {
     _trunkLineLength = calculateTrunkLineLength();
     _latLineLength = trunkLineLength! ~/ 2;
