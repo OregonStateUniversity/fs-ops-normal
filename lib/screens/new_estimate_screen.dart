@@ -22,6 +22,20 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   static const bool _structureInputIsValid = true;
 
   @override
+  void disposeMyControllerAcreage() {
+    // Clean up the controller when the widget is disposed.
+    myControllerAcreage.dispose();
+    super.dispose();
+  }
+
+  @override
+  void disposeMyControllerStructure() {
+    // Clean up the controller when the widget is disposed.
+    myControllerStructure.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Engagement? engagement =
         ModalRoute.of(context)!.settings.arguments as Engagement?;
