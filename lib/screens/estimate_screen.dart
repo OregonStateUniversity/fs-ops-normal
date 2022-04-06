@@ -68,8 +68,8 @@ class EstimateScreen extends StatelessWidget {
     return FloatingActionButton(
         child: Icon(Icons.copy),
         onPressed: () {
-          Clipboard.setData(ClipboardData(text: estimate.toCopyString())).then(
-              (value) =>
+          Clipboard.setData(ClipboardData(text: estimate.toCopyStringAcres()))
+              .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),
                   )));
