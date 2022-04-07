@@ -207,24 +207,24 @@ class Estimate {
   }
 
   String toCopyStringAcres() {
-    String str = "Trunk Line: ${this._trunkLineLength!} ft.\n"
-        "Lat Line: ${this._latLineLength!} ft.\n"
-        "Toy Hose: ${this._toyLineLength!} ft.\n\n";
+    String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
+        "Lat Line: ${this._latLineLength} ft.\n"
+        "Toy Hose: ${this._toyLineLength} ft.\n\n";
 
-    str += "1.5\" Gated Wye: ${this._fittings!}\n"
-        "1.5\" Reducers: ${this._fittings!}\n"
-        "1\"-3/4\" Reducers: ${this._fittings!}\n"
-        "Forester Nozzles: ${this._fittings!}\n"
-        "Toy Nozzles: ${this._fittings!}\n"
-        "Toy Wye: ${this._fittings!}\n\n";
-    str += "Folda-tank: ${this._foldaTanks!}\n"
-        "Mark 3 + Kits: ${this._mark3Pumps!}\n"
-        "Pump Mix (Cans): ${this._pumpMixCans!}\n\n";
+    str += "1.5\" Gated Wye: ${this._fittings}\n"
+        "1.5\" Reducers: ${this._fittings}\n"
+        "1\"-3/4\" Reducers: ${this._fittings}\n"
+        "Forester Nozzles: ${this._fittings}\n"
+        "Toy Nozzles: ${this._fittings}\n"
+        "Toy Wye: ${this._fittings}\n\n";
+    str += "Folda-tank: ${this._foldaTanks}\n"
+        "Mark 3 + Kits: ${this._mark3Pumps}\n"
+        "Pump Mix (Cans): ${this._pumpMixCans}\n\n";
 
-    str += "Water (Pallets): ${this._waterPallets!}\n"
-        "Gatorade (Pallets): ${this._gatoradePallets!}\n"
-        "MRE (Pallets): ${this._mrePallets!}\n"
-        "Port-a-Potties: ${this._portaPotties!}\n\n";
+    str += "Water (Pallets): ${this._waterPallets}\n"
+        "Gatorade (Pallets): ${this._gatoradePallets}\n"
+        "MRE (Pallets): ${this._mrePallets}\n"
+        "Port-a-Potties: ${this._portaPotties}\n\n";
 
     return str;
   }
