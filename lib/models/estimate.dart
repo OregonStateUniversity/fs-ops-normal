@@ -5,7 +5,7 @@ class Estimate {
   int? name;
   String? timeStamp;
   int? acres;
-  int? structures;  
+  int? structures;
 
   int? _trunkLineLength;
   int? _latLineLength;
@@ -36,7 +36,7 @@ class Estimate {
     this.name = -1,
     this.timeStamp,
     this.acres,
-    this.structures = 0,
+    this.structures,
   }) {
     initializeAllProperties();
   }
@@ -244,5 +244,4 @@ class Estimate {
         'toyLineLength': toyLineLength,
         'fittings': fittings
       };
-
 }
