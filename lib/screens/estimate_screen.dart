@@ -36,7 +36,7 @@ class EstimateScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                floatingActionButton(estimate, context),
+                floatingActionButtonAcres(estimate, context),
               ],
             ),
             Padding(padding: EdgeInsets.all(10)),
@@ -56,7 +56,7 @@ class EstimateScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                floatingActionButton(estimate, context),
+                floatingActionButtonStructures(estimate, context),
               ],
             ),
           ],
@@ -65,11 +65,24 @@ class EstimateScreen extends StatelessWidget {
         bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
   }
 
-  Widget floatingActionButton(estimate, context) {
+  Widget floatingActionButtonAcres(estimate, context) {
     return FloatingActionButton(
         child: Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(ClipboardData(text: estimate.toCopyStringAcres()))
+              .then((value) =>
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Copied to Clipboard"),
+                  )));
+        });
+  }
+
+  Widget floatingActionButtonAcresStructures(estimate, context) {
+    return FloatingActionButton(
+        child: Icon(Icons.copy),
+        onPressed: () {
+          Clipboard.setData(
+                  ClipboardData(text: estimate.toCopyStringStructures()))
               .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),
