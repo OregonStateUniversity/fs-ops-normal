@@ -77,7 +77,7 @@ class EstimateScreen extends StatelessWidget {
         });
   }
 
-  Widget floatingActionButtonAcresStructures(estimate, context) {
+  Widget floatingActionButtonStructures(estimate, context) {
     return FloatingActionButton(
         child: Icon(Icons.copy),
         onPressed: () {
