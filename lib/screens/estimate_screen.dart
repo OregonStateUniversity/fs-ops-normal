@@ -36,6 +36,7 @@ class EstimateScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                floatingActionButton(estimate, context),
               ],
             ),
             Padding(padding: EdgeInsets.all(10)),
@@ -48,19 +49,19 @@ class EstimateScreen extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(8),
                       child: SelectableText(estimate.toCopyStringStructures()),
                     ),
                   ],
                 ),
+                floatingActionButton(estimate, context),
               ],
             ),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: floatingActionButton(estimate, context),
+        //floatingActionButton: floatingActionButton(estimate, context),
         bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
   }
 
