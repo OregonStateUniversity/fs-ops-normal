@@ -3,13 +3,13 @@ import 'package:hose_jockey/models/estimate.dart';
 
 void main() {
   group('An Estimate', () {
-    test('using loadSavedEstimate named constructor', () {
+    test('using finalEstimate named constructor', () {
       //Arrange
       Estimate estimate;
 
       //Act
       estimate =
-          new Estimate.loadSavedEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
+          new Estimate.finalEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));

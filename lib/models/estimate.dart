@@ -54,7 +54,7 @@ class Estimate {
     _fittings = fittings;
   }
 
-  Estimate.loadSavedEstimate(
+  Estimate.finalEstimate(
       name, acres, timeStamp, structures, trunk, lat, toy,
       [fittings]) {
     this.name = name;
@@ -124,12 +124,11 @@ class Estimate {
   }
 
   int defaultFittings() {
-    return 777;
-    // if (this.acres! >= 0) {
-    //   return (latLineLength! ~/ 100).toInt();
-    // } else {
-    //   return 0;
-    // }
+    if (this.acres! >= 0) {
+      return (latLineLength! ~/ 100).toInt();
+    } else {
+      return 0;
+    }
   }
 
   int defaultFoldaTanks() {

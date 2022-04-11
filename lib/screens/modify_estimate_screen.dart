@@ -61,10 +61,11 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                         formKey.currentState!.save();
                         // var newNum = checkNamingNumber();
                         var newNum = 0;
-                        var finalEstimate = new Estimate.loadSavedEstimate(
+                        var finalEstimate = new Estimate.finalEstimate(
                             newNum,
                             orderField.acres,
                             widget.estimate?.timeStamp,
+                            widget.estimate?.structures,
                             orderField.trunkLineLength,
                             orderField.latLineLength,
                             orderField.toyLineLength,
