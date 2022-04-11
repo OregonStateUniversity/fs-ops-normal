@@ -36,7 +36,7 @@ class Estimate {
     this.name = -1,
     this.timeStamp,
     this.acres,
-    this.structures = 0,
+    this.structures,
   }) {
     initializeAllProperties();
   }

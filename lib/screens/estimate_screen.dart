@@ -36,6 +36,7 @@ class EstimateScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                floatingActionButtonAcres(estimate, context),
               ],
             ),
             Padding(padding: EdgeInsets.all(10)),
@@ -48,27 +49,40 @@ class EstimateScreen extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(8),
                       child: SelectableText(estimate.toCopyStringStructures()),
                     ),
                   ],
                 ),
+                floatingActionButtonStructures(estimate, context),
               ],
             ),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: floatingActionButton(estimate, context),
+        //floatingActionButton: floatingActionButton(estimate, context),
         bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
   }
 
-  Widget floatingActionButton(estimate, context) {
+  Widget floatingActionButtonAcres(estimate, context) {
     return FloatingActionButton(
         child: Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(ClipboardData(text: estimate.toCopyStringAcres()))
+              .then((value) =>
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Copied to Clipboard"),
+                  )));
+        });
+  }
+
+  Widget floatingActionButtonStructures(estimate, context) {
+    return FloatingActionButton(
+        child: Icon(Icons.copy),
+        onPressed: () {
+          Clipboard.setData(
+                  ClipboardData(text: estimate.toCopyStringStructures()))
               .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),
