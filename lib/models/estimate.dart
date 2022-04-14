@@ -54,8 +54,7 @@ class Estimate {
     _fittings = fittings;
   }
 
-  Estimate.finalEstimate(
-      name, acres, timeStamp, structures, trunk, lat, toy,
+  Estimate.finalEstimate(name, acres, timeStamp, structures, trunk, lat, toy,
       [fittings]) {
     this.name = name;
     this.acres = acres;
@@ -210,7 +209,7 @@ class Estimate {
     }
   }
 
-  String toCopyStringAcres() {
+  String flatFireOrderText() {
     String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
         "Lat Line: ${this._latLineLength} ft.\n"
         "Toy Hose: ${this._toyLineLength} ft.\n\n";
@@ -233,7 +232,7 @@ class Estimate {
     return str;
   }
 
-  String toCopyStringStructures() {
+  String structureFireOrderText() {
     String str = "Sprinkler Kits: ${this._sprinklers}\n";
     return str;
   }

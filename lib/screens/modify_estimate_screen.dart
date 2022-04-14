@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hose_jockey/screens/estimate_list_screen.dart';
+import 'package:hose_jockey/screens/engagement_list_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
-import '../widgets/bottom_nav_bar.dart';
-import 'new_estimate_screen.dart';
 
 class OrderFields {
   int? acres;
@@ -33,9 +31,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   Estimate? est;
 
   void _onItemTapped(int index) {
-    // setState(() {
-    //   _selectedIndex = index;
-    // });
     Navigator.pushNamed(context, EstimateListScreen.routeName);
   }
 

@@ -33,7 +33,7 @@ class EstimateScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.all(8),
-                      child: SelectableText(estimate.toCopyStringAcres()),
+                      child: SelectableText(estimate.flatFireOrderText()),
                     ),
                   ],
                 ),
@@ -47,7 +47,7 @@ class EstimateScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(8),
-                      child: SelectableText(estimate.toCopyStringStructures()),
+                      child: SelectableText(estimate.structureFireOrderText()),
                     ),
                   ],
                 ),
@@ -64,7 +64,7 @@ class EstimateScreen extends StatelessWidget {
         heroTag: "CopyAcres",
         child: Icon(Icons.copy),
         onPressed: () {
-          Clipboard.setData(ClipboardData(text: estimate.toCopyStringAcres()))
+          Clipboard.setData(ClipboardData(text: estimate.flatFireOrderText()))
               .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),
@@ -78,7 +78,7 @@ class EstimateScreen extends StatelessWidget {
         child: Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(
-                  ClipboardData(text: estimate.toCopyStringStructures()))
+                  ClipboardData(text: estimate.structureFireOrderText()))
               .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),

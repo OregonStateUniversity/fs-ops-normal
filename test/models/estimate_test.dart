@@ -8,8 +8,7 @@ void main() {
       Estimate estimate;
 
       //Act
-      estimate =
-          new Estimate.finalEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
+      estimate = new Estimate.finalEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -98,7 +97,7 @@ void main() {
           "Toy Wye: 6\n\n";
 
       //Act
-      var actual = estimate.toCopyStringAcres();
+      var actual = estimate.flatFireOrderText();
 
       //Assert
       expect(actual, equals(expected));
@@ -123,7 +122,7 @@ void main() {
           "Pump Mix (Gallons): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
 
       //Act
-      var actual = estimate.toCopyStringAcres();
+      var actual = estimate.flatFireOrderText();
 
       //Assert
       expect(actual, equals(expected));
@@ -152,7 +151,7 @@ void main() {
           "Port-a-Potties: ${acres ~/ 2}\n\n";
 
       //Act
-      var actual = estimate.toCopyStringAcres();
+      var actual = estimate.flatFireOrderText();
 
       //Assert
       expect(actual, equals(expected));
