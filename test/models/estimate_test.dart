@@ -25,7 +25,7 @@ void main() {
 
       //Act
       estimate = new Estimate.jsonConvF(
-          1, 1, "Square", "Timber", 2, "time", 1200, 600, 300, 6);
+          1, 1, 2, "time", 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -38,10 +38,10 @@ void main() {
 
     test('toJson', () {
       //Arrange
-      Estimate estimate = new Estimate();
-      estimate.acres = 1;
+      Estimate estimate = new Estimate(acres: 1);
+      // estimate.acres = 1;
       var expected =
-          "{name: -1, acres: 1, timeStamp: null, shape: null, type: null, structures: 0, trunkLineLength: 1200, latLineLength: 600, toyLineLength: 300, fittings: 6}";
+          "{name: -1, timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200, latLineLength: 600, toyLineLength: 300, fittings: 6}";
 
       //Act
       var estimateJson = estimate.toJson().toString();
@@ -106,8 +106,7 @@ void main() {
     test('toCopyString that is 10-19 acres', () {
       //Arrange
       Estimate estimate = new Estimate();
-      int acres = 10;
-      estimate.acres = acres;
+      estimate.acres = 10;
       var expected = "Trunk Line: 3000 ft.\n"
           "Lat Line: 1500 ft.\n"
           "Toy Hose: 750 ft.\n\n"
@@ -117,9 +116,9 @@ void main() {
           "Forester Nozzles: 15\n"
           "Toy Nozzles: 15\n"
           "Toy Wye: 15\n\n"
-          "Folda-tank: ${acres ~/ 5}\n"
-          "Mark 3 + Kits: ${acres ~/ 5}\n"
-          "Pump Mix (Gallons): ${((acres ~/ 5) ~/ 2) * 3}\n\n";
+          "Folda-tank: 2\n"
+          "Mark 3 + Kits: 1\n"
+          "Pump Mix (Gallons): 6\n\n";
 
       //Act
       var actual = estimate.flatFireOrderText();

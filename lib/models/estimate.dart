@@ -35,14 +35,13 @@ class Estimate {
   Estimate({
     this.name = -1,
     this.timeStamp,
-    this.acres,
-    this.structures,
+    this.acres = 0,
+    this.structures = 0,
   }) {
     initializeAllProperties();
   }
 
-  Estimate.jsonConvF(
-      name, acres, shape, type, structures, timeStamp, trunk, lat, toy,
+  Estimate.jsonConvF(name, acres, structures, timeStamp, trunk, lat, toy,
       [fittings = 0]) {
     this.name = name;
     this.acres = acres;
@@ -70,8 +69,6 @@ class Estimate {
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
       json["name"],
       json["acres"],
-      json["shape"],
-      json["type"],
       json["structures"],
       json["timeStamp"],
       json["trunkLineLength"],
@@ -239,8 +236,8 @@ class Estimate {
 
   Map<String, dynamic> toJson() => {
         'name': name,
-        'acres': acres,
         'timeStamp': timeStamp,
+        'acres': acres,
         'structures': structures,
         'trunkLineLength': trunkLineLength,
         'latLineLength': latLineLength,
