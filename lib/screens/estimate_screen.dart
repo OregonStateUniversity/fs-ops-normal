@@ -23,6 +23,7 @@ class EstimateScreen extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Padding(padding: EdgeInsets.all(10)),
                 Text(
                   "Acres Order",
                   style: TextStyle(color: Colors.orange, fontSize: 25.0),
