@@ -67,6 +67,7 @@ class EstimateScreen extends StatelessWidget {
 
   Widget floatingActionButtonAcres(estimate, context) {
     return FloatingActionButton(
+        heroTag: "CopyAcres",
         child: Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(ClipboardData(text: estimate.toCopyStringAcres()))
@@ -79,6 +80,7 @@ class EstimateScreen extends StatelessWidget {
 
   Widget floatingActionButtonStructures(estimate, context) {
     return FloatingActionButton(
+        heroTag: "CopyStructures",
         child: Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(
