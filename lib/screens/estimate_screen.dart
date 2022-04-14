@@ -37,12 +37,6 @@ class EstimateScreen extends StatelessWidget {
                   ],
                 ),
                 floatingActionButtonAcres(estimate, context),
-              ],
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
                 Text(
                   "Structure Order",
                   style: TextStyle(color: Colors.orange, fontSize: 25.0),
@@ -61,7 +55,6 @@ class EstimateScreen extends StatelessWidget {
             ),
           ],
         ),
-        //floatingActionButton: floatingActionButton(estimate, context),
         bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
   }
 
