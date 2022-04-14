@@ -25,9 +25,16 @@ class ModifyEstimateScreen extends StatefulWidget {
 }
 
 class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
+  int _selectedIndex = 0;
   var formKey = GlobalKey<FormState>();
   OrderFields orderField = new OrderFields();
   Estimate? est;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +95,28 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      // bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: (Colors.blueGrey[900]!),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: '',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.school),
+          //   label: 'School',
+          // ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: (Colors.blueGrey[900]!),
+        onTap: _onItemTapped,
+      ),
     );
   }
 
