@@ -31,7 +31,8 @@ class App extends StatelessWidget {
       title: 'Ops Normal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
+        appBarTheme: AppBarTheme(color: const Color.fromRGBO(0, 80, 47, 1)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,

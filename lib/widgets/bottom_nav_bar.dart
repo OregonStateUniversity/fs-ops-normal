@@ -20,7 +20,7 @@ class BottomNavBarState extends State<BottomNavBar> {
       gapLocation: GapLocation.center,
       notchSmoothness: NotchSmoothness.softEdge,
       tabBuilder: (int index, bool isActive) {
-        final color = isActive ? Colors.red : Colors.white;
+        final color = isActive ? Color.fromRGBO(255, 227, 99, 1) : Colors.white;
         return Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
