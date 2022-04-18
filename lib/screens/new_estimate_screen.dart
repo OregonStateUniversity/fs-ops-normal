@@ -75,17 +75,9 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                     acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(myControllerStructure.text),
                     timeStamp: TimeFormat.currentTime);
+                myControllerAcreage.text = "0";
+                myControllerStructure.text = "0";
                 myControllerAcreage.text.isNotEmpty
-                    ? Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ModifyEstimateScreen(
-                                  estimate: estimate,
-                                  engagement: engagement,
-                                )),
-                      )
-                    : ArgumentError.notNull('Value Can\'t Be Empty');
-                myControllerStructure.text.isNotEmpty
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(
