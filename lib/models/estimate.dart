@@ -22,6 +22,7 @@ class Estimate {
 
   int? _sprinklers;
   int? _onePointFiveHose;
+  int? _oneInchHose;
 
   int? get trunkLineLength => _trunkLineLength;
   int? get latLineLength => _latLineLength;
@@ -94,6 +95,7 @@ class Estimate {
     _portaPotties = defaultPortaPotties();
     _sprinklers = defaultSprinklers();
     _onePointFiveHose = defaultOnePointFiveHose();
+    _oneInchHose = defaultOneInchHose();
   }
 
   void initializeAllProperties() {
@@ -222,6 +224,20 @@ class Estimate {
     }
   }
 
+  int defaultOneInchHose() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 20;
+    } else if (this.structures! < 40) {
+      return 35;
+    } else if (this.structures! > 40) {
+      return 50;
+    } else {
+      return 0;
+    }
+  }
+
   String flatFireOrderText() {
     String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
         "Lat Line: ${this._latLineLength} ft.\n"
@@ -247,7 +263,8 @@ class Estimate {
 
   String structureFireOrderText() {
     String str = "Sprinkler Kits: ${this._sprinklers}\n"
-        "1.5 hose: ${this._onePointFiveHose}\n";
+        "1.5 hose: ${this._onePointFiveHose}\n"
+        "1.0 hose: ${this._oneInchHose}\n";
     return str;
   }
 
