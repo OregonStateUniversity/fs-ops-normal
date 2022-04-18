@@ -16,27 +16,13 @@ class NewEstimateScreen extends StatefulWidget {
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
   var formKey = GlobalKey<FormState>();
 
-  static var myControllerAcreage = TextEditingController(text: "0");
-  static var myControllerStructure = TextEditingController(text: "0");
+  var myControllerAcreage = TextEditingController(text: "0");
+  var myControllerStructure = TextEditingController(text: "0");
 
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
   int _selectedIndex = 0;
-
-  @override
-  void disposeMyControllerAcreage() {
-    // Clean up the controller when the widget is disposed.
-    myControllerAcreage.dispose();
-    super.dispose();
-  }
-
-  @override
-  void disposeMyControllerStructure() {
-    // Clean up the controller when the widget is disposed.
-    myControllerStructure.dispose();
-    super.dispose();
-  }
 
   void _onItemTapped(int index) {
     Navigator.pushNamed(context, EstimateListScreen.routeName);
@@ -75,8 +61,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                     acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(myControllerStructure.text),
                     timeStamp: TimeFormat.currentTime);
-                myControllerAcreage.text = "0";
-                myControllerStructure.text = "0";
                 myControllerAcreage.text.isNotEmpty
                     ? Navigator.push(
                         context,
