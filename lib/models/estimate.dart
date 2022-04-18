@@ -25,6 +25,7 @@ class Estimate {
   int? _oneInchHose;
   int? _onePointFiveWye;
   int? _oneInchWye;
+  int? _onePointFiveToOneInchReducer;
 
   int? get trunkLineLength => _trunkLineLength;
   int? get latLineLength => _latLineLength;
@@ -100,6 +101,7 @@ class Estimate {
     _oneInchHose = defaultOneInchHose();
     _onePointFiveWye = defaultOnePointFiveWye();
     _oneInchWye = defaultOneInchWye();
+    _onePointFiveToOneInchReducer = defaultOnePointFiveToOneInchReducer();
   }
 
   void initializeAllProperties() {
@@ -270,6 +272,20 @@ class Estimate {
     }
   }
 
+  int defaultOnePointFiveToOneInchReducer() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 20;
+    } else if (this.structures! < 40) {
+      return 20;
+    } else if (this.structures! > 40) {
+      return 30;
+    } else {
+      return 0;
+    }
+  }
+
   String flatFireOrderText() {
     String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
         "Lat Line: ${this._latLineLength} ft.\n"
@@ -298,7 +314,8 @@ class Estimate {
         "1.5 hose: ${this._onePointFiveHose}\n"
         "1.0 hose: ${this._oneInchHose}\n"
         "1.5 Gated Wye: ${this._onePointFiveWye}\n"
-        "1.0 Gated Wye: ${this._oneInchWye}\n";
+        "1.0 Gated Wye: ${this._oneInchWye}\n"
+        "1.5-1.0 Reducer: ${this._onePointFiveToOneInchReducer}\n";
     return str;
   }
 
