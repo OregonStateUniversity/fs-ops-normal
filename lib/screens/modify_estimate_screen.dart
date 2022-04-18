@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hose_jockey/screens/engagement_list_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
-import '../widgets/bottom_nav_bar.dart';
 
 class OrderFields {
   int? acres;
@@ -31,9 +31,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   Estimate? est;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    Navigator.pushNamed(context, EstimateListScreen.routeName);
   }
 
   @override
@@ -107,10 +105,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             icon: Icon(Icons.business),
             label: '',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.school),
-          //   label: 'School',
-          // ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,

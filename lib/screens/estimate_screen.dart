@@ -16,49 +16,45 @@ class EstimateScreen extends StatelessWidget {
           automaticallyImplyLeading: true,
           title: Text("Estimate Screen"),
         ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(padding: EdgeInsets.all(25)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(padding: EdgeInsets.all(10)),
-                  Text(
-                    "Acres Order",
-                    style: TextStyle(color: Colors.orange, fontSize: 25.0),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: SelectableText(estimate.toCopyStringAcres()),
-                      ),
-                    ],
-                  ),
-                  floatingActionButtonAcres(estimate, context),
-                  Text(
-                    "Structure Order",
-                    style: TextStyle(color: Colors.orange, fontSize: 25.0),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child:
-                            SelectableText(estimate.toCopyStringStructures()),
-                      ),
-                    ],
-                  ),
-                  floatingActionButtonStructures(estimate, context),
-                ],
-              ),
-            ],
-          ),
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(padding: EdgeInsets.all(25)),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(padding: EdgeInsets.all(10)),
+                Text(
+                  "Acres Order",
+                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: SelectableText(estimate.flatFireOrderText()),
+                    ),
+                  ],
+                ),
+                floatingActionButtonAcres(estimate, context),
+                Text(
+                  "Structure Order",
+                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: SelectableText(estimate.structureFireOrderText()),
+                    ),
+                  ],
+                ),
+                floatingActionButtonStructures(estimate, context),
+              ],
+            ),
+          ],
         ),
         bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
   }
@@ -68,7 +64,7 @@ class EstimateScreen extends StatelessWidget {
         heroTag: "CopyAcres",
         child: Icon(Icons.copy),
         onPressed: () {
-          Clipboard.setData(ClipboardData(text: estimate.toCopyStringAcres()))
+          Clipboard.setData(ClipboardData(text: estimate.flatFireOrderText()))
               .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),
@@ -82,7 +78,7 @@ class EstimateScreen extends StatelessWidget {
         child: Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(
-                  ClipboardData(text: estimate.toCopyStringStructures()))
+                  ClipboardData(text: estimate.structureFireOrderText()))
               .then((value) =>
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("Copied to Clipboard"),

@@ -21,6 +21,7 @@ class Estimate {
   int? _portaPotties;
 
   int? _sprinklers;
+  int? _onePointFiveHose;
 
   int? get trunkLineLength => _trunkLineLength;
   int? get latLineLength => _latLineLength;
@@ -35,14 +36,13 @@ class Estimate {
   Estimate({
     this.name = -1,
     this.timeStamp,
-    this.acres,
-    this.structures,
+    this.acres = 0,
+    this.structures = 0,
   }) {
     initializeAllProperties();
   }
 
-  Estimate.jsonConvF(
-      name, acres, shape, type, structures, timeStamp, trunk, lat, toy,
+  Estimate.jsonConvF(name, acres, structures, timeStamp, trunk, lat, toy,
       [fittings = 0]) {
     this.name = name;
     this.acres = acres;
@@ -54,8 +54,7 @@ class Estimate {
     _fittings = fittings;
   }
 
-  Estimate.finalEstimate(
-      name, acres, timeStamp, structures, trunk, lat, toy,
+  Estimate.finalEstimate(name, acres, timeStamp, structures, trunk, lat, toy,
       [fittings]) {
     this.name = name;
     this.acres = acres;
@@ -71,8 +70,6 @@ class Estimate {
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
       json["name"],
       json["acres"],
-      json["shape"],
-      json["type"],
       json["structures"],
       json["timeStamp"],
       json["trunkLineLength"],
@@ -96,6 +93,7 @@ class Estimate {
     _mrePallets = defaultMrePallets();
     _portaPotties = defaultPortaPotties();
     _sprinklers = defaultSprinklers();
+    _onePointFiveHose = defaultOnePointFiveHose();
   }
 
   void initializeAllProperties() {
@@ -210,7 +208,21 @@ class Estimate {
     }
   }
 
-  String toCopyStringAcres() {
+  int defaultOnePointFiveHose() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 3000;
+    } else if (this.structures! < 40) {
+      return 5000;
+    } else if (this.structures! > 40) {
+      return 7000;
+    } else {
+      return 0;
+    }
+  }
+
+  String flatFireOrderText() {
     String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
         "Lat Line: ${this._latLineLength} ft.\n"
         "Toy Hose: ${this._toyLineLength} ft.\n\n";
@@ -233,15 +245,16 @@ class Estimate {
     return str;
   }
 
-  String toCopyStringStructures() {
-    String str = "Sprinkler Kits: ${this._sprinklers}\n";
+  String structureFireOrderText() {
+    String str = "Sprinkler Kits: ${this._sprinklers}\n"
+        "1.5 hose: ${this._onePointFiveHose}\n";
     return str;
   }
 
   Map<String, dynamic> toJson() => {
         'name': name,
-        'acres': acres,
         'timeStamp': timeStamp,
+        'acres': acres,
         'structures': structures,
         'trunkLineLength': trunkLineLength,
         'latLineLength': latLineLength,

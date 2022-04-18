@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hose_jockey/screens/engagement_list_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../utils/time_format.dart';
-import '../widgets/bottom_nav_bar.dart';
+// import '../widgets/bottom_nav_bar.dart';
 
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimateScreen';
@@ -21,6 +22,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
+  int _selectedIndex = 0;
+
   @override
   void disposeMyControllerAcreage() {
     // Clean up the controller when the widget is disposed.
@@ -33,6 +36,10 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
     // Clean up the controller when the widget is disposed.
     myControllerStructure.dispose();
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    Navigator.pushNamed(context, EstimateListScreen.routeName);
   }
 
   @override
@@ -92,7 +99,23 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               child: Text("New Estimate")),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: (Colors.blueGrey[900]!),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: '',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: (Colors.blueGrey[900]!),
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
