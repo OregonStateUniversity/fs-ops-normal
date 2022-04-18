@@ -16,45 +16,57 @@ class EstimateScreen extends StatelessWidget {
           automaticallyImplyLeading: true,
           title: Text("Estimate Screen"),
         ),
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(padding: EdgeInsets.all(25)),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(padding: EdgeInsets.all(10)),
-                Text(
-                  "Acres Order",
-                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: SelectableText(estimate.flatFireOrderText()),
-                    ),
-                  ],
-                ),
-                floatingActionButtonAcres(estimate, context),
-                Text(
-                  "Structure Order",
-                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: SelectableText(estimate.structureFireOrderText()),
-                    ),
-                  ],
-                ),
-                floatingActionButtonStructures(estimate, context),
-              ],
-            ),
-          ],
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(padding: EdgeInsets.all(25)),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(padding: EdgeInsets.all(10)),
+                  Text(
+                    "Acres Order",
+                    style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: SelectableText(estimate.flatFireOrderText()),
+                      ),
+                    ],
+                  ),
+                  floatingActionButtonAcres(estimate, context),
+                  Padding(padding: EdgeInsets.all(20)),
+                  // const Divider(
+                  //   height: 20,
+                  //   thickness: 50,
+                  //   indent: 1,
+                  //   endIndent: 0,
+                  //   color: Colors.black,
+                  // ),
+                  Text(
+                    "Structure Order",
+                    style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child:
+                            SelectableText(estimate.structureFireOrderText()),
+                      ),
+                    ],
+                  ),
+                  floatingActionButtonStructures(estimate, context),
+                ],
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
   }

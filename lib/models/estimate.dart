@@ -23,6 +23,7 @@ class Estimate {
   int? _sprinklers;
   int? _onePointFiveHose;
   int? _oneInchHose;
+  int? _onePointFiveWye;
 
   int? get trunkLineLength => _trunkLineLength;
   int? get latLineLength => _latLineLength;
@@ -96,6 +97,7 @@ class Estimate {
     _sprinklers = defaultSprinklers();
     _onePointFiveHose = defaultOnePointFiveHose();
     _oneInchHose = defaultOneInchHose();
+    _onePointFiveWye = defaultOnePointFiveWye();
   }
 
   void initializeAllProperties() {
@@ -231,6 +233,20 @@ class Estimate {
       return 20;
     } else if (this.structures! < 40) {
       return 35;
+    } else if (this.structures! > 40) {
+      return 50;
+    } else {
+      return 0;
+    }
+  }
+
+  int defaultOnePointFiveWye() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 10;
+    } else if (this.structures! < 40) {
+      return 40;
     } else if (this.structures! > 40) {
       return 50;
     } else {
