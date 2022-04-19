@@ -5,31 +5,31 @@ void main() {
   group('An Engagement', () {
     test('Construction and attributes', () {
       final engagement = new Xengagement(
-        id: null, name: "Fake Engagement", timeStamp: DateTime.now(),
+        id: null, name: "Fake Engagement", createdAt: DateTime.now(),
         estimates: [], active: true);
       expect(engagement.id, isNull);
       expect(engagement.name, isNotNull);
-      expect(engagement.timeStamp, isNotNull);
+      expect(engagement.createdAt, isNotNull);
       expect(engagement.estimates, isList);
       expect(engagement.active, isNotNull);
     });
 
     test('toString', () {
-      final timeStamp = DateTime.now();
+      final createdAt = DateTime.now();
       final engagement = new Xengagement(id: 42, name: "Fake Engagement",
-        timeStamp: timeStamp, estimates: [], active: true);
-      String expected = "Engagement 42: Fake Engagement, $timeStamp";
+        createdAt: createdAt, estimates: [], active: true);
+      String expected = "Engagement 42: Fake Engagement, $createdAt";
       expect(engagement.toString(), equals(expected));
     });
     group('isSaved', () {
       test('is false when the id is null', () {
         final engagement = new Xengagement(id: null, name: "Fake Engagement",
-          timeStamp: DateTime.now(), estimates: [], active: true);
+          createdAt: DateTime.now(), estimates: [], active: true);
           expect(engagement.isSaved, isFalse);
       });
       test('is true when it has an id', () {
         final engagement = new Xengagement(id: 42, name: "Fake Engagement",
-          timeStamp: DateTime.now(), estimates: [], active: true);
+          createdAt: DateTime.now(), estimates: [], active: true);
           expect(engagement.isSaved, isTrue);
       });
     });
