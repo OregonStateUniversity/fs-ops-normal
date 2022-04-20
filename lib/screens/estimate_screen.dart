@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/estimate.dart';
@@ -18,53 +20,45 @@ class EstimateScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(padding: EdgeInsets.all(25)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(padding: EdgeInsets.all(10)),
-                  Text(
-                    "Acres Order",
-                    style: TextStyle(color: Colors.orange, fontSize: 25.0),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: SelectableText(estimate.flatFireOrderText()),
-                      ),
-                    ],
-                  ),
-                  floatingActionButtonAcres(estimate, context),
-                  Padding(padding: EdgeInsets.all(20)),
-                  // const Divider(
-                  //   height: 20,
-                  //   thickness: 50,
-                  //   indent: 1,
-                  //   endIndent: 0,
-                  //   color: Colors.black,
-                  // ),
-                  Text(
-                    "Structure Order",
-                    style: TextStyle(color: Colors.orange, fontSize: 25.0),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child:
-                            SelectableText(estimate.structureFireOrderText()),
-                      ),
-                    ],
-                  ),
-                  floatingActionButtonStructures(estimate, context),
-                ],
+              Container(
+                  height: 10,
+                  width: double
+                      .infinity), //invisible container to make column max-width
+              Text(
+                "Acres Order",
+                style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold),
               ),
+              Container(
+                  child: SelectableText(
+                estimate.flatFireOrderText(),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              )),
+              Container(child: floatingActionButtonAcres(estimate, context)),
+              Container(
+                  height: 50,
+                  width: double
+                      .infinity), //invisible container to make column max-width
+              Text(
+                "Structures Order",
+                style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              Container(
+                  child: SelectableText(
+                estimate.structureFireOrderText(),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              )),
+              Container(child: floatingActionButtonAcres(estimate, context)),
             ],
           ),
         ),
@@ -112,3 +106,50 @@ class EstimateScreen extends StatelessWidget {
     );
   }
 }
+
+
+          // child: Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Column(
+          //       children: [
+          //         Padding(padding: EdgeInsets.all(10)),
+          //         Text(
+          //           "Acres Order",
+          //           style: TextStyle(color: Colors.orange, fontSize: 25.0),
+          //         ),
+          //         Row(
+          //           children: [
+          //             Padding(
+          //               padding: EdgeInsets.all(8),
+          //               child: SelectableText(estimate.flatFireOrderText()),
+          //             ),
+          //           ],
+          //         ),
+          //         Row(
+          //           children: [
+          //             Padding(
+          //               padding: EdgeInsets.all(5),
+          //               child: floatingActionButtonAcres(estimate, context),
+          //             ),
+          //           ],
+          //         ),
+          //         Padding(padding: EdgeInsets.all(10)),
+          //         Text(
+          //           "Structure Order",
+          //           style: TextStyle(color: Colors.orange, fontSize: 25.0),
+          //         ),
+          //         Row(
+          //           children: <Widget>[
+          //             Padding(
+          //               padding: EdgeInsets.all(8),
+          //               child:
+          //                   SelectableText(estimate.structureFireOrderText()),
+          //             ),
+          //           ],
+          //         ),
+          //         floatingActionButtonStructures(estimate, context),
+          //       ],
+          //     ),
+          //   ],
+          // ),

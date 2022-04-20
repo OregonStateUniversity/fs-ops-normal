@@ -71,7 +71,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                                 )),
                       )
                     : ArgumentError.notNull('Value Can\'t Be Empty');
-              },
+            },
               child: Text("New Estimate")),
         ],
       ),
