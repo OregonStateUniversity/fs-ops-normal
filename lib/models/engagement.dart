@@ -6,17 +6,15 @@ class Engagement {
   final String? name;
   final String? timeStamp;
   final int? size;
-  final String? shape;
-  final String? type;
   final int? structures;
   final List<Estimate>? orders;
 
-  Engagement(this.name, this.timeStamp, this.size, this.shape, this.type,
+  Engagement(this.name, this.timeStamp, this.size, 
       this.structures, this.orders, this.active,
       [this.primaryKey]);
 
   @override
   String toString() {
-    return '{ ${this.name}, ${this.timeStamp}, Size: ${this.size}, ${this.shape}, ${this.type}, Structures: ${this.structures} }';
+    return '{ ${this.name}, ${this.timeStamp}, Size: ${this.size}, Structures: ${this.structures} }';
   }
 }

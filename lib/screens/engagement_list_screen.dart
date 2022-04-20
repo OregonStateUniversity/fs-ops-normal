@@ -41,8 +41,7 @@ class EstimateListScreenState extends State<EstimateListScreen> {
         record['name'],
         record['timeStamp'],
         record['acres'],
-        record['shape'],
-        record['type'],
+        
         record['structures'],
         loadOrders(record['orders']),
         record['active'],
@@ -73,7 +72,7 @@ class EstimateListScreenState extends State<EstimateListScreen> {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {
         dto = Engagement(
-            newName, TimeFormat.currentTime, 250, 'Square', 'Timber', 0, [], 1);
+            newName, TimeFormat.currentTime, 250, 0, [], 1);
       });
       engagementCtrl.clear();
     }

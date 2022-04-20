@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-
   static Database? _database;
 
   static Future<Database?> getDBConnector() async {
@@ -16,7 +15,7 @@ class DatabaseHelper {
     _database = await openDatabase('engagements.db', version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
-          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, shape TEXT NOT NULL, type TEXT NOT NULL, structures INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);');
+          'CREATE TABLE IF NOT EXISTS engagements(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, timeStamp TEXT NOT NULL, acres INTEGER NOT NULL, structures INTEGER NOT NULL, active INTEGER NOT NULL, orders TEXT NOT NULL);');
     });
     return _database!;
   }
@@ -36,17 +35,8 @@ class DatabaseHelper {
     final Database? db = await getDBConnector();
     await db!.transaction((txn) async {
       await txn.rawInsert(
-          'INSERT INTO engagements(name, timeStamp, acres, shape, type, structures, active, orders) VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
-          [
-            dto.name,
-            dto.timeStamp,
-            dto.size,
-            dto.shape,
-            dto.type,
-            dto.structures,
-            1,
-            "[]"
-          ]);
+          'INSERT INTO engagements(name, timeStamp, acres, structures, active, orders) VALUES(?, ?, ?, ?, ?, ?)',
+          [dto.name, dto.timeStamp, dto.size, dto.structures, 1, "[]"]);
     });
   }
 
@@ -60,16 +50,14 @@ class DatabaseHelper {
   static Future<void> archiveEngagement(id) async {
     final Database? db = await getDBConnector();
     await db!.transaction((txn) async {
-      await txn
-          .rawUpdate('UPDATE engagements SET active = 0 WHERE id = $id');
+      await txn.rawUpdate('UPDATE engagements SET active = 0 WHERE id = $id');
     });
   }
 
   static Future<void> unarchiveEngagement(id) async {
     final Database? db = await getDBConnector();
     await db!.transaction((txn) async {
-      await txn
-          .rawUpdate('UPDATE engagements SET active = 1 WHERE id = $id');
+      await txn.rawUpdate('UPDATE engagements SET active = 1 WHERE id = $id');
     });
   }
 

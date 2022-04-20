@@ -10,15 +10,14 @@ void main() {
 
       //Act
       Engagement engagement = new Engagement(
-          "Test", "Time", 15, "Square", "Timber", 0, estimates, 1);
+          "Test", "Time", 15, 0, estimates, 1);
 
       //Assert
       expect(engagement.active, equals(1));
       expect(engagement.name, equals("Test"));
       expect(engagement.timeStamp, equals("Time"));
       expect(engagement.size, equals(15));
-      expect(engagement.shape, equals("Square"));
-      expect(engagement.type, equals("Timber"));
+      
       expect(engagement.orders, equals(estimates));
     });
 
@@ -31,24 +30,22 @@ void main() {
 
       //Act
       Engagement engagement = new Engagement(
-          "Test", "Time", 15, "Square", "Timber", 0, estimates, 1);
+          "Test", "Time", 15, 0, estimates, 1);
 
       //Assert
       expect(engagement.active, equals(1));
       expect(engagement.name, equals("Test"));
       expect(engagement.timeStamp, equals("Time"));
       expect(engagement.size, equals(15));
-      expect(engagement.shape, equals("Square"));
-      expect(engagement.type, equals("Timber"));
       expect(engagement.orders, equals(estimates));
     });
 
     test('toString', () {
       //Arrange
       Engagement engagement =
-          new Engagement("Test", "Time", 15, "Square", "Timber", 0, [], 1);
+          new Engagement("Test", "Time", 15, 0, [], 1);
       String expected =
-          "{ Test, Time, Size: 15, Square, Timber, Structures: 0 }";
+          "{ Test, Time, Size: 15, Structures: 0 }";
 
       //Act
       String actual = engagement.toString();
