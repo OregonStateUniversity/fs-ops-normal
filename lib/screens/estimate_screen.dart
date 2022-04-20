@@ -22,7 +22,7 @@ class EstimateScreen extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: <Widget>[
               Container(
                   height: 10,
                   width: double
@@ -58,7 +58,8 @@ class EstimateScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               )),
-              Container(child: floatingActionButtonAcres(estimate, context)),
+              Container(
+                  child: floatingActionButtonStructures(estimate, context)),
             ],
           ),
         ),
