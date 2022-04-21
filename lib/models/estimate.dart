@@ -27,6 +27,7 @@ class Estimate {
   int? _oneInchWye;
   int? _onePointFiveToOneInchReducer;
   int? _kkNozzles;
+  int? _mark3Structures;
   int? _foam;
 
   int? get trunkLineLength => _trunkLineLength;
@@ -105,6 +106,7 @@ class Estimate {
     _oneInchWye = defaultOneInchWye();
     _onePointFiveToOneInchReducer = defaultOnePointFiveToOneInchReducer();
     _kkNozzles = defaultKkNozzles();
+    _mark3Structures = defaultMark3Structures();
     _foam = defaultFoam();
   }
 
@@ -304,6 +306,20 @@ class Estimate {
     }
   }
 
+  int defaultMark3Structures() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 3;
+    } else if (this.structures! < 40) {
+      return 6;
+    } else if (this.structures! > 40) {
+      return 10;
+    } else {
+      return 0;
+    }
+  }
+
   int defaultFoam() {
     if (this.structures! == 0) {
       return 0;
@@ -349,6 +365,8 @@ class Estimate {
         "1.0 Gated Wye: ${this._oneInchWye}\n"
         "1.5-1.0 Reducer: ${this._onePointFiveToOneInchReducer}\n"
         "KK Nozzles: ${this._kkNozzles}\n"
+        "Mark 3 Pumps: ${this._mark3Structures}\n"
+        "Mark 3 Kits: ${this._mark3Structures}\n"
         "Foam: ${this._foam}\n";
     return str;
   }
