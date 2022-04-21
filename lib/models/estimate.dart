@@ -13,8 +13,8 @@ class Estimate {
   int? _fittings;
 
   int? _foldaTanks;
-  int? _mark3Pumps;
-  int? _pumpMixCans;
+  int? _mark3PumpsAcres;
+  int? _pumpMixCansAcres;
   int? _waterPallets;
   int? _gatoradePallets;
   int? _mrePallets;
@@ -92,8 +92,8 @@ class Estimate {
 
   void initializeUnsavedProperties() {
     _foldaTanks = defaultFoldaTanks();
-    _mark3Pumps = defaultMark3Pumps();
-    _pumpMixCans = defaultPumpMixCans();
+    _mark3PumpsAcres = defaultMark3PumpsAcres();
+    _pumpMixCansAcres = defaultPumpMixCansAcres();
     _waterPallets = defaultWaterPallets();
     _gatoradePallets = defaultGatoradePallets();
     _mrePallets = defaultMrePallets();
@@ -149,7 +149,7 @@ class Estimate {
     }
   }
 
-  int defaultMark3Pumps() {
+  int defaultMark3PumpsAcres() {
     if (acres! >= 10) {
       return acres! ~/ 10.toInt();
     } else {
@@ -158,7 +158,7 @@ class Estimate {
   }
 
   // TODO: https://github.com/osu-cascades/fs-hose-jockey/issues/120
-  int calculateMark3Kits() {
+  int calculateMark3KitsAcres() {
     if (acres! >= 10) {
       return (acres! ~/ 10).toInt();
     } else {
@@ -166,9 +166,9 @@ class Estimate {
     }
   }
 
-  int defaultPumpMixCans() {
+  int defaultPumpMixCansAcres() {
     if (this.acres! >= 10) {
-      return (this.defaultMark3Pumps() * 6).toInt();
+      return (this.defaultMark3PumpsAcres() * 6).toInt();
     } else {
       return 0;
     }
@@ -330,8 +330,8 @@ class Estimate {
         "Toy Nozzles: ${this._fittings}\n"
         "Toy Wye: ${this._fittings}\n\n";
     str += "Folda-tank: ${this._foldaTanks}\n"
-        "Mark 3 + Kits: ${this._mark3Pumps}\n"
-        "Pump Mix (Cans): ${this._pumpMixCans}\n\n";
+        "Mark 3 + Kits: ${this._mark3PumpsAcres}\n"
+        "Pump Mix (Cans): ${this._pumpMixCansAcres}\n\n";
 
     str += "Water (Pallets): ${this._waterPallets}\n"
         "Gatorade (Pallets): ${this._gatoradePallets}\n"
