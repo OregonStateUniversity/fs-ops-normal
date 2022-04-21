@@ -383,7 +383,7 @@ class Estimate {
   }
 
   String flatFireOrderText() {
-    String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
+    String str = "\nTrunk Line: ${this._trunkLineLength} ft.\n"
         "Lat Line: ${this._latLineLength} ft.\n"
         "Toy Hose: ${this._toyLineLength} ft.\n\n";
 
@@ -406,7 +406,7 @@ class Estimate {
   }
 
   String structureFireOrderText() {
-    String str = "Sprinkler Kits: ${this._sprinklers}\n"
+    String str = "\nSprinkler Kits: ${this._sprinklers}\n"
         "1.5 hose: ${this._onePointFiveHose}\n"
         "1.0 hose: ${this._oneInchHose}\n\n"
         "1.5 Gated Wye: ${this._onePointFiveWye}\n"
