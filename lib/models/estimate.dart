@@ -30,6 +30,7 @@ class Estimate {
   int? _mark3Structures;
   int? _unleadedGas;
   int? _twoCycleOil;
+  int? _portaPottiesStructures;
   int? _foam;
 
   int? get trunkLineLength => _trunkLineLength;
@@ -111,6 +112,7 @@ class Estimate {
     _mark3Structures = defaultMark3Structures();
     _unleadedGas = defaultUnleadedGas();
     _twoCycleOil = defaultTwoCycleOil();
+    _portaPottiesStructures = defaultPortaPottiesStructures();
     _foam = defaultFoam();
   }
 
@@ -352,6 +354,20 @@ class Estimate {
     }
   }
 
+  int defaultPortaPottiesStructures() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 5;
+    } else if (this.structures! < 40) {
+      return 6;
+    } else if (this.structures! > 40) {
+      return 10;
+    } else {
+      return 0;
+    }
+  }
+
   int defaultFoam() {
     if (this.structures! == 0) {
       return 0;
@@ -401,6 +417,7 @@ class Estimate {
         "Mark 3 Kits: ${this._mark3Structures}\n"
         "Unleaded Gas (Gallons): ${this._unleadedGas}\n"
         "2 Cycle Oil (Quart): ${this._twoCycleOil}\n"
+        "Port-a-Potties (1500 Gallon): ${this._portaPottiesStructures}\n"
         "Foam: ${this._foam}\n";
     return str;
   }
