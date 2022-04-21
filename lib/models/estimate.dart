@@ -18,7 +18,7 @@ class Estimate {
   int? _waterPallets;
   int? _gatoradePallets;
   int? _mrePallets;
-  int? _portaPotties;
+  int? _portaPottiesAcres;
 
   int? _sprinklers;
   int? _onePointFiveHose;
@@ -100,7 +100,7 @@ class Estimate {
     _waterPallets = defaultWaterPallets();
     _gatoradePallets = defaultGatoradePallets();
     _mrePallets = defaultMrePallets();
-    _portaPotties = defaultPortaPotties();
+    _portaPottiesAcres = defaultPortaPottiesAcres();
     _sprinklers = defaultSprinklers();
     _onePointFiveHose = defaultOnePointFiveHose();
     _oneInchHose = defaultOneInchHose();
@@ -204,7 +204,7 @@ class Estimate {
     }
   }
 
-  int defaultPortaPotties() {
+  int defaultPortaPottiesAcres() {
     if (this.acres! >= 20) {
       return (acres! ~/ 10).toInt();
     } else {
@@ -384,7 +384,7 @@ class Estimate {
     str += "Water (Pallets): ${this._waterPallets}\n"
         "Gatorade (Pallets): ${this._gatoradePallets}\n"
         "MRE (Pallets): ${this._mrePallets}\n"
-        "Port-a-Potties: ${this._portaPotties}\n\n";
+        "Port-a-Potties: ${this._portaPottiesAcres}\n\n";
 
     return str;
   }
