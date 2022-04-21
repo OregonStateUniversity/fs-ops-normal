@@ -28,6 +28,7 @@ class Estimate {
   int? _onePointFiveToOneInchReducer;
   int? _kkNozzles;
   int? _mark3Structures;
+  int? _unleadedGas;
   int? _foam;
 
   int? get trunkLineLength => _trunkLineLength;
@@ -107,6 +108,7 @@ class Estimate {
     _onePointFiveToOneInchReducer = defaultOnePointFiveToOneInchReducer();
     _kkNozzles = defaultKkNozzles();
     _mark3Structures = defaultMark3Structures();
+    _unleadedGas = defaultUnleadedGas();
     _foam = defaultFoam();
   }
 
@@ -320,6 +322,20 @@ class Estimate {
     }
   }
 
+  int defaultUnleadedGas() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 30;
+    } else if (this.structures! < 40) {
+      return 90;
+    } else if (this.structures! > 40) {
+      return 300;
+    } else {
+      return 0;
+    }
+  }
+
   int defaultFoam() {
     if (this.structures! == 0) {
       return 0;
@@ -367,6 +383,7 @@ class Estimate {
         "KK Nozzles: ${this._kkNozzles}\n"
         "Mark 3 Pumps: ${this._mark3Structures}\n"
         "Mark 3 Kits: ${this._mark3Structures}\n"
+        "Unleaded Gas (Gallons) : ${this._unleadedGas}\n"
         "Foam: ${this._foam}\n";
     return str;
   }
