@@ -161,4 +161,30 @@ void main() {
       expect(actual, equals(expected));
     });
   });
+
+  group('Estimate default methods', () {
+    test('Defualt Trunk Line Length: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 1000;
+
+      //Act
+      var actual = estimate.defaultTrunkLineLength();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Trunk Line Length: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 3000;
+
+      //Act
+      var actual = estimate.defaultTrunkLineLength();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+  });
 }
