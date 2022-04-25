@@ -6,6 +6,7 @@ import 'engagement_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
+import '../persistence/database_manager.dart';
 import '../utils/time_format.dart';
 import '../widgets/bottom_icon.dart';
 import '../widgets/side_drawer.dart';
@@ -22,43 +23,13 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   final engagementCtrl = new TextEditingController();
   final acreageCtrl = TextEditingController();
   final GlobalKey<EngagementListScreenState> _key = GlobalKey();
-  List<Engagement> engagements = [];
-
+  List<Engagement> engagements = DatabaseManager.getInstance().engagements();
   var newName;
   var dto;
   var active = true; // always starts on active orders
 
   void initState() {
     super.initState();
-    loadEngagements();
-  }
-
-  void loadEngagements() async {
-    List<Map> engagementRecords = await DatabaseHelper.getAllEngagements();
-    final engagementEntries = engagementRecords.map((record) {
-      print("active: ${record['active']}");
-      return Engagement(
-        record['name'],
-        record['timeStamp'],
-        record['acres'],
-        
-        record['structures'],
-        loadOrders(record['orders']),
-        record['active'],
-        record['id'],
-      );
-    }).toList();
-    setState(() {
-      active == true
-          ? engagements = engagementEntries.reversed
-              .toList()
-              .where((a) => a.active == 1)
-              .toList()
-          : engagements = engagementEntries.reversed
-              .toList()
-              .where((a) => a.active == 0)
-              .toList();
-    });
   }
 
   List<Estimate> loadOrders(string) {
@@ -71,8 +42,8 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   void setEngagement() {
     if (engagementCtrl.text.isNotEmpty) {
       setState(() {
-        dto = Engagement(
-            newName, TimeFormat.currentTime, 250, 0, [], 1);
+        // dto = Engagement(
+        //     newName, TimeFormat.currentTime, 250, 0, [], 1);
       });
       engagementCtrl.clear();
     }
@@ -151,11 +122,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         onSelected: (dynamic value) {
           if (value == 1) {
             setState(() {
-              engagements.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+              engagements.sort((a, b) => a.createdAt.compareTo(b.createdAt));
             });
           } else if (value == 2) {
             setState(() {
-              engagements.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+              engagements.sort((a, b) => b.createdAt.compareTo(a.createdAt));
             });
           }
         });
@@ -163,7 +134,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   Widget _dismissible(engagements, index) {
     return Dismissible(
-        key: Key(engagements[index].primaryKey.toString()),
+        key: Key(engagements[index].id.toString()),
         background: _primaryBackground(),
         secondaryBackground: _secondaryBackground(),
         dismissThresholds: {
@@ -185,7 +156,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         '${engagements[index].name}',
         style: TextStyle(fontSize: 22),
       ),
-      subtitle: Text('Created: ${engagements[index].timeStamp}',
+      subtitle: Text('Created: ${engagements[index].createdAt}',
           style: TextStyle(fontSize: 18)),
       onTap: () {
         Navigator.pushNamed(
@@ -261,13 +232,13 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void _onDismissed(direction, index) {
     if (direction == DismissDirection.endToStart) {
-      DatabaseHelper.deleteEngagement(engagements[index].primaryKey);
+      DatabaseHelper.deleteEngagement(engagements[index].id);
     } else if (active == true) {
-      DatabaseHelper.archiveEngagement(engagements[index].primaryKey);
+      DatabaseHelper.archiveEngagement(engagements[index].id);
     } else if (active == false) {
-      DatabaseHelper.unarchiveEngagement(engagements[index].primaryKey);
+      DatabaseHelper.unarchiveEngagement(engagements[index].id);
     }
-    loadEngagements();
+    // loadEngagements();
   }
 
   Widget _alertDialog(deleteOrArchive) {
@@ -322,7 +293,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
                     newName = engagementCtrl.text;
                     setEngagement();
                     DatabaseHelper.insertEngagement(dto);
-                    loadEngagements();
+                    // loadEngagements();
                     Navigator.of(context).pop();
                   },
                 ),
@@ -380,12 +351,12 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         switch (index) {
           case 0:
             active = true;
-            loadEngagements();
+            // loadEngagements();
             _onTap(index);
             break;
           case 1:
             active = false;
-            loadEngagements();
+            // loadEngagements();
             _onTap(index);
             break;
         }
@@ -407,6 +378,6 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void changeBackToActive() {
     active = true;
-    loadEngagements();
+    // loadEngagements();
   }
 }
