@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
 
-import '../models/engagement.dart';
-
 class DatabaseManager {
 
   static const SCHEMA_FILE_ASSET_PATH = 'assets/db/schema_1.sql.txt';
@@ -50,12 +48,6 @@ class DatabaseManager {
 
   Future<List<Map<String, dynamic>>> select({required String sql}) {
     return db.rawQuery(sql);
-  }
-
-  List<Engagement> engagements() {
-    List<Engagement> results = [];
-
-    return results;
   }
 
 }

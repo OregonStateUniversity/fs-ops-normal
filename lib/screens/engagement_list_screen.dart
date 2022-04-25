@@ -7,6 +7,7 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
 import '../persistence/database_manager.dart';
+import '../persistence/engagement_dao.dart';
 import '../utils/time_format.dart';
 import '../widgets/bottom_icon.dart';
 import '../widgets/side_drawer.dart';
@@ -20,16 +21,25 @@ class EngagementListScreen extends StatefulWidget {
 }
 
 class EngagementListScreenState extends State<EngagementListScreen> {
+  
   final engagementCtrl = new TextEditingController();
   final acreageCtrl = TextEditingController();
   final GlobalKey<EngagementListScreenState> _key = GlobalKey();
-  List<Engagement> engagements = DatabaseManager.getInstance().engagements();
+  List<Engagement>? engagements = [];
+  
   var newName;
   var dto;
   var active = true; // always starts on active orders
 
+  @override
   void initState() {
     super.initState();
+    loadEngagements();
+  }
+
+  void loadEngagements() async {
+    this.engagements = await EngagementDAO.engagements(databaseManager: DatabaseManager.getInstance());
+    // setState(() {});
   }
 
   List<Estimate> loadOrders(string) {
@@ -52,7 +62,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   @override
   Widget build(BuildContext context) {
     final title = active == true ? "Ops Normal" : "Ops Archive";
-    if (engagements.isEmpty) {
+    if (engagements!.isEmpty) {
       return Scaffold(
           appBar: AppBar(
             title: Text(title),
@@ -90,7 +100,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
             Expanded(
               child: ListView.builder(
                   padding: const EdgeInsets.all(10),
-                  itemCount: engagements.length,
+                  itemCount: engagements!.length,
                   itemBuilder: (context, index) {
                     return _dismissible(engagements, index);
                   }),
@@ -122,11 +132,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         onSelected: (dynamic value) {
           if (value == 1) {
             setState(() {
-              engagements.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+              engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
             });
           } else if (value == 2) {
             setState(() {
-              engagements.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+              engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
             });
           }
         });
@@ -232,11 +242,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void _onDismissed(direction, index) {
     if (direction == DismissDirection.endToStart) {
-      DatabaseHelper.deleteEngagement(engagements[index].id);
+      DatabaseHelper.deleteEngagement(engagements![index].id);
     } else if (active == true) {
-      DatabaseHelper.archiveEngagement(engagements[index].id);
+      DatabaseHelper.archiveEngagement(engagements![index].id);
     } else if (active == false) {
-      DatabaseHelper.unarchiveEngagement(engagements[index].id);
+      DatabaseHelper.unarchiveEngagement(engagements![index].id);
     }
     // loadEngagements();
   }

@@ -16,4 +16,10 @@ class Engagement {
 
   get isSaved => id != null;
 
+  Engagement.fromMap({required Map map}) : id = map['id'],
+    name = map['name'],
+    createdAt = DateTime.parse(map['createdAt']),
+    estimates = [],
+    active = map['active'];
+
 }
