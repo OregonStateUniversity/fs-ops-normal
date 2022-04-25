@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hose_jockey/screens/engagement_list_screen.dart';
+import 'engagement_list_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
@@ -25,7 +25,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-    Navigator.pushNamed(context, EstimateListScreen.routeName);
+    Navigator.pushNamed(context, EngagementListScreen.routeName);
   }
 
   @override
