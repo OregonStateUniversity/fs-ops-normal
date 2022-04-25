@@ -19,7 +19,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
   Widget build(BuildContext context) {
     final Engagement? engagement =
         ModalRoute.of(context)!.settings.arguments as Engagement?;
-    final List<Estimate>? argOrders = engagement!.orders;
+    final List<Estimate>? argOrders = engagement!.estimates;
     List<Estimate> orders = argOrders!;
     if (orders.isEmpty) {
       return Scaffold(
@@ -35,7 +35,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
                     style: TextStyle(fontSize: 22),
                   ),
                   TextSpan(
-                      text: "\nCreated on: ${engagement.timeStamp}",
+                      text: "\nCreated on: ${engagement.createdAt}",
                       style: TextStyle(fontSize: 14))
                 ]),
           ),
@@ -68,7 +68,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
                   style: TextStyle(fontSize: 22),
                 ),
                 TextSpan(
-                    text: "\nCreated on: ${engagement.timeStamp}",
+                    text: "\nCreated on: ${engagement.createdAt}",
                     style: TextStyle(fontSize: 14))
               ]),
         ),
@@ -116,7 +116,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(engagement.orders![index].timeStamp!),
+                  key: Key(engagement.estimates[index].timeStamp!),
                   background: Stack(
                     children: [
                       Container(
@@ -169,7 +169,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
                   },
                   onDismissed: (direction) async {
                     DatabaseHelper.deleteOrder(
-                        engagement, engagement.orders![index]);
+                        engagement, engagement.estimates[index]);
                     setState(() {
                       orders.removeAt(index);
                     });

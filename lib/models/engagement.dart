@@ -1,20 +1,19 @@
 import 'estimate.dart';
 
 class Engagement {
-  final int? primaryKey;
-  final int? active;
-  final String? name;
-  final String? timeStamp;
-  final int? size;
-  final int? structures;
-  final List<Estimate>? orders;
+  final int? id;
+  final String name;
+  final bool active;
+  final DateTime createdAt;
+  final List<Estimate> estimates;
 
-  Engagement(this.name, this.timeStamp, this.size, 
-      this.structures, this.orders, this.active,
-      [this.primaryKey]);
+  Engagement({this.id, required this.name, required this.createdAt, required this.estimates, required this.active});
 
   @override
   String toString() {
-    return '{ ${this.name}, ${this.timeStamp}, Size: ${this.size}, Structures: ${this.structures} }';
+    return 'Engagement ${this.id}: ${this.name}, ${this.createdAt}';
   }
+
+  get isSaved => id != null;
+
 }
