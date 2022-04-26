@@ -13,8 +13,10 @@ class EngagementDAO {
     return engagementRecords.map( (row) => Engagement.fromMap(map: row) ).toList();
   }
 
-  static void save({required DatabaseManager databaseManager, required EngagementDTO dto}) {
-    // TODO
+  static Future save({required DatabaseManager databaseManager, required EngagementDTO dto}) async {
+    databaseManager.insert(sql: DatabaseManager.SQL['engagements']!['insert']!,
+      values: [dto.name, dto.createdAt.toString(), dto.active]
+    );
   }
 
 }
