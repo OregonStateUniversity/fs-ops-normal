@@ -38,6 +38,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void loadEngagements() async {
     this.engagements = await EngagementDAO.engagements(databaseManager: DatabaseManager.getInstance());
+    setState(() {});
   }
 
   List<Estimate> loadOrders(string) {
