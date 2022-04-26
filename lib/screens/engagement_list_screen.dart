@@ -23,8 +23,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   
   final GlobalKey<EngagementListScreenState> _key = GlobalKey();
   List<Engagement>? engagements;
-  
-  var active = true; // always starts on active orders
+  var active = true;
 
   @override
   void initState() {
@@ -71,7 +70,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           appBar: AppBar(
             title: Text(title),
             centerTitle: true,
-            actions: <Widget>[_sortByOptions()],
+            actions: <Widget>[_sortMenu()],
           ),
           body: Column(key: _key, children: <Widget>[
             Text('Engagements'),
@@ -90,34 +89,27 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           bottomNavigationBar: bottomNavBar());
   }
 
-  Widget _sortByOptions() {
+  Widget _sortMenu() {
     return PopupMenuButton(
-        icon: Transform.rotate(
-          angle: 90 * 3.1415927 / 180,
-          child: Icon(Icons.code),
-        ),
-        offset: Offset(0, 30),
-        itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 1,
-                child: Text("Oldest"),
-              ),
-              PopupMenuItem(
-                value: 2,
-                child: Text("Newest"),
-              ),
-            ],
-        onSelected: (dynamic value) {
-          if (value == 1) {
-            setState(() {
-              engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-            });
-          } else if (value == 2) {
-            setState(() {
-              engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-            });
-          }
-        });
+      icon: Icon(Icons.sort),
+      itemBuilder: (context) => [
+        PopupMenuItem(value: 'newest', child: Text("Newest")),
+        PopupMenuItem(value: 'oldest', child: Text("Oldest")),
+      ],
+      onSelected: (value) => _sortEngagements(value)
+    );
+  }
+
+  void _sortEngagements(value) {
+    if (value == 'oldest') {
+      setState(() {
+        engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      });
+    } else if (value == 'newest') {
+      setState(() {
+        engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      });
+    }
   }
 
   Widget _dismissible(engagements, index) {
