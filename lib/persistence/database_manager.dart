@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
 
-import '../models/engagement.dart';
-
 class DatabaseManager {
 
   static const SCHEMA_FILE_ASSET_PATH = 'assets/db/schema_1.sql.txt';
@@ -11,7 +9,7 @@ class DatabaseManager {
     'engagements': {
       'select': 'SELECT * FROM engagements',
       'select_one': 'SELECT * FROM engagements WHERE id = ?',
-      'insert': 'INSERT INTO engagements(name, createdAt, active) VALUES(?, ?, ?)',
+      'insert': 'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
       'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
       'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?'
     }
@@ -52,10 +50,10 @@ class DatabaseManager {
     return db.rawQuery(sql);
   }
 
-  List<Engagement> engagements() {
-    List<Engagement> results = [];
-
-    return results;
+  void insert({required String sql, required List<dynamic> values}) {
+    db.transaction((t) async {
+      await t.rawInsert(sql, values);
+    });
   }
 
 }

@@ -1,14 +1,14 @@
-import 'dart:convert';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'engagement_screen.dart';
-import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
 import '../persistence/database_manager.dart';
-import '../utils/time_format.dart';
+import '../persistence/engagement_dao.dart';
+import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_icon.dart';
+import '../widgets/new_engagement_dialog.dart';
 import '../widgets/side_drawer.dart';
 
 class EngagementListScreen extends StatefulWidget {
@@ -20,39 +20,26 @@ class EngagementListScreen extends StatefulWidget {
 }
 
 class EngagementListScreenState extends State<EngagementListScreen> {
-  final engagementCtrl = new TextEditingController();
-  final acreageCtrl = TextEditingController();
+  
   final GlobalKey<EngagementListScreenState> _key = GlobalKey();
-  List<Engagement> engagements = DatabaseManager.getInstance().engagements();
-  var newName;
-  var dto;
-  var active = true; // always starts on active orders
+  List<Engagement>? engagements;
+  var active = true;
 
+  @override
   void initState() {
     super.initState();
+    loadEngagements();
   }
 
-  List<Estimate> loadOrders(string) {
-    Iterable i = json.decode(string);
-    List<Estimate> orderEntries =
-        List<Estimate>.from(i.map((model) => Estimate.fromJson(model)));
-    return orderEntries;
-  }
-
-  void setEngagement() {
-    if (engagementCtrl.text.isNotEmpty) {
-      setState(() {
-        // dto = Engagement(
-        //     newName, TimeFormat.currentTime, 250, 0, [], 1);
-      });
-      engagementCtrl.clear();
-    }
+  void loadEngagements() async {
+    this.engagements = await EngagementDAO.engagements(databaseManager: DatabaseManager.getInstance());
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final title = active == true ? "Ops Normal" : "Ops Archive";
-    if (engagements.isEmpty) {
+    if (engagements == null || engagements!.isEmpty) {
       return Scaffold(
           appBar: AppBar(
             title: Text(title),
@@ -74,7 +61,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: floatAccButton(),
+          floatingActionButton: this.active ? newEngagementButton() : null,
           bottomNavigationBar: bottomNavBar());
     } else
       return Scaffold(
@@ -83,14 +70,14 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           appBar: AppBar(
             title: Text(title),
             centerTitle: true,
-            actions: <Widget>[_sortByOptions()],
+            actions: <Widget>[_sortMenu()],
           ),
           body: Column(key: _key, children: <Widget>[
             Text('Engagements'),
             Expanded(
               child: ListView.builder(
                   padding: const EdgeInsets.all(10),
-                  itemCount: engagements.length,
+                  itemCount: engagements!.length,
                   itemBuilder: (context, index) {
                     return _dismissible(engagements, index);
                   }),
@@ -98,38 +85,31 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           ]),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: floatAccButton(),
+          floatingActionButton: this.active ? newEngagementButton() : null,
           bottomNavigationBar: bottomNavBar());
   }
 
-  Widget _sortByOptions() {
+  Widget _sortMenu() {
     return PopupMenuButton(
-        icon: Transform.rotate(
-          angle: 90 * 3.1415927 / 180,
-          child: Icon(Icons.code),
-        ),
-        offset: Offset(0, 30),
-        itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 1,
-                child: Text("Oldest"),
-              ),
-              PopupMenuItem(
-                value: 2,
-                child: Text("Newest"),
-              ),
-            ],
-        onSelected: (dynamic value) {
-          if (value == 1) {
-            setState(() {
-              engagements.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-            });
-          } else if (value == 2) {
-            setState(() {
-              engagements.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-            });
-          }
-        });
+      icon: Icon(Icons.sort),
+      itemBuilder: (context) => [
+        PopupMenuItem(value: 'newest', child: Text("Newest")),
+        PopupMenuItem(value: 'oldest', child: Text("Oldest")),
+      ],
+      onSelected: (value) => _sortEngagements(value)
+    );
+  }
+
+  void _sortEngagements(value) {
+    if (value == 'oldest') {
+      setState(() {
+        engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      });
+    } else if (value == 'newest') {
+      setState(() {
+        engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      });
+    }
   }
 
   Widget _dismissible(engagements, index) {
@@ -156,7 +136,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         '${engagements[index].name}',
         style: TextStyle(fontSize: 22),
       ),
-      subtitle: Text('Created: ${engagements[index].createdAt}',
+      subtitle: Text('Created: ${DateTimeFormatter.format(engagements[index].createdAt)}',
           style: TextStyle(fontSize: 18)),
       onTap: () {
         Navigator.pushNamed(
@@ -232,11 +212,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void _onDismissed(direction, index) {
     if (direction == DismissDirection.endToStart) {
-      DatabaseHelper.deleteEngagement(engagements[index].id);
+      DatabaseHelper.deleteEngagement(engagements![index].id);
     } else if (active == true) {
-      DatabaseHelper.archiveEngagement(engagements[index].id);
+      DatabaseHelper.archiveEngagement(engagements![index].id);
     } else if (active == false) {
-      DatabaseHelper.unarchiveEngagement(engagements[index].id);
+      DatabaseHelper.unarchiveEngagement(engagements![index].id);
     }
     // loadEngagements();
   }
@@ -263,47 +243,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     );
   }
 
-  _createEngagement(context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              title: Text('Create New Engagement'),
-              content: TextField(
-                autofocus: true,
-                controller: engagementCtrl,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  labelText: 'Engagement Name:',
-                  border: const OutlineInputBorder(),
-                ),
-              ),
-              actions: <Widget>[
-                OutlinedButton(
-                  child: Text('cancel'),
-                  onPressed: () {
-                    engagementCtrl.clear();
-                    Navigator.of(context).pop();
-                  },
-                ),
-                OutlinedButton(
-                  key: Key('create engagement'),
-                  child: Text('Create'),
-                  onPressed: () async {
-                    newName = engagementCtrl.text;
-                    setEngagement();
-                    DatabaseHelper.insertEngagement(dto);
-                    // loadEngagements();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ]);
-        });
-  }
-
-  int? activeIndex;
   var _bottomNavIndex = 0;
-  final autoSizeGroup = AutoSizeGroup();
 
   List<BottomIcon> iconList = [
     BottomIcon("Home", Icons.home_filled),
@@ -340,7 +280,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
                 iconList[index].name,
                 maxLines: 1,
                 style: TextStyle(color: color),
-                group: autoSizeGroup,
+                group: AutoSizeGroup(),
               ),
             )
           ],
@@ -364,20 +304,21 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     );
   }
 
-  Widget? floatAccButton() {
-    if (active == false) {
-      return null;
-    }
+  Widget newEngagementButton() {
     return FloatingActionButton(
-      key: Key("add engagement"),
-      onPressed: () => _createEngagement(context),
-      tooltip: 'New estimate',
-      child: Icon(Icons.add),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => NewEngagementDialog()
+        ).then((value) {
+          if (value) {
+            setState(() { loadEngagements(); });
+          }
+        });    
+      },
+      tooltip: 'New engagement',
+      child: const Icon(Icons.add),
     );
   }
 
-  void changeBackToActive() {
-    active = true;
-    // loadEngagements();
-  }
 }
