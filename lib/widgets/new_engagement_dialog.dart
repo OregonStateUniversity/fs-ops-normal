@@ -9,36 +9,42 @@ class NewEngagementDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Create New Engagement'),
-      content: TextField(
-        autofocus: true,
-        controller: engagementNameTextFieldController,
-        textCapitalization: TextCapitalization.words,
-        decoration: InputDecoration(
-          labelText: 'Engagement Name:',
-          border: const OutlineInputBorder(),
-        ),
-      ),
-      actions: <Widget>[
-        OutlinedButton(
-          child: Text('Cancel'),
-          onPressed: () {
-            engagementNameTextFieldController.clear();
-            Navigator.of(context).pop();
-          },
-        ),
-        OutlinedButton(
-          key: Key('create engagement'),
-          child: Text('Create'),
-          onPressed: () async {
-            final engagementName = engagementNameTextFieldController.text;
-            // setEngagement();
-            // DatabaseHelper.insertEngagement(dto);
-            // loadEngagements();
-            Navigator.of(context).pop();
-          },
-        ),
-      ]
+      title: const Text('Create New Engagement'),
+      content: _nameField(),
+      actions: <Widget>[_cancelButton(context), _saveButton(context)]
     );
   }
+
+  Widget _nameField() {
+    return TextField(
+      autofocus: true,
+      controller: engagementNameTextFieldController,
+      textCapitalization: TextCapitalization.words,
+      decoration: const InputDecoration(
+        labelText: 'Engagement Name:',
+        border: const OutlineInputBorder(),
+      )
+    );
+  }
+
+  Widget _cancelButton(BuildContext context) {
+    return OutlinedButton(
+      child: const Text('Cancel'),
+      onPressed: () => Navigator.of(context).pop()
+    );
+  }
+
+  Widget _saveButton(BuildContext context) {
+    return OutlinedButton(
+      child: const Text('Save'),
+      onPressed: () async {
+        final engagementName = engagementNameTextFieldController.text;
+        // setEngagement();
+        // DatabaseHelper.insertEngagement(dto);
+        // loadEngagements();
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
 }
