@@ -3,7 +3,6 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'engagement_screen.dart';
-import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
 import '../persistence/database_manager.dart';
@@ -23,11 +22,9 @@ class EngagementListScreen extends StatefulWidget {
 
 class EngagementListScreenState extends State<EngagementListScreen> {
   
-  final acreageCtrl = TextEditingController();
   final GlobalKey<EngagementListScreenState> _key = GlobalKey();
-  List<Engagement>? engagements = [];
+  List<Engagement>? engagements;
   
-  var newName;
   var active = true; // always starts on active orders
 
   @override
@@ -41,17 +38,10 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     setState(() {});
   }
 
-  List<Estimate> loadOrders(string) {
-    Iterable i = json.decode(string);
-    List<Estimate> orderEntries =
-        List<Estimate>.from(i.map((model) => Estimate.fromJson(model)));
-    return orderEntries;
-  }
-
   @override
   Widget build(BuildContext context) {
     final title = active == true ? "Ops Normal" : "Ops Archive";
-    if (engagements!.isEmpty) {
+    if (engagements == null || engagements!.isEmpty) {
       return Scaffold(
           appBar: AppBar(
             title: Text(title),
@@ -262,9 +252,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     );
   }
 
-  int? activeIndex;
   var _bottomNavIndex = 0;
-  final autoSizeGroup = AutoSizeGroup();
 
   List<BottomIcon> iconList = [
     BottomIcon("Home", Icons.home_filled),
@@ -301,7 +289,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
                 iconList[index].name,
                 maxLines: 1,
                 style: TextStyle(color: color),
-                group: autoSizeGroup,
+                group: AutoSizeGroup(),
               ),
             )
           ],
@@ -342,8 +330,4 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     );
   }
 
-  void changeBackToActive() {
-    active = true;
-    // loadEngagements();
-  }
 }
