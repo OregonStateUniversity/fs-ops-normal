@@ -10,6 +10,7 @@ import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
 import '../utils/time_format.dart';
 import '../widgets/bottom_icon.dart';
+import '../widgets/new_engagement_dialog.dart';
 import '../widgets/side_drawer.dart';
 
 class EngagementListScreen extends StatefulWidget {
@@ -22,7 +23,6 @@ class EngagementListScreen extends StatefulWidget {
 
 class EngagementListScreenState extends State<EngagementListScreen> {
   
-  final engagementCtrl = new TextEditingController();
   final acreageCtrl = TextEditingController();
   final GlobalKey<EngagementListScreenState> _key = GlobalKey();
   List<Engagement>? engagements = [];
@@ -49,15 +49,15 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     return orderEntries;
   }
 
-  void setEngagement() {
-    if (engagementCtrl.text.isNotEmpty) {
-      setState(() {
-        // dto = Engagement(
-        //     newName, TimeFormat.currentTime, 250, 0, [], 1);
-      });
-      engagementCtrl.clear();
-    }
-  }
+  // void setEngagement() {
+  //   if (engagementCtrl.text.isNotEmpty) {
+  //     setState(() {
+  //       // dto = Engagement(
+  //       //     newName, TimeFormat.currentTime, 250, 0, [], 1);
+  //     });
+  //     engagementCtrl.clear();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: floatAccButton(),
+          floatingActionButton: this.active ? newEngagementButton() : null,
           bottomNavigationBar: bottomNavBar());
     } else
       return Scaffold(
@@ -108,7 +108,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           ]),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: floatAccButton(),
+          floatingActionButton: this.active ? newEngagementButton() : null,
           bottomNavigationBar: bottomNavBar());
   }
 
@@ -273,44 +273,6 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     );
   }
 
-  _createEngagement(context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              title: Text('Create New Engagement'),
-              content: TextField(
-                autofocus: true,
-                controller: engagementCtrl,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  labelText: 'Engagement Name:',
-                  border: const OutlineInputBorder(),
-                ),
-              ),
-              actions: <Widget>[
-                OutlinedButton(
-                  child: Text('cancel'),
-                  onPressed: () {
-                    engagementCtrl.clear();
-                    Navigator.of(context).pop();
-                  },
-                ),
-                OutlinedButton(
-                  key: Key('create engagement'),
-                  child: Text('Create'),
-                  onPressed: () async {
-                    newName = engagementCtrl.text;
-                    setEngagement();
-                    DatabaseHelper.insertEngagement(dto);
-                    // loadEngagements();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ]);
-        });
-  }
-
   int? activeIndex;
   var _bottomNavIndex = 0;
   final autoSizeGroup = AutoSizeGroup();
@@ -374,15 +336,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     );
   }
 
-  Widget? floatAccButton() {
-    if (active == false) {
-      return null;
-    }
+  Widget newEngagementButton() {
     return FloatingActionButton(
-      key: Key("add engagement"),
-      onPressed: () => _createEngagement(context),
-      tooltip: 'New estimate',
-      child: Icon(Icons.add),
+      onPressed: () => showDialog(context: context, builder: (context) => NewEngagementDialog()),
+      tooltip: 'New engagement',
+      child: const Icon(Icons.add),
     );
   }
 
