@@ -3,7 +3,7 @@ import 'engagement_list_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-import '../utils/time_format.dart';
+import '../utils/date_time_formatter.dart';
 // import '../widgets/bottom_nav_bar.dart';
 
 class NewEstimateScreen extends StatefulWidget {
@@ -60,7 +60,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 var estimate = new Estimate(
                     acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(myControllerStructure.text),
-                    timeStamp: TimeFormat.currentTime);
+                    timeStamp: DateTimeFormatter.format(DateTime.now()));
                 myControllerAcreage.text.isNotEmpty
                     ? Navigator.push(
                         context,

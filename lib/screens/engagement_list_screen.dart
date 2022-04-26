@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
-import '../utils/time_format.dart';
+import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_icon.dart';
 import '../widgets/new_engagement_dialog.dart';
 import '../widgets/side_drawer.dart';
@@ -145,7 +144,7 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         '${engagements[index].name}',
         style: TextStyle(fontSize: 22),
       ),
-      subtitle: Text('Created: ${engagements[index].createdAt}',
+      subtitle: Text('Created: ${DateTimeFormatter.format(engagements[index].createdAt)}',
           style: TextStyle(fontSize: 18)),
       onTap: () {
         Navigator.pushNamed(
