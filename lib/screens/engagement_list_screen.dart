@@ -28,7 +28,6 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   List<Engagement>? engagements = [];
   
   var newName;
-  var dto;
   var active = true; // always starts on active orders
 
   @override
@@ -39,7 +38,6 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void loadEngagements() async {
     this.engagements = await EngagementDAO.engagements(databaseManager: DatabaseManager.getInstance());
-    // setState(() {});
   }
 
   List<Estimate> loadOrders(string) {
@@ -48,16 +46,6 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         List<Estimate>.from(i.map((model) => Estimate.fromJson(model)));
     return orderEntries;
   }
-
-  // void setEngagement() {
-  //   if (engagementCtrl.text.isNotEmpty) {
-  //     setState(() {
-  //       // dto = Engagement(
-  //       //     newName, TimeFormat.currentTime, 250, 0, [], 1);
-  //     });
-  //     engagementCtrl.clear();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -338,7 +326,16 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   Widget newEngagementButton() {
     return FloatingActionButton(
-      onPressed: () => showDialog(context: context, builder: (context) => NewEngagementDialog()),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => NewEngagementDialog()
+        ).then((value) {
+          if (value) {
+            setState(() { loadEngagements(); });
+          }
+        });    
+      },
       tooltip: 'New engagement',
       child: const Icon(Icons.add),
     );

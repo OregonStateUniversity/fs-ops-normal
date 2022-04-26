@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../persistence/database_manager.dart';
+import '../persistence/engagement_dao.dart';
+import '../persistence/engagement_dto.dart';
 
 class NewEngagementDialog extends StatelessWidget {
   
@@ -30,19 +33,20 @@ class NewEngagementDialog extends StatelessWidget {
   Widget _cancelButton(BuildContext context) {
     return OutlinedButton(
       child: const Text('Cancel'),
-      onPressed: () => Navigator.of(context).pop()
+      onPressed: () => Navigator.of(context).pop(false)
     );
   }
 
   Widget _saveButton(BuildContext context) {
     return OutlinedButton(
       child: const Text('Save'),
-      onPressed: () async {
-        final engagementName = engagementNameTextFieldController.text;
-        // setEngagement();
-        // DatabaseHelper.insertEngagement(dto);
-        // loadEngagements();
-        Navigator.of(context).pop();
+      onPressed: () {
+        final dto = EngagementDTO(
+          name: engagementNameTextFieldController.text,
+          active: true,
+          createdAt: DateTime.now());
+        EngagementDAO.save(databaseManager: DatabaseManager.getInstance(), dto: dto);
+        Navigator.of(context).pop(true);
       },
     );
   }
