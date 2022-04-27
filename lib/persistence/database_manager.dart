@@ -7,8 +7,10 @@ class DatabaseManager {
   static const DATABASE_FILENAME = 'ops_normal.sqlite3.db';
   static const SQL = {
     'engagements': {
-      'select': 'SELECT * FROM engagements ORDER BY createdAt DESC',
-      'select_one': 'SELECT * FROM engagements WHERE id = ?',
+      'selectAll': 'SELECT * FROM engagements ORDER BY createdAt DESC',
+      'selectActive': 'SELECT * FROM engagements WHERE active = TRUE ORDER BY createdAt DESC',
+      'selectInactive': 'SELECT * FROM engagements WHERE active = FALSE ORDER BY createdAt DESC',
+      'selectOne': 'SELECT * FROM engagements WHERE id = ?',
       'insert': 'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
       'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
       'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?',
@@ -60,6 +62,12 @@ class DatabaseManager {
   void delete({required String sql, required int id}) {
     db.transaction( (t) async {
       await t.rawDelete(sql, [id]);
+    });
+  }
+
+  void update({required String sql, required List<dynamic> values}) {
+    db.transaction((t) async {
+      await t.rawUpdate(sql, values);
     });
   }
 

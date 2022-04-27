@@ -4,10 +4,16 @@ import '../models/engagement.dart';
 
 class EngagementDAO {
 
-  static final sqlSelect = DatabaseManager.SQL['engagements']!['select'];
+  static final sqlSelectActive = DatabaseManager.SQL['engagements']!['selectActive'];
+  static final sqlSelectInactive = DatabaseManager.SQL['engagements']!['selectInactive'];
 
-  static Future<List<Engagement>> engagements({required DatabaseManager databaseManager}) async {
-    final engagementRecords = await databaseManager.select(sql: sqlSelect!);
+  static Future<List<Engagement>> activeEngagements({required DatabaseManager databaseManager}) async {
+    final engagementRecords = await databaseManager.select(sql: sqlSelectActive!);
+    return engagementRecords.map( (row) => Engagement.fromMap(map: row) ).toList();
+  }
+
+  static Future<List<Engagement>> inactiveEngagements({required DatabaseManager databaseManager}) async {
+    final engagementRecords = await databaseManager.select(sql: sqlSelectInactive!);
     return engagementRecords.map( (row) => Engagement.fromMap(map: row) ).toList();
   }
 

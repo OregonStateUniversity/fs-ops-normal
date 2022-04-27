@@ -21,7 +21,6 @@ class EngagementListScreen extends StatefulWidget {
 
 class EngagementListScreenState extends State<EngagementListScreen> {
   
-  // final GlobalKey<EngagementListScreenState> _key = GlobalKey();
   List<Engagement>? engagements;
   var active = true;
   get _noEngagements => engagements == null || engagements!.isEmpty;
@@ -33,7 +32,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   }
 
   void loadEngagements() async {
-    this.engagements = await EngagementDAO.engagements(databaseManager: DatabaseManager.getInstance());
+    if (active) {
+      this.engagements = await EngagementDAO.activeEngagements(databaseManager: DatabaseManager.getInstance());
+    } else {
+      this.engagements = await EngagementDAO.inactiveEngagements(databaseManager: DatabaseManager.getInstance());
+    }
     setState(() {});
   }
 
@@ -203,9 +206,9 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     if (direction == DismissDirection.endToStart) {
       EngagementDAO.delete(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     } else if (active == true) {
-      DatabaseHelper.archiveEngagement(engagement.id);
+      // EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     } else if (active == false) {
-      DatabaseHelper.unarchiveEngagement(engagement.id);
+      // EngagementDAO.reactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     }
     loadEngagements();
   }
@@ -280,12 +283,12 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         switch (index) {
           case 0:
             active = true;
-            // loadEngagements();
+            loadEngagements();
             _onTap(index);
             break;
           case 1:
             active = false;
-            // loadEngagements();
+            loadEngagements();
             _onTap(index);
             break;
         }
