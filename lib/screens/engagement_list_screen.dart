@@ -21,10 +21,11 @@ class EngagementListScreen extends StatefulWidget {
 
 class EngagementListScreenState extends State<EngagementListScreen> {
   
-  final GlobalKey<EngagementListScreenState> _key = GlobalKey();
+  // final GlobalKey<EngagementListScreenState> _key = GlobalKey();
   List<Engagement>? engagements;
   var active = true;
-
+  get _noEngagements => engagements == null || engagements!.isEmpty;
+  
   @override
   void initState() {
     super.initState();
@@ -38,55 +39,48 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final title = active == true ? "Ops Normal" : "Ops Archive";
-    if (engagements == null || engagements!.isEmpty) {
-      return Scaffold(
-          appBar: AppBar(
-            title: Text(title),
-            centerTitle: true,
+    return Scaffold(
+      drawer: SideDrawer(),
+      appBar: AppBar(
+        title: _appBarTitle(),
+        actions: _appBarActions(),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _bodyChildren()
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: this.active ? newEngagementButton() : null,
+      bottomNavigationBar: bottomNavBar()
+    );
+  }
+
+  Widget _appBarTitle() => active ? const Text("Ops Normal") : const Text("Ops Archive");
+
+  Widget _emptyListPrompt() => active ? const Text("No engagements created yet.") : const Text("No engagements archived yet.");
+
+  List<Widget> _appBarActions() => _noEngagements ? const <Widget>[] : [_sortMenu()];
+
+  List<Widget> _bodyChildren() {
+    if (_noEngagements) {
+      return [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [_emptyListPrompt()],
+        )];
+    } else {
+      return [
+        Text('Engagements'),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(10),
+            itemCount: engagements!.length,
+            itemBuilder: (context, index) {
+              return _dismissible(engagements, index);
+            }),
           ),
-          drawer: SideDrawer(),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  active == true
-                      ? Text("No Engagements Created Yet")
-                      : Text("No Engagements Archived Yet")
-                ],
-              ),
-            ],
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: this.active ? newEngagementButton() : null,
-          bottomNavigationBar: bottomNavBar());
-    } else
-      return Scaffold(
-          resizeToAvoidBottomInset: false,
-          drawer: SideDrawer(),
-          appBar: AppBar(
-            title: Text(title),
-            centerTitle: true,
-            actions: <Widget>[_sortMenu()],
-          ),
-          body: Column(key: _key, children: <Widget>[
-            Text('Engagements'),
-            Expanded(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(10),
-                  itemCount: engagements!.length,
-                  itemBuilder: (context, index) {
-                    return _dismissible(engagements, index);
-                  }),
-            ),
-          ]),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: this.active ? newEngagementButton() : null,
-          bottomNavigationBar: bottomNavBar());
+        ];
+    }
   }
 
   Widget _sortMenu() {
