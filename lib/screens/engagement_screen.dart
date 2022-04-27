@@ -4,6 +4,9 @@ import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../persistence/database_helper.dart';
+import '../persistence/database_manager.dart';
+import '../persistence/estimate_dao.dart';
+import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class EngagementScreen extends StatefulWidget {
@@ -13,15 +16,26 @@ class EngagementScreen extends StatefulWidget {
 }
 
 class _EngagementScreenState extends State<EngagementScreen> {
-  final acreageCon = new TextEditingController();
+
+  Engagement? engagement;
+  List<Estimate>? estimates;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void loadEstimates() async {
+    this.estimates = await EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: this.engagement!);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Engagement? engagement =
-        ModalRoute.of(context)!.settings.arguments as Engagement?;
-    final List<Estimate>? argOrders = engagement!.estimates;
-    List<Estimate> orders = argOrders!;
-    if (orders.isEmpty) {
+    this.engagement = ModalRoute.of(context)!.settings.arguments as Engagement;
+    loadEstimates();
+
+    if (this.estimates?.isEmpty == true) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
@@ -31,11 +45,11 @@ class _EngagementScreenState extends State<EngagementScreen> {
                 style: TextStyle(fontSize: 22, color: Colors.white),
                 children: <TextSpan>[
                   TextSpan(
-                    text: "${engagement.name}",
+                    text: "${engagement?.name}",
                     style: TextStyle(fontSize: 22),
                   ),
                   TextSpan(
-                      text: "\nCreated on: ${engagement.createdAt}",
+                      text: "\nCreated ${DateTimeFormatter.format(engagement!.createdAt)}",
                       style: TextStyle(fontSize: 14))
                 ]),
           ),
@@ -46,7 +60,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("No Orders Created Yet"),
+                Text("No Estimates Created Yet"),
               ],
             )
           ],
@@ -64,11 +78,11 @@ class _EngagementScreenState extends State<EngagementScreen> {
               style: TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan>[
                 TextSpan(
-                  text: "${engagement.name}",
+                  text: "${engagement?.name}",
                   style: TextStyle(fontSize: 22),
                 ),
                 TextSpan(
-                    text: "\nCreated on: ${engagement.createdAt}",
+                    text: "\nCreated on: ${engagement?.createdAt}",
                     style: TextStyle(fontSize: 14))
               ]),
         ),
@@ -96,15 +110,15 @@ class _EngagementScreenState extends State<EngagementScreen> {
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    orders.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                    this.estimates?.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    orders.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                    this.estimates?.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
-                    orders.sort((a, b) => b.acres!.compareTo(a.acres!));
+                    this.estimates?.sort((a, b) => b.acres!.compareTo(a.acres!));
                   });
                 }
               }),
@@ -113,14 +127,14 @@ class _EngagementScreenState extends State<EngagementScreen> {
       body: Scrollbar(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: orders.length,
+              itemCount: this.estimates?.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(engagement.estimates[index].timeStamp!),
+                  key: Key(estimates![index].timeStamp!),
                   background: Stack(
                     children: [
                       Container(
-                        color: engagement.active == 1
+                        color: engagement!.active
                             ? Colors.red
                             : Colors.black12,
                       ),
@@ -128,9 +142,9 @@ class _EngagementScreenState extends State<EngagementScreen> {
                         padding: EdgeInsets.all(12.0),
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: engagement.active == 1
+                          child: engagement!.active
                               ? Icon(Icons.delete_forever, size: 34)
-                              : Text("Can't Delete Orders In Archive Mode"),
+                              : Text("Can't Delete Estimates In Archive Mode"),
                         ),
                       )
                     ],
@@ -138,19 +152,19 @@ class _EngagementScreenState extends State<EngagementScreen> {
                   dismissThresholds: {
                     DismissDirection.startToEnd: 2.0,
                     DismissDirection.endToStart:
-                        engagement.active == 1 ? .25 : 2.0
+                        engagement!.active ? .25 : 2.0
                   },
                   confirmDismiss: (DismissDirection direction) async {
                     return await showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          if (engagement.active == 0) {
+                          if (engagement!.active == false) {
                             return AlertDialog(
                                 title:
                                     const Text("This engagement isn't active"));
                           }
                           return AlertDialog(
-                            title: const Text("Delete Order?"),
+                            title: const Text("Delete Estimate?"),
                             content: const Text("This cannot be undone"),
                             actions: [
                               TextButton(
@@ -169,21 +183,21 @@ class _EngagementScreenState extends State<EngagementScreen> {
                   },
                   onDismissed: (direction) async {
                     DatabaseHelper.deleteOrder(
-                        engagement, engagement.estimates[index]);
+                        engagement, estimates?[index]);
                     setState(() {
-                      orders.removeAt(index);
+                      this.estimates?.removeAt(index);
                     });
                   },
                   child: ListTile(
-                    title: Text('Estimate ${orders[index].name}',
+                    title: Text('Estimate ${this.estimates![index].name}',
                         style: TextStyle(fontSize: 22)),
                     subtitle: Text(
-                      '${orders[index].acres.toString()} Acres\nCreated on: ${orders[index].timeStamp}\n',
+                      '${this.estimates![index].acres.toString()} Acres\nCreated on: ${this.estimates![index].timeStamp}\n',
                       style: TextStyle(fontSize: 18),
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, EstimateScreen.routeName,
-                          arguments: orders[index]);
+                          arguments: this.estimates![index]);
                     },
                   ),
                 );
@@ -203,7 +217,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
         Navigator.pushNamed(context, NewEstimateScreen.routeName,
             arguments: engagement);
       },
-      tooltip: 'New Order',
+      tooltip: 'New Estimate',
       child: Icon(Icons.add),
     );
   }

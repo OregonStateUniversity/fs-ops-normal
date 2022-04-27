@@ -15,6 +15,9 @@ class DatabaseManager {
       'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
       'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?',
       'delete': 'DELETE FROM engagements WHERE id = ?',
+    },
+    'estimates': {
+      'select': 'SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC',
     }
   };
 
@@ -53,6 +56,10 @@ class DatabaseManager {
 
   Future<List<Map<String, dynamic>>> select({required String sql}) {
     return db.rawQuery(sql);
+  }
+
+  Future<List<Map<String, dynamic>>> selectWhere({required String sql, required List<dynamic> values}) {
+    return db.rawQuery(sql, values);
   }
 
   void insert({required String sql, required List<dynamic> values}) {

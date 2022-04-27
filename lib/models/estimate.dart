@@ -2,6 +2,11 @@ class Estimate {
   static const BASE_TRUNK_LINE_LENGTH = 1000;
   static const TRUNK_LINE_LENGTH_PER_ACRE = 200;
 
+  int? id;
+  int? engagementId;
+  String? newName;
+  DateTime? createdAt;
+
   int? name;
   String? timeStamp;
   int? acres;
@@ -432,4 +437,13 @@ class Estimate {
         'toyLineLength': toyLineLength,
         'fittings': fittings
       };
+  
+  Estimate.fromMap({required Map map}) :
+    id = map['id'],
+    engagementId = map['engagementId'],
+    newName = map['name'],
+    createdAt = DateTime.parse(map['createdAt']),
+    acres = map['acres'],
+    structures = map['structures'];
+
 }
