@@ -7,7 +7,7 @@ class DatabaseManager {
   static const DATABASE_FILENAME = 'ops_normal.sqlite3.db';
   static const SQL = {
     'engagements': {
-      'select': 'SELECT * FROM engagements',
+      'select': 'SELECT * FROM engagements ORDER BY createdAt DESC',
       'select_one': 'SELECT * FROM engagements WHERE id = ?',
       'insert': 'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
       'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
