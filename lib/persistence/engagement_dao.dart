@@ -17,4 +17,8 @@ class EngagementDAO {
     );
   }
 
+  static Future delete({required DatabaseManager databaseManager, required Engagement engagement}) async {
+    databaseManager.delete(sql: DatabaseManager.SQL['engagements']!['delete']!, id: engagement.id!);
+  }
+
 }

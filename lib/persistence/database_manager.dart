@@ -11,7 +11,8 @@ class DatabaseManager {
       'select_one': 'SELECT * FROM engagements WHERE id = ?',
       'insert': 'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
       'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
-      'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?'
+      'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?',
+      'delete': 'DELETE FROM engagements WHERE id = ?',
     }
   };
 
@@ -53,6 +54,12 @@ class DatabaseManager {
   void insert({required String sql, required List<dynamic> values}) {
     db.transaction((t) async {
       await t.rawInsert(sql, values);
+    });
+  }
+
+  void delete({required String sql, required int id}) {
+    db.transaction( (t) async {
+      await t.rawDelete(sql, [id]);
     });
   }
 

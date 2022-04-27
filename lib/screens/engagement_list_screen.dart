@@ -201,13 +201,13 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   void _archiveOrDeleteEngagement(direction, Engagement engagement) {
     if (direction == DismissDirection.endToStart) {
-      DatabaseHelper.deleteEngagement(engagement.id);
+      EngagementDAO.delete(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     } else if (active == true) {
       DatabaseHelper.archiveEngagement(engagement.id);
     } else if (active == false) {
       DatabaseHelper.unarchiveEngagement(engagement.id);
     }
-    // loadEngagements();
+    loadEngagements();
   }
 
   Widget _alertDialog(deleteOrArchive) {
