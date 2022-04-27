@@ -61,28 +61,6 @@ class EngagementListScreenState extends State<EngagementListScreen> {
 
   List<Widget> _appBarActions() => _noEngagements ? const <Widget>[] : [_sortMenu()];
 
-  List<Widget> _bodyChildren() {
-    if (_noEngagements) {
-      return [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [_emptyListPrompt()],
-        )];
-    } else {
-      return [
-        Text('Engagements'),
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(10),
-            itemCount: engagements!.length,
-            itemBuilder: (context, index) {
-              return _dismissible(engagements, index);
-            }),
-          ),
-        ];
-    }
-  }
-
   Widget _sortMenu() {
     return PopupMenuButton(
       icon: Icon(Icons.sort),
@@ -106,11 +84,32 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     }
   }
 
-  Widget _dismissible(engagements, index) {
+  List<Widget> _bodyChildren() {
+    if (_noEngagements) {
+      return [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [_emptyListPrompt()],
+        )];
+    } else {
+      return [
+        Text('Engagements'),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(10),
+            itemCount: engagements!.length,
+            itemBuilder: (context, index) => _dismissible(engagements![index])
+          ),
+        ),
+      ];
+    }
+  }
+
+  Widget _dismissible(Engagement engagement) {
     return Dismissible(
-        key: Key(engagements[index].id.toString()),
-        background: _primaryBackground(),
-        secondaryBackground: _secondaryBackground(),
+        key: Key(engagement.id.toString()),
+        background: _archiveBackground(),
+        secondaryBackground: _deleteBackground(),
         dismissThresholds: {
           DismissDirection.startToEnd: 0.25,
           DismissDirection.endToStart: 0.25
@@ -119,30 +118,25 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           return await _confirmDismiss(direction);
         },
         onDismissed: (direction) {
-          _onDismissed(direction, index);
+          _archiveOrDeleteEngagement(direction, engagement);
         },
-        child: _listTile(engagements, index));
+        child: _listTile(engagement)
+      );
   }
 
-  Widget _listTile(engagements, index) {
+  Widget _listTile(Engagement engagement) {
     return ListTile(
-      title: Text(
-        '${engagements[index].name}',
-        style: TextStyle(fontSize: 22),
-      ),
-      subtitle: Text('Created: ${DateTimeFormatter.format(engagements[index].createdAt)}',
-          style: TextStyle(fontSize: 18)),
+      title: Text(engagement.name, style: TextStyle(fontSize: 22)),
+      subtitle: Text('Created: ${DateTimeFormatter.format(engagement.createdAt)}',
+          style: TextStyle(fontSize: 18)
+        ),
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          EngagementScreen.routeName,
-          arguments: engagements[index],
-        );
+        Navigator.pushNamed(context, EngagementScreen.routeName, arguments: engagement);
       },
     );
   }
 
-  Widget _primaryBackground() {
+  Widget _archiveBackground() {
     return Stack(children: [
       Container(
         color: Colors.green,
@@ -150,14 +144,11 @@ class EngagementListScreenState extends State<EngagementListScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
-                  active == false
-                      ? Icons.unarchive_rounded
-                      : Icons.archive_rounded,
-                  color: Colors.white),
-              Text(active == false ? "Unarchive" : "Archive",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w700)),
+              Icon(_archivingIconData(), color: Colors.white),
+              Text(_archivingIconText(),
+                style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w700)
+              ),
               SizedBox(width: 20)
             ],
           ),
@@ -166,7 +157,15 @@ class EngagementListScreenState extends State<EngagementListScreen> {
     ]);
   }
 
-  Widget _secondaryBackground() {
+  IconData _archivingIconData() {
+    return active ? Icons.archive_rounded : Icons.unarchive_rounded;
+  }
+
+  String _archivingIconText() {
+    return active ? "Archive" : "Unarchive";
+  }
+
+  Widget _deleteBackground() {
     return Stack(
       children: [
         Container(
@@ -176,9 +175,9 @@ class EngagementListScreenState extends State<EngagementListScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Icon(Icons.delete_forever_outlined, color: Colors.white),
-                Text("Delete",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w700)),
+                Text("Delete", style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w700)
+                ),
                 SizedBox(width: 20)
               ],
             ),
@@ -189,28 +188,24 @@ class EngagementListScreenState extends State<EngagementListScreen> {
   }
 
   Future<bool?> _confirmDismiss(direction) async {
-    if (direction == DismissDirection.endToStart) {
-      return await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return _alertDialog("Delete");
-          });
-    } else {
-      return await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return _alertDialog("Archive");
-          });
-    }
+    return await showDialog(context: context,
+      builder: (BuildContext context) {
+        if (direction == DismissDirection.endToStart) {
+          return _alertDialog("Delete");
+        } else {
+          return _alertDialog("Archive");
+        }
+      }
+    );
   }
 
-  void _onDismissed(direction, index) {
+  void _archiveOrDeleteEngagement(direction, Engagement engagement) {
     if (direction == DismissDirection.endToStart) {
-      DatabaseHelper.deleteEngagement(engagements![index].id);
+      DatabaseHelper.deleteEngagement(engagement.id);
     } else if (active == true) {
-      DatabaseHelper.archiveEngagement(engagements![index].id);
+      DatabaseHelper.archiveEngagement(engagement.id);
     } else if (active == false) {
-      DatabaseHelper.unarchiveEngagement(engagements![index].id);
+      DatabaseHelper.unarchiveEngagement(engagement.id);
     }
     // loadEngagements();
   }
