@@ -90,16 +90,16 @@ class EngagementListScreenState extends State<EngagementListScreen> {
         PopupMenuItem(value: 'newest', child: Text("Newest")),
         PopupMenuItem(value: 'oldest', child: Text("Oldest")),
       ],
-      onSelected: (value) => _sortEngagements(value)
+      onSelected: (value) => _sortEngagements(value as String)
     );
   }
 
-  void _sortEngagements(value) {
-    if (value == 'oldest') {
+  void _sortEngagements(String order) {
+    if (order == 'oldest') {
       setState(() {
         engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
       });
-    } else if (value == 'newest') {
+    } else if (order == 'newest') {
       setState(() {
         engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       });
