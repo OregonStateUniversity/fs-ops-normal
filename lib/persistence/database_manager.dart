@@ -45,8 +45,10 @@ class DatabaseManager {
     await db.execute('PRAGMA foreign_keys = ON');
   }
 
-  static void createTables(Database db, int _, String sql) async {
-    await db.execute(sql);
+  static void createTables(Database db, int _, String sql) {
+    List<String> createStatements = sql.split(";").map( (s) => s.trim() ).toList();
+    createStatements.removeWhere((s) => s.isEmpty);
+    createStatements.forEach((statement) => db.execute(statement));
   }
 
   Future<List<Map<String, dynamic>>> select({required String sql}) {

@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS engagements(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     createdAt TEXT NOT NULL,
-    active INTEGER NOT NULL DEFAULT 1);
+    active INTEGER NOT NULL DEFAULT TRUE);
 
 CREATE TABLE IF NOT EXISTS estimates(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS estimates(
     name TEXT NOT NULL,
     createdAt TEXT NOT NULL,
     acres INTEGER NOT NULL,
-    structures INTEGER NOT NULL),
-    FOREIGN KEY (engagementId) REFERENCES engagements(id);
+    structures INTEGER NOT NULL,
+    FOREIGN KEY (engagementId) REFERENCES engagements(id));
