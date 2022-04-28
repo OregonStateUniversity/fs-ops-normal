@@ -68,7 +68,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/OpsNormal_IOS.png
+    - assets/icon/icon.png
     - assets/IRPG_2018.pdf
     - assets/RedBook.pdf
     - assets/db/schema_1.sql.txt
