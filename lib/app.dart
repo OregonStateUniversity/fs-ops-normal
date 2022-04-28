@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'screens/about_screen.dart';
 import 'screens/new_estimate_screen.dart';
 import 'screens/engagement_screen.dart';
@@ -9,6 +8,8 @@ import 'screens/incident_response_pocket_guide_screen.dart';
 import 'screens/engagement_list_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/red_book_screen.dart';
+import 'screens/xactive_engagement_list_screen.dart';
+import 'screens/xinactive_engagement_list_screen.dart';
 
 class App extends StatelessWidget {
   static final routes = {
@@ -27,15 +28,41 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: EngagementListScreen.routeName,
       title: 'Ops Normal',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
         appBarTheme: AppBarTheme(color: const Color.fromRGBO(0, 80, 47, 1)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: routes,
+      home: MainTabController()
     );
   }
+}
+
+class MainTabController extends StatelessWidget {
+  
+  static const tabs = [
+    Tab(icon: Icon(Icons.home)),
+    Tab(icon: Icon(Icons.archive))
+  ];
+
+  static final screens = [
+    XActiveEngagementListScreen(),
+    XInactiveEngagementListScreen()
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        length: tabs.length,
+        child: Scaffold(
+            appBar: AppBar(
+                title: Text('Ops Normal'),
+                bottom: TabBar(tabs: tabs)
+            ),
+            body: SafeArea(child: TabBarView(children: screens))
+        )
+      );
+  }
+
 }
