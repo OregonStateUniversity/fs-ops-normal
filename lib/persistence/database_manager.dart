@@ -2,22 +2,25 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseManager {
-
   static const SCHEMA_FILE_ASSET_PATH = 'assets/db/schema_1.sql.txt';
   static const DATABASE_FILENAME = 'ops_normal.sqlite3.db';
   static const SQL = {
     'engagements': {
       'selectAll': 'SELECT * FROM engagements ORDER BY createdAt DESC',
-      'selectActive': 'SELECT * FROM engagements WHERE active = TRUE ORDER BY createdAt DESC',
-      'selectInactive': 'SELECT * FROM engagements WHERE active = FALSE ORDER BY createdAt DESC',
+      'selectActive':
+          'SELECT * FROM engagements WHERE active = TRUE ORDER BY createdAt DESC',
+      'selectInactive':
+          'SELECT * FROM engagements WHERE active = FALSE ORDER BY createdAt DESC',
       'selectOne': 'SELECT * FROM engagements WHERE id = ?',
-      'insert': 'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
+      'insert':
+          'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
       'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
       'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?',
       'delete': 'DELETE FROM engagements WHERE id = ?',
     },
     'estimates': {
-      'select': 'SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC',
+      'select':
+          'SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC',
     }
   };
 
@@ -34,13 +37,10 @@ class DatabaseManager {
   }
 
   static Future initialize() async {
-    final db = await openDatabase(DATABASE_FILENAME,
-      version: 1,
-      onCreate: (Database db, int _) async {
-        createTables(db, _, await rootBundle.loadString(SCHEMA_FILE_ASSET_PATH));
-      },
-      onConfigure: _configure
-    );
+    final db = await openDatabase(DATABASE_FILENAME, version: 1,
+        onCreate: (Database db, int _) async {
+      createTables(db, _, await rootBundle.loadString(SCHEMA_FILE_ASSET_PATH));
+    }, onConfigure: _configure);
     _instance = DatabaseManager._(database: db);
   }
 
@@ -49,7 +49,8 @@ class DatabaseManager {
   }
 
   static void createTables(Database db, int _, String sql) {
-    List<String> createStatements = sql.split(";").map( (s) => s.trim() ).toList();
+    List<String> createStatements =
+        sql.split(";").map((s) => s.trim()).toList();
     createStatements.removeWhere((s) => s.isEmpty);
     createStatements.forEach((statement) => db.execute(statement));
   }
@@ -58,7 +59,8 @@ class DatabaseManager {
     return db.rawQuery(sql);
   }
 
-  Future<List<Map<String, dynamic>>> selectWhere({required String sql, required List<dynamic> values}) {
+  Future<List<Map<String, dynamic>>> selectWhere(
+      {required String sql, required List<dynamic> values}) {
     return db.rawQuery(sql, values);
   }
 
@@ -69,9 +71,13 @@ class DatabaseManager {
   }
 
   void delete({required String sql, required int id}) {
-    db.transaction( (t) async {
+    db.transaction((t) async {
       await t.rawDelete(sql, [id]);
     });
+  }
+
+  void reactivate({required String sql, required int id}) {
+    // TODO
   }
 
   void update({required String sql, required List<dynamic> values}) {
@@ -79,5 +85,4 @@ class DatabaseManager {
       await t.rawUpdate(sql, values);
     });
   }
-
 }
