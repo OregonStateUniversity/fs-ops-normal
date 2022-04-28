@@ -30,7 +30,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   OrderFields orderField = new OrderFields();
   Estimate? est;
 
-  void _onItemTapped(int index) {
+  void _navigateHome(int index) {
     Navigator.pushNamed(context, EngagementListScreen.routeName);
   }
 
@@ -109,7 +109,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
         unselectedItemColor: (Colors.blueGrey[900]!),
-        onTap: _onItemTapped,
+        onTap: _navigateHome,
       ),
     );
   }
