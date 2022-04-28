@@ -5,7 +5,7 @@ import '../widgets/bottom_nav_bar.dart';
 class RedBookScreen extends StatelessWidget {
   static const title = "Red Book";
   static const routeName = 'redBook';
-  static const PDF_FILE_NAME = 'lib/assets/RedBook.pdf';
+  static const PDF_FILE_NAME = 'assets/RedBook.pdf';
 
   final pdfController =
       PdfController(document: PdfDocument.openAsset(PDF_FILE_NAME));

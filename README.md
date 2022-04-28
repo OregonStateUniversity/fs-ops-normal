@@ -9,7 +9,7 @@ Hose Jockey, now known as Ops Normal, is an application to help assist wildland 
 
 ## How to run Ops Normal on device, Virtual or Physical
 ### Virtual Device
-1. Open up virtual device from your IDE
+1. Open up virtual device from your IDE. If you need help setting up a vitual device, you can follow the steps described in this article: https://flutteragency.com/set-up-an-emulator-for-vscode/
 2. Run the application
 
 ### Physical Device
