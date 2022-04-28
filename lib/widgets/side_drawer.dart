@@ -63,7 +63,7 @@ class SideDrawer extends StatelessWidget {
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(color: Colors.black),
-        child: Image(image: AssetImage('lib/assets/icon/OpsNormal_IOS.png')));
+        child: Image(image: AssetImage('assets/icon/OpsNormal_IOS.png')));
   }
 
   Widget _drawerItem(IconData icon, String text, Function onTap) {
