@@ -8,14 +8,14 @@ class DatabaseManager {
     'engagements': {
       'selectAll': 'SELECT * FROM engagements ORDER BY createdAt DESC',
       'selectActive':
-          'SELECT * FROM engagements WHERE active = TRUE ORDER BY createdAt DESC',
+          'SELECT * FROM engagements WHERE active = 1 ORDER BY createdAt DESC',
       'selectInactive':
-          'SELECT * FROM engagements WHERE active = FALSE ORDER BY createdAt DESC',
+          'SELECT * FROM engagements WHERE active = 0 ORDER BY createdAt DESC',
       'selectOne': 'SELECT * FROM engagements WHERE id = ?',
       'insert':
           'INSERT INTO engagements(name, createdAt, active) VALUES (?, ?, ?)',
-      'deactivate': 'UPDATE engagements SET active = FALSE WHERE id = ?',
-      'reactivate': 'UPDATE engagements SET active = TRUE WHERE id = ?',
+      'deactivate': 'UPDATE engagements SET active = 0 WHERE id = ?',
+      'reactivate': 'UPDATE engagements SET active = 1 WHERE id = ?',
       'delete': 'DELETE FROM engagements WHERE id = ?',
     },
     'estimates': {
