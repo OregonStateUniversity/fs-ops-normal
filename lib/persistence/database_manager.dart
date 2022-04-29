@@ -77,7 +77,9 @@ class DatabaseManager {
   }
 
   void reactivate({required String sql, required int id}) {
-    // TODO
+    db.transaction((t) async {
+      await t.rawReactivate(sql, [id]);
+    });
   }
 
   void update({required String sql, required List<dynamic> values}) {
