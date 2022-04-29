@@ -49,6 +49,12 @@ class MainScreen extends StatelessWidget {
             ],
         onSelected: (value) => { /* TODO */ });
 
+  final Widget floatingActionButton = FloatingActionButton(
+      onPressed: () { /* TODO */ },
+      tooltip: 'New engagement',
+      child: const Icon(Icons.add),
+    );
+
   static const tabs = [
     Tab(text: 'Home', icon: Icon(Icons.home)),
     Tab(text: 'Archive', icon: Icon(Icons.archive))
@@ -64,6 +70,8 @@ class MainScreen extends StatelessWidget {
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
+            floatingActionButton: floatingActionButton,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             drawer: SideDrawer(),
             appBar: AppBar(
                 title: const Text('Ops Normal'),
@@ -75,9 +83,7 @@ class MainScreen extends StatelessWidget {
               child: TabBar(tabs: tabs, unselectedLabelColor: Colors.grey)
             )
         )
-
       );
   }
 
 }
-

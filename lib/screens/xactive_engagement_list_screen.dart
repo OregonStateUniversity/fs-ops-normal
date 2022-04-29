@@ -8,6 +8,7 @@ import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_icon.dart';
 import '../widgets/new_engagement_dialog.dart';
+import '../widgets/side_drawer.dart';
 
 class XActiveEngagementListScreen extends StatefulWidget {
   XActiveEngagementListScreen({Key? key}) : super(key: key);
@@ -41,40 +42,43 @@ class XActiveEngagementListScreenState extends State<XActiveEngagementListScreen
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: _bodyChildren()),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: this.active ? newEngagementButton() : null,
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _bodyChildren()
     );
   }
+
+  Widget _appBarTitle() =>
+      active ? const Text("Ops Normal") : const Text("Ops Archive");
 
   Widget _emptyListPrompt() => active
       ? const Text("No engagements created yet.")
       : const Text("No engagements archived yet.");
 
-  // Widget _sortMenu() {
-  //   return PopupMenuButton(
-  //       icon: Icon(Icons.sort),
-  //       itemBuilder: (context) => [
-  //             PopupMenuItem(value: 'newest', child: Text("Newest")),
-  //             PopupMenuItem(value: 'oldest', child: Text("Oldest")),
-  //           ],
-  //       onSelected: (value) => _sortEngagements(value as String));
-  // }
+  List<Widget> _appBarActions() =>
+      _noEngagements ? const <Widget>[] : [_sortMenu()];
 
-  // void _sortEngagements(String order) {
-  //   if (order == 'oldest') {
-  //     setState(() {
-  //       engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-  //     });
-  //   } else if (order == 'newest') {
-  //     setState(() {
-  //       engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-  //     });
-  //   }
-  // }
+  Widget _sortMenu() {
+    return PopupMenuButton(
+        icon: Icon(Icons.sort),
+        itemBuilder: (context) => [
+              PopupMenuItem(value: 'newest', child: Text("Newest")),
+              PopupMenuItem(value: 'oldest', child: Text("Oldest")),
+            ],
+        onSelected: (value) => _sortEngagements(value as String));
+  }
+
+  void _sortEngagements(String order) {
+    if (order == 'oldest') {
+      setState(() {
+        engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      });
+    } else if (order == 'newest') {
+      setState(() {
+        engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      });
+    }
+  }
 
   List<Widget> _bodyChildren() {
     if (_noEngagements) {
