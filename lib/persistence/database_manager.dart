@@ -78,7 +78,7 @@ class DatabaseManager {
 
   void reactivate({required String sql, required int id}) {
     db.transaction((t) async {
-      await t.rawReactivate(sql, [id]);
+      await t.rawUpdate(sql, [id]);
     });
   }
 
