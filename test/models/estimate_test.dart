@@ -163,7 +163,7 @@ void main() {
   });
 
   group('Estimate default methods', () {
-    test('Defualt Trunk Line Length: 0', () {
+    test('Defualt Trunk Line Length - Acres: 0', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0);
       var expected = 1000;
@@ -175,13 +175,37 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('Defualt Trunk Line Length: 10', () {
+    test('Defualt Trunk Line Length - Acres: 10', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 10);
       var expected = 3000;
 
       //Act
       var actual = estimate.defaultTrunkLineLength();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Lat Line Length - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 500;
+
+      //Act
+      var actual = estimate.defaultLatLineLength();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Lat Line Length - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 1500;
+
+      //Act
+      var actual = estimate.defaultLatLineLength();
 
       //Assert
       expect(actual, equals(expected));
