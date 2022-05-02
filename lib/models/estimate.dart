@@ -289,6 +289,8 @@ class Estimate {
     }
   }
 
+  // TODO: Check this calculation
+
   int defaultOnePointFiveToOneInchReducer() {
     if (this.structures! == 0) {
       return 0;
@@ -373,6 +375,8 @@ class Estimate {
     }
   }
 
+  // TODO: get clarification on Foam when greater than 40
+
   int defaultFoam() {
     if (this.structures! == 0) {
       return 0;
@@ -381,7 +385,7 @@ class Estimate {
     } else if (this.structures! < 40) {
       return 5;
     } else if (this.structures! > 40) {
-      return 0;
+      return 5;
     } else {
       return 0;
     }

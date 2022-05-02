@@ -451,6 +451,8 @@ void main() {
       expect(actual, equals(expected));
     });
 
+    // STRUCTURE TESTS BELOW
+
     test('Defualt Sprinklers - Structures: 0', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 0);
@@ -500,6 +502,566 @@ void main() {
       expect(actual, equals(expected));
     });
 
+    // OnePointFive
+
+    test('Defualt OnePointFive Hose - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OnePointFive Hose - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 3000;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt OnePointFive Hose - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 5000;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OnePointFive Hose - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 7000;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // One Inch Hose
+
+    test('Defualt OneInch Hose - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultOneInchHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OneInch Hose - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 20;
+
+      //Act
+      var actual = estimate.defaultOneInchHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt OneInch Hose - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 35;
+
+      //Act
+      var actual = estimate.defaultOneInchHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OneInch Hose - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 50;
+
+      //Act
+      var actual = estimate.defaultOneInchHose();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // One Point Five Wye
+
+    test('Defualt OnePointFive Wye - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OnePointFive Wye - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 10;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt OnePointFive Wye - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 40;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OnePointFive Wye - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 50;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // One Inch Wye
+
+    test('Defualt OneInch Wye  - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultOneInchWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OneInch Wye  - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 20;
+
+      //Act
+      var actual = estimate.defaultOneInchWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt OneInch Wye  - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 40;
+
+      //Act
+      var actual = estimate.defaultOneInchWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OneInch Wye  - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 50;
+
+      //Act
+      var actual = estimate.defaultOneInchWye();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // OnePointFiveToOneInchReducer
+
+    test('Defualt OnePointFiveToOneInchReducer - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveToOneInchReducer();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OnePointFiveToOneInchReducer - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 20;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveToOneInchReducer();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 20;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveToOneInchReducer();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt OnePointFiveToOneInchReducer - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 30;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveToOneInchReducer();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // KK Nozzles
+
+    test('Defualt KK Nozzles   - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultKkNozzles();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt KK Nozzles  - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 20;
+
+      //Act
+      var actual = estimate.defaultKkNozzles();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt KK Nozzles  - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 20;
+
+      //Act
+      var actual = estimate.defaultKkNozzles();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt KK Nozzles  - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 30;
+
+      //Act
+      var actual = estimate.defaultKkNozzles();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // Mark 3 Structures
+
+    test('Defualt Mark3Structures - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultMark3Structures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3Structures - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 3;
+
+      //Act
+      var actual = estimate.defaultMark3Structures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt Mark3Structures - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 6;
+
+      //Act
+      var actual = estimate.defaultMark3Structures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3Structures - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 10;
+
+      //Act
+      var actual = estimate.defaultMark3Structures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // Unleaded Gas
+
+    test('Defualt Unleaded Gas - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultUnleadedGas();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Unleaded Gas - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 30;
+
+      //Act
+      var actual = estimate.defaultUnleadedGas();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt Unleaded Gas - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 90;
+
+      //Act
+      var actual = estimate.defaultUnleadedGas();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Unleaded Gas - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 300;
+
+      //Act
+      var actual = estimate.defaultUnleadedGas();
+
+      //Assert
+      expect(actual, equals(expected));
+    });    
+
+    // Two Cycle Oil
+
+    test('Defualt Two Cycle Oil - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultTwoCycleOil();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Two Cycle Oil - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 6;
+
+      //Act
+      var actual = estimate.defaultTwoCycleOil();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt Two Cycle Oil - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 18;
+
+      //Act
+      var actual = estimate.defaultTwoCycleOil();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Two Cycle Oil - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 60;
+
+      //Act
+      var actual = estimate.defaultTwoCycleOil();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // Porta Potties Structure
+
+    test('Defualt Porta Potties Structure - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultPortaPottiesStructures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Porta Potties Structure - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 5;
+
+      //Act
+      var actual = estimate.defaultPortaPottiesStructures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt Porta Potties Structure - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 6;
+
+      //Act
+      var actual = estimate.defaultPortaPottiesStructures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Porta Potties Structure - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 10;
+
+      //Act
+      var actual = estimate.defaultPortaPottiesStructures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    // Foam
+
+    test('Defualt Foam - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultFoam();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Foam - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 5;
+
+      //Act
+      var actual = estimate.defaultFoam();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt Foam - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 5;
+
+      //Act
+      var actual = estimate.defaultFoam();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Foam - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 5;
+
+      //Act
+      var actual = estimate.defaultFoam();
+
+      //Assert
+      expect(actual, equals(expected));
+    });    
 
   });
 }
