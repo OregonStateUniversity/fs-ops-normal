@@ -210,5 +210,296 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
+
+    test('Defualt Toy Line Length - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 250;
+
+      //Act
+      var actual = estimate.defaultToyLineLength();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Toy Line Length - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 750;
+
+      //Act
+      var actual = estimate.defaultToyLineLength();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Fittings - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 5;
+
+      //Act
+      var actual = estimate.defaultFittings();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Fittings - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 15;
+
+      //Act
+      var actual = estimate.defaultFittings();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt FoldaTanks - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultFoldaTanks();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt FoldaTanks - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 2;
+
+      //Act
+      var actual = estimate.defaultFoldaTanks();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3Pumps - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultMark3PumpsAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3Pumps - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 1;
+
+      //Act
+      var actual = estimate.defaultMark3PumpsAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3Kits - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.calculateMark3KitsAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3Kits - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 1;
+
+      //Act
+      var actual = estimate.calculateMark3KitsAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3PumpMix - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultPumpMixCansAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Mark3PumpMix - Acres: 10', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 10);
+      var expected = 6;
+
+      //Act
+      var actual = estimate.defaultPumpMixCansAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt WaterPallets - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultWaterPallets();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt WaterPallets - Acres: 20', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 20);
+      var expected = 1;
+
+      //Act
+      var actual = estimate.defaultWaterPallets();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt GatoradePallets - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultGatoradePallets();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt GatoradePallets - Acres: 20', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 20);
+      var expected = 1;
+
+      //Act
+      var actual = estimate.defaultGatoradePallets();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt MREPallets - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultMrePallets();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt MREPallets - Acres: 20', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 20);
+      var expected = 1;
+
+      //Act
+      var actual = estimate.defaultMrePallets();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt PortaPotties - Acres: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultPortaPottiesAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt PortaPotties - Acres: 20', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 20);
+      var expected = 2;
+
+      //Act
+      var actual = estimate.defaultPortaPottiesAcres();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Sprinklers - Structures: 0', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultSprinklers();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Sprinklers - Structures: 0 < x < 10 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      var expected = 10;
+
+      //Act
+      var actual = estimate.defaultSprinklers();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
+    test('Defualt Sprinklers - Structures: 10 < x < 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      var expected = 40;
+
+      //Act
+      var actual = estimate.defaultSprinklers();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+    test('Defualt Sprinklers - Structures: x > 40 ', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      var expected = 50;
+
+      //Act
+      var actual = estimate.defaultSprinklers();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
+
+
   });
 }
