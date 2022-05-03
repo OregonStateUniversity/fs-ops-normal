@@ -49,4 +49,12 @@ class EngagementDAO {
         sql: DatabaseManager.SQL['engagements']!['reactivate']!,
         values: [engagement.id!]);
   }
+
+    static Future deactivate(
+      {required DatabaseManager databaseManager,
+      required Engagement engagement}) async {
+    databaseManager.update(
+        sql: DatabaseManager.SQL['engagements']!['deactivate']!,
+        values: [engagement.id!]);
+  }
 }
