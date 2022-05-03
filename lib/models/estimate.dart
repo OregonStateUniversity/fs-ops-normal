@@ -392,7 +392,7 @@ class Estimate {
   }
 
   String flatFireOrderText() {
-    String str = "\nTrunk Line: ${this._trunkLineLength} ft.\n"
+    String str = "Trunk Line: ${this._trunkLineLength} ft.\n"
         "Lat Line: ${this._latLineLength} ft.\n"
         "Toy Hose: ${this._toyLineLength} ft.\n\n";
 

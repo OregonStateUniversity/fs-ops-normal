@@ -68,7 +68,7 @@ void main() {
       expect(estimate.fittings, equals(estimateFromJson.fittings));
     });
 
-    test('has initial calculations', () {
+    test('has initial acre calculations', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 1);
 
@@ -80,7 +80,19 @@ void main() {
       expect(estimate.fittings, equals(6));
     });
 
-    test('toCopyString that is 1-9 acres', () {
+    test('has initial structure calculations', () {
+      //Arrange
+      Estimate estimate = new Estimate(acres: 0, structures: 1);
+
+      //Assert
+      expect(estimate.acres, equals(0));
+      expect(estimate.trunkLineLength, equals(1000));
+      expect(estimate.latLineLength, equals(500));
+      expect(estimate.toyLineLength, equals(250));
+      expect(estimate.fittings, equals(5));
+    });
+
+    test('flat fire that is 1-9 acres', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 1);
       var expected = "Trunk Line: 1200 ft.\n"
@@ -107,7 +119,7 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('toCopyString that is 10-19 acres', () {
+    test('flat fire  that is 10-19 acres', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 10);
       var expected = "Trunk Line: 3000 ft.\n"
@@ -134,7 +146,9 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('toCopyString that is 20+ acres', () {
+    
+
+    test('flat fire  that is 20+ acres', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 20);
       var expected = "Trunk Line: 5000 ft.\n"
