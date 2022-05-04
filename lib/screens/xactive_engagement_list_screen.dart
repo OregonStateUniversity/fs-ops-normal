@@ -1,12 +1,9 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'engagement_screen.dart';
 import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
-import '../widgets/bottom_icon.dart';
 import '../widgets/new_engagement_dialog.dart';
 
 class XActiveEngagementListScreen extends StatefulWidget {
@@ -202,11 +199,6 @@ class XActiveEngagementListScreenState
       ],
     );
   }
-
-  List<BottomIcon> iconList = [
-    BottomIcon("Home", Icons.home_filled),
-    BottomIcon("Archive", Icons.archive),
-  ];
 
   Widget newEngagementButton() {
     return FloatingActionButton(
