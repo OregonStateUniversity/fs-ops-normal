@@ -47,37 +47,9 @@ class XActiveEngagementListScreenState
         mainAxisAlignment: MainAxisAlignment.center, children: _bodyChildren());
   }
 
-  Widget _appBarTitle() =>
-      active ? const Text("Ops Normal") : const Text("Ops Archive");
-
   Widget _emptyListPrompt() => active
       ? const Text("No engagements created yet.")
       : const Text("No engagements archived yet.");
-
-  List<Widget> _appBarActions() =>
-      _noEngagements ? const <Widget>[] : [_sortMenu()];
-
-  Widget _sortMenu() {
-    return PopupMenuButton(
-        icon: Icon(Icons.sort),
-        itemBuilder: (context) => [
-              PopupMenuItem(value: 'newest', child: Text("Newest")),
-              PopupMenuItem(value: 'oldest', child: Text("Oldest")),
-            ],
-        onSelected: (value) => _sortEngagements(value as String));
-  }
-
-  void _sortEngagements(String order) {
-    if (order == 'oldest') {
-      setState(() {
-        engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-      });
-    } else if (order == 'newest') {
-      setState(() {
-        engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      });
-    }
-  }
 
   List<Widget> _bodyChildren() {
     if (_noEngagements) {
@@ -231,66 +203,10 @@ class XActiveEngagementListScreenState
     );
   }
 
-  var _bottomNavIndex = 0;
-
   List<BottomIcon> iconList = [
     BottomIcon("Home", Icons.home_filled),
     BottomIcon("Archive", Icons.archive),
   ];
-
-  void _onTap(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
-  }
-
-  Widget bottomNavBar() {
-    return AnimatedBottomNavigationBar.builder(
-      itemCount: iconList.length,
-      activeIndex: _bottomNavIndex,
-      gapLocation: GapLocation.center,
-      notchSmoothness: NotchSmoothness.softEdge,
-      tabBuilder: (int index, bool isActive) {
-        final color = isActive ? Colors.red : Colors.white;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              iconList[index].icon,
-              size: 24,
-              color: color,
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: AutoSizeText(
-                iconList[index].name,
-                maxLines: 1,
-                style: TextStyle(color: color),
-                group: AutoSizeGroup(),
-              ),
-            )
-          ],
-        );
-      },
-      backgroundColor: (Colors.blueGrey[900]!),
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            active = true;
-            loadEngagements();
-            _onTap(index);
-            break;
-          case 1:
-            active = false;
-            loadEngagements();
-            _onTap(index);
-            break;
-        }
-      },
-    );
-  }
 
   Widget newEngagementButton() {
     return FloatingActionButton(
