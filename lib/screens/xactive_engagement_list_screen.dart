@@ -8,17 +8,18 @@ import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_icon.dart';
 import '../widgets/new_engagement_dialog.dart';
-import '../widgets/side_drawer.dart';
 
 class XActiveEngagementListScreen extends StatefulWidget {
   XActiveEngagementListScreen({Key? key}) : super(key: key);
   static const routeName = '/';
 
   @override
-  XActiveEngagementListScreenState createState() => XActiveEngagementListScreenState();
+  XActiveEngagementListScreenState createState() =>
+      XActiveEngagementListScreenState();
 }
 
-class XActiveEngagementListScreenState extends State<XActiveEngagementListScreen> {
+class XActiveEngagementListScreenState
+    extends State<XActiveEngagementListScreen> {
   List<Engagement>? engagements;
   var active = true;
   get _noEngagements => engagements == null || engagements!.isEmpty;
@@ -43,9 +44,7 @@ class XActiveEngagementListScreenState extends State<XActiveEngagementListScreen
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: _bodyChildren()
-    );
+        mainAxisAlignment: MainAxisAlignment.center, children: _bodyChildren());
   }
 
   Widget _appBarTitle() =>
