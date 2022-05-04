@@ -117,11 +117,11 @@ class XActiveEngagementListScreenState
   }
 
   IconData _archivingIconData() {
-    return active ? Icons.archive_rounded : Icons.unarchive_rounded;
+    return Icons.archive_rounded;
   }
 
   String _archivingIconText() {
-    return active ? "Archive" : "Unarchive";
+    return "Archive";
   }
 
   Widget _deleteBackground() {
