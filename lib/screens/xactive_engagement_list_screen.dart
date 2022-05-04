@@ -4,7 +4,6 @@ import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
-import '../widgets/new_engagement_dialog.dart';
 
 class XActiveEngagementListScreen extends StatefulWidget {
   XActiveEngagementListScreen({Key? key}) : super(key: key);
@@ -180,24 +179,6 @@ class XActiveEngagementListScreenState
           child: const Text("No"),
         )
       ],
-    );
-  }
-
-  Widget newEngagementButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (context) => NewEngagementDialog()).then((value) {
-          if (value) {
-            setState(() {
-              loadEngagements();
-            });
-          }
-        });
-      },
-      tooltip: 'New engagement',
-      child: const Icon(Icons.add),
     );
   }
 }
