@@ -28,13 +28,8 @@ class XActiveEngagementListScreenState
   }
 
   void loadEngagements() async {
-    if (active) {
-      this.engagements = await EngagementDAO.activeEngagements(
-          databaseManager: DatabaseManager.getInstance());
-    } else {
-      this.engagements = await EngagementDAO.inactiveEngagements(
-          databaseManager: DatabaseManager.getInstance());
-    }
+    this.engagements = await EngagementDAO.activeEngagements(
+        databaseManager: DatabaseManager.getInstance());
     setState(() {});
   }
 
