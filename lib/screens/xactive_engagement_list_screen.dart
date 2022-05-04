@@ -170,13 +170,9 @@ class XActiveEngagementListScreenState
 
   Widget _alertDialog(deleteOrArchive) {
     return AlertDialog(
-      title: active == true
-          ? deleteOrArchive == "Archive"
-              ? Text("Archive Engagement")
-              : Text("Delete Engagement")
-          : deleteOrArchive == "Delete"
-              ? Text("Delete Engagement")
-              : Text("Unarchive"),
+      title: deleteOrArchive == "Archive"
+          ? Text("Archive Engagement")
+          : Text("Delete Engagement"),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
