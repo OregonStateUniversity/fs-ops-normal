@@ -18,7 +18,6 @@ class XActiveEngagementListScreen extends StatefulWidget {
 class XActiveEngagementListScreenState
     extends State<XActiveEngagementListScreen> {
   List<Engagement>? engagements;
-  //var active = true;
   get _noEngagements => engagements == null || engagements!.isEmpty;
 
   @override
@@ -39,7 +38,7 @@ class XActiveEngagementListScreenState
         mainAxisAlignment: MainAxisAlignment.center, children: _bodyChildren());
   }
 
-  Widget _emptyListPrompt() => const Text("No engagements created yet.")
+  Widget _emptyListPrompt() => const Text("No engagements created yet.");
 
   List<Widget> _bodyChildren() {
     if (_noEngagements) {
