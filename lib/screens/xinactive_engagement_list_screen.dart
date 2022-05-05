@@ -15,12 +15,14 @@ class XInactiveEngagementListScreen extends StatefulWidget {
   static const routeName = '/';
 
   @override
-  XInactiveEngagementListScreenState createState() => XInactiveEngagementListScreenState();
+  XInactiveEngagementListScreenState createState() =>
+      XInactiveEngagementListScreenState();
 }
 
-class XInactiveEngagementListScreenState extends State<XInactiveEngagementListScreen> {
+class XInactiveEngagementListScreenState
+    extends State<XInactiveEngagementListScreen> {
   List<Engagement>? engagements;
-  var active = true;
+
   get _noEngagements => engagements == null || engagements!.isEmpty;
 
   @override
@@ -30,63 +32,18 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
   }
 
   void loadEngagements() async {
-    if (active) {
-      this.engagements = await EngagementDAO.activeEngagements(
-          databaseManager: DatabaseManager.getInstance());
-    } else {
-      this.engagements = await EngagementDAO.inactiveEngagements(
-          databaseManager: DatabaseManager.getInstance());
-    }
+    this.engagements = await EngagementDAO.inactiveEngagements(
+        databaseManager: DatabaseManager.getInstance());
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: SideDrawer(),
-        appBar: AppBar(
-          title: _appBarTitle(),
-          actions: _appBarActions(),
-        ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: _bodyChildren()),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: this.active ? newEngagementButton() : null,
-        bottomNavigationBar: bottomNavBar());
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center, children: _bodyChildren());
   }
 
-  Widget _appBarTitle() =>
-      active ? const Text("Ops Normal") : const Text("Ops Archive");
-
-  Widget _emptyListPrompt() => active
-      ? const Text("No engagements created yet.")
-      : const Text("No engagements archived yet.");
-
-  List<Widget> _appBarActions() =>
-      _noEngagements ? const <Widget>[] : [_sortMenu()];
-
-  Widget _sortMenu() {
-    return PopupMenuButton(
-        icon: Icon(Icons.sort),
-        itemBuilder: (context) => [
-              PopupMenuItem(value: 'newest', child: Text("Newest")),
-              PopupMenuItem(value: 'oldest', child: Text("Oldest")),
-            ],
-        onSelected: (value) => _sortEngagements(value as String));
-  }
-
-  void _sortEngagements(String order) {
-    if (order == 'oldest') {
-      setState(() {
-        engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-      });
-    } else if (order == 'newest') {
-      setState(() {
-        engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      });
-    }
-  }
+  Widget _emptyListPrompt() => const Text("No engagements archived yet.");
 
   List<Widget> _bodyChildren() {
     if (_noEngagements) {
@@ -98,7 +55,7 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
       ];
     } else {
       return [
-        Text('Engagements'),
+        Text('Archived Engagements'),
         Expanded(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
@@ -162,11 +119,11 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
   }
 
   IconData _archivingIconData() {
-    return active ? Icons.archive_rounded : Icons.unarchive_rounded;
+    return Icons.unarchive_rounded;
   }
 
   String _archivingIconText() {
-    return active ? "Archive" : "Unarchive";
+    return "Unarchive";
   }
 
   Widget _deleteBackground() {
@@ -208,9 +165,7 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
       EngagementDAO.delete(
           databaseManager: DatabaseManager.getInstance(),
           engagement: engagement);
-    } else if (active == true) {
-      EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
-    } else if (active == false) {
+    } else {
       EngagementDAO.reactivate(
           databaseManager: DatabaseManager.getInstance(),
           engagement: engagement);
@@ -220,13 +175,9 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
 
   Widget _alertDialog(deleteOrArchive) {
     return AlertDialog(
-      title: active == true
-          ? deleteOrArchive == "Archive"
-              ? Text("Archive Engagement")
-              : Text("Delete Engagement")
-          : deleteOrArchive == "Delete"
-              ? Text("Delete Engagement")
-              : Text("Unarchive"),
+      title: deleteOrArchive == "Delete"
+          ? Text("Delete Engagement")
+          : Text("Unarchive"),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
@@ -237,85 +188,6 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
           child: const Text("No"),
         )
       ],
-    );
-  }
-
-  var _bottomNavIndex = 0;
-
-  List<BottomIcon> iconList = [
-    BottomIcon("Home", Icons.home_filled),
-    BottomIcon("Archive", Icons.archive),
-  ];
-
-  void _onTap(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
-  }
-
-  Widget bottomNavBar() {
-    return AnimatedBottomNavigationBar.builder(
-      itemCount: iconList.length,
-      activeIndex: _bottomNavIndex,
-      gapLocation: GapLocation.center,
-      notchSmoothness: NotchSmoothness.softEdge,
-      tabBuilder: (int index, bool isActive) {
-        final color = isActive ? Colors.red : Colors.white;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              iconList[index].icon,
-              size: 24,
-              color: color,
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: AutoSizeText(
-                iconList[index].name,
-                maxLines: 1,
-                style: TextStyle(color: color),
-                group: AutoSizeGroup(),
-              ),
-            )
-          ],
-        );
-      },
-      backgroundColor: (Colors.blueGrey[900]!),
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            active = true;
-            loadEngagements();
-            _onTap(index);
-            break;
-          case 1:
-            active = false;
-            loadEngagements();
-            _onTap(index);
-            break;
-        }
-      },
-    );
-  }
-
-  Widget newEngagementButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (context) => NewEngagementDialog()).then((value) {
-          if (value) {
-            setState(() {
-              loadEngagements();
-            });
-          }
-        });
-      },
-      tooltip: 'New engagement',
-      child: const Icon(Icons.add),
     );
   }
 }
