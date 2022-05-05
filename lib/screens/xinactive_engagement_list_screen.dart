@@ -209,7 +209,7 @@ class XInactiveEngagementListScreenState extends State<XInactiveEngagementListSc
           databaseManager: DatabaseManager.getInstance(),
           engagement: engagement);
     } else if (active == true) {
-      //EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
+      EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     } else if (active == false) {
       EngagementDAO.reactivate(
           databaseManager: DatabaseManager.getInstance(),

@@ -159,8 +159,9 @@ class XActiveEngagementListScreenState
       EngagementDAO.delete(
           databaseManager: DatabaseManager.getInstance(),
           engagement: engagement);
+    } else {
+      EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     }
-    //EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
     loadEngagements();
   }
 
