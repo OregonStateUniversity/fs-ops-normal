@@ -5,17 +5,17 @@ import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
 
-class XInactiveEngagementListScreen extends StatefulWidget {
-  XInactiveEngagementListScreen({Key? key}) : super(key: key);
+class InactiveEngagementListScreen extends StatefulWidget {
+  InactiveEngagementListScreen({Key? key}) : super(key: key);
   static const routeName = '/';
 
   @override
-  XInactiveEngagementListScreenState createState() =>
-      XInactiveEngagementListScreenState();
+  InactiveEngagementListScreenState createState() =>
+      InactiveEngagementListScreenState();
 }
 
-class XInactiveEngagementListScreenState
-    extends State<XInactiveEngagementListScreen> {
+class InactiveEngagementListScreenState
+    extends State<InactiveEngagementListScreen> {
   List<Engagement>? engagements;
 
   get _noEngagements => engagements == null || engagements!.isEmpty;

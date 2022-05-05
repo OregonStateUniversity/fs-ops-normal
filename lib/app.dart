@@ -8,7 +8,7 @@ import 'screens/incident_response_pocket_guide_screen.dart';
 import 'screens/modify_estimate_screen.dart';
 import 'screens/red_book_screen.dart';
 import 'screens/active_engagement_list_screen.dart';
-import 'screens/xinactive_engagement_list_screen.dart';
+import 'screens/inactive_engagement_list_screen.dart';
 import 'widgets/side_drawer.dart';
 
 class App extends StatelessWidget {
@@ -62,7 +62,7 @@ class MainScreen extends StatelessWidget {
 
   static final screens = [
     ActiveEngagementListScreen(),
-    XInactiveEngagementListScreen()
+    InactiveEngagementListScreen()
   ];
 
   @override
