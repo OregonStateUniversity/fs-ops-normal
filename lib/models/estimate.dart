@@ -25,7 +25,7 @@ class Estimate {
   int? _mrePallets;
   int? _portaPottiesAcres;
 
-  int? _sprinklers;
+  int? _sprinklerKits;
   int? _onePointFiveHose;
   int? _oneInchHose;
   int? _onePointFiveWye;
@@ -107,7 +107,7 @@ class Estimate {
     _gatoradePallets = defaultGatoradePallets();
     _mrePallets = defaultMrePallets();
     _portaPottiesAcres = defaultPortaPottiesAcres();
-    _sprinklers = defaultSprinklers();
+    _sprinklerKits = defaultSprinklerKits();
     _onePointFiveHose = defaultOnePointFiveHose();
     _oneInchHose = defaultOneInchHose();
     _onePointFiveWye = defaultOnePointFiveWye();
@@ -219,15 +219,15 @@ class Estimate {
     }
   }
 
-  int defaultSprinklers() {
+  int defaultSprinklerKits() {
     if (this.structures! == 0) {
       return 0;
     } else if (this.structures! < 10) {
-      return 10;
+      return 4;
     } else if (this.structures! < 40) {
-      return 40;
+      return 10;
     } else if (this.structures! > 40) {
-      return 50;
+      return 13;
     } else {
       return 0;
     }
@@ -415,7 +415,7 @@ class Estimate {
   }
 
   String structureFireOrderText() {
-    String str = "\nSprinkler Kits: ${this._sprinklers}\n"
+    String str = "\nSprinkler Kits: ${this._sprinklerKits}\n"
         "1.5 hose: ${this._onePointFiveHose}\n"
         "1.0 hose: ${this._oneInchHose}\n\n"
         "1.5 Gated Wye: ${this._onePointFiveWye}\n"
@@ -441,13 +441,12 @@ class Estimate {
         'toyLineLength': toyLineLength,
         'fittings': fittings
       };
-  
-  Estimate.fromMap({required Map map}) :
-    id = map['id'],
-    engagementId = map['engagementId'],
-    newName = map['name'],
-    createdAt = DateTime.parse(map['createdAt']),
-    acres = map['acres'],
-    structures = map['structures'];
 
+  Estimate.fromMap({required Map map})
+      : id = map['id'],
+        engagementId = map['engagementId'],
+        newName = map['name'],
+        createdAt = DateTime.parse(map['createdAt']),
+        acres = map['acres'],
+        structures = map['structures'];
 }
