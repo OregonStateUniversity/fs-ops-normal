@@ -66,7 +66,9 @@ class MainScreen extends StatelessWidget {
             body: SafeArea(
               child: TabBarView(
                 children: [
-                  ActiveEngagementListScreen(popupMenuButtonHandler: popupMenuButtonHandler),
+                  ActiveEngagementListScreen(
+                    popupMenuButtonHandler: popupMenuButtonHandler,
+                    floatingActionButtonHandler: floatingActionButtonHandler),
                   InactiveEngagementListScreen()
                 ]
               )

@@ -5,11 +5,15 @@ import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
+import '../event_handlers/floating_action_button_handler.dart';
 
 class ActiveEngagementListScreen extends StatefulWidget {
 
-  ActiveEngagementListScreen({required this.popupMenuButtonHandler, Key? key}) : super(key: key);
+  ActiveEngagementListScreen({Key? key,
+    required this.popupMenuButtonHandler,
+    required this.floatingActionButtonHandler}) : super(key: key);
 
+  final FloatingActionButtonHandler floatingActionButtonHandler;
   final PopupMenuButtonHandler popupMenuButtonHandler;
 
   static const routeName = '/';
@@ -28,6 +32,10 @@ class ActiveEngagementListScreenState
   void initState() {
     super.initState();
     loadEngagements();
+    widget.floatingActionButtonHandler.onPressed = () {
+      // https://github.com/osu-cascades/fs-hose-jockey/issues/149
+      // TODO: kick off the create engagement ux
+    };
     widget.popupMenuButtonHandler.onSelected = (String order) {
       setState(() {
         // https://github.com/osu-cascades/fs-hose-jockey/issues/147
@@ -35,7 +43,6 @@ class ActiveEngagementListScreenState
         //       as a reference.
       });
     };
-    
   }
 
   void loadEngagements() async {
