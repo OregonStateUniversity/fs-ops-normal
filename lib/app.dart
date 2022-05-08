@@ -13,6 +13,7 @@ import 'event_handlers/floating_action_button_handler.dart';
 import 'event_handlers/popup_menu_button_handler.dart';
 import 'widgets/hidable_floating_action_button.dart';
 import 'widgets/side_drawer.dart';
+import 'widgets/sort_popup_menu_button.dart';
 
 class App extends StatelessWidget {
   static final routes = {
@@ -61,13 +62,15 @@ class MainScreen extends StatelessWidget {
               visible: true,
               onPressed: () => floatingActionButtonHandler.onPressed(),
               tooltip: 'New engagement',
-              child: const Icon(Icons.add),
+              child: const Icon(Icons.add)
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             drawer: SideDrawer(),
             appBar: AppBar(
                 title: const Text('Ops Normal'),
-                actions: [_sortMenu()],
+                actions: [
+                  SortPopupMenuButton(popupMenuButtonHandler: popupMenuButtonHandler)
+                ]
             ),
             body: SafeArea(
               child: TabBarView(
@@ -85,17 +88,6 @@ class MainScreen extends StatelessWidget {
             )
         )
       );
-  }
-
-  Widget _sortMenu() {
-    return PopupMenuButton(
-      icon: Icon(Icons.sort),
-      itemBuilder: (context) => [
-        PopupMenuItem(value: 'newest', child: const Text('Newest')),
-        PopupMenuItem(value: 'oldest', child: const Text('Oldest')),
-      ],
-      onSelected: (String value) => popupMenuButtonHandler.onSelected(value)
-    );
   }
 
 }
