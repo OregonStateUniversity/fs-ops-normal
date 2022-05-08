@@ -9,9 +9,10 @@ import 'screens/modify_estimate_screen.dart';
 import 'screens/red_book_screen.dart';
 import 'screens/active_engagement_list_screen.dart';
 import 'screens/inactive_engagement_list_screen.dart';
-import 'widgets/side_drawer.dart';
 import 'event_handlers/floating_action_button_handler.dart';
 import 'event_handlers/popup_menu_button_handler.dart';
+import 'widgets/hidable_floating_action_button.dart';
+import 'widgets/side_drawer.dart';
 
 class App extends StatelessWidget {
   static final routes = {
@@ -56,7 +57,12 @@ class MainScreen extends StatelessWidget {
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
-            floatingActionButton: _floatingActionButton(),
+            floatingActionButton: HidableFloatingActionButton(
+              visible: true,
+              onPressed: () => floatingActionButtonHandler.onPressed(),
+              tooltip: 'New engagement',
+              child: const Icon(Icons.add),
+            ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             drawer: SideDrawer(),
             appBar: AppBar(
@@ -79,14 +85,6 @@ class MainScreen extends StatelessWidget {
             )
         )
       );
-  }
-
-  Widget _floatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () => floatingActionButtonHandler.onPressed(),
-      tooltip: 'New engagement',
-      child: const Icon(Icons.add),
-    );
   }
 
   Widget _sortMenu() {
