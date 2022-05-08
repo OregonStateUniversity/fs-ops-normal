@@ -10,6 +10,7 @@ import 'screens/red_book_screen.dart';
 import 'screens/active_engagement_list_screen.dart';
 import 'screens/inactive_engagement_list_screen.dart';
 import 'widgets/side_drawer.dart';
+import 'event_handlers/popup_menu_button_handler.dart';
 
 class App extends StatelessWidget {
   static final routes = {
@@ -41,13 +42,17 @@ class App extends StatelessWidget {
 
 class MainScreen extends StatelessWidget {
   
-  final Widget sortMenu = PopupMenuButton(
+  final popupMenuButtonHandler = PopupMenuButtonHandler();
+
+  Widget _sortMenu() {
+    return PopupMenuButton(
         icon: Icon(Icons.sort),
         itemBuilder: (context) => [
               PopupMenuItem(value: 'newest', child: const Text('Newest')),
               PopupMenuItem(value: 'oldest', child: const Text('Oldest')),
             ],
-        onSelected: (value) => { /* TODO */ });
+        onSelected: (String value) => { popupMenuButtonHandler.onSelected(value) });
+  }
 
   final Widget floatingActionButton = FloatingActionButton(
       onPressed: () { /* TODO */ },
@@ -60,13 +65,9 @@ class MainScreen extends StatelessWidget {
     Tab(text: 'Archive', icon: Icon(Icons.archive))
   ];
 
-  static final screens = [
-    ActiveEngagementListScreen(),
-    InactiveEngagementListScreen()
-  ];
-
   @override
   Widget build(BuildContext context) {
+    
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
@@ -75,9 +76,12 @@ class MainScreen extends StatelessWidget {
             drawer: SideDrawer(),
             appBar: AppBar(
                 title: const Text('Ops Normal'),
-                actions: [sortMenu],
+                actions: [_sortMenu()],
             ),
-            body: SafeArea(child: TabBarView(children: screens)),
+            body: SafeArea(child: TabBarView(children: [
+    ActiveEngagementListScreen(popupMenuButtonHandler: popupMenuButtonHandler),
+    InactiveEngagementListScreen()
+  ])),
             bottomNavigationBar: Container(
               color: Colors.blueGrey[900],
               child: TabBar(tabs: tabs, unselectedLabelColor: Colors.grey)
