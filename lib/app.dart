@@ -10,6 +10,7 @@ import 'screens/red_book_screen.dart';
 import 'screens/active_engagement_list_screen.dart';
 import 'screens/inactive_engagement_list_screen.dart';
 import 'widgets/side_drawer.dart';
+import 'event_handlers/floating_action_button_handler.dart';
 import 'event_handlers/popup_menu_button_handler.dart';
 
 class App extends StatelessWidget {
@@ -41,53 +42,60 @@ class App extends StatelessWidget {
 }
 
 class MainScreen extends StatelessWidget {
-  
-  final popupMenuButtonHandler = PopupMenuButtonHandler();
-
-  Widget _sortMenu() {
-    return PopupMenuButton(
-        icon: Icon(Icons.sort),
-        itemBuilder: (context) => [
-              PopupMenuItem(value: 'newest', child: const Text('Newest')),
-              PopupMenuItem(value: 'oldest', child: const Text('Oldest')),
-            ],
-        onSelected: (String value) => { popupMenuButtonHandler.onSelected(value) });
-  }
-
-  final Widget floatingActionButton = FloatingActionButton(
-      onPressed: () { /* TODO */ },
-      tooltip: 'New engagement',
-      child: const Icon(Icons.add),
-    );
 
   static const tabs = [
     Tab(text: 'Home', icon: Icon(Icons.home)),
     Tab(text: 'Archive', icon: Icon(Icons.archive))
   ];
 
+  final popupMenuButtonHandler = PopupMenuButtonHandler();
+  final floatingActionButtonHandler = FloatingActionButtonHandler();
+
   @override
   Widget build(BuildContext context) {
-    
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
-            floatingActionButton: floatingActionButton,
+            floatingActionButton: _floatingActionButton(),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             drawer: SideDrawer(),
             appBar: AppBar(
                 title: const Text('Ops Normal'),
                 actions: [_sortMenu()],
             ),
-            body: SafeArea(child: TabBarView(children: [
-    ActiveEngagementListScreen(popupMenuButtonHandler: popupMenuButtonHandler),
-    InactiveEngagementListScreen()
-  ])),
+            body: SafeArea(
+              child: TabBarView(
+                children: [
+                  ActiveEngagementListScreen(popupMenuButtonHandler: popupMenuButtonHandler),
+                  InactiveEngagementListScreen()
+                ]
+              )
+            ),
             bottomNavigationBar: Container(
               color: Colors.blueGrey[900],
               child: TabBar(tabs: tabs, unselectedLabelColor: Colors.grey)
             )
         )
       );
+  }
+
+  Widget _floatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () => floatingActionButtonHandler.onPressed(),
+      tooltip: 'New engagement',
+      child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _sortMenu() {
+    return PopupMenuButton(
+      icon: Icon(Icons.sort),
+      itemBuilder: (context) => [
+        PopupMenuItem(value: 'newest', child: const Text('Newest')),
+        PopupMenuItem(value: 'oldest', child: const Text('Oldest')),
+      ],
+      onSelected: (String value) => popupMenuButtonHandler.onSelected(value)
+    );
   }
 
 }
