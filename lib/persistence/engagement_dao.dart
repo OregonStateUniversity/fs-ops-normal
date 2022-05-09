@@ -3,6 +3,7 @@ import 'engagement_dto.dart';
 import '../models/engagement.dart';
 
 class EngagementDAO {
+  
   static final sqlSelectActive =
       DatabaseManager.SQL['engagements']!['selectActive'];
   static final sqlSelectInactive =
@@ -50,11 +51,12 @@ class EngagementDAO {
         values: [engagement.id!]);
   }
 
-    static Future deactivate(
+  static Future deactivate(
       {required DatabaseManager databaseManager,
       required Engagement engagement}) async {
     databaseManager.update(
-        sql: DatabaseManager.SQL['engagements']!['deactivate']!,
-        values: [engagement.id!]);
+      sql: DatabaseManager.SQL['engagements']!['deactivate']!,
+      values: [engagement.id!]);
   }
+
 }
