@@ -2,15 +2,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseManager {
+  
   static const SCHEMA_FILE_ASSET_PATH = 'assets/db/schema_1.sql.txt';
   static const DATABASE_FILENAME = 'ops_normal.sqlite3.db';
-  static const SQL = {
-    'estimates': {
-      'select':
-          'SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC',
-    }
-  };
-
   static DatabaseManager? _instance;
   final Database db;
 
