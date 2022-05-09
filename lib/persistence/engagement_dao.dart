@@ -5,14 +5,22 @@ import '../models/engagement.dart';
 class EngagementDAO {
   
   static final sqlSelectActive =
-      DatabaseManager.SQL['engagements']!['selectActive'];
+      DatabaseManager.SQL['engagements']!['selectActive']!;
   static final sqlSelectInactive =
-      DatabaseManager.SQL['engagements']!['selectInactive'];
+      DatabaseManager.SQL['engagements']!['selectInactive']!;
+  static final sqlInsert =
+      DatabaseManager.SQL['engagements']!['insert']!;
+  static final sqlDelete =
+      DatabaseManager.SQL['engagements']!['delete']!;
+  static final sqlReactivate =
+      DatabaseManager.SQL['engagements']!['reactivate']!;
+  static final sqlDeactivate =
+      DatabaseManager.SQL['engagements']!['deactivate']!;
 
   static Future<List<Engagement>> activeEngagements(
       {required DatabaseManager databaseManager}) async {
     final engagementRecords =
-        await databaseManager.select(sql: sqlSelectActive!);
+        await databaseManager.select(sql: sqlSelectActive);
     return engagementRecords
         .map((row) => Engagement.fromMap(map: row))
         .toList();
@@ -21,7 +29,7 @@ class EngagementDAO {
   static Future<List<Engagement>> inactiveEngagements(
       {required DatabaseManager databaseManager}) async {
     final engagementRecords =
-        await databaseManager.select(sql: sqlSelectInactive!);
+        await databaseManager.select(sql: sqlSelectInactive);
     return engagementRecords
         .map((row) => Engagement.fromMap(map: row))
         .toList();
@@ -31,7 +39,7 @@ class EngagementDAO {
       {required DatabaseManager databaseManager,
       required EngagementDTO dto}) async {
     databaseManager.insert(
-        sql: DatabaseManager.SQL['engagements']!['insert']!,
+        sql: sqlInsert,
         values: [dto.name, dto.createdAt.toString(), dto.active]);
   }
 
@@ -39,7 +47,7 @@ class EngagementDAO {
       {required DatabaseManager databaseManager,
       required Engagement engagement}) async {
     databaseManager.delete(
-        sql: DatabaseManager.SQL['engagements']!['delete']!,
+        sql: sqlDelete,
         id: engagement.id!);
   }
 
@@ -47,7 +55,7 @@ class EngagementDAO {
       {required DatabaseManager databaseManager,
       required Engagement engagement}) async {
     databaseManager.update(
-        sql: DatabaseManager.SQL['engagements']!['reactivate']!,
+        sql: sqlReactivate,
         values: [engagement.id!]);
   }
 
@@ -55,7 +63,7 @@ class EngagementDAO {
       {required DatabaseManager databaseManager,
       required Engagement engagement}) async {
     databaseManager.update(
-      sql: DatabaseManager.SQL['engagements']!['deactivate']!,
+      sql: sqlDeactivate,
       values: [engagement.id!]);
   }
 
