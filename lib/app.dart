@@ -10,19 +10,22 @@ import 'widgets/sort_popup_menu_button.dart';
 
 class App extends StatelessWidget {
 
+  static const APP_TITLE = 'Ops Normal';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ops Normal',
+      title: APP_TITLE,
       routes: RouteMap.routes,
       theme: ThemeData(
         primarySwatch: Colors.green,
-        appBarTheme: AppBarTheme(color: const Color.fromRGBO(0, 80, 47, 1)),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: const AppBarTheme(color: const Color.fromRGBO(0, 80, 47, 1)),
+        visualDensity: VisualDensity.adaptivePlatformDensity
       ),
       home: MainScreen()
     );
   }
+  
 }
 
 class MainScreen extends StatelessWidget {
