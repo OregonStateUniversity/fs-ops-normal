@@ -473,7 +473,7 @@ void main() {
       var expected = 0;
 
       //Act
-      var actual = estimate.defaultSprinklers();
+      var actual = estimate.defaultSprinklerKits();
 
       //Assert
       expect(actual, equals(expected));
@@ -485,7 +485,7 @@ void main() {
       var expected = 10;
 
       //Act
-      var actual = estimate.defaultSprinklers();
+      var actual = estimate.defaultSprinklerKits();
 
       //Assert
       expect(actual, equals(expected));
@@ -498,7 +498,7 @@ void main() {
       var expected = 40;
 
       //Act
-      var actual = estimate.defaultSprinklers();
+      var actual = estimate.defaultSprinklerKits();
 
       //Assert
       expect(actual, equals(expected));
@@ -510,7 +510,7 @@ void main() {
       var expected = 50;
 
       //Act
-      var actual = estimate.defaultSprinklers();
+      var actual = estimate.defaultSprinklerKits();
 
       //Assert
       expect(actual, equals(expected));
