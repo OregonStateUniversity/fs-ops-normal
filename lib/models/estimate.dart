@@ -33,6 +33,7 @@ class Estimate {
   int? _onePointFiveToOneInchReducer;
   int? _kkNozzles;
   int? _mark3Structures;
+  int? _foldaTanksStructures;
   int? _unleadedGas;
   int? _twoCycleOil;
   int? _portaPottiesStructures;
@@ -333,6 +334,23 @@ class Estimate {
     }
   }
 
+  // According to Ross, fold a tank in the structures calculations will always be equal
+  //to mark 3 kits
+  //This could be refactored to only use one var in the future
+  int defaultFoldATankStructures() {
+    if (this.structures! == 0) {
+      return 0;
+    } else if (this.structures! < 10) {
+      return 3;
+    } else if (this.structures! < 40) {
+      return 6;
+    } else if (this.structures! > 40) {
+      return 10;
+    } else {
+      return 0;
+    }
+  }
+
   int defaultUnleadedGas() {
     if (this.structures! == 0) {
       return 0;
@@ -424,6 +442,7 @@ class Estimate {
         "KK Nozzles: ${this._kkNozzles}\n\n"
         "Mark 3 Pumps: ${this._mark3Structures}\n"
         "Mark 3 Kits: ${this._mark3Structures}\n\n"
+        "Fold-a-Tanks: ${this._foldaTanksStructures}\n\n"
         "Unleaded Gas (Gallons): ${this._unleadedGas}\n"
         "2 Cycle Oil (Quart): ${this._twoCycleOil}\n"
         "Port-a-Potties (1500 Gallon): ${this._portaPottiesStructures}\n"
