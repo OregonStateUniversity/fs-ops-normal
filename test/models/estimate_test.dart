@@ -146,8 +146,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    
-
     test('flat fire  that is 20+ acres', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 20);
@@ -279,7 +277,7 @@ void main() {
       var expected = 0;
 
       //Act
-      var actual = estimate.defaultFoldaTanks();
+      var actual = estimate.defaultFoldaTanksAcres();
 
       //Assert
       expect(actual, equals(expected));
@@ -291,7 +289,7 @@ void main() {
       var expected = 2;
 
       //Act
-      var actual = estimate.defaultFoldaTanks();
+      var actual = estimate.defaultFoldaTanksAcres();
 
       //Assert
       expect(actual, equals(expected));
@@ -491,7 +489,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt Sprinklers - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -541,7 +538,6 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-
 
     test('Defualt OnePointFive Hose - Structures: 10 < x < 40 ', () {
       //Arrange
@@ -593,7 +589,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt OneInch Hose - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -643,7 +638,6 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-
 
     test('Defualt OnePointFive Wye - Structures: 10 < x < 40 ', () {
       //Arrange
@@ -695,7 +689,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt OneInch Wye  - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -745,7 +738,6 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-
 
     test('Defualt OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ', () {
       //Arrange
@@ -797,7 +789,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt KK Nozzles  - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -847,7 +838,6 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-
 
     test('Defualt Mark3Structures - Structures: 10 < x < 40 ', () {
       //Arrange
@@ -899,7 +889,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt Unleaded Gas - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -922,7 +911,7 @@ void main() {
 
       //Assert
       expect(actual, equals(expected));
-    });    
+    });
 
     // Two Cycle Oil
 
@@ -949,7 +938,6 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-
 
     test('Defualt Two Cycle Oil - Structures: 10 < x < 40 ', () {
       //Arrange
@@ -1001,7 +989,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt Porta Potties Structure - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -1052,7 +1039,6 @@ void main() {
       expect(actual, equals(expected));
     });
 
-
     test('Defualt Foam - Structures: 10 < x < 40 ', () {
       //Arrange
       Estimate estimate = new Estimate(acres: 0, structures: 20);
@@ -1075,7 +1061,6 @@ void main() {
 
       //Assert
       expect(actual, equals(expected));
-    });    
-
+    });
   });
 }
