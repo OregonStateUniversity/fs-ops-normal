@@ -6,12 +6,14 @@ import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../event_handlers/floating_action_button_handler.dart';
+import '../widgets/new_engagement_dialog.dart';
 
 class ActiveEngagementListScreen extends StatefulWidget {
-
-  ActiveEngagementListScreen({Key? key,
-    required this.popupMenuButtonHandler,
-    required this.floatingActionButtonHandler}) : super(key: key);
+  ActiveEngagementListScreen(
+      {Key? key,
+      required this.popupMenuButtonHandler,
+      required this.floatingActionButtonHandler})
+      : super(key: key);
 
   final FloatingActionButtonHandler floatingActionButtonHandler;
   final PopupMenuButtonHandler popupMenuButtonHandler;
@@ -33,8 +35,14 @@ class ActiveEngagementListScreenState
     super.initState();
     loadEngagements();
     widget.floatingActionButtonHandler.onPressed = () {
-      // https://github.com/osu-cascades/fs-hose-jockey/issues/149
-      // TODO: kick off the create engagement ux
+      showDialog(context: context, builder: (context) => NewEngagementDialog())
+          .then((value) {
+        if (value) {
+          setState(() {
+            loadEngagements();
+          });
+        }
+      });
     };
     widget.popupMenuButtonHandler.onSelected = (String order) {
       setState(() {
@@ -180,7 +188,9 @@ class ActiveEngagementListScreenState
           databaseManager: DatabaseManager.getInstance(),
           engagement: engagement);
     } else {
-      EngagementDAO.deactivate(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
+      EngagementDAO.deactivate(
+          databaseManager: DatabaseManager.getInstance(),
+          engagement: engagement);
     }
     loadEngagements();
   }
