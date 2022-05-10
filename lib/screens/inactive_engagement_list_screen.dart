@@ -4,9 +4,16 @@ import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
 import '../utils/date_time_formatter.dart';
+import '../event_handlers/popup_menu_button_handler.dart';
 
 class InactiveEngagementListScreen extends StatefulWidget {
-  InactiveEngagementListScreen({Key? key}) : super(key: key);
+  InactiveEngagementListScreen({
+    Key? key,
+    required this.popupMenuButtonHandler,
+  }) : super(key: key);
+
+  final PopupMenuButtonHandler popupMenuButtonHandler;
+
   static const routeName = '/';
 
   @override
@@ -17,14 +24,20 @@ class InactiveEngagementListScreen extends StatefulWidget {
 class InactiveEngagementListScreenState
     extends State<InactiveEngagementListScreen> {
   List<Engagement>? engagements;
-
   get _noEngagements => engagements == null || engagements!.isEmpty;
 
   @override
   void initState() {
     super.initState();
     loadEngagements();
-    // https://github.com/osu-cascades/fs-hose-jockey/issues/148
+
+    widget.popupMenuButtonHandler.onSelected = (String order) {
+      setState(() {
+        // https://github.com/osu-cascades/fs-hose-jockey/issues/148
+        // TODO: Sort the engagements. See the old EngagementListScreen._sortEngagements
+        //       as a reference.
+      });
+    };
   }
 
   void loadEngagements() async {
