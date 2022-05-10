@@ -32,11 +32,15 @@ class InactiveEngagementListScreenState
     loadEngagements();
 
     widget.popupMenuButtonHandler.onSelected = (String order) {
-      setState(() {
-        // https://github.com/osu-cascades/fs-hose-jockey/issues/148
-        // TODO: Sort the engagements. See the old EngagementListScreen._sortEngagements
-        //       as a reference.
-      });
+      if (order == 'oldest') {
+        setState(() {
+          engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        });
+      } else if (order == 'newest') {
+        setState(() {
+          engagements!.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        });
+      }
     };
   }
 
