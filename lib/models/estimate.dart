@@ -17,7 +17,7 @@ class Estimate {
   int? _toyLineLength;
   int? _fittings;
 
-  int? _foldaTanks;
+  int? _foldaTanksAcres;
   int? _mark3PumpsAcres;
   int? _pumpMixCansAcres;
   int? _waterPallets;
@@ -100,7 +100,7 @@ class Estimate {
   }
 
   void initializeUnsavedProperties() {
-    _foldaTanks = defaultFoldaTanks();
+    _foldaTanksAcres = defaultFoldaTanksAcres();
     _mark3PumpsAcres = defaultMark3PumpsAcres();
     _pumpMixCansAcres = defaultPumpMixCansAcres();
     _waterPallets = defaultWaterPallets();
@@ -154,7 +154,7 @@ class Estimate {
     }
   }
 
-  int defaultFoldaTanks() {
+  int defaultFoldaTanksAcres() {
     if (acres! >= 10) {
       return (acres! ~/ 5).toInt();
     } else {
@@ -402,7 +402,7 @@ class Estimate {
         "Forester Nozzles: ${this._fittings}\n"
         "Toy Nozzles: ${this._fittings}\n"
         "Toy Wye: ${this._fittings}\n\n";
-    str += "Folda-tank: ${this._foldaTanks}\n"
+    str += "Folda-tank: ${this._foldaTanksAcres}\n"
         "Mark 3 + Kits: ${this._mark3PumpsAcres}\n"
         "Pump Mix (Cans): ${this._pumpMixCansAcres}\n\n";
 
