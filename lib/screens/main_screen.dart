@@ -14,10 +14,11 @@ class MainScreen extends StatefulWidget {
   ];
 
   @override
-  State<MainScreen> createState() => MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> {
+
   final popupMenuButtonHandler = PopupMenuButtonHandler();
   final floatingActionButtonHandler = FloatingActionButtonHandler();
 
@@ -51,4 +52,5 @@ class MainScreenState extends State<MainScreen> {
                 color: Colors.blueGrey[900],
                 child: TabBar(tabs: MainScreen.tabs, unselectedLabelColor: Colors.grey))));
   }
+
 }
