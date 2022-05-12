@@ -46,7 +46,6 @@ class ActiveEngagementListScreenState
     };
     widget.popupMenuButtonHandler.onSelected = (String order) {
       setState(() {
-        // https://github.com/osu-cascades/fs-hose-jockey/issues/147
         if (order == 'oldest') {
           setState(() {
             engagements!.sort((a, b) => a.createdAt.compareTo(b.createdAt));
