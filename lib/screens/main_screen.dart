@@ -7,19 +7,24 @@ import '/widgets/side_drawer.dart';
 import '/widgets/sort_popup_menu_button.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   static const tabs = [
     Tab(text: 'Home', icon: Icon(Icons.home)),
     Tab(text: 'Archive', icon: Icon(Icons.archive))
   ];
 
+  @override
+  State<MainScreen> createState() => MainScreenState();
+}
+
+class MainScreenState extends State<MainScreen> {
   final popupMenuButtonHandler = PopupMenuButtonHandler();
   final floatingActionButtonHandler = FloatingActionButtonHandler();
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: tabs.length,
+        length: MainScreen.tabs.length,
         child: Scaffold(
             floatingActionButton: HidableFloatingActionButton(
                 visible: true,
@@ -44,6 +49,6 @@ class MainScreen extends StatelessWidget {
             ])),
             bottomNavigationBar: Container(
                 color: Colors.blueGrey[900],
-                child: TabBar(tabs: tabs, unselectedLabelColor: Colors.grey))));
+                child: TabBar(tabs: MainScreen.tabs, unselectedLabelColor: Colors.grey))));
   }
 }
