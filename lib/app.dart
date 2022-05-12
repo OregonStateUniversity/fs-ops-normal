@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'route_map.dart';
-import '/screens/main_screen.dart';
+import 'screens/main_screen.dart';
 
 class App extends StatelessWidget {
   static const APP_TITLE = 'Ops Normal';
