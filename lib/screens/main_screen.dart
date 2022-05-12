@@ -7,7 +7,6 @@ import '../widgets/hidable_floating_action_button.dart';
 import '../widgets/side_drawer.dart';
 import '../widgets/sort_popup_menu_button.dart';
 
-
 class MainScreen extends StatefulWidget {
   static const tabs = [
     Tab(text: 'Home', icon: Icon(Icons.home)),
@@ -23,16 +22,19 @@ class _MainScreenState extends State<MainScreen> {
   final popupMenuButtonHandler = PopupMenuButtonHandler();
   final floatingActionButtonHandler = FloatingActionButtonHandler();
 
+  var _fabVisible = true;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: MainScreen.tabs.length,
         child: Scaffold(
             floatingActionButton: HidableFloatingActionButton(
-                visible: true,
+                visible: _fabVisible,
                 onPressed: () => floatingActionButtonHandler.onPressed(),
                 tooltip: 'New engagement',
-                child: const Icon(Icons.add)),
+                child: const Icon(Icons.add)
+              ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             drawer: SideDrawer(),
@@ -51,7 +53,14 @@ class _MainScreenState extends State<MainScreen> {
             ])),
             bottomNavigationBar: Container(
                 color: Colors.blueGrey[900],
-                child: TabBar(tabs: MainScreen.tabs, unselectedLabelColor: Colors.grey))));
+                child: TabBar(
+                  tabs: MainScreen.tabs,
+                  unselectedLabelColor: Colors.grey,
+                  onTap: (index) => setState( () => _fabVisible = (index == 0) )
+                )
+              )
+            )
+          );
   }
 
 }
