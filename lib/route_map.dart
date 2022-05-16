@@ -1,6 +1,5 @@
 import 'screens/about_screen.dart';
 import 'screens/new_estimate_screen.dart';
-import 'screens/engagement_screen.dart';
 import 'screens/estimate_screen.dart';
 import 'screens/how_to_screen.dart';
 import 'screens/incident_response_pocket_guide_screen.dart';
@@ -16,7 +15,6 @@ class RouteMap {
       IncidentResponsePocketGuideScreen.routeName: (context) =>
           IncidentResponsePocketGuideScreen(),
       ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
-      EngagementScreen.routeName: (context) => EngagementScreen(),
       RedBookScreen.routeName: (context) => RedBookScreen(),
     };
 }

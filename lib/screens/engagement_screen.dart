@@ -11,31 +11,36 @@ import '../widgets/bottom_nav_bar.dart';
 
 class EngagementScreen extends StatefulWidget {
   static const routeName = 'engagement';
+  final Engagement engagement;
+  final List<Estimate> estimates;
 
-  _EngagementScreenState createState() => _EngagementScreenState();
+  EngagementScreen({Key? key, required this.engagement, required this.estimates}) : super(key: key);
+
+  _EngagementScreenState createState() => _EngagementScreenState(estimates: this.estimates);
 }
 
 class _EngagementScreenState extends State<EngagementScreen> {
 
-  Engagement? engagement;
-  List<Estimate>? estimates;
+  List<Estimate> estimates;
+
+  _EngagementScreenState({required this.estimates});
 
   @override
   void initState() {
     super.initState();
   }
 
-  void loadEstimates() async {
-    this.estimates = await EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: this.engagement!);
-    setState(() {});
+  void loadEstimates() {
+    EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: widget.engagement).then(
+      (estimates) {
+        setState(() { this.estimates = estimates; });
+      }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    this.engagement = ModalRoute.of(context)!.settings.arguments as Engagement;
-    loadEstimates();
-
-    if (this.estimates?.isEmpty == true) {
+    if (this.estimates.isEmpty == true) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
@@ -45,11 +50,11 @@ class _EngagementScreenState extends State<EngagementScreen> {
                 style: TextStyle(fontSize: 22, color: Colors.white),
                 children: <TextSpan>[
                   TextSpan(
-                    text: "${engagement?.name}",
+                    text: "${widget.engagement.name}",
                     style: TextStyle(fontSize: 22),
                   ),
                   TextSpan(
-                      text: "\nCreated ${DateTimeFormatter.format(engagement!.createdAt)}",
+                      text: "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
                       style: TextStyle(fontSize: 14))
                 ]),
           ),
@@ -66,7 +71,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: floatAccButton(engagement),
+        floatingActionButton: floatAccButton(widget.engagement),
         bottomNavigationBar: BottomNavBar(goBack: '/'),
       );
     }
@@ -78,11 +83,11 @@ class _EngagementScreenState extends State<EngagementScreen> {
               style: TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan>[
                 TextSpan(
-                  text: "${engagement?.name}",
+                  text: "${widget.engagement.name}",
                   style: TextStyle(fontSize: 22),
                 ),
                 TextSpan(
-                    text: "\nCreated on: ${engagement?.createdAt}",
+                    text: "\nCreated on: ${widget.engagement.createdAt}",
                     style: TextStyle(fontSize: 14))
               ]),
         ),
@@ -110,15 +115,15 @@ class _EngagementScreenState extends State<EngagementScreen> {
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    this.estimates?.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                    this.estimates.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    this.estimates?.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                    this.estimates.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
-                    this.estimates?.sort((a, b) => b.acres!.compareTo(a.acres!));
+                    this.estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
                   });
                 }
               }),
@@ -127,14 +132,14 @@ class _EngagementScreenState extends State<EngagementScreen> {
       body: Scrollbar(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: this.estimates?.length,
+              itemCount: this.estimates.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(estimates![index].timeStamp!),
+                  key: Key(estimates[index].timeStamp!),
                   background: Stack(
                     children: [
                       Container(
-                        color: engagement!.active
+                        color: widget.engagement.active
                             ? Colors.red
                             : Colors.black12,
                       ),
@@ -142,7 +147,7 @@ class _EngagementScreenState extends State<EngagementScreen> {
                         padding: EdgeInsets.all(12.0),
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: engagement!.active
+                          child: widget.engagement.active
                               ? Icon(Icons.delete_forever, size: 34)
                               : Text("Can't Delete Estimates In Archive Mode"),
                         ),
@@ -152,13 +157,13 @@ class _EngagementScreenState extends State<EngagementScreen> {
                   dismissThresholds: {
                     DismissDirection.startToEnd: 2.0,
                     DismissDirection.endToStart:
-                        engagement!.active ? .25 : 2.0
+                        widget.engagement.active ? .25 : 2.0
                   },
                   confirmDismiss: (DismissDirection direction) async {
                     return await showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          if (engagement!.active == false) {
+                          if (widget.engagement.active == false) {
                             return AlertDialog(
                                 title:
                                     const Text("This engagement isn't active"));
@@ -183,27 +188,27 @@ class _EngagementScreenState extends State<EngagementScreen> {
                   },
                   onDismissed: (direction) async {
                     DatabaseHelper.deleteOrder(
-                        engagement, estimates?[index]);
+                        widget.engagement, estimates[index]);
                     setState(() {
-                      this.estimates?.removeAt(index);
+                      this.estimates.removeAt(index);
                     });
                   },
                   child: ListTile(
-                    title: Text('Estimate ${this.estimates![index].name}',
+                    title: Text('Estimate ${this.estimates[index].name}',
                         style: TextStyle(fontSize: 22)),
                     subtitle: Text(
-                      '${this.estimates![index].acres.toString()} Acres\nCreated on: ${this.estimates![index].timeStamp}\n',
+                      '${this.estimates[index].acres.toString()} Acres\nCreated on: ${this.estimates[index].timeStamp}\n',
                       style: TextStyle(fontSize: 18),
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, EstimateScreen.routeName,
-                          arguments: this.estimates![index]);
+                          arguments: this.estimates[index]);
                     },
                   ),
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatAccButton(engagement),
+      floatingActionButton: floatAccButton(widget.engagement),
       bottomNavigationBar: BottomNavBar(goBack: '/'),
     );
   }

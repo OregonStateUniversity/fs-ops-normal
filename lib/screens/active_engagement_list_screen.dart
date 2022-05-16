@@ -7,6 +7,7 @@ import '../utils/date_time_formatter.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../event_handlers/floating_action_button_handler.dart';
 import '../widgets/new_engagement_dialog.dart';
+import '../persistence/estimate_dao.dart';
 
 class ActiveEngagementListScreen extends StatefulWidget {
   ActiveEngagementListScreen(
@@ -119,9 +120,12 @@ class ActiveEngagementListScreenState
       subtitle: Text(
           'Created: ${DateTimeFormatter.format(engagement.createdAt)}',
           style: TextStyle(fontSize: 18)),
-      onTap: () {
-        Navigator.pushNamed(context, EngagementScreen.routeName,
-            arguments: engagement);
+      onTap: () async {
+        final estimates = await EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return EngagementScreen(engagement: engagement, estimates: estimates);
+          })
+        );
       },
     );
   }
