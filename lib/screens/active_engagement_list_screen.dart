@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'engagement_screen.dart';
+import 'active_engagement_screen.dart';
+import '../event_handlers/popup_menu_button_handler.dart';
+import '../event_handlers/floating_action_button_handler.dart';
 import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
-import '../utils/date_time_formatter.dart';
-import '../event_handlers/popup_menu_button_handler.dart';
-import '../event_handlers/floating_action_button_handler.dart';
-import '../widgets/new_engagement_dialog.dart';
 import '../persistence/estimate_dao.dart';
+import '../utils/date_time_formatter.dart';
+import '../widgets/new_engagement_dialog.dart';
 
 class ActiveEngagementListScreen extends StatefulWidget {
   ActiveEngagementListScreen(
@@ -123,7 +123,7 @@ class ActiveEngagementListScreenState
       onTap: () async {
         final estimates = await EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return EngagementScreen(engagement: engagement, estimates: estimates);
+            return ActiveEngagementScreen(engagement: engagement, estimates: estimates);
           })
         );
       },

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'engagement_screen.dart';
+import 'inactive_engagement_screen.dart';
+import '../event_handlers/popup_menu_button_handler.dart';
 import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/engagement_dao.dart';
+import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
-import '../event_handlers/popup_menu_button_handler.dart';
 
 class InactiveEngagementListScreen extends StatefulWidget {
   InactiveEngagementListScreen({
@@ -104,9 +105,12 @@ class InactiveEngagementListScreenState
       subtitle: Text(
           'Created: ${DateTimeFormatter.format(engagement.createdAt)}',
           style: TextStyle(fontSize: 18)),
-      onTap: () {
-        Navigator.pushNamed(context, EngagementScreen.routeName,
-            arguments: engagement);
+      onTap: () async {
+        final estimates = await EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return InactiveEngagementScreen(engagement: engagement, estimates: estimates);
+          })
+        );
       },
     );
   }
