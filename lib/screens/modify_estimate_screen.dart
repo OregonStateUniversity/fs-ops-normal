@@ -3,7 +3,8 @@ import 'estimate_screen.dart';
 import 'xengagement_list_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-import '../persistence/database_helper.dart';
+import '../persistence/database_manager.dart';
+import '../persistence/estimate_dao.dart';
 
 class OrderFields {
   int? acres;
@@ -75,8 +76,8 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                             orderField.latLineLength,
                             orderField.toyLineLength,
                             orderField.fittingsField);
-                        DatabaseHelper.insertOrder(
-                            widget.engagement, finalEstimate);
+                        finalEstimate.createdAt = DateTime.now();
+                        EstimateDAO.save(databaseManager: DatabaseManager.getInstance(), engagement: widget.engagement!, estimate: finalEstimate);
                         Navigator.pushNamed(context, EstimateScreen.routeName,
                             arguments: finalEstimate);
                       }
