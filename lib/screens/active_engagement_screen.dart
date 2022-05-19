@@ -134,7 +134,7 @@ class _ActiveEngagementScreenState extends State<ActiveEngagementScreen> {
               itemCount: this.estimates.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(estimates[index].timeStamp!),
+                  key: Key(estimates[index].createdAt.toString()),
                   background: Stack(
                     children: [
                       Container(
