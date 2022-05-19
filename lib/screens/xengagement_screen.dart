@@ -3,7 +3,6 @@ import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
-import '../persistence/database_helper.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
@@ -187,11 +186,9 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
                         });
                   },
                   onDismissed: (direction) async {
-                    DatabaseHelper.deleteOrder(
-                        widget.engagement, estimates[index]);
-                    setState(() {
-                      this.estimates.removeAt(index);
-                    });
+                    // TOMBSTONE: Removed old database_helper call.
+                    //            This whole class/screen is poised to be deleted,
+                    //            so no new code is being added here.
                   },
                   child: ListTile(
                     title: Text('Estimate ${this.estimates[index].name}',
