@@ -8,23 +8,24 @@ import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_nav_bar.dart';
 
-class InactiveEngagementScreen extends StatefulWidget {
+class InactiveEstimateListScreen extends StatefulWidget {
   static const routeName = 'engagement';
   final Engagement engagement;
   final List<Estimate> estimates;
 
-  InactiveEngagementScreen(
+  InactiveEstimateListScreen(
       {Key? key, required this.engagement, required this.estimates})
       : super(key: key);
 
-  _InactiveEngagementScreenState createState() =>
-      _InactiveEngagementScreenState(estimates: this.estimates);
+  _InactiveEstimateListScreenState createState() =>
+      _InactiveEstimateListScreenState(estimates: this.estimates);
 }
 
-class _InactiveEngagementScreenState extends State<InactiveEngagementScreen> {
+class _InactiveEstimateListScreenState
+    extends State<InactiveEstimateListScreen> {
   List<Estimate> estimates;
 
-  _InactiveEngagementScreenState({required this.estimates});
+  _InactiveEstimateListScreenState({required this.estimates});
 
   @override
   void initState() {

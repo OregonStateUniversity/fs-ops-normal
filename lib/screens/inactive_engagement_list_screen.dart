@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'inactive_engagement_screen.dart';
+import 'inactive_estimate_list_screen.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
@@ -106,11 +106,13 @@ class InactiveEngagementListScreenState
           'Created: ${DateTimeFormatter.format(engagement.createdAt)}',
           style: TextStyle(fontSize: 18)),
       onTap: () async {
-        final estimates = await EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: engagement);
+        final estimates = await EstimateDAO.estimates(
+            databaseManager: DatabaseManager.getInstance(),
+            engagement: engagement);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return InactiveEngagementScreen(engagement: engagement, estimates: estimates);
-          })
-        );
+          return InactiveEstimateListScreen(
+              engagement: engagement, estimates: estimates);
+        }));
       },
     );
   }
