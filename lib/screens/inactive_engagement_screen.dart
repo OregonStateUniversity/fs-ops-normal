@@ -13,13 +13,15 @@ class InactiveEngagementScreen extends StatefulWidget {
   final Engagement engagement;
   final List<Estimate> estimates;
 
-  InactiveEngagementScreen({Key? key, required this.engagement, required this.estimates}) : super(key: key);
+  InactiveEngagementScreen(
+      {Key? key, required this.engagement, required this.estimates})
+      : super(key: key);
 
-  _InactiveEngagementScreenState createState() => _InactiveEngagementScreenState(estimates: this.estimates);
+  _InactiveEngagementScreenState createState() =>
+      _InactiveEngagementScreenState(estimates: this.estimates);
 }
 
 class _InactiveEngagementScreenState extends State<InactiveEngagementScreen> {
-
   List<Estimate> estimates;
 
   _InactiveEngagementScreenState({required this.estimates});
@@ -30,11 +32,14 @@ class _InactiveEngagementScreenState extends State<InactiveEngagementScreen> {
   }
 
   void loadEstimates() {
-    EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: widget.engagement).then(
-      (estimates) {
-        setState(() { this.estimates = estimates; });
-      }
-    );
+    EstimateDAO.estimates(
+            databaseManager: DatabaseManager.getInstance(),
+            engagement: widget.engagement)
+        .then((estimates) {
+      setState(() {
+        this.estimates = estimates;
+      });
+    });
   }
 
   @override
@@ -53,7 +58,8 @@ class _InactiveEngagementScreenState extends State<InactiveEngagementScreen> {
                     style: TextStyle(fontSize: 22),
                   ),
                   TextSpan(
-                      text: "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
+                      text:
+                          "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
                       style: TextStyle(fontSize: 14))
                 ]),
           ),
@@ -114,11 +120,15 @@ class _InactiveEngagementScreenState extends State<InactiveEngagementScreen> {
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    this.estimates.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                    this
+                        .estimates
+                        .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    this.estimates.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                    this
+                        .estimates
+                        .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
@@ -133,76 +143,17 @@ class _InactiveEngagementScreenState extends State<InactiveEngagementScreen> {
               padding: const EdgeInsets.all(10),
               itemCount: this.estimates.length,
               itemBuilder: (context, index) {
-                return Dismissible(
-                  key: Key(estimates[index].timeStamp!),
-                  background: Stack(
-                    children: [
-                      Container(
-                        color: widget.engagement.active
-                            ? Colors.red
-                            : Colors.black12,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: widget.engagement.active
-                              ? Icon(Icons.delete_forever, size: 34)
-                              : Text("Can't Delete Estimates In Archive Mode"),
-                        ),
-                      )
-                    ],
+                return ListTile(
+                  title: Text('Estimate ${this.estimates[index].name}',
+                      style: TextStyle(fontSize: 22)),
+                  subtitle: Text(
+                    '${this.estimates[index].acres.toString()} Acres\nCreated on: ${this.estimates[index].timeStamp}\n',
+                    style: TextStyle(fontSize: 18),
                   ),
-                  dismissThresholds: {
-                    DismissDirection.startToEnd: 2.0,
-                    DismissDirection.endToStart:
-                        widget.engagement.active ? .25 : 2.0
+                  onTap: () {
+                    Navigator.pushNamed(context, EstimateScreen.routeName,
+                        arguments: this.estimates[index]);
                   },
-                  confirmDismiss: (DismissDirection direction) async {
-                    return await showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          if (widget.engagement.active == false) {
-                            return AlertDialog(
-                                title:
-                                    const Text("This engagement isn't active"));
-                          }
-                          return AlertDialog(
-                            title: const Text("Delete Estimate?"),
-                            content: const Text("This cannot be undone"),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(true),
-                                child: const Text("Delete"),
-                              ),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(false),
-                                child: const Text("Cancel"),
-                              )
-                            ],
-                          );
-                        });
-                  },
-                  onDismissed: (direction) async {
-                    // TOMBSTONE. Removed old database helper. This entire
-                    //            Dismissible widget should be removed and
-                    //            the itemBuilder function should just return
-                    //            the ListTile.
-                  },
-                  child: ListTile(
-                    title: Text('Estimate ${this.estimates[index].name}',
-                        style: TextStyle(fontSize: 22)),
-                    subtitle: Text(
-                      '${this.estimates[index].acres.toString()} Acres\nCreated on: ${this.estimates[index].timeStamp}\n',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, EstimateScreen.routeName,
-                          arguments: this.estimates[index]);
-                    },
-                  ),
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
