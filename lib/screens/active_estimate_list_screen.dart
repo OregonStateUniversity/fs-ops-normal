@@ -8,21 +8,23 @@ import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
 import '../widgets/bottom_nav_bar.dart';
 
-class ActiveEngagementScreen extends StatefulWidget {
+class ActiveEstimateListScreen extends StatefulWidget {
   static const routeName = 'engagement';
   final Engagement engagement;
   final List<Estimate> estimates;
 
-  ActiveEngagementScreen({Key? key, required this.engagement, required this.estimates}) : super(key: key);
+  ActiveEstimateListScreen(
+      {Key? key, required this.engagement, required this.estimates})
+      : super(key: key);
 
-  _ActiveEngagementScreenState createState() => _ActiveEngagementScreenState(estimates: this.estimates);
+  _ActiveEstimateListScreenState createState() =>
+      _ActiveEstimateListScreenState(estimates: this.estimates);
 }
 
-class _ActiveEngagementScreenState extends State<ActiveEngagementScreen> {
-
+class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
   List<Estimate> estimates;
 
-  _ActiveEngagementScreenState({required this.estimates});
+  _ActiveEstimateListScreenState({required this.estimates});
 
   @override
   void initState() {
@@ -30,11 +32,14 @@ class _ActiveEngagementScreenState extends State<ActiveEngagementScreen> {
   }
 
   void loadEstimates() {
-    EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: widget.engagement).then(
-      (estimates) {
-        setState(() { this.estimates = estimates; });
-      }
-    );
+    EstimateDAO.estimates(
+            databaseManager: DatabaseManager.getInstance(),
+            engagement: widget.engagement)
+        .then((estimates) {
+      setState(() {
+        this.estimates = estimates;
+      });
+    });
   }
 
   @override
@@ -53,7 +58,8 @@ class _ActiveEngagementScreenState extends State<ActiveEngagementScreen> {
                     style: TextStyle(fontSize: 22),
                   ),
                   TextSpan(
-                      text: "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
+                      text:
+                          "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
                       style: TextStyle(fontSize: 14))
                 ]),
           ),
@@ -114,11 +120,15 @@ class _ActiveEngagementScreenState extends State<ActiveEngagementScreen> {
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    this.estimates.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                    this
+                        .estimates
+                        .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    this.estimates.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                    this
+                        .estimates
+                        .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
@@ -186,7 +196,9 @@ class _ActiveEngagementScreenState extends State<ActiveEngagementScreen> {
                         });
                   },
                   onDismissed: (direction) async {
-                    EstimateDAO.delete(databaseManager: DatabaseManager.getInstance(), estimate: estimates[index]);
+                    EstimateDAO.delete(
+                        databaseManager: DatabaseManager.getInstance(),
+                        estimate: estimates[index]);
                     setState(() {
                       this.estimates.removeAt(index);
                     });
