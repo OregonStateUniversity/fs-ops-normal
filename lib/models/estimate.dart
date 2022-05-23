@@ -393,8 +393,6 @@ class Estimate {
     }
   }
 
-  // TODO: get clarification on Foam when greater than 40
-
   int defaultFoam() {
     if (this.structures! == 0) {
       return 0;
@@ -446,7 +444,7 @@ class Estimate {
         "Unleaded Gas (Gallons): ${this._unleadedGas}\n"
         "2 Cycle Oil (Quart): ${this._twoCycleOil}\n"
         "Port-a-Potties (1500 Gallon): ${this._portaPottiesStructures}\n"
-        "Foam: ${this._foam}\n";
+        "Foam (Cans): ${this._foam}\n";
     return str;
   }
 
