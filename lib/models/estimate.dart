@@ -116,6 +116,7 @@ class Estimate {
     _onePointFiveToOneInchReducer = defaultOnePointFiveToOneInchReducer();
     _kkNozzles = defaultKkNozzles();
     _mark3Structures = defaultMark3Structures();
+    _foldaTanksStructures = defaultFoldATankStructures();
     _unleadedGas = defaultUnleadedGas();
     _twoCycleOil = defaultTwoCycleOil();
     _portaPottiesStructures = defaultPortaPottiesStructures();
@@ -171,8 +172,7 @@ class Estimate {
     }
   }
 
-  // TODO: https://github.com/osu-cascades/fs-hose-jockey/issues/120
-  int calculateMark3KitsAcres() {
+    int calculateMark3KitsAcres() {
     if (acres! >= 10) {
       return (acres! ~/ 10).toInt();
     } else {
@@ -290,7 +290,7 @@ class Estimate {
     }
   }
 
-  // TODO: Check this calculation
+  // TODO: Check this calculation. https://github.com/osu-cascades/fs-hose-jockey/issues/164
 
   int defaultOnePointFiveToOneInchReducer() {
     if (this.structures! == 0) {
@@ -334,21 +334,8 @@ class Estimate {
     }
   }
 
-  // According to Ross, fold a tank in the structures calculations will always be equal
-  //to mark 3 kits
-  //This could be refactored to only use one var in the future
   int defaultFoldATankStructures() {
-    if (this.structures! == 0) {
-      return 0;
-    } else if (this.structures! < 10) {
-      return 3;
-    } else if (this.structures! < 40) {
-      return 6;
-    } else if (this.structures! > 40) {
-      return 10;
-    } else {
-      return 0;
-    }
+    return ((this.structures! ~/ 5) * 4);
   }
 
   int defaultUnleadedGas() {
@@ -392,8 +379,6 @@ class Estimate {
       return 0;
     }
   }
-
-  // TODO: get clarification on Foam when greater than 40
 
   int defaultFoam() {
     if (this.structures! == 0) {
@@ -446,7 +431,7 @@ class Estimate {
         "Unleaded Gas (Gallons): ${this._unleadedGas}\n"
         "2 Cycle Oil (Quart): ${this._twoCycleOil}\n"
         "Port-a-Potties (1500 Gallon): ${this._portaPottiesStructures}\n"
-        "Foam: ${this._foam}\n";
+        "Foam (Cans): ${this._foam}\n";
     return str;
   }
 

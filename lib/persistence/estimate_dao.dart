@@ -1,4 +1,5 @@
 import 'database_manager.dart';
+import 'estimate_dto.dart';
 import '../models/engagement.dart';
 import '../models/estimate.dart';
 
@@ -18,10 +19,8 @@ class EstimateDAO {
     if (id != null) databaseManager.delete(sql: SQL_DELETE, id: id);
   }
 
-  static Future<void> save({required DatabaseManager databaseManager, required Engagement engagement, required Estimate estimate}) async {
-    final engagementId = engagement.id;
-    if (engagementId != null) {
-      databaseManager.insert(sql: SQL_INSERT, values: [engagementId, estimate.name, estimate.createdAt.toString(), estimate.acres, estimate.structures]);
-    }
+  static Future<void> save({required DatabaseManager databaseManager, required EstimateDTO dto}) async {
+    databaseManager.insert(sql: SQL_INSERT, values: [dto.engagementId, dto.name, dto.createdAt.toString(), dto.acres, dto.structures]);
   }
+
 }
