@@ -147,36 +147,23 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                   key: Key(estimates[index].createdAt.toString()),
                   background: Stack(
                     children: [
-                      Container(
-                        color: widget.engagement.active
-                            ? Colors.red
-                            : Colors.black12,
-                      ),
+                      Container(color: Colors.red),
                       Padding(
                         padding: EdgeInsets.all(12.0),
                         child: Align(
-                          alignment: Alignment.centerRight,
-                          child: widget.engagement.active
-                              ? Icon(Icons.delete_forever, size: 34)
-                              : Text("Can't Delete Estimates In Archive Mode"),
-                        ),
+                            alignment: Alignment.centerRight,
+                            child: Icon(Icons.delete_forever, size: 34)),
                       )
                     ],
                   ),
                   dismissThresholds: {
                     DismissDirection.startToEnd: 2.0,
-                    DismissDirection.endToStart:
-                        widget.engagement.active ? .25 : 2.0
+                    DismissDirection.endToStart: .25
                   },
                   confirmDismiss: (DismissDirection direction) async {
                     return await showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          if (widget.engagement.active == false) {
-                            return AlertDialog(
-                                title:
-                                    const Text("This engagement isn't active"));
-                          }
                           return AlertDialog(
                             title: const Text("Delete Estimate?"),
                             content: const Text("This cannot be undone"),
