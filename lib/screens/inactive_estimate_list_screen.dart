@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
@@ -77,7 +76,6 @@ class _InactiveEstimateListScreenState
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: floatAccButton(widget.engagement),
         bottomNavigationBar: BottomNavBar(goBack: '/'),
       );
     }
@@ -158,22 +156,7 @@ class _InactiveEstimateListScreenState
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatAccButton(widget.engagement),
       bottomNavigationBar: BottomNavBar(goBack: '/'),
-    );
-  }
-
-  Widget? floatAccButton(engagement) {
-    if (engagement.active == 0) {
-      return null;
-    }
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.pushNamed(context, NewEstimateScreen.routeName,
-            arguments: engagement);
-      },
-      tooltip: 'New Estimate',
-      child: Icon(Icons.add),
     );
   }
 }
