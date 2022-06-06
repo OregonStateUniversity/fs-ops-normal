@@ -172,7 +172,7 @@ class Estimate {
     }
   }
 
-    int calculateMark3KitsAcres() {
+  int calculateMark3KitsAcres() {
     if (acres! >= 10) {
       return (acres! ~/ 10).toInt();
     } else {
@@ -289,8 +289,6 @@ class Estimate {
       return 0;
     }
   }
-
-  // TODO: Check this calculation. https://github.com/osu-cascades/fs-hose-jockey/issues/164
 
   int defaultOnePointFiveToOneInchReducer() {
     if (this.structures! == 0) {
