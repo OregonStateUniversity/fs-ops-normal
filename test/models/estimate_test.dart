@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:hose_jockey/models/estimate.dart';
+import 'package:ops_normal/models/estimate.dart';
 
 void main() {
   group('An Estimate', () {

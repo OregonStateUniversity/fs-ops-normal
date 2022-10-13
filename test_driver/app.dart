@@ -1,5 +1,5 @@
 import 'package:flutter_driver/driver_extension.dart';
-import 'package:hose_jockey/main.dart' as app;
+import 'package:ops_normal/main.dart' as app;
 
 void main(){
   enableFlutterDriverExtension();
