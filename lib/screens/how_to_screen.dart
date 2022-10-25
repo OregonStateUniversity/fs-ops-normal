@@ -8,11 +8,13 @@ class HowToScreen extends StatelessWidget {
 
   static const TextAlign align = TextAlign.center;
 
+  const HowToScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: const Text(title),
       ),
       body: Semantics(
         label: "A list of instructions about how to use Ops Normal",
@@ -22,7 +24,7 @@ class HowToScreen extends StatelessWidget {
               Align(
                 alignment: FractionalOffset.center,
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
                       _cardItem(HowToCreateEngagementAndOrder.title,
@@ -33,7 +35,7 @@ class HowToScreen extends StatelessWidget {
                           HowToArchiveEngagement.description),
                       _cardItem(HowToUnarchiveEngagement.title,
                           HowToUnarchiveEngagement.description),
-                      Divider(),
+                      const Divider(),
                     ],
                   ),
                 ),
@@ -52,11 +54,11 @@ class HowToScreen extends StatelessWidget {
         label: "Dropdown description for how to use Ops Normal",
         child: Card(
           child: Padding(
-              padding:
-                  EdgeInsets.only(top: 6.0, left: 6.0, right: 6.0, bottom: 6.0),
+              padding: const EdgeInsets.only(
+                  top: 6.0, left: 6.0, right: 6.0, bottom: 6.0),
               child: ExpansionTile(
                 title: Text(title),
-                children: [Text("$description")],
+                children: [Text(description)],
               )),
         ));
   }
