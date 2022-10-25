@@ -8,8 +8,11 @@ import '../utils/date_time_formatter.dart';
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimateScreen';
   static const title = "NewEstimateScreen";
+
+  const NewEstimateScreen({super.key});
+
   @override
-  _NewEstimateScreenState createState() => _NewEstimateScreenState();
+  createState() => _NewEstimateScreenState();
 }
 
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
@@ -21,7 +24,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
-  int _selectedIndex = 0;
+  final _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     Navigator.pushNamed(context, ActiveEngagementListScreen.routeName);
@@ -38,25 +41,25 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          Padding(padding: const EdgeInsets.all(10)),
+          const Padding(padding: EdgeInsets.all(10)),
           TextField(
               controller: myControllerAcreage,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: 'Enter Acreage',
                   errorText: _acreageInputIsValid ? null : 'error',
-                  border: const OutlineInputBorder())),
-          Padding(padding: const EdgeInsets.all(10)),
+                  border: OutlineInputBorder())),
+          const Padding(padding: EdgeInsets.all(10)),
           TextField(
               controller: myControllerStructure,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: 'Enter Structures',
                   errorText: _structureInputIsValid ? null : 'error',
-                  border: const OutlineInputBorder())),
+                  border: OutlineInputBorder())),
           OutlinedButton(
               onPressed: () {
-                var estimate = new Estimate(
+                var estimate = Estimate(
                     acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(myControllerStructure.text),
                     timeStamp: DateTimeFormatter.format(DateTime.now()));
@@ -71,7 +74,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                       )
                     : ArgumentError.notNull('Value Can\'t Be Empty');
               },
-              child: Text("New Estimate")),
+              child: const Text("New Estimate")),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:native_pdf_view/native_pdf_view.dart';
+import 'package:pdfx/pdfx.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
