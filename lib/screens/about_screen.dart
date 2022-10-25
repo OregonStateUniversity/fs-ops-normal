@@ -24,7 +24,7 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Created By Ian Snyder, Erin O'Connell, \n Josh C., Kyle H. for",
+                    "Created By Ben Shiffman,\nIan Snyder, Erin O'Connell, \n Josh C., Kyle H. for",
                     textAlign: align,
                   ),
                   Text(
