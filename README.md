@@ -19,4 +19,5 @@ There are two options main options to put the application on a physical device, 
 2. Build an APK with 'flutter build apk' and transfer the file onto your physical device and run it. (This only works on Android devices)
 
 
-© Josh Crowley, Kyle Hannon, Ian Snyder, Erin O'Connell, Ben Shiffman, Aimee Bogle
+© Josh Crowley, Kyle Hannon, Ian Snyder, Erin O'Connell, Ben Shiffman, Aimee Bogle, Kelson Denton
+
