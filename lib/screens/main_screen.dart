@@ -8,6 +8,8 @@ import '../widgets/side_drawer.dart';
 import '../widgets/sort_popup_menu_button.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   static const tabs = [
     Tab(text: 'Home', icon: Icon(Icons.home)),
     Tab(text: 'Archive', icon: Icon(Icons.archive))
@@ -37,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
-            drawer: SideDrawer(),
+            drawer: const SideDrawer(),
             appBar: AppBar(title: const Text('Ops Normal'), actions: [
               SortPopupMenuButton(
                   popupMenuButtonHandler: popupMenuButtonHandler)
