@@ -42,24 +42,20 @@ class SideDrawer extends StatelessWidget {
   }
 
   Widget _bottomOfDrawer(BuildContext context) {
-    return Container(
-      child: Align(
-        alignment: FractionalOffset.bottomCenter,
-        child: Container(
-          child: Column(
-            children: [
-              Divider(),
-              _drawerItem(Icons.info_outline, "About",
-                  () => Navigator.pushNamed(context, AboutScreen.routeName)),
-            ],
-          ),
-        ),
+    return Align(
+      alignment: FractionalOffset.bottomCenter,
+      child: Column(
+        children: [
+          const Divider(),
+          _drawerItem(Icons.info_outline, "About",
+              () => Navigator.pushNamed(context, AboutScreen.routeName)),
+        ],
       ),
     );
   }
 
   Widget _drawerHeader() {
-    return DrawerHeader(
+    return const DrawerHeader(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(color: Colors.black),
@@ -72,7 +68,7 @@ class SideDrawer extends StatelessWidget {
           children: [
             Icon(icon),
             Padding(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: const EdgeInsets.only(left: 8.0),
               child: Text(text),
             ),
           ],
