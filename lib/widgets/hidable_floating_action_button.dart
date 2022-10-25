@@ -13,11 +13,11 @@ class HidableFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: this.visible,
+      visible: visible,
       child: FloatingActionButton(
-        tooltip: this.tooltip,
-        child: this.child,
-        onPressed: this.onPressed
+        tooltip: tooltip,
+        onPressed: onPressed,
+        child: child
       )
     );
   }
