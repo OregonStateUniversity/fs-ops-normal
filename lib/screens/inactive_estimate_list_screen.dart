@@ -12,19 +12,21 @@ class InactiveEstimateListScreen extends StatefulWidget {
   final Engagement engagement;
   final List<Estimate> estimates;
 
-  InactiveEstimateListScreen(
+  const InactiveEstimateListScreen(
       {Key? key, required this.engagement, required this.estimates})
       : super(key: key);
 
-  _InactiveEstimateListScreenState createState() =>
-      _InactiveEstimateListScreenState(estimates: this.estimates);
+  @override
+  State<InactiveEstimateListScreen> createState() {
+    return _InactiveEstimateListScreenState();
+  }
 }
 
 class _InactiveEstimateListScreenState
     extends State<InactiveEstimateListScreen> {
-  List<Estimate> estimates;
+  late List<Estimate> estimates = widget.estimates;
 
-  _InactiveEstimateListScreenState({required this.estimates});
+  //_InactiveEstimateListScreenState({required this.estimates});
 
   @override
   void initState() {
@@ -44,23 +46,23 @@ class _InactiveEstimateListScreenState
 
   @override
   Widget build(BuildContext context) {
-    if (this.estimates.isEmpty == true) {
+    if (estimates.isEmpty == true) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           automaticallyImplyLeading: true,
           title: RichText(
             text: TextSpan(
-                style: TextStyle(fontSize: 22, color: Colors.white),
+                style: const TextStyle(fontSize: 22, color: Colors.white),
                 children: <TextSpan>[
                   TextSpan(
-                    text: "${widget.engagement.name}",
-                    style: TextStyle(fontSize: 22),
+                    text: widget.engagement.name,
+                    style: const TextStyle(fontSize: 22),
                   ),
                   TextSpan(
                       text:
                           "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
-                      style: TextStyle(fontSize: 14))
+                      style: const TextStyle(fontSize: 14))
                 ]),
           ),
         ),
@@ -69,7 +71,7 @@ class _InactiveEstimateListScreenState
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("No Estimates Created Yet"),
               ],
             )
@@ -84,34 +86,34 @@ class _InactiveEstimateListScreenState
         automaticallyImplyLeading: true,
         title: RichText(
           text: TextSpan(
-              style: TextStyle(fontSize: 22, color: Colors.white),
+              style: const TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan>[
                 TextSpan(
-                  text: "${widget.engagement.name}",
-                  style: TextStyle(fontSize: 22),
+                  text: widget.engagement.name,
+                  style: const TextStyle(fontSize: 22),
                 ),
                 TextSpan(
                     text: "\nCreated on: ${widget.engagement.createdAt}",
-                    style: TextStyle(fontSize: 14))
+                    style: const TextStyle(fontSize: 14))
               ]),
         ),
         actions: <Widget>[
           PopupMenuButton(
               icon: Transform.rotate(
                 angle: 90 * 3.1415927 / 180,
-                child: Icon(Icons.code),
+                child: const Icon(Icons.code),
               ),
-              offset: Offset(0, 30),
+              offset: const Offset(0, 30),
               itemBuilder: (context) => [
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 1,
                       child: Text("Oldest"),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 2,
                       child: Text("Newest"),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 3,
                       child: Text("Size"),
                     ),
@@ -119,19 +121,17 @@ class _InactiveEstimateListScreenState
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    this
-                        .estimates
+                    estimates
                         .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    this
-                        .estimates
+                    estimates
                         .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
-                    this.estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
+                    estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
                   });
                 }
               }),
@@ -140,18 +140,18 @@ class _InactiveEstimateListScreenState
       body: Scrollbar(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: this.estimates.length,
+              itemCount: estimates.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text('Estimate ${this.estimates[index].name}',
-                      style: TextStyle(fontSize: 22)),
+                  title: Text('Estimate ${estimates[index].name}',
+                      style: const TextStyle(fontSize: 22)),
                   subtitle: Text(
-                    '${this.estimates[index].acres.toString()} Acres\nCreated on: ${this.estimates[index].timeStamp}\n',
-                    style: TextStyle(fontSize: 18),
+                    '${estimates[index].acres.toString()} Acres\nCreated on: ${estimates[index].timeStamp}\n',
+                    style: const TextStyle(fontSize: 18),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, EstimateScreen.routeName,
-                        arguments: this.estimates[index]);
+                        arguments: estimates[index]);
                   },
                 );
               })),
