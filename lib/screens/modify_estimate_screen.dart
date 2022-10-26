@@ -20,16 +20,16 @@ class ModifyEstimateScreen extends StatefulWidget {
 
   final Estimate? estimate;
   final Engagement? engagement;
-  ModifyEstimateScreen({this.estimate, this.engagement});
+  const ModifyEstimateScreen({super.key, this.estimate, this.engagement});
 
   @override
-  _ModifyEstimateScreenState createState() => _ModifyEstimateScreenState();
+  State<ModifyEstimateScreen> createState() => _ModifyEstimateScreenState();
 }
 
 class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
   var formKey = GlobalKey<FormState>();
-  OrderFields orderField = new OrderFields();
+  OrderFields orderField = OrderFields();
   Estimate? est;
 
   void _navigateHome(int index) {
@@ -43,7 +43,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text('Estimate Result'),
+        title: const Text('Estimate Result'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -68,7 +68,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                         formKey.currentState!.save();
                         // var newNum = checkNamingNumber();
                         var newNum = 0;
-                        var finalEstimate = new Estimate.finalEstimate(
+                        var finalEstimate = Estimate.finalEstimate(
                             newNum,
                             orderField.acres,
                             widget.estimate?.timeStamp,
@@ -80,16 +80,18 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                         finalEstimate.createdAt = DateTime.now();
                         EstimateDAO.save(
                             databaseManager: DatabaseManager.getInstance(),
-                            dto: EstimateDTO.fromEngagementEstimate(engagement: widget.engagement!, estimate: finalEstimate));
+                            dto: EstimateDTO.fromEngagementEstimate(
+                                engagement: widget.engagement!,
+                                estimate: finalEstimate));
                         Navigator.pushNamed(context, EstimateScreen.routeName,
                             arguments: finalEstimate);
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 10),
                     ),
-                    child: Text('Save',
+                    child: const Text('Save',
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold)),
                   )
@@ -126,7 +128,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           flex: 2,
           child: TextFormField(
             initialValue: widget.estimate?.trunkLineLength.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 35.0,
             ),
             textAlign: TextAlign.center,
@@ -160,7 +162,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           flex: 2,
           child: TextFormField(
             initialValue: widget.estimate?.latLineLength.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 35.0,
             ),
             textAlign: TextAlign.center,
@@ -197,7 +199,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           flex: 2,
           child: TextFormField(
             initialValue: widget.estimate?.toyLineLength.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 35.0,
             ),
             textAlign: TextAlign.center,
@@ -231,7 +233,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
           flex: 2,
           child: TextFormField(
             initialValue: widget.estimate?.fittings.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 35.0,
             ),
             textAlign: TextAlign.center,
