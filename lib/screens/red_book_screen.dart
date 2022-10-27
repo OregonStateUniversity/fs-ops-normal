@@ -3,19 +3,20 @@ import 'package:pdfx/pdfx.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class RedBookScreen extends StatelessWidget {
+  RedBookScreen({super.key});
   static const title = "Red Book";
   static const routeName = 'redBook';
-  static const PDF_FILE_NAME = 'assets/RedBook.pdf';
+  static const pdfFileName = 'assets/RedBook.pdf';
 
   final pdfController =
-      PdfController(document: PdfDocument.openAsset(PDF_FILE_NAME));
+      PdfController(document: PdfDocument.openAsset(pdfFileName));
   final pageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: const Text(title),
       ),
       body: Column(
         children: [
@@ -24,9 +25,9 @@ class RedBookScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: ElevatedButton(
-                    child: Text("Go To"),
+                    child: const Text("Go To"),
                     onPressed: () {
                       pdfController
                           .jumpToPage(int.parse(pageController.text) + 22);
@@ -36,11 +37,11 @@ class RedBookScreen extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: TextField(
                     controller: pageController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: UnderlineInputBorder(),
                         labelText: "Page Number"),
                   ),
@@ -50,7 +51,7 @@ class RedBookScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 
