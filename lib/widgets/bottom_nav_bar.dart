@@ -5,7 +5,7 @@ import 'bottom_icon.dart';
 
 class BottomNavBar extends StatefulWidget {
   final String goBack;
-  BottomNavBar({Key? key, required this.goBack}) : super(key: key);
+  const BottomNavBar({Key? key, required this.goBack}) : super(key: key);
 
   @override
   BottomNavBarState createState() => BottomNavBarState();
@@ -20,7 +20,8 @@ class BottomNavBarState extends State<BottomNavBar> {
       gapLocation: GapLocation.center,
       notchSmoothness: NotchSmoothness.softEdge,
       tabBuilder: (int index, bool isActive) {
-        final color = isActive ? Color.fromRGBO(255, 227, 99, 1) : Colors.white;
+        const Color yellow99 = Color.fromRGBO(255, 227, 99, 1);
+        final color = isActive ? yellow99 : Colors.white;
         return Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
