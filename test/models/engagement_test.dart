@@ -5,7 +5,7 @@ import 'package:ops_normal/models/engagement.dart';
 void main() {
   group('An Engagement', () {
     test('Construction and attributes', () {
-      final engagement = new Engagement(
+      final engagement = Engagement(
           id: null,
           name: "Fake Engagement",
           createdAt: DateTime.now(),
@@ -20,7 +20,7 @@ void main() {
 
     test('toString', () {
       final createdAt = DateTime.now();
-      final engagement = new Engagement(
+      final engagement = Engagement(
           id: 42,
           name: "Fake Engagement",
           createdAt: createdAt,
@@ -31,7 +31,7 @@ void main() {
     });
     group('isSaved', () {
       test('is false when the id is null', () {
-        final engagement = new Engagement(
+        final engagement = Engagement(
             id: null,
             name: "Fake Engagement",
             createdAt: DateTime.now(),
@@ -40,7 +40,7 @@ void main() {
         expect(engagement.isSaved, isFalse);
       });
       test('is true when it has an id', () {
-        final engagement = new Engagement(
+        final engagement = Engagement(
             id: 42,
             name: "Fake Engagement",
             createdAt: DateTime.now(),
