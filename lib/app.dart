@@ -3,18 +3,18 @@ import 'route_map.dart';
 import 'screens/main_screen.dart';
 
 class App extends StatelessWidget {
-  static const APP_TITLE = 'Ops Normal';
+  const App({super.key});
+  static const appTitle = 'Ops Normal';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: APP_TITLE,
+        title: appTitle,
         routes: RouteMap.routes,
         theme: ThemeData(
             primarySwatch: Colors.green,
-            appBarTheme:
-                const AppBarTheme(color: const Color.fromRGBO(0, 80, 47, 1)),
+            appBarTheme: const AppBarTheme(color: Color.fromRGBO(0, 80, 47, 1)),
             visualDensity: VisualDensity.adaptivePlatformDensity),
-        home: MainScreen());
+        home: const MainScreen());
   }
 }
