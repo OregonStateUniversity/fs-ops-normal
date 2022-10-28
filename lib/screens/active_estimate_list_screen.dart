@@ -26,8 +26,6 @@ class ActiveEstimateListScreen extends StatefulWidget {
 class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
   late List<Estimate> estimates = widget.estimates;
 
-  //_ActiveEstimateListScreenState({required this.estimates});
-
   @override
   void initState() {
     super.initState();
