@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 class PopupMenuButtonHandler {
-
   void Function(String value) onSelected = (value) {
-    print("Warning: This event handler should be assigned a new function.");
+    //log: only print the debug mode. won't print the release mode
+    log("Warning: This event handler should be assigned a new function.");
   };
-
 }
