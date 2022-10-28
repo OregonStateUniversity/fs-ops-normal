@@ -13,18 +13,20 @@ class ActiveEstimateListScreen extends StatefulWidget {
   final Engagement engagement;
   final List<Estimate> estimates;
 
-  ActiveEstimateListScreen(
+  const ActiveEstimateListScreen(
       {Key? key, required this.engagement, required this.estimates})
       : super(key: key);
 
-  _ActiveEstimateListScreenState createState() =>
-      _ActiveEstimateListScreenState(estimates: this.estimates);
+  @override
+  State<ActiveEstimateListScreen> createState() {
+    return _ActiveEstimateListScreenState();
+  }
 }
 
 class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
-  List<Estimate> estimates;
+  late List<Estimate> estimates = widget.estimates;
 
-  _ActiveEstimateListScreenState({required this.estimates});
+  //_ActiveEstimateListScreenState({required this.estimates});
 
   @override
   void initState() {
@@ -44,23 +46,23 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (this.estimates.isEmpty == true) {
+    if (estimates.isEmpty == true) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           automaticallyImplyLeading: true,
           title: RichText(
             text: TextSpan(
-                style: TextStyle(fontSize: 22, color: Colors.white),
+                style: const TextStyle(fontSize: 22, color: Colors.white),
                 children: <TextSpan>[
                   TextSpan(
-                    text: "${widget.engagement.name}",
-                    style: TextStyle(fontSize: 22),
+                    text: widget.engagement.name,
+                    style: const TextStyle(fontSize: 22),
                   ),
                   TextSpan(
                       text:
                           "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
-                      style: TextStyle(fontSize: 14))
+                      style: const TextStyle(fontSize: 14))
                 ]),
           ),
         ),
@@ -69,7 +71,7 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("No Estimates Created Yet"),
               ],
             )
@@ -77,7 +79,7 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: floatAccButton(widget.engagement),
-        bottomNavigationBar: BottomNavBar(goBack: '/'),
+        bottomNavigationBar: const BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
@@ -85,34 +87,34 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
         automaticallyImplyLeading: true,
         title: RichText(
           text: TextSpan(
-              style: TextStyle(fontSize: 22, color: Colors.white),
+              style: const TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan>[
                 TextSpan(
-                  text: "${widget.engagement.name}",
-                  style: TextStyle(fontSize: 22),
+                  text: widget.engagement.name,
+                  style: const TextStyle(fontSize: 22),
                 ),
                 TextSpan(
                     text: "\nCreated on: ${widget.engagement.createdAt}",
-                    style: TextStyle(fontSize: 14))
+                    style: const TextStyle(fontSize: 14))
               ]),
         ),
         actions: <Widget>[
           PopupMenuButton(
               icon: Transform.rotate(
                 angle: 90 * 3.1415927 / 180,
-                child: Icon(Icons.code),
+                child: const Icon(Icons.code),
               ),
-              offset: Offset(0, 30),
+              offset: const Offset(0, 30),
               itemBuilder: (context) => [
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 1,
                       child: Text("Oldest"),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 2,
                       child: Text("Newest"),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 3,
                       child: Text("Size"),
                     ),
@@ -120,19 +122,17 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    this
-                        .estimates
+                    estimates
                         .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    this
-                        .estimates
+                    estimates
                         .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
-                    this.estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
+                    estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
                   });
                 }
               }),
@@ -141,14 +141,14 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
       body: Scrollbar(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: this.estimates.length,
+              itemCount: estimates.length,
               itemBuilder: (context, index) {
                 return Dismissible(
                   key: Key(estimates[index].createdAt.toString()),
                   background: Stack(
                     children: [
                       Container(color: Colors.red),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(12.0),
                         child: Align(
                             alignment: Alignment.centerRight,
@@ -156,7 +156,7 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                       )
                     ],
                   ),
-                  dismissThresholds: {
+                  dismissThresholds: const {
                     DismissDirection.startToEnd: 2.0,
                     DismissDirection.endToStart: .25
                   },
@@ -187,26 +187,26 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                         databaseManager: DatabaseManager.getInstance(),
                         estimate: estimates[index]);
                     setState(() {
-                      this.estimates.removeAt(index);
+                      estimates.removeAt(index);
                     });
                   },
                   child: ListTile(
-                    title: Text('Estimate ${this.estimates[index].name}',
-                        style: TextStyle(fontSize: 22)),
+                    title: Text('Estimate ${estimates[index].name}',
+                        style: const TextStyle(fontSize: 22)),
                     subtitle: Text(
-                      '${this.estimates[index].acres.toString()} Acres\nCreated on: ${this.estimates[index].timeStamp}\n',
-                      style: TextStyle(fontSize: 18),
+                      '${estimates[index].acres.toString()} Acres\nCreated on: ${estimates[index].timeStamp}\n',
+                      style: const TextStyle(fontSize: 18),
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, EstimateScreen.routeName,
-                          arguments: this.estimates[index]);
+                          arguments: estimates[index]);
                     },
                   ),
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatAccButton(widget.engagement),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 
@@ -220,7 +220,7 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
             arguments: engagement);
       },
       tooltip: 'New Estimate',
-      child: Icon(Icons.add),
+      child: const Icon(Icons.add),
     );
   }
 }
