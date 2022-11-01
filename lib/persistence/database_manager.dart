@@ -2,9 +2,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseManager {
-  
-  static const SCHEMA_FILE_ASSET_PATH = 'assets/db/schema_1.sql.txt';
-  static const DATABASE_FILENAME = 'ops_normal.sqlite3.db';
+  static const schemaFileAssetPath = 'assets/db/schema_1.sql.txt';
+  static const databaseFileName = 'ops_normal.sqlite3.db';
   static DatabaseManager? _instance;
   final Database db;
 
@@ -18,9 +17,9 @@ class DatabaseManager {
   }
 
   static Future initialize() async {
-    final db = await openDatabase(DATABASE_FILENAME, version: 1,
+    final db = await openDatabase(databaseFileName, version: 1,
         onCreate: (Database db, int _) async {
-      createTables(db, _, await rootBundle.loadString(SCHEMA_FILE_ASSET_PATH));
+      createTables(db, _, await rootBundle.loadString(schemaFileAssetPath));
     }, onConfigure: _configure);
     _instance = DatabaseManager._(database: db);
   }
@@ -33,7 +32,9 @@ class DatabaseManager {
     List<String> createStatements =
         sql.split(";").map((s) => s.trim()).toList();
     createStatements.removeWhere((s) => s.isEmpty);
-    createStatements.forEach((statement) => db.execute(statement));
+    for (var statement in createStatements) {
+      db.execute(statement);
+    }
   }
 
   Future<List<Map<String, dynamic>>> select({required String sql}) {
@@ -62,5 +63,4 @@ class DatabaseManager {
       await t.rawDelete(sql, [id]);
     });
   }
-
 }
