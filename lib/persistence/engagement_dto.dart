@@ -5,6 +5,7 @@ class EngagementDTO {
 
   EngagementDTO(
       {required this.name, required this.active, required this.createdAt});
+
   @override
   String toString() => 'Name: $name, Active: $active, Created At: $createdAt';
 }
