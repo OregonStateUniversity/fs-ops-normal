@@ -10,7 +10,7 @@ import '../utils/date_time_formatter.dart';
 import '../widgets/new_engagement_dialog.dart';
 
 class ActiveEngagementListScreen extends StatefulWidget {
-  ActiveEngagementListScreen(
+  const ActiveEngagementListScreen(
       {Key? key,
       required this.popupMenuButtonHandler,
       required this.floatingActionButtonHandler})
@@ -61,7 +61,7 @@ class ActiveEngagementListScreenState
   }
 
   void loadEngagements() async {
-    this.engagements = await EngagementDAO.activeEngagements(
+    engagements = await EngagementDAO.activeEngagements(
         databaseManager: DatabaseManager.getInstance());
     setState(() {});
   }
@@ -84,7 +84,7 @@ class ActiveEngagementListScreenState
       ];
     } else {
       return [
-        Text('Engagements'),
+        const Text('Engagements'),
         Expanded(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
@@ -101,7 +101,7 @@ class ActiveEngagementListScreenState
         key: Key(engagement.id.toString()),
         background: _archiveBackground(),
         secondaryBackground: _deleteBackground(),
-        dismissThresholds: {
+        dismissThresholds: const {
           DismissDirection.startToEnd: 0.25,
           DismissDirection.endToStart: 0.25
         },
@@ -116,10 +116,10 @@ class ActiveEngagementListScreenState
 
   Widget _listTile(Engagement engagement) {
     return ListTile(
-      title: Text(engagement.name, style: TextStyle(fontSize: 22)),
+      title: Text(engagement.name, style: const TextStyle(fontSize: 22)),
       subtitle: Text(
           'Created: ${DateTimeFormatter.format(engagement.createdAt)}',
-          style: TextStyle(fontSize: 18)),
+          style: const TextStyle(fontSize: 18)),
       onTap: () async {
         final estimates = await EstimateDAO.estimates(
             databaseManager: DatabaseManager.getInstance(),
@@ -168,7 +168,7 @@ class ActiveEngagementListScreenState
           child: Align(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
+              children: const [
                 Icon(Icons.delete_forever_outlined, color: Colors.white),
                 Text("Delete",
                     style: TextStyle(
@@ -210,12 +210,12 @@ class ActiveEngagementListScreenState
   Widget _alertDialog(deleteOrArchive) {
     return AlertDialog(
       title: deleteOrArchive == "Archive"
-          ? Text("Archive Engagement")
-          : Text("Delete Engagement"),
+          ? const Text("Archive Engagement")
+          : const Text("Delete Engagement"),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
-          child: Text("Yes"),
+          child: const Text("Yes"),
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
