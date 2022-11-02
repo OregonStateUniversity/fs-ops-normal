@@ -8,7 +8,7 @@ import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
 
 class InactiveEngagementListScreen extends StatefulWidget {
-  InactiveEngagementListScreen({
+  const InactiveEngagementListScreen({
     Key? key,
     required this.popupMenuButtonHandler,
   }) : super(key: key);
@@ -46,7 +46,7 @@ class InactiveEngagementListScreenState
   }
 
   void loadEngagements() async {
-    this.engagements = await EngagementDAO.inactiveEngagements(
+    engagements = await EngagementDAO.inactiveEngagements(
         databaseManager: DatabaseManager.getInstance());
     setState(() {});
   }
@@ -69,7 +69,7 @@ class InactiveEngagementListScreenState
       ];
     } else {
       return [
-        Text('Archived Engagements'),
+        const Text('Archived Engagements'),
         Expanded(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
@@ -86,7 +86,7 @@ class InactiveEngagementListScreenState
         key: Key(engagement.id.toString()),
         background: _archiveBackground(),
         secondaryBackground: _deleteBackground(),
-        dismissThresholds: {
+        dismissThresholds: const {
           DismissDirection.startToEnd: 0.25,
           DismissDirection.endToStart: 0.25
         },
@@ -101,14 +101,15 @@ class InactiveEngagementListScreenState
 
   Widget _listTile(Engagement engagement) {
     return ListTile(
-      title: Text(engagement.name, style: TextStyle(fontSize: 22)),
+      title: Text(engagement.name, style: const TextStyle(fontSize: 22)),
       subtitle: Text(
           'Created: ${DateTimeFormatter.format(engagement.createdAt)}',
-          style: TextStyle(fontSize: 18)),
+          style: const TextStyle(fontSize: 18)),
       onTap: () async {
         final estimates = await EstimateDAO.estimates(
             databaseManager: DatabaseManager.getInstance(),
             engagement: engagement);
+        if (!mounted) return;
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return InactiveEstimateListScreen(
               engagement: engagement, estimates: estimates);
@@ -127,9 +128,9 @@ class InactiveEngagementListScreenState
             children: [
               Icon(_archivingIconData(), color: Colors.white),
               Text(_archivingIconText(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700)),
-              SizedBox(width: 20)
+              const SizedBox(width: 20)
             ],
           ),
         ),
@@ -153,7 +154,7 @@ class InactiveEngagementListScreenState
           child: Align(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
+              children: const [
                 Icon(Icons.delete_forever_outlined, color: Colors.white),
                 Text("Delete",
                     style: TextStyle(
@@ -195,12 +196,12 @@ class InactiveEngagementListScreenState
   Widget _alertDialog(deleteOrArchive) {
     return AlertDialog(
       title: deleteOrArchive == "Delete"
-          ? Text("Delete Engagement")
-          : Text("Unarchive"),
+          ? const Text("Delete Engagement")
+          : const Text("Unarchive"),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
-          child: Text("Yes"),
+          child: const Text("Yes"),
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
