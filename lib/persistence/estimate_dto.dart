@@ -12,12 +12,13 @@ class EstimateDTO {
   EstimateDTO({this.engagementId, required this.name, required this.createdAt, required this.acres, required this.structures});
 
   EstimateDTO.fromEngagementEstimate({required Engagement engagement, required Estimate estimate}) :
-    this.engagementId = engagement.id,
-    this.name = estimate.name.toString(),
-    this.createdAt = estimate.createdAt!,
-    this.acres = estimate.acres!,
-    this.structures = estimate.structures!;
+    engagementId = engagement.id,
+    name = estimate.name.toString(),
+    createdAt = estimate.createdAt!,
+    acres = estimate.acres!,
+    structures = estimate.structures!;
 
+  @override
   String toString() =>
     'EngagementId: $engagementId, Name: $name, Created At: $createdAt, acres: $acres, Structures: $structures';
 
