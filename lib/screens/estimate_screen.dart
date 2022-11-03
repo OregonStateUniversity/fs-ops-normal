@@ -4,6 +4,9 @@ import '../models/estimate.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class EstimateScreen extends StatelessWidget {
+
+  const EstimateScreen({super.key});
+
   static const routeName = 'estimateScreen';
 
   @override
@@ -14,60 +17,58 @@ class EstimateScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          title: Text("Estimate Screen"),
+          title: const Text("Estimate Screen"),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
+              const SizedBox(
                   height: 10,
                   width: double
                       .infinity), //invisible container to make column max-width
-              Text(
+              const Text(
                 "Acres Order",
                 style: TextStyle(
                     color: Colors.orange,
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold),
               ),
-              Container(
-                  child: SelectableText(
-                estimate.flatFireOrderText(),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              )),
+              SelectableText(
+              estimate.flatFireOrderText(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
               Container(child: floatingActionButtonAcres(estimate, context)),
-              Container(
+              const SizedBox(
                   height: 50,
                   width: double
                       .infinity), //invisible container to make column max-width
-              Text(
+              const Text(
                 "Structures Order",
                 style: TextStyle(
                     color: Colors.orange,
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold),
               ),
-              Container(
-                  child: SelectableText(
+              SelectableText(
                 estimate.structureFireOrderText(),
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              )),
+                style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
               Container(
                   child: floatingActionButtonStructures(estimate, context)),
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavBar(goBack: 'engagement'));
+        bottomNavigationBar: const BottomNavBar(goBack: 'engagement'));
   }
 
   Widget floatingActionButtonAcres(estimate, context) {
     return FloatingActionButton(
         heroTag: "CopyAcres",
-        child: Icon(Icons.copy),
+        child: const Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(ClipboardData(text: estimate.flatFireOrderText()))
               .then((value) =>
@@ -80,7 +81,7 @@ class EstimateScreen extends StatelessWidget {
   Widget floatingActionButtonStructures(estimate, context) {
     return FloatingActionButton(
         heroTag: "CopyStructures",
-        child: Icon(Icons.copy),
+        child: const Icon(Icons.copy),
         onPressed: () {
           Clipboard.setData(
                   ClipboardData(text: estimate.structureFireOrderText()))
@@ -100,8 +101,8 @@ class EstimateScreen extends StatelessWidget {
                   content: Text("Copied to Clipboard"),
                 )));
       },
-      icon: Icon(Icons.copy),
-      label: Text("Copy"),
+      icon: const Icon(Icons.copy),
+      label: const Text("Copy"),
     );
   }
 }
