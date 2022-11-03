@@ -13,48 +13,58 @@ class XEngagementScreen extends StatefulWidget {
   final Engagement engagement;
   final List<Estimate> estimates;
 
-  XEngagementScreen({Key? key, required this.engagement, required this.estimates}) : super(key: key);
+  const XEngagementScreen(
+      {Key? key, required this.engagement, required this.estimates})
+      : super(key: key);
+  @override
+  State<XEngagementScreen> createState() => _XEngagementScreenState();
+  // _XEngagementScreenState createState() =>
+  //     _XEngagementScreenState(estimates: this.estimates);
 
-  _XEngagementScreenState createState() => _XEngagementScreenState(estimates: this.estimates);
 }
 
 class _XEngagementScreenState extends State<XEngagementScreen> {
+  late List<Estimate> estimates;
 
-  List<Estimate> estimates;
-
-  _XEngagementScreenState({required this.estimates});
+  // _XEngagementScreenState({required this.estimates});
+  // _XEngagementScreenState({required this.estimates});
 
   @override
   void initState() {
     super.initState();
+    estimates = widget.estimates;
   }
 
   void loadEstimates() {
-    EstimateDAO.estimates(databaseManager: DatabaseManager.getInstance(), engagement: widget.engagement).then(
-      (estimates) {
-        setState(() { this.estimates = estimates; });
-      }
-    );
+    EstimateDAO.estimates(
+            databaseManager: DatabaseManager.getInstance(),
+            engagement: widget.engagement)
+        .then((estimates) {
+      setState(() {
+        this.estimates = estimates;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (this.estimates.isEmpty == true) {
+    if (estimates.isEmpty == true) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           automaticallyImplyLeading: true,
           title: RichText(
             text: TextSpan(
-                style: TextStyle(fontSize: 22, color: Colors.white),
+                style: const TextStyle(fontSize: 22, color: Colors.white),
                 children: <TextSpan>[
                   TextSpan(
-                    text: "${widget.engagement.name}",
-                    style: TextStyle(fontSize: 22),
+                    text: widget.engagement.name,
+                    style: const TextStyle(fontSize: 22),
                   ),
                   TextSpan(
-                      text: "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
-                      style: TextStyle(fontSize: 14))
+                      text:
+                          "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
+                      style: const TextStyle(fontSize: 14))
                 ]),
           ),
         ),
@@ -63,7 +73,7 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("No Estimates Created Yet"),
               ],
             )
@@ -71,7 +81,7 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: floatAccButton(widget.engagement),
-        bottomNavigationBar: BottomNavBar(goBack: '/'),
+        bottomNavigationBar: const BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
@@ -79,25 +89,25 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
         automaticallyImplyLeading: true,
         title: RichText(
           text: TextSpan(
-              style: TextStyle(fontSize: 22, color: Colors.white),
+              style: const TextStyle(fontSize: 22, color: Colors.white),
               children: <TextSpan>[
                 TextSpan(
-                  text: "${widget.engagement.name}",
-                  style: TextStyle(fontSize: 22),
+                  text: widget.engagement.name,
+                  style: const TextStyle(fontSize: 22),
                 ),
                 TextSpan(
                     text: "\nCreated on: ${widget.engagement.createdAt}",
-                    style: TextStyle(fontSize: 14))
+                    style: const TextStyle(fontSize: 14))
               ]),
         ),
         actions: <Widget>[
           PopupMenuButton(
               icon: Transform.rotate(
                 angle: 90 * 3.1415927 / 180,
-                child: Icon(Icons.code),
+                child: const Icon(Icons.code),
               ),
-              offset: Offset(0, 30),
-              itemBuilder: (context) => [
+              offset: const Offset(0, 30),
+              itemBuilder: (context) => const [
                     PopupMenuItem(
                       value: 1,
                       child: Text("Oldest"),
@@ -114,15 +124,17 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
               onSelected: (dynamic value) {
                 if (value == 1) {
                   setState(() {
-                    this.estimates.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                    estimates
+                        .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
                   });
                 } else if (value == 2) {
                   setState(() {
-                    this.estimates.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                    estimates
+                        .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
                   });
                 } else if (value == 3) {
                   setState(() {
-                    this.estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
+                    estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
                   });
                 }
               }),
@@ -131,7 +143,7 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
       body: Scrollbar(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: this.estimates.length,
+              itemCount: estimates.length,
               itemBuilder: (context, index) {
                 return Dismissible(
                   key: Key(estimates[index].timeStamp!),
@@ -143,12 +155,13 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
                             : Colors.black12,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: widget.engagement.active
-                              ? Icon(Icons.delete_forever, size: 34)
-                              : Text("Can't Delete Estimates In Archive Mode"),
+                              ? const Icon(Icons.delete_forever, size: 34)
+                              : const Text(
+                                  "Can't Delete Estimates In Archive Mode"),
                         ),
                       )
                     ],
@@ -163,9 +176,8 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
                         context: context,
                         builder: (BuildContext context) {
                           if (widget.engagement.active == false) {
-                            return AlertDialog(
-                                title:
-                                    const Text("This engagement isn't active"));
+                            return const AlertDialog(
+                                title: Text("This engagement isn't active"));
                           }
                           return AlertDialog(
                             title: const Text("Delete Estimate?"),
@@ -191,22 +203,22 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
                     //            so no new code is being added here.
                   },
                   child: ListTile(
-                    title: Text('Estimate ${this.estimates[index].name}',
-                        style: TextStyle(fontSize: 22)),
+                    title: Text('Estimate ${estimates[index].name}',
+                        style: const TextStyle(fontSize: 22)),
                     subtitle: Text(
-                      '${this.estimates[index].acres.toString()} Acres\nCreated on: ${this.estimates[index].timeStamp}\n',
-                      style: TextStyle(fontSize: 18),
+                      '${estimates[index].acres.toString()} Acres\nCreated on: ${estimates[index].timeStamp}\n',
+                      style: const TextStyle(fontSize: 18),
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, EstimateScreen.routeName,
-                          arguments: this.estimates[index]);
+                          arguments: estimates[index]);
                     },
                   ),
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatAccButton(widget.engagement),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 
@@ -220,7 +232,7 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
             arguments: engagement);
       },
       tooltip: 'New Estimate',
-      child: Icon(Icons.add),
+      child: const Icon(Icons.add),
     );
   }
 }
