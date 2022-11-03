@@ -5,12 +5,13 @@ import '../widgets/bottom_nav_bar.dart';
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';
   static const title = "Pocket Guide";
-  static const PDF_FILE_NAME = 'assets/IRPG_2022.pdf';
+  static const pdfFileName = 'assets/IRPG_2022.pdf';
 
   final pdfController =
-      PdfController(document: PdfDocument.openAsset(PDF_FILE_NAME));
+      PdfController(document: PdfDocument.openAsset(pdfFileName));
   final pageController = TextEditingController();
 
+  IncidentResponsePocketGuideScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +25,9 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: ElevatedButton(
-                    child: Text("Go To"),
+                    child: const Text("Go To"),
                     onPressed: () {
                       pdfController
                           .jumpToPage(int.parse(pageController.text) + 16);
@@ -36,11 +37,11 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: TextField(
                     controller: pageController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: UnderlineInputBorder(),
                         labelText: "Page Number"),
                   ),
@@ -50,7 +51,7 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 
