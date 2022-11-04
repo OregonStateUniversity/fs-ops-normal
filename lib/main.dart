@@ -5,5 +5,5 @@ import 'persistence/database_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseManager.initialize();
-  runApp(App());
+  runApp(const App());
 }
