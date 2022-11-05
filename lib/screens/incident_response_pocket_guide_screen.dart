@@ -16,7 +16,7 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: const Text(title),
       ),
       body: Column(
         children: [
