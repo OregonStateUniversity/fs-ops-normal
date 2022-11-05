@@ -44,7 +44,7 @@ class HowToScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 

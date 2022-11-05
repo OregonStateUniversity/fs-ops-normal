@@ -78,7 +78,7 @@ class _InactiveEstimateListScreenState
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomNavBar(goBack: '/'),
+        bottomNavigationBar: const BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
@@ -156,7 +156,7 @@ class _InactiveEstimateListScreenState
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 }
