@@ -153,9 +153,9 @@ class ActiveEngagementListScreenState
             children: [
               Icon(_archivingIconData(), color: Colors.white),
               Text(_archivingIconText(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700)),
-              SizedBox(width: 20)
+              const SizedBox(width: 20)
             ],
           ),
         ),
