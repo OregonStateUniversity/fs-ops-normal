@@ -8,13 +8,13 @@ import 'screens/red_book_screen.dart';
 
 class RouteMap {
   static final routes = {
-      AboutScreen.routeName: (context) => AboutScreen(),
-      NewEstimateScreen.routeName: (context) => NewEstimateScreen(),
-      EstimateScreen.routeName: (context) => EstimateScreen(),
-      HowToScreen.routeName: (context) => HowToScreen(),
+      AboutScreen.routeName: (context) => const AboutScreen(),
+      NewEstimateScreen.routeName: (context) => const NewEstimateScreen(),
+      EstimateScreen.routeName: (context) => const EstimateScreen(),
+      HowToScreen.routeName: (context) => const HowToScreen(),
       IncidentResponsePocketGuideScreen.routeName: (context) =>
           IncidentResponsePocketGuideScreen(),
-      ModifyEstimateScreen.routeName: (context) => ModifyEstimateScreen(),
+      ModifyEstimateScreen.routeName: (context) => const ModifyEstimateScreen(),
       RedBookScreen.routeName: (context) => RedBookScreen(),
     };
 }
