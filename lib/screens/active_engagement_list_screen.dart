@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ops_normal/models/estimate.dart';
 import 'active_estimate_list_screen.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../event_handlers/floating_action_button_handler.dart';
@@ -120,14 +121,24 @@ class ActiveEngagementListScreenState
       subtitle: Text(
           'Created: ${DateTimeFormatter.format(engagement.createdAt)}',
           style: const TextStyle(fontSize: 18)),
-      onTap: () async {
-        final estimates = await EstimateDAO.estimates(
-            databaseManager: DatabaseManager.getInstance(),
-            engagement: engagement);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ActiveEstimateListScreen(
-              engagement: engagement, estimates: estimates);
-        }));
+      onTap: () {
+        // final estimates = EstimateDAO.estimates(
+        //     databaseManager: DatabaseManager.getInstance(),
+        //     engagement: engagement);
+        EstimateDAO.estimates(
+                databaseManager: DatabaseManager.getInstance(),
+                engagement: engagement)
+            .then((estimates) => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ActiveEstimateListScreen(
+                        engagement: engagement, estimates: estimates);
+                  }))
+                });
+        // TODO: delete the commented lines
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return ActiveEstimateListScreen(
+        //       engagement: engagement, estimates: estimates);
+        // }));
       },
     );
   }
