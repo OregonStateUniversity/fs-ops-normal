@@ -8,7 +8,7 @@ void main() {
       Estimate estimate;
 
       //Act
-      estimate = new Estimate.finalEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
+      estimate = Estimate.finalEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -24,7 +24,7 @@ void main() {
       Estimate estimate;
 
       //Act
-      estimate = new Estimate.jsonConvF(1, 1, 2, "time", 1200, 600, 300, 6);
+      estimate = Estimate.jsonConvF(1, 1, 2, "time", 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -37,7 +37,7 @@ void main() {
 
     test('toJson', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 1);
+      Estimate estimate = Estimate(acres: 1);
       // estimate.acres = 1;
       var expected =
           "{name: -1, timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200, latLineLength: 600, toyLineLength: 300, fittings: 6}";
@@ -51,7 +51,7 @@ void main() {
 
     test('fromJson', () {
       //Arrange
-      Estimate estimate = new Estimate();
+      Estimate estimate = Estimate();
       estimate.acres = 1;
       var estimateToJson = estimate.toJson();
 
@@ -70,7 +70,7 @@ void main() {
 
     test('has initial acre calculations', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 1);
+      Estimate estimate = Estimate(acres: 1);
 
       //Assert
       expect(estimate.acres, equals(1));
@@ -82,7 +82,7 @@ void main() {
 
     test('has initial structure calculations', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 1);
+      Estimate estimate = Estimate(acres: 0, structures: 1);
 
       //Assert
       expect(estimate.acres, equals(0));
@@ -94,7 +94,7 @@ void main() {
 
     test('flat fire that is 1-9 acres', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 1);
+      Estimate estimate = Estimate(acres: 1);
       var expected = "Trunk Line: 1200 ft.\n"
           "Lat Line: 600 ft.\n"
           "Toy Hose: 300 ft.\n\n"
@@ -121,7 +121,7 @@ void main() {
 
     test('flat fire  that is 10-19 acres', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = "Trunk Line: 3000 ft.\n"
           "Lat Line: 1500 ft.\n"
           "Toy Hose: 750 ft.\n\n"
@@ -148,7 +148,7 @@ void main() {
 
     test('flat fire  that is 20+ acres', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 20);
+      Estimate estimate = Estimate(acres: 20);
       var expected = "Trunk Line: 5000 ft.\n"
           "Lat Line: 2500 ft.\n"
           "Toy Hose: 1250 ft.\n\n"
@@ -177,7 +177,7 @@ void main() {
   group('Estimate default methods', () {
     test('Defualt Trunk Line Length - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 1000;
 
       //Act
@@ -189,7 +189,7 @@ void main() {
 
     test('Defualt Trunk Line Length - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 3000;
 
       //Act
@@ -201,7 +201,7 @@ void main() {
 
     test('Defualt Lat Line Length - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 500;
 
       //Act
@@ -213,7 +213,7 @@ void main() {
 
     test('Defualt Lat Line Length - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 1500;
 
       //Act
@@ -225,7 +225,7 @@ void main() {
 
     test('Defualt Toy Line Length - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 250;
 
       //Act
@@ -237,7 +237,7 @@ void main() {
 
     test('Defualt Toy Line Length - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 750;
 
       //Act
@@ -249,7 +249,7 @@ void main() {
 
     test('Defualt Fittings - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 5;
 
       //Act
@@ -261,7 +261,7 @@ void main() {
 
     test('Defualt Fittings - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 15;
 
       //Act
@@ -273,7 +273,7 @@ void main() {
 
     test('Defualt FoldaTanks - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -285,7 +285,7 @@ void main() {
 
     test('Defualt FoldaTanks - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 2;
 
       //Act
@@ -297,7 +297,7 @@ void main() {
 
     test('Defualt Mark3Pumps - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -309,7 +309,7 @@ void main() {
 
     test('Defualt Mark3Pumps - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 1;
 
       //Act
@@ -321,7 +321,7 @@ void main() {
 
     test('Defualt Mark3Kits - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -333,7 +333,7 @@ void main() {
 
     test('Defualt Mark3Kits - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 1;
 
       //Act
@@ -345,7 +345,7 @@ void main() {
 
     test('Defualt Mark3PumpMix - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -357,7 +357,7 @@ void main() {
 
     test('Defualt Mark3PumpMix - Acres: 10', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 10);
+      Estimate estimate = Estimate(acres: 10);
       var expected = 6;
 
       //Act
@@ -369,7 +369,7 @@ void main() {
 
     test('Defualt WaterPallets - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -381,7 +381,7 @@ void main() {
 
     test('Defualt WaterPallets - Acres: 20', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 20);
+      Estimate estimate = Estimate(acres: 20);
       var expected = 1;
 
       //Act
@@ -393,7 +393,7 @@ void main() {
 
     test('Defualt GatoradePallets - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -405,7 +405,7 @@ void main() {
 
     test('Defualt GatoradePallets - Acres: 20', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 20);
+      Estimate estimate = Estimate(acres: 20);
       var expected = 1;
 
       //Act
@@ -417,7 +417,7 @@ void main() {
 
     test('Defualt MREPallets - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -429,7 +429,7 @@ void main() {
 
     test('Defualt MREPallets - Acres: 20', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 20);
+      Estimate estimate = Estimate(acres: 20);
       var expected = 1;
 
       //Act
@@ -441,7 +441,7 @@ void main() {
 
     test('Defualt PortaPotties - Acres: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0);
+      Estimate estimate = Estimate(acres: 0);
       var expected = 0;
 
       //Act
@@ -453,7 +453,7 @@ void main() {
 
     test('Defualt PortaPotties - Acres: 20', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 20);
+      Estimate estimate = Estimate(acres: 20);
       var expected = 2;
 
       //Act
@@ -467,7 +467,7 @@ void main() {
 
     test('Defualt Sprinklers - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -479,7 +479,7 @@ void main() {
 
     test('Defualt Sprinklers - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 10;
 
       //Act
@@ -491,7 +491,7 @@ void main() {
 
     test('Defualt Sprinklers - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 40;
 
       //Act
@@ -503,7 +503,7 @@ void main() {
 
     test('Defualt Sprinklers - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 50;
 
       //Act
@@ -517,7 +517,7 @@ void main() {
 
     test('Defualt OnePointFive Hose - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -529,7 +529,7 @@ void main() {
 
     test('Defualt OnePointFive Hose - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 3000;
 
       //Act
@@ -541,7 +541,7 @@ void main() {
 
     test('Defualt OnePointFive Hose - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 5000;
 
       //Act
@@ -553,7 +553,7 @@ void main() {
 
     test('Defualt OnePointFive Hose - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 7000;
 
       //Act
@@ -567,7 +567,7 @@ void main() {
 
     test('Defualt OneInch Hose - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -579,7 +579,7 @@ void main() {
 
     test('Defualt OneInch Hose - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 20;
 
       //Act
@@ -591,7 +591,7 @@ void main() {
 
     test('Defualt OneInch Hose - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 35;
 
       //Act
@@ -603,7 +603,7 @@ void main() {
 
     test('Defualt OneInch Hose - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 50;
 
       //Act
@@ -617,7 +617,7 @@ void main() {
 
     test('Defualt OnePointFive Wye - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -629,7 +629,7 @@ void main() {
 
     test('Defualt OnePointFive Wye - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 10;
 
       //Act
@@ -641,7 +641,7 @@ void main() {
 
     test('Defualt OnePointFive Wye - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 40;
 
       //Act
@@ -653,7 +653,7 @@ void main() {
 
     test('Defualt OnePointFive Wye - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 50;
 
       //Act
@@ -667,7 +667,7 @@ void main() {
 
     test('Defualt OneInch Wye  - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -679,7 +679,7 @@ void main() {
 
     test('Defualt OneInch Wye  - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 20;
 
       //Act
@@ -691,7 +691,7 @@ void main() {
 
     test('Defualt OneInch Wye  - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 40;
 
       //Act
@@ -703,7 +703,7 @@ void main() {
 
     test('Defualt OneInch Wye  - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 50;
 
       //Act
@@ -717,7 +717,7 @@ void main() {
 
     test('Defualt OnePointFiveToOneInchReducer - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -729,7 +729,7 @@ void main() {
 
     test('Defualt OnePointFiveToOneInchReducer - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 20;
 
       //Act
@@ -741,7 +741,7 @@ void main() {
 
     test('Defualt OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 20;
 
       //Act
@@ -753,7 +753,7 @@ void main() {
 
     test('Defualt OnePointFiveToOneInchReducer - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 30;
 
       //Act
@@ -767,7 +767,7 @@ void main() {
 
     test('Defualt KK Nozzles   - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -779,7 +779,7 @@ void main() {
 
     test('Defualt KK Nozzles  - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 20;
 
       //Act
@@ -791,7 +791,7 @@ void main() {
 
     test('Defualt KK Nozzles  - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 20;
 
       //Act
@@ -803,7 +803,7 @@ void main() {
 
     test('Defualt KK Nozzles  - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 30;
 
       //Act
@@ -817,7 +817,7 @@ void main() {
 
     test('Defualt Mark3Structures - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -829,7 +829,7 @@ void main() {
 
     test('Defualt Mark3Structures - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 3;
 
       //Act
@@ -841,7 +841,7 @@ void main() {
 
     test('Defualt Mark3Structures - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 6;
 
       //Act
@@ -853,7 +853,7 @@ void main() {
 
     test('Defualt Mark3Structures - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 10;
 
       //Act
@@ -867,7 +867,7 @@ void main() {
 
     test('Defualt Unleaded Gas - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -879,7 +879,7 @@ void main() {
 
     test('Defualt Unleaded Gas - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 30;
 
       //Act
@@ -891,7 +891,7 @@ void main() {
 
     test('Defualt Unleaded Gas - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 90;
 
       //Act
@@ -903,7 +903,7 @@ void main() {
 
     test('Defualt Unleaded Gas - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 300;
 
       //Act
@@ -917,7 +917,7 @@ void main() {
 
     test('Defualt Two Cycle Oil - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -929,7 +929,7 @@ void main() {
 
     test('Defualt Two Cycle Oil - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 6;
 
       //Act
@@ -941,7 +941,7 @@ void main() {
 
     test('Defualt Two Cycle Oil - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 18;
 
       //Act
@@ -953,7 +953,7 @@ void main() {
 
     test('Defualt Two Cycle Oil - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 60;
 
       //Act
@@ -967,7 +967,7 @@ void main() {
 
     test('Defualt Porta Potties Structure - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -979,7 +979,7 @@ void main() {
 
     test('Defualt Porta Potties Structure - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 5;
 
       //Act
@@ -991,7 +991,7 @@ void main() {
 
     test('Defualt Porta Potties Structure - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 6;
 
       //Act
@@ -1003,7 +1003,7 @@ void main() {
 
     test('Defualt Porta Potties Structure - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 10;
 
       //Act
@@ -1017,7 +1017,7 @@ void main() {
 
     test('Defualt Foam - Structures: 0', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 0);
+      Estimate estimate = Estimate(acres: 0, structures: 0);
       var expected = 0;
 
       //Act
@@ -1029,7 +1029,7 @@ void main() {
 
     test('Defualt Foam - Structures: 0 < x < 10 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 5);
+      Estimate estimate = Estimate(acres: 0, structures: 5);
       var expected = 5;
 
       //Act
@@ -1041,7 +1041,7 @@ void main() {
 
     test('Defualt Foam - Structures: 10 < x < 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 20);
+      Estimate estimate = Estimate(acres: 0, structures: 20);
       var expected = 5;
 
       //Act
@@ -1053,7 +1053,7 @@ void main() {
 
     test('Defualt Foam - Structures: x > 40 ', () {
       //Arrange
-      Estimate estimate = new Estimate(acres: 0, structures: 50);
+      Estimate estimate = Estimate(acres: 0, structures: 50);
       var expected = 5;
 
       //Act
