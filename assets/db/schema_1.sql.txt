@@ -11,4 +11,8 @@ CREATE TABLE IF NOT EXISTS estimates(
     createdAt TEXT NOT NULL,
     acres INTEGER NOT NULL,
     structures INTEGER NOT NULL,
+    truckLineLength INTEGER NOT NULL,
+    latLineLength INTEGER NOT NULL,
+    toyLineLength INTEGER NOT NULL,
+    fittings INTEGER NOT NULL,
     FOREIGN KEY (engagementId) REFERENCES engagements(id));

@@ -397,6 +397,7 @@ class Estimate {
         "Forester Nozzles: $_fittings\n"
         "Toy Nozzles: $_fittings\n"
         "Toy Wye: $_fittings\n\n";
+
     str += "Folda-tank: $_foldaTanksAcres\n"
         "Mark 3 + Kits: $_mark3PumpsAcres\n"
         "Pump Mix (Cans): $_pumpMixCansAcres\n\n";

@@ -73,10 +73,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                             orderField.acres,
                             widget.estimate?.timeStamp,
                             widget.estimate?.structures,
-                            orderField.trunkLineLength,
-                            orderField.latLineLength,
-                            orderField.toyLineLength,
-                            orderField.fittingsField);
+                            widget.estimate?.trunkLineLength,
+                            widget.estimate?.latLineLength,
+                            widget.estimate?.toyLineLength,
+                            widget.estimate?.fittings);
                         finalEstimate.createdAt = DateTime.now();
                         EstimateDAO.save(
                             databaseManager: DatabaseManager.getInstance(),
@@ -139,7 +139,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ft.',
             ),
             onSaved: (value) {
-              orderField.trunkLineLength = int.parse(value!);
+              widget.estimate?.trunkLineLength = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -176,7 +176,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               orderField.fittingsField = int.parse(value) ~/ 100;
             },
             onSaved: (value) {
-              orderField.latLineLength = int.parse(value!);
+              widget.estimate?.latLineLength = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -210,7 +210,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ft.',
             ),
             onSaved: (value) {
-              orderField.toyLineLength = int.parse(value!);
+              widget.estimate?.toyLineLength = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -244,7 +244,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ea.',
             ),
             onSaved: (value) {
-              orderField.fittingsField = int.parse(value!);
+              widget.estimate?.fittings = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {

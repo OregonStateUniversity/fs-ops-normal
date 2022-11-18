@@ -4,7 +4,6 @@ import '../models/estimate.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class EstimateScreen extends StatelessWidget {
-
   const EstimateScreen({super.key});
 
   static const routeName = 'estimateScreen';
@@ -36,9 +35,10 @@ class EstimateScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SelectableText(
-              estimate.flatFireOrderText(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                estimate.flatFireOrderText(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
               Container(child: floatingActionButtonAcres(estimate, context)),
               const SizedBox(
@@ -55,7 +55,8 @@ class EstimateScreen extends StatelessWidget {
               SelectableText(
                 estimate.structureFireOrderText(),
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
               Container(
                   child: floatingActionButtonStructures(estimate, context)),
