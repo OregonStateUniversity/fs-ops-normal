@@ -5,7 +5,7 @@ import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
-import '../widgets/bottom_nav_bar.dart';
+//import '../widgets/bottom_nav_bar.dart';
 
 class InactiveEstimateListScreen extends StatefulWidget {
   static const routeName = 'engagement';
@@ -78,7 +78,7 @@ class _InactiveEstimateListScreenState
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: const BottomNavBar(goBack: '/'),
+        //bottomNavigationBar: const BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
@@ -156,7 +156,7 @@ class _InactiveEstimateListScreenState
                 );
               })),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 }

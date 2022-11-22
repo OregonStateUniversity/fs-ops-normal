@@ -20,49 +20,44 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   final popupMenuButtonHandler = PopupMenuButtonHandler();
   final floatingActionButtonHandler = FloatingActionButtonHandler();
 
-  var _fabVisible = true;
+  final _fabVisible = true; //change "final" to "var" if adding nav bar back in
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: MainScreen.tabs.length,
         child: Scaffold(
-            floatingActionButton: HidableFloatingActionButton(
-                visible: _fabVisible,
-                onPressed: () => floatingActionButtonHandler.onPressed(),
-                tooltip: 'New engagement',
-                child: const Icon(Icons.add)
-              ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            drawer: const SideDrawer(),
-            appBar: AppBar(title: const Text('Ops Normal'), actions: [
-              SortPopupMenuButton(
-                  popupMenuButtonHandler: popupMenuButtonHandler)
-            ]),
-            body: SafeArea(
-                child: TabBarView(children: [
-              ActiveEngagementListScreen(
-                  popupMenuButtonHandler: popupMenuButtonHandler,
-                  floatingActionButtonHandler: floatingActionButtonHandler),
-              InactiveEngagementListScreen(
+          floatingActionButton: HidableFloatingActionButton(
+              visible: _fabVisible,
+              onPressed: () => floatingActionButtonHandler.onPressed(),
+              tooltip: 'New engagement',
+              child: const Icon(Icons.add)),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          drawer: const SideDrawer(),
+          appBar: AppBar(title: const Text('Ops Normal'), actions: [
+            SortPopupMenuButton(popupMenuButtonHandler: popupMenuButtonHandler)
+          ]),
+          body: SafeArea(
+              child: TabBarView(children: [
+            ActiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler,
-              ),
-            ])),
-            bottomNavigationBar: Container(
+                floatingActionButtonHandler: floatingActionButtonHandler),
+            InactiveEngagementListScreen(
+              popupMenuButtonHandler: popupMenuButtonHandler,
+            ),
+          ])),
+          /*bottomNavigationBar: Container(
                 color: Colors.blueGrey[900],
                 child: TabBar(
                   tabs: MainScreen.tabs,
                   unselectedLabelColor: Colors.grey,
                   onTap: (index) => setState( () => _fabVisible = (index == 0) )
                 )
-              )
-            )
-          );
+            )*/
+        ));
   }
-
 }
