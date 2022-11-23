@@ -216,7 +216,7 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
                   ),
                 );
               })),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatAccButton(widget.engagement),
       //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );

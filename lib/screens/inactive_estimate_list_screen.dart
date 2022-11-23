@@ -77,7 +77,7 @@ class _InactiveEstimateListScreenState
             )
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         //bottomNavigationBar: const BottomNavBar(goBack: '/'),
       );
     }

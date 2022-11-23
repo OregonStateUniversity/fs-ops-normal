@@ -35,8 +35,8 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: () => floatingActionButtonHandler.onPressed(),
               tooltip: 'New engagement',
               child: const Icon(Icons.add)),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          //floatingActionButtonLocation:
+              //FloatingActionButtonLocation.,
           drawer: const SideDrawer(),
           appBar: AppBar(title: const Text('Ops Normal'), actions: [
             SortPopupMenuButton(popupMenuButtonHandler: popupMenuButtonHandler)

@@ -202,7 +202,7 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                   ),
                 );
               })),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatAccButton(widget.engagement),
       //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
