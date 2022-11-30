@@ -202,8 +202,34 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                   ),
                 );
               })),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatAccButton(widget.engagement),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButton: floatAccButton(widget.engagement),
+    floatingActionButton: Wrap( //will break to another line on overflow
+      direction: Axis.horizontal, //use vertical to show  on vertical axis
+      children: <Widget>[
+          Container( 
+            margin:const EdgeInsets.only(left:10.0, top:10.0, right:110.0, bottom:20.0),
+            child: FloatingActionButton(
+              heroTag: "homeButton",
+              onPressed: (){
+                  floatAccButton(widget.engagement);
+              },
+              child: const Icon(Icons.home),
+            )
+          ), //button first
+
+          Container( 
+            margin:const EdgeInsets.only(left:110.0, top:10.0, right:10.0, bottom:20.0),
+            child: FloatingActionButton(
+              heroTag: "addButton",
+              onPressed: (){
+                  //floatAccButton(widget.main_screen);
+              },
+              child: const Icon(Icons.add),
+            )
+          ), // button second,
+        ]
+      )
       //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
