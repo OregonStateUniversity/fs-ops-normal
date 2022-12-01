@@ -3,10 +3,23 @@ import 'package:flutter/services.dart';
 import '../models/estimate.dart';
 //import '../widgets/bottom_nav_bar.dart';
 
-class EstimateScreen extends StatelessWidget {
-  const EstimateScreen({super.key});
+class EstimateScreen extends StatefulWidget {
 
   static const routeName = 'estimateScreen';
+
+  const EstimateScreen(
+      {Key? key}) : super(key: key);
+
+  @override
+  State<EstimateScreen> createState() {
+    return _EstimateScreenState();
+  }
+}
+
+class _EstimateScreenState extends State<EstimateScreen> {
+  //const EstimateScreen({super.key});
+
+  //static const routeName = 'estimateScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +75,21 @@ class EstimateScreen extends StatelessWidget {
           ],
         ),
       ),
+
+    floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+    floatingActionButton: homeButton(ContextAction),
       //bottomNavigationBar: const BottomNavBar(goBack: 'engagement')
     );
+  }
+
+  Widget? homeButton(ContextAction) {
+      return FloatingActionButton(
+        onPressed: () {
+          Navigator.popUntil(context, ModalRoute.withName('/'));
+          setState(() {});
+        },
+      heroTag: 'homeButton',
+      child: const Icon(Icons.home));
   }
 
   Widget floatingActionButtonAcres(estimate, context) {
@@ -106,4 +132,5 @@ class EstimateScreen extends StatelessWidget {
       label: const Text("Copy"),
     );
   }
+
 }
