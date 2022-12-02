@@ -12,42 +12,39 @@ class Estimate {
   int? acres;
   int? structures;
 
-  int? _trunkLineLength;
-  int? _latLineLength;
-  int? _toyLineLength;
-  int? _fittings;
+  int? trunkLineLength;
+  int? latLineLength;
+  int? toyLineLength;
+  int? fittings;
 
-  int? _foldaTanksAcres;
-  int? _mark3PumpsAcres;
-  int? _pumpMixCansAcres;
-  int? _waterPallets;
-  int? _gatoradePallets;
-  int? _mrePallets;
-  int? _portaPottiesAcres;
+  int? foldaTanks;
+  int? pumpCans;
+  int? waterPallets;
+  int? gatoradePallets;
+  int? mrePallets;
+  int? portaPottiesPallets;
 
-  int? _sprinklerKits;
+  int? sprinklerKits;
   int? _onePointFiveHose;
   int? _oneInchHose;
-  int? _onePointFiveWye;
+  int? onePointFiveInchWye;
   int? _oneInchWye;
-  int? _onePointFiveToOneInchReducer;
+  int? onePointFiveInchReducer;
   int? _kkNozzles;
-  int? _mark3Structures;
-  int? _foldaTanksStructures;
+  int? mark3Kits;
   int? _unleadedGas;
   int? _twoCycleOil;
-  int? _portaPottiesStructures;
   int? _foam;
 
-  int? get trunkLineLength => _trunkLineLength;
-  int? get latLineLength => _latLineLength;
-  int? get toyLineLength => _toyLineLength;
-  int? get fittings => _fittings;
+  int? get trunkLine => trunkLineLength;
+  int? get latLine => latLineLength;
+  int? get toyLine => toyLineLength;
+  int? get variousFittings => fittings;
 
-  set trunkLineLength(int? length) => _trunkLineLength;
-  set latLineLength(int? length) => _latLineLength;
-  set toyLineLength(int? length) => _toyLineLength;
-  set fittings(int? count) => _fittings;
+  set trunkLine(int? length) => trunkLineLength;
+  set latLine(int? length) => latLineLength;
+  set toyLine(int? length) => toyLineLength;
+  set variousFittings(int? count) => fittings;
 
   Estimate({
     this.name = -1,
@@ -59,21 +56,47 @@ class Estimate {
   }
 
   Estimate.jsonConvF(
-      this.name, this.acres, this.structures, this.timeStamp, trunk, lat, toy,
-      [fittings = 0]) {
-    _trunkLineLength = trunk;
-    _latLineLength = lat;
-    _toyLineLength = toy;
-    _fittings = fittings;
+      this.name,
+      this.acres,
+      this.structures,
+      this.timeStamp,
+      trunk,
+      lat,
+      toy,
+      wye,
+      reducer,
+      tank,
+      mark3,
+      cans,
+      water,
+      gatorade,
+      mre,
+      portaPotty,
+      sprinklers,
+      [variousFittings]) {
+    trunkLineLength = trunk;
+    latLineLength = lat;
+    toyLineLength = toy;
+    fittings = variousFittings;
+    onePointFiveInchWye = wye;
+    onePointFiveInchReducer = reducer;
+    foldaTanks = tank;
+    mark3Kits = mark3;
+    pumpCans = cans;
+    waterPallets = water;
+    gatoradePallets = gatorade;
+    mrePallets = mre;
+    portaPottiesPallets = portaPotty;
+    sprinklerKits = sprinklers;
   }
 
   Estimate.finalEstimate(
-      this.name, this.acres, this.timeStamp, this.structures, trunk, lat, toy,
-      [fittings]) {
-    _trunkLineLength = trunk;
-    _latLineLength = lat;
-    _toyLineLength = toy;
-    _fittings = fittings;
+      this.name, this.acres, this.structures, this.timeStamp, trunk, lat, toy,
+      [variousFittings]) {
+    trunkLineLength = trunk;
+    latLineLength = lat;
+    toyLineLength = toy;
+    fittings = variousFittings;
     initializeUnsavedProperties();
   }
 
@@ -85,35 +108,42 @@ class Estimate {
       json["trunkLineLength"],
       json["latLineLength"],
       json["toyLineLength"],
-      json["fittings"] ?? 0);
+      json["fittings"],
+      json["onePointFiveInchWye"],
+      json["onePointFiveInchReducer"],
+      json["foldaTanks"],
+      json["mark3Kits"],
+      json["pumpCans"],
+      json["waterPallets"],
+      json["gatoradePallets"],
+      json["mrePallets"],
+      json["portPottiesPallets"],
+      json["sprinklerKits"] ?? 0);
 
   void initializeSavedProperties() {
-    _trunkLineLength = defaultTrunkLineLength();
-    _latLineLength = defaultLatLineLength();
-    _toyLineLength = defaultToyLineLength();
-    _fittings = defaultFittings();
+    trunkLineLength = defaultTrunkLineLength();
+    latLineLength = defaultLatLineLength();
+    toyLineLength = defaultToyLineLength();
+    fittings = defaultFittings();
   }
 
   void initializeUnsavedProperties() {
-    _foldaTanksAcres = defaultFoldaTanksAcres();
-    _mark3PumpsAcres = defaultMark3PumpsAcres();
-    _pumpMixCansAcres = defaultPumpMixCansAcres();
-    _waterPallets = defaultWaterPallets();
-    _gatoradePallets = defaultGatoradePallets();
-    _mrePallets = defaultMrePallets();
-    _portaPottiesAcres = defaultPortaPottiesAcres();
-    _sprinklerKits = defaultSprinklerKits();
+    foldaTanks = defaultFoldaTanksAcres();
+    pumpCans = defaultPumpMixCansAcres();
+    waterPallets = defaultWaterPallets();
+    gatoradePallets = defaultGatoradePallets();
+    mrePallets = defaultMrePallets();
+    portaPottiesPallets = defaultPortaPottiesAcres();
+    sprinklerKits = defaultSprinklerKits();
     _onePointFiveHose = defaultOnePointFiveHose();
     _oneInchHose = defaultOneInchHose();
-    _onePointFiveWye = defaultOnePointFiveWye();
+    onePointFiveInchWye = defaultOnePointFiveWye();
     _oneInchWye = defaultOneInchWye();
-    _onePointFiveToOneInchReducer = defaultOnePointFiveToOneInchReducer();
+    onePointFiveInchReducer = defaultOnePointFiveToOneInchReducer();
     _kkNozzles = defaultKkNozzles();
-    _mark3Structures = defaultMark3Structures();
-    _foldaTanksStructures = defaultFoldATankStructures();
+    mark3Kits = defaultMark3Structures();
     _unleadedGas = defaultUnleadedGas();
     _twoCycleOil = defaultTwoCycleOil();
-    _portaPottiesStructures = defaultPortaPottiesStructures();
     _foam = defaultFoam();
   }
 
@@ -128,7 +158,7 @@ class Estimate {
 
   int defaultLatLineLength() {
     if (acres! >= 0) {
-      return (trunkLineLength! ~/ 2).toInt();
+      return (trunkLine! ~/ 2).toInt();
     } else {
       return 0;
     }
@@ -136,7 +166,7 @@ class Estimate {
 
   int defaultToyLineLength() {
     if (acres! >= 0) {
-      return (latLineLength! ~/ 2).toInt();
+      return (latLine! ~/ 2).toInt();
     } else {
       return 0;
     }
@@ -144,7 +174,7 @@ class Estimate {
 
   int defaultFittings() {
     if (acres! >= 0) {
-      return (latLineLength! ~/ 100).toInt();
+      return (latLine! ~/ 100).toInt();
     } else {
       return 0;
     }
@@ -387,43 +417,42 @@ class Estimate {
   }
 
   String flatFireOrderText() {
-    String str = "Trunk Line: $_trunkLineLength ft.\n"
-        "Lat Line: $_latLineLength ft.\n"
-        "Toy Hose: $_toyLineLength ft.\n\n";
+    String str = "Trunk Line: $trunkLineLength ft.\n"
+        "Lat Line: $latLineLength ft.\n"
+        "Toy Hose: $toyLineLength ft.\n\n";
 
-    str += "1.5\" Gated Wye: $_fittings\n"
-        "1.5\" Reducers: $_fittings\n"
-        "1\"-3/4\" Reducers: $_fittings\n"
-        "Forester Nozzles: $_fittings\n"
-        "Toy Nozzles: $_fittings\n"
-        "Toy Wye: $_fittings\n\n";
+    str += "1.5\" Gated Wye: $onePointFiveInchWye\n"
+        "1.5\" Reducers: $onePointFiveInchReducer\n"
+        "1\"-3/4\" Reducers: $fittings\n"
+        "Forester Nozzles: $fittings\n"
+        "Toy Nozzles: $fittings\n"
+        "Toy Wye: $fittings\n\n";
 
-    str += "Folda-tank: $_foldaTanksAcres\n"
-        "Mark 3 + Kits: $_mark3PumpsAcres\n"
-        "Pump Mix (Cans): $_pumpMixCansAcres\n\n";
-
-    str += "Water (Pallets): $_waterPallets\n"
-        "Gatorade (Pallets): $_gatoradePallets\n"
-        "MRE (Pallets): $_mrePallets\n"
-        "Port-a-Potties: $_portaPottiesAcres\n\n";
+    str += "Folda-tank: $foldaTanks\n"
+        "Mark 3 + Kits: $mark3Kits\n"
+        "Pump Mix (Cans): $pumpCans\n\n";
+    str += "Water (Pallets): $waterPallets\n"
+        "Gatorade (Pallets): $gatoradePallets\n"
+        "MRE (Pallets): $mrePallets\n"
+        "Port-a-Potties: $portaPottiesPallets\n\n";
 
     return str;
   }
 
   String structureFireOrderText() {
-    String str = "\nSprinkler Kits: $_sprinklerKits\n"
+    String str = "\nSprinkler Kits: $sprinklerKits\n"
         "1.5 hose: $_onePointFiveHose\n"
         "1.0 hose: $_oneInchHose\n\n"
-        "1.5 Gated Wye: $_onePointFiveWye\n"
+        "1.5 Gated Wye: $onePointFiveInchWye\n"
         "1.0 Gated Wye: $_oneInchWye\n"
-        "1.5-1.0 Reducer: $_onePointFiveToOneInchReducer\n"
+        "1.5-1.0 Reducer: $onePointFiveInchReducer\n"
         "KK Nozzles: $_kkNozzles\n\n"
-        "Mark 3 Pumps: $_mark3Structures\n"
-        "Mark 3 Kits: $_mark3Structures\n\n"
-        "Fold-a-Tanks: $_foldaTanksStructures\n\n"
+        "Mark 3 Pumps: $mark3Kits\n"
+        "Mark 3 Kits: $mark3Kits\n\n"
+        "Fold-a-Tanks: $foldaTanks\n\n"
         "Unleaded Gas (Gallons): $_unleadedGas\n"
         "2 Cycle Oil (Quart): $_twoCycleOil\n"
-        "Port-a-Potties (1500 Gallon): $_portaPottiesStructures\n"
+        "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
         "Foam (Cans): $_foam\n";
     return str;
   }
@@ -436,7 +465,17 @@ class Estimate {
         'trunkLineLength': trunkLineLength,
         'latLineLength': latLineLength,
         'toyLineLength': toyLineLength,
-        'fittings': fittings
+        'fittings': fittings,
+        'onePointFiveInchWye': onePointFiveInchWye,
+        'onePointFiveInchReducer': onePointFiveInchReducer,
+        'foldaTanks': foldaTanks,
+        'mark3Kits': mark3Kits,
+        'pumpCans': pumpCans,
+        'waterPallets': waterPallets,
+        'gatoradePallets': gatoradePallets,
+        'mrePallets': mrePallets,
+        'portaPottiesPallets': portaPottiesPallets,
+        'sprinklerKits': sprinklerKits
       };
 
   Estimate.fromMap({required Map map})
@@ -445,5 +484,19 @@ class Estimate {
         newName = map['name'],
         createdAt = DateTime.parse(map['createdAt']),
         acres = map['acres'],
-        structures = map['structures'];
+        structures = map['structures'],
+        trunkLineLength = map['truckLineLength'],
+        latLineLength = map['latLineLength'],
+        toyLineLength = map['toyLineLength'],
+        fittings = map['fittings'],
+        onePointFiveInchWye = map['onePointFiveInchWye'],
+        onePointFiveInchReducer = map['onePointFiveInchReducer'],
+        foldaTanks = map['foldaTanks'],
+        mark3Kits = map['mark3Kits'],
+        pumpCans = map['pumpCans'],
+        waterPallets = map['waterPallets'],
+        gatoradePallets = map['gatoradePallets'],
+        mrePallets = map['mrePallets'],
+        portaPottiesPallets = map['portaPottiesPallets'],
+        sprinklerKits = map['sprinklerKits'];
 }

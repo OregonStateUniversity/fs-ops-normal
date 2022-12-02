@@ -6,9 +6,9 @@ import '../models/estimate.dart';
 class EstimateDAO {
   static const sqlSelect =
       "SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC;";
-  static const sqlDelete = "DELETE FROM estimates WHERE estimateId = ?;";
+  static const sqlDelete = "DELETE FROM estimates WHERE id = ?;";
   static const sqlInsert =
-      "INSERT INTO estimates(engagementId, name, createdAt, acres, structures, truckLineLength, latLineLength, toyLineLength, fittings) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      "INSERT INTO estimates(engagementId, name, createdAt, acres, structures, truckLineLength, latLineLength, toyLineLength, fittings, onePointFiveInchWye, onePointFiveInchReducer, foldaTanks, mark3Kits, pumpCans, waterPallets, gatoradePallets, mrePallets, portaPottiesPallets, sprinklerKits) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
   static Future<List<Estimate>> estimates(
       {required DatabaseManager databaseManager,
@@ -37,7 +37,17 @@ class EstimateDAO {
       dto.truckLineLength,
       dto.latLineLength,
       dto.toyLineLength,
-      dto.fittings
+      dto.fittings,
+      dto.onePointFiveInchWye,
+      dto.onePointFiveInchReducer,
+      dto.foldaTanks,
+      dto.mark3Kits,
+      dto.pumpCans,
+      dto.waterPallets,
+      dto.gatoradePallets,
+      dto.mrePallets,
+      dto.portaPottiesPallets,
+      dto.sprinklerKits
     ]);
   }
 }

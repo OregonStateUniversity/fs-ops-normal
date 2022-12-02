@@ -8,7 +8,7 @@ void main() {
       Estimate estimate;
 
       //Act
-      estimate = Estimate.finalEstimate(1, 1, "time", 0, 1200, 600, 300, 6);
+      estimate = Estimate.finalEstimate(1, 1, 0, "time", 1200, 600, 300, 6);
 
       //Assert
       expect(estimate.name, equals(1));
@@ -24,7 +24,8 @@ void main() {
       Estimate estimate;
 
       //Act
-      estimate = Estimate.jsonConvF(1, 1, 2, "time", 1200, 600, 300, 6);
+      estimate = Estimate.jsonConvF(1, 1, 2, "time", 1200, 600, 300, 6, 30, 65,
+          7, 12, 23, 45, 12, 67, 11, 10);
 
       //Assert
       expect(estimate.name, equals(1));

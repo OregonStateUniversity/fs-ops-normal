@@ -39,6 +39,10 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
   @override
   Widget build(BuildContext context) {
     orderField.acres = widget.estimate?.acres;
+    orderField.trunkLineLength = widget.estimate?.trunkLineLength;
+    orderField.latLineLength = widget.estimate?.latLineLength;
+    orderField.toyLineLength = widget.estimate?.toyLineLength;
+    orderField.fittingsField = widget.estimate?.fittings;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -71,12 +75,12 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                         var finalEstimate = Estimate.finalEstimate(
                             newNum,
                             orderField.acres,
-                            widget.estimate?.timeStamp,
                             widget.estimate?.structures,
-                            widget.estimate?.trunkLineLength,
-                            widget.estimate?.latLineLength,
-                            widget.estimate?.toyLineLength,
-                            widget.estimate?.fittings);
+                            widget.estimate?.timeStamp,
+                            orderField.trunkLineLength,
+                            orderField.latLineLength,
+                            orderField.toyLineLength,
+                            orderField.fittingsField);
                         finalEstimate.createdAt = DateTime.now();
                         EstimateDAO.save(
                             databaseManager: DatabaseManager.getInstance(),
@@ -139,7 +143,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ft.',
             ),
             onSaved: (value) {
-              widget.estimate?.trunkLineLength = int.parse(value!);
+              orderField.trunkLineLength = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -176,7 +180,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               orderField.fittingsField = int.parse(value) ~/ 100;
             },
             onSaved: (value) {
-              widget.estimate?.latLineLength = int.parse(value!);
+              orderField.latLineLength = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -210,7 +214,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ft.',
             ),
             onSaved: (value) {
-              widget.estimate?.toyLineLength = int.parse(value!);
+              orderField.toyLineLength = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -244,7 +248,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
               suffixText: 'ea.',
             ),
             onSaved: (value) {
-              widget.estimate?.fittings = int.parse(value!);
+              orderField.fittingsField = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
