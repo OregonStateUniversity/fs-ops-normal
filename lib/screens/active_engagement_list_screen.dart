@@ -73,14 +73,18 @@ class ActiveEngagementListScreenState
   }
 
   Widget _emptyListPrompt() => const Text("No engagements created yet.");
+  //Widget _swipePrompt() => const Text("Swipe left to see archived engagements.");
 
   List<Widget> _bodyChildren() {
     if (_noEngagements) {
       return [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [_emptyListPrompt()],
-        )
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [_emptyListPrompt()],
+          ),
+        ),
+        //_swipePrompt()
       ];
     } else {
       return [
@@ -92,6 +96,7 @@ class ActiveEngagementListScreenState
               itemBuilder: (context, index) =>
                   _dismissible(engagements![index])),
         ),
+        //_swipePrompt()
       ];
     }
   }

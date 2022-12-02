@@ -10,59 +10,91 @@ import '../widgets/sort_popup_menu_button.dart';
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
-  static const tabs = [
-    Tab(text: 'Home', icon: Icon(Icons.home)),
-    Tab(text: 'Archive', icon: Icon(Icons.archive))
-  ];
-
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
+  static const List<Tab> tabs = <Tab>[
+    Tab(text: 'Home', icon: Icon(Icons.home)),
+    Tab(text: 'Archive', icon: Icon(Icons.archive))
+  ];
+
+  late TabController _tabController;
+  var _fabVisible = true; //change "final" to "var" if adding nav bar back in
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   final popupMenuButtonHandler = PopupMenuButtonHandler();
   final floatingActionButtonHandler = FloatingActionButtonHandler();
 
-  var _fabVisible = true;
-
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: MainScreen.tabs.length,
-        child: Scaffold(
-            floatingActionButton: HidableFloatingActionButton(
-                visible: _fabVisible,
-                onPressed: () => floatingActionButtonHandler.onPressed(),
-                tooltip: 'New engagement',
-                child: const Icon(Icons.add)
-              ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            drawer: const SideDrawer(),
-            appBar: AppBar(title: const Text('Ops Normal'), actions: [
-              SortPopupMenuButton(
-                  popupMenuButtonHandler: popupMenuButtonHandler)
-            ]),
-            body: SafeArea(
-                child: TabBarView(children: [
-              ActiveEngagementListScreen(
-                  popupMenuButtonHandler: popupMenuButtonHandler,
-                  floatingActionButtonHandler: floatingActionButtonHandler),
-              InactiveEngagementListScreen(
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Wrap(
+        direction: Axis.horizontal,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: _fabVisible ? 220 : 0),
+            child: FloatingActionButton(
+              onPressed: () {
+                _tabController.index = _tabController.index == 0 ? 1 : 0;
+                setState(() {
+                  _fabVisible = !_fabVisible;
+                });
+              },
+              tooltip: "toggle home or archive",
+              heroTag: "homeButton",
+              child: _fabVisible
+                  ? const Icon(Icons.archive)
+                  : const Icon(Icons.home),
+            ),
+          ),
+          HidableFloatingActionButton(
+              visible: _fabVisible,
+              onPressed: () => floatingActionButtonHandler.onPressed(),
+              tooltip: 'New engagement',
+              child: const Icon(Icons.add)),
+        ],
+      ),
+      drawer: const SideDrawer(),
+      appBar: AppBar(title: const Text('Ops Normal'), actions: [
+        SortPopupMenuButton(popupMenuButtonHandler: popupMenuButtonHandler)
+      ]),
+      body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _tabController,
+          children: [
+            ActiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler,
-              ),
-            ])),
-            bottomNavigationBar: Container(
-                color: Colors.blueGrey[900],
-                child: TabBar(
-                  tabs: MainScreen.tabs,
-                  unselectedLabelColor: Colors.grey,
-                  onTap: (index) => setState( () => _fabVisible = (index == 0) )
-                )
-              )
-            )
-          );
+                floatingActionButtonHandler: floatingActionButtonHandler),
+            InactiveEngagementListScreen(
+                popupMenuButtonHandler: popupMenuButtonHandler),
+          ]),
+      /*bottomNavigationBar: Container(
+            color: Colors.blueGrey[900],
+            child: TabBar(
+                controller: _tabController,
+                tabs: tabs,
+                unselectedLabelColor: Colors.grey,
+                onTap: (index) => setState(() => _fabVisible = (index == 0))))*/
+    );
   }
-
 }

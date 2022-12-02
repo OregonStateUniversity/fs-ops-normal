@@ -6,7 +6,7 @@ import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
-import '../widgets/bottom_nav_bar.dart';
+//import '../widgets/bottom_nav_bar.dart';
 
 class XEngagementScreen extends StatefulWidget {
   static const routeName = 'engagement';
@@ -81,7 +81,7 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: floatAccButton(widget.engagement),
-        bottomNavigationBar: const BottomNavBar(goBack: '/'),
+        //bottomNavigationBar: const BottomNavBar(goBack: '/'),
       );
     }
     return Scaffold(
@@ -216,9 +216,9 @@ class _XEngagementScreenState extends State<XEngagementScreen> {
                   ),
                 );
               })),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatAccButton(widget.engagement),
-      bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 

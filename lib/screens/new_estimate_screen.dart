@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'active_engagement_list_screen.dart';
+//import 'active_engagement_list_screen.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
@@ -24,11 +24,11 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
-  final _selectedIndex = 0;
+  //final _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
+  /*void _onItemTapped(int index) {
     Navigator.pushNamed(context, ActiveEngagementListScreen.routeName);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               child: const Text("New Estimate")),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         backgroundColor: (Colors.blueGrey[900]!),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -93,7 +93,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         selectedItemColor: Colors.white,
         unselectedItemColor: (Colors.blueGrey[900]!),
         onTap: _onItemTapped,
-      ),
+      ),*/
     );
   }
 }

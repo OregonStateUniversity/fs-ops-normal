@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/how_to_instructions_strings.dart';
-import '../widgets/bottom_nav_bar.dart';
+//import '../widgets/bottom_nav_bar.dart';
 
 class HowToScreen extends StatelessWidget {
   static const routeName = 'howto';
@@ -44,7 +44,7 @@ class HowToScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 
