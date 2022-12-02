@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
-import '../widgets/bottom_nav_bar.dart';
+//import '../widgets/bottom_nav_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';
@@ -51,7 +51,7 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
     );
   }
 

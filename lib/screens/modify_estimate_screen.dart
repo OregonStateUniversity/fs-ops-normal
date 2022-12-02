@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'active_engagement_list_screen.dart';
+//import 'active_engagement_list_screen.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
@@ -27,14 +27,14 @@ class ModifyEstimateScreen extends StatefulWidget {
 }
 
 class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
-  final int _selectedIndex = 0;
+  //final int _selectedIndex = 0;
   var formKey = GlobalKey<FormState>();
   OrderFields orderField = OrderFields();
   Estimate? est;
 
-  void _navigateHome(int index) {
+  /*void _navigateHome(int index) {
     Navigator.pushNamed(context, ActiveEngagementListScreen.routeName);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         ),
       ),
       // bottomNavigationBar: BottomNavBar(goBack: '/'),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         backgroundColor: (Colors.blueGrey[900]!),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -120,7 +120,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
         selectedItemColor: Colors.white,
         unselectedItemColor: (Colors.blueGrey[900]!),
         onTap: _navigateHome,
-      ),
+      ),*/
     );
   }
 
