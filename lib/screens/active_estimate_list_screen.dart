@@ -123,12 +123,12 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                   if (value == 1) {
                     setState(() {
                       estimates
-                          .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                          .sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
                     });
                   } else if (value == 2) {
                     setState(() {
                       estimates
-                          .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                          .sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
                     });
                   } else if (value == 3) {
                     setState(() {
@@ -191,10 +191,10 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                       });
                     },
                     child: ListTile(
-                      title: Text('Estimate ${estimates[index].name}',
+                      title: Text('Estimate ${estimates[index].id}',
                           style: const TextStyle(fontSize: 22)),
                       subtitle: Text(
-                        '${estimates[index].acres.toString()} Acres\nCreated on: ${estimates[index].timeStamp}\n',
+                        '${estimates[index].acres.toString()} Acres\nCreated on: ${DateTimeFormatter.format(estimates[index].createdAt!)}\n',
                         style: const TextStyle(fontSize: 18),
                       ),
                       onTap: () {

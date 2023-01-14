@@ -25,4 +25,13 @@ CREATE TABLE IF NOT EXISTS estimates(
     mrePallets INTEGER NOT NULL,
     portaPottiesPallets INTEGER NOT NULL,
     sprinklerKits INTEGER NOT NULL,
+    onePointFiveHose INTEGER NOT NULL,
+    oneInchHose INTEGER NOT NULL,
+    oneInchWye INTEGER NOT NULL,
+    kkNozzles INTEGER NOT NULL,
+    mark3Structures INTEGER NOT NULL,
+    foldaTankStructures INTEGER NOT NULL,
+    unleadedGas INTEGER NOT NULL,
+    twoCycleOil INTEGER NOT NULL,
+    foam INTEGER NOT NULL,
     FOREIGN KEY (engagementId) REFERENCES engagements(id));

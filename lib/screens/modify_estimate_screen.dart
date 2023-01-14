@@ -71,7 +71,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
                         // var newNum = checkNamingNumber();
-                        var newNum = 0;
+                        var newNum = "";
                         var finalEstimate = Estimate.finalEstimate(
                             newNum,
                             orderField.acres,

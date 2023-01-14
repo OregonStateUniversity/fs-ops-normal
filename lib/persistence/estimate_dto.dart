@@ -21,6 +21,15 @@ class EstimateDTO {
   final int mrePallets;
   final int portaPottiesPallets;
   final int sprinklerKits;
+  final int onePointFiveHose;
+  final int oneInchHose;
+  final int oneInchWye;
+  final int kkNozzles;
+  final int mark3Structures;
+  final int foldaTankStructures;
+  final int unleadedGas;
+  final int twoCycleOil;
+  final int foam;
 
   EstimateDTO(
       {this.engagementId,
@@ -41,7 +50,16 @@ class EstimateDTO {
       required this.gatoradePallets,
       required this.mrePallets,
       required this.portaPottiesPallets,
-      required this.sprinklerKits});
+      required this.sprinklerKits,
+      required this.onePointFiveHose,
+      required this.oneInchHose,
+      required this.oneInchWye,
+      required this.kkNozzles,
+      required this.mark3Structures,
+      required this.foldaTankStructures,
+      required this.unleadedGas,
+      required this.twoCycleOil,
+      required this.foam});
 
   EstimateDTO.fromEngagementEstimate(
       {required Engagement engagement, required Estimate estimate})
@@ -63,9 +81,18 @@ class EstimateDTO {
         gatoradePallets = estimate.gatoradePallets!,
         mrePallets = estimate.mrePallets!,
         portaPottiesPallets = estimate.portaPottiesPallets!,
-        sprinklerKits = estimate.sprinklerKits!;
+        sprinklerKits = estimate.sprinklerKits!,
+        onePointFiveHose = estimate.onePointFiveHose!,
+        oneInchHose = estimate.oneInchHose!,
+        oneInchWye = estimate.oneInchWye!,
+        kkNozzles = estimate.kkNozzles!,
+        mark3Structures = estimate.mark3Structures!,
+        foldaTankStructures = estimate.foldaTankStructures!,
+        unleadedGas = estimate.unleadedGas!,
+        twoCycleOil = estimate.twoCycleOil!,
+        foam = estimate.foam!;
 
   @override
   String toString() =>
-      'EngagementId: $engagementId, Name: $name, Created At: $createdAt, acres: $acres, Structures: $structures, Truck Line: $truckLineLength, Lat Line: $latLineLength, Toy Line: $toyLineLength, Fittings: $fittings, 1.5 Inch Wye: $onePointFiveInchWye, 1.5 Inch Reducer: $onePointFiveInchReducer, Folda-Tanks: $foldaTanks, Mark3 Kits: $mark3Kits, Pump Mix Cans: $pumpCans, Water Pallets: $waterPallets, Gatorade Pallets: $gatoradePallets, MRE Pallets: $mrePallets, Porta-Potty Pallets: $portaPottiesPallets, Sprinkler Kits: $sprinklerKits';
+      'EngagementId: $engagementId, Name: $name, Created At: $createdAt, acres: $acres, Structures: $structures, Truck Line: $truckLineLength, Lat Line: $latLineLength, Toy Line: $toyLineLength, Fittings: $fittings, 1.5 Inch Wye: $onePointFiveInchWye, 1.5 Inch Reducer: $onePointFiveInchReducer, Folda-Tanks: $foldaTanks, Mark3 Kits: $mark3Kits, Pump Mix Cans: $pumpCans, Water Pallets: $waterPallets, Gatorade Pallets: $gatoradePallets, MRE Pallets: $mrePallets, Porta-Potty Pallets: $portaPottiesPallets, Sprinkler Kits: $sprinklerKits, 1.5 Hose: $onePointFiveHose, 1 Inch Hose: $oneInchHose, 1 Inch Wye: $oneInchWye, KK Nozzles: $kkNozzles, Mark 3 Structures: $mark3Structures, Folda-Tanks Structures: $foldaTankStructures, Unleaded Gas: $unleadedGas, Two-Cycle Oil: $twoCycleOil, Foam: $foam';
 }

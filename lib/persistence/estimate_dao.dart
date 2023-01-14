@@ -8,7 +8,7 @@ class EstimateDAO {
       "SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC;";
   static const sqlDelete = "DELETE FROM estimates WHERE id = ?;";
   static const sqlInsert =
-      "INSERT INTO estimates(engagementId, name, createdAt, acres, structures, truckLineLength, latLineLength, toyLineLength, fittings, onePointFiveInchWye, onePointFiveInchReducer, foldaTanks, mark3Kits, pumpCans, waterPallets, gatoradePallets, mrePallets, portaPottiesPallets, sprinklerKits) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      "INSERT INTO estimates(engagementId, name, createdAt, acres, structures, truckLineLength, latLineLength, toyLineLength, fittings, onePointFiveInchWye, onePointFiveInchReducer, foldaTanks, mark3Kits, pumpCans, waterPallets, gatoradePallets, mrePallets, portaPottiesPallets, sprinklerKits, onePointFiveHose, oneInchHose, oneInchWye, kkNozzles, mark3Structures, foldaTankStructures, unleadedGas, twoCycleOil, foam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
   static Future<List<Estimate>> estimates(
       {required DatabaseManager databaseManager,
@@ -47,7 +47,16 @@ class EstimateDAO {
       dto.gatoradePallets,
       dto.mrePallets,
       dto.portaPottiesPallets,
-      dto.sprinklerKits
+      dto.sprinklerKits,
+      dto.onePointFiveHose,
+      dto.oneInchHose,
+      dto.oneInchWye,
+      dto.kkNozzles,
+      dto.mark3Structures,
+      dto.foldaTankStructures,
+      dto.unleadedGas,
+      dto.twoCycleOil,
+      dto.foam
     ]);
   }
 }

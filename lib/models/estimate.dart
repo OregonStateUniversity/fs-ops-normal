@@ -7,7 +7,7 @@ class Estimate {
   String? newName;
   DateTime? createdAt;
 
-  int? name;
+  String? name;
   String? timeStamp;
   int? acres;
   int? structures;
@@ -25,16 +25,18 @@ class Estimate {
   int? portaPottiesPallets;
 
   int? sprinklerKits;
-  int? _onePointFiveHose;
-  int? _oneInchHose;
+  int? onePointFiveHose;
+  int? oneInchHose;
   int? onePointFiveInchWye;
-  int? _oneInchWye;
+  int? oneInchWye;
   int? onePointFiveInchReducer;
-  int? _kkNozzles;
+  int? kkNozzles;
+  int? mark3Structures;
+  int? foldaTankStructures;
   int? mark3Kits;
-  int? _unleadedGas;
-  int? _twoCycleOil;
-  int? _foam;
+  int? unleadedGas;
+  int? twoCycleOil;
+  int? foam;
 
   int? get trunkLine => trunkLineLength;
   int? get latLine => latLineLength;
@@ -47,7 +49,7 @@ class Estimate {
   set variousFittings(int? count) => fittings;
 
   Estimate({
-    this.name = -1,
+    this.name = "",
     this.timeStamp,
     this.acres = 0,
     this.structures = 0,
@@ -73,6 +75,15 @@ class Estimate {
       mre,
       portaPotty,
       sprinklers,
+      hoseOnePointFive,
+      hoseOneInch,
+      wyeOneInch,
+      nozzles,
+      mark3Struct,
+      foldaTankStruct,
+      gas,
+      oil,
+      foamCans,
       [variousFittings]) {
     trunkLineLength = trunk;
     latLineLength = lat;
@@ -88,6 +99,15 @@ class Estimate {
     mrePallets = mre;
     portaPottiesPallets = portaPotty;
     sprinklerKits = sprinklers;
+    onePointFiveHose = hoseOnePointFive;
+    oneInchHose = hoseOneInch;
+    oneInchWye = wyeOneInch;
+    kkNozzles = nozzles;
+    mark3Structures = mark3Struct;
+    foldaTankStructures = foldaTankStruct;
+    unleadedGas = gas;
+    twoCycleOil = oil;
+    foam = foamCans;
   }
 
   Estimate.finalEstimate(
@@ -118,7 +138,16 @@ class Estimate {
       json["gatoradePallets"],
       json["mrePallets"],
       json["portPottiesPallets"],
-      json["sprinklerKits"] ?? 0);
+      json["sprinklerKits"],
+      json["onePointFiveHose"],
+      json["oneInchHose"],
+      json["oneInchWye"],
+      json["kkNozzles"],
+      json["mark3Structures"],
+      json["foldaTankStructures"],
+      json["unleadedGas"],
+      json["twoCycleOil"],
+      json["foam"] ?? 0);
 
   void initializeSavedProperties() {
     trunkLineLength = defaultTrunkLineLength();
@@ -135,16 +164,18 @@ class Estimate {
     mrePallets = defaultMrePallets();
     portaPottiesPallets = defaultPortaPottiesAcres();
     sprinklerKits = defaultSprinklerKits();
-    _onePointFiveHose = defaultOnePointFiveHose();
-    _oneInchHose = defaultOneInchHose();
+    onePointFiveHose = defaultOnePointFiveHose();
+    oneInchHose = defaultOneInchHose();
     onePointFiveInchWye = defaultOnePointFiveWye();
-    _oneInchWye = defaultOneInchWye();
+    oneInchWye = defaultOneInchWye();
     onePointFiveInchReducer = defaultOnePointFiveToOneInchReducer();
-    _kkNozzles = defaultKkNozzles();
-    mark3Kits = defaultMark3Structures();
-    _unleadedGas = defaultUnleadedGas();
-    _twoCycleOil = defaultTwoCycleOil();
-    _foam = defaultFoam();
+    kkNozzles = defaultKkNozzles();
+    mark3Structures = defaultMark3Structures();
+    foldaTankStructures = defaultFoldATankStructures();
+    mark3Kits = defaultMark3PumpsAcres();
+    unleadedGas = defaultUnleadedGas();
+    twoCycleOil = defaultTwoCycleOil();
+    foam = defaultFoam();
   }
 
   void initializeAllProperties() {
@@ -441,19 +472,18 @@ class Estimate {
 
   String structureFireOrderText() {
     String str = "\nSprinkler Kits: $sprinklerKits\n"
-        "1.5 hose: $_onePointFiveHose\n"
-        "1.0 hose: $_oneInchHose\n\n"
+        "1.5 hose: $onePointFiveHose\n"
+        "1.0 hose: $oneInchHose\n\n"
         "1.5 Gated Wye: $onePointFiveInchWye\n"
-        "1.0 Gated Wye: $_oneInchWye\n"
+        "1.0 Gated Wye: $oneInchWye\n"
         "1.5-1.0 Reducer: $onePointFiveInchReducer\n"
-        "KK Nozzles: $_kkNozzles\n\n"
-        "Mark 3 Pumps: $mark3Kits\n"
-        "Mark 3 Kits: $mark3Kits\n\n"
-        "Fold-a-Tanks: $foldaTanks\n\n"
-        "Unleaded Gas (Gallons): $_unleadedGas\n"
-        "2 Cycle Oil (Quart): $_twoCycleOil\n"
+        "KK Nozzles: $kkNozzles\n\n"
+        "Mark 3 Pumps & Kits: $mark3Structures\n"
+        "Fold-a-Tanks: $foldaTankStructures\n\n"
+        "Unleaded Gas (Gallons): $unleadedGas\n"
+        "2 Cycle Oil (Quart): $twoCycleOil\n"
         "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
-        "Foam (Cans): $_foam\n";
+        "Foam (Cans): $foam\n";
     return str;
   }
 
@@ -475,7 +505,16 @@ class Estimate {
         'gatoradePallets': gatoradePallets,
         'mrePallets': mrePallets,
         'portaPottiesPallets': portaPottiesPallets,
-        'sprinklerKits': sprinklerKits
+        'sprinklerKits': sprinklerKits,
+        'onePointFiveHose': onePointFiveHose,
+        'oneInchHose': oneInchHose,
+        'oneInchWye': oneInchWye,
+        'kkNozzles': kkNozzles,
+        'mark3Structures': mark3Structures,
+        'foldaTankStructures': foldaTankStructures,
+        'unleadedGas': unleadedGas,
+        'twoCycleOil': twoCycleOil,
+        'foam': foam
       };
 
   Estimate.fromMap({required Map map})
@@ -498,5 +537,14 @@ class Estimate {
         gatoradePallets = map['gatoradePallets'],
         mrePallets = map['mrePallets'],
         portaPottiesPallets = map['portaPottiesPallets'],
-        sprinklerKits = map['sprinklerKits'];
+        sprinklerKits = map['sprinklerKits'],
+        onePointFiveHose = map["onePointFiveHose"],
+        oneInchHose = map["oneInchHose"],
+        oneInchWye = map["oneInchWye"],
+        kkNozzles = map["kkNozzles"],
+        mark3Structures = map["mark3Structures"],
+        foldaTankStructures = map["foldaTankStructures"],
+        unleadedGas = map["unleadedGas"],
+        twoCycleOil = map["twoCycleOil"],
+        foam = map["foam"];
 }

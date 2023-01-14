@@ -18,9 +18,11 @@ class NewEstimateScreen extends StatefulWidget {
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
   var formKey = GlobalKey<FormState>();
 
+  var myControllerName = TextEditingController(text: " ");
   var myControllerAcreage = TextEditingController(text: " ");
   var myControllerStructure = TextEditingController(text: " ");
 
+  static const bool _nameInputIsValid = true;
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
@@ -60,6 +62,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           OutlinedButton(
               onPressed: () {
                 var estimate = Estimate(
+                    name: myControllerName.toString(),
                     acres: int.parse(myControllerAcreage.text),
                     structures: int.parse(myControllerStructure.text),
                     timeStamp: DateTimeFormatter.format(DateTime.now()));
