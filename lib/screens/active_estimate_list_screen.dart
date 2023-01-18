@@ -199,7 +199,11 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                       ),
                       onTap: () {
                         Navigator.pushNamed(context, EstimateScreen.routeName,
-                            arguments: estimates[index]);
+                                arguments:
+                                    EstimateScreenArgs(false, estimates[index]))
+                            .then((value) {
+                          loadEstimates();
+                        });
                       },
                     ),
                   );
@@ -218,7 +222,10 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
     return FloatingActionButton(
       onPressed: () {
         Navigator.pushNamed(context, NewEstimateScreen.routeName,
-            arguments: engagement);
+                arguments: engagement)
+            .then((value) {
+          loadEstimates();
+        });
       },
       tooltip: 'New Estimate',
       child: const Icon(Icons.add),

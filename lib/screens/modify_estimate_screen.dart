@@ -88,7 +88,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                                 engagement: widget.engagement!,
                                 estimate: finalEstimate));
                         Navigator.pushNamed(context, EstimateScreen.routeName,
-                            arguments: finalEstimate);
+                            arguments: EstimateScreenArgs(true, finalEstimate));
                       }
                     },
                     style: ElevatedButton.styleFrom(
