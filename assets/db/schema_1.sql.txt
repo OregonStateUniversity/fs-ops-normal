@@ -34,4 +34,4 @@ CREATE TABLE IF NOT EXISTS estimates(
     unleadedGas INTEGER NOT NULL,
     twoCycleOil INTEGER NOT NULL,
     foam INTEGER NOT NULL,
-    FOREIGN KEY (engagementId) REFERENCES engagements(id));
+    FOREIGN KEY (engagementId) REFERENCES engagements(id) ON DELETE CASCADE);
