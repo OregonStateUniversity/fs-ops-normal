@@ -41,6 +41,9 @@ dependencies:
   sqflite: ^2.1.0+1
   toggle_switch: ^2.0.1
   url_launcher: ^6.1.6
+  flutter_svg: ^1.1.6
+  flutter_compass: ^0.7.0
+  location: ^4.4.0
 
 dev_dependencies:
   flutter_test:
@@ -65,3 +68,4 @@ flutter:
     - assets/IRPG_2022.pdf
     - assets/RedBook.pdf
     - assets/db/schema_1.sql.txt
+    - assets/images/compass_style_clean.svg
