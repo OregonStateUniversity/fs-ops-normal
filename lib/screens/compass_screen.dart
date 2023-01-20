@@ -8,9 +8,9 @@ import '../widgets/location_widget.dart';
 
 class CompassWidget extends StatefulWidget {
   const CompassWidget({super.key, this.buildNavBar});
-  final buildNavBar;
+  final bool? buildNavBar;
   @override
-  _CompassWidget createState() => _CompassWidget();
+  State<CompassWidget> createState() => _CompassWidget();
 }
 
 class _CompassWidget extends State<CompassWidget> {
@@ -26,7 +26,7 @@ class _CompassWidget extends State<CompassWidget> {
       floatingActionButton: () {
         if (widget.buildNavBar == null) {
           return null;
-        } else if (widget.buildNavBar) {
+        } else if (widget.buildNavBar == true) {
           return Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -45,8 +45,8 @@ class _CompassWidget extends State<CompassWidget> {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => MainScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const MainScreen()));
                   },
                   child: const Icon(Icons.home),
                 )
@@ -66,8 +66,8 @@ class _CompassWidget extends State<CompassWidget> {
   }
 
   Widget _buildCompass() {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
     // might need to accound for padding on iphones
     //var padding = MediaQuery.of(context).padding;
     return StreamBuilder<CompassEvent>(
@@ -125,7 +125,9 @@ class _CompassWidget extends State<CompassWidget> {
                         color: Color.fromARGB(189, 255, 255, 255),
                       ),
                       child: Transform.rotate(
-                        angle: ((direction ?? 0) * (math.pi / 180) * -1),
+                        angle: ((direction > 0 ? direction : 0) *
+                            (math.pi / 180) *
+                            -1),
                         child: Container(
                           padding: const EdgeInsets.all(10),
                           child: SvgPicture.asset(
@@ -138,7 +140,7 @@ class _CompassWidget extends State<CompassWidget> {
                   Center(
                     child: Text(
                       "$ang˚",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color.fromARGB(255, 65, 151, 70),
                           fontSize: 30,
                           fontWeight: FontWeight.w700),
@@ -161,7 +163,7 @@ class _CompassWidget extends State<CompassWidget> {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: LocationWidget(),
             )
           ]),
