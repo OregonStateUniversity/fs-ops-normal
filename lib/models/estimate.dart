@@ -54,7 +54,7 @@ class Estimate {
     this.acres = 0,
     this.structures = 0,
   }) {
-    initializeAllProperties();
+    initializeSavedProperties();
   }
 
   Estimate.jsonConvF(
@@ -111,13 +111,56 @@ class Estimate {
   }
 
   Estimate.finalEstimate(
-      this.name, this.acres, this.structures, this.timeStamp, trunk, lat, toy,
-      [variousFittings]) {
+      this.name,
+      this.acres,
+      this.structures,
+      this.timeStamp,
+      trunk,
+      lat,
+      toy,
+      variousFittings,
+      oneFiveWye,
+      onePointFiveRed,
+      foldaTank,
+      mark3,
+      pumpCan,
+      water,
+      gatorade,
+      mre,
+      portaPotties,
+      sprinkers,
+      oneFiveHose,
+      oneHose,
+      oneWye,
+      kkNozzle,
+      mark3Struct,
+      foldaTankStruct,
+      gas,
+      oil,
+      foamCan) {
     trunkLineLength = trunk;
     latLineLength = lat;
     toyLineLength = toy;
     fittings = variousFittings;
-    initializeUnsavedProperties();
+    onePointFiveInchWye = oneFiveWye;
+    onePointFiveInchReducer = onePointFiveRed;
+    foldaTanks = foldaTank;
+    mark3Kits = mark3;
+    pumpCans = pumpCan;
+    waterPallets = water;
+    gatoradePallets = gatorade;
+    mrePallets = mre;
+    portaPottiesPallets = portaPotties;
+    sprinklerKits = sprinkers;
+    onePointFiveHose = oneFiveHose;
+    oneInchHose = oneHose;
+    oneInchWye = oneWye;
+    kkNozzles = kkNozzle;
+    mark3Structures = mark3Struct;
+    foldaTankStructures = foldaTankStruct;
+    unleadedGas = gas;
+    twoCycleOil = oil;
+    foam = foamCan;
   }
 
   factory Estimate.fromJson(Map<String, dynamic> json) => Estimate.jsonConvF(
@@ -154,10 +197,10 @@ class Estimate {
     latLineLength = defaultLatLineLength();
     toyLineLength = defaultToyLineLength();
     fittings = defaultFittings();
-  }
-
-  void initializeUnsavedProperties() {
+    onePointFiveInchWye = defaultOnePointFiveWye();
+    onePointFiveInchReducer = defaultOnePointFiveToOneInchReducer();
     foldaTanks = defaultFoldaTanksAcres();
+    mark3Kits = defaultMark3PumpsAcres();
     pumpCans = defaultPumpMixCansAcres();
     waterPallets = defaultWaterPallets();
     gatoradePallets = defaultGatoradePallets();
@@ -166,21 +209,13 @@ class Estimate {
     sprinklerKits = defaultSprinklerKits();
     onePointFiveHose = defaultOnePointFiveHose();
     oneInchHose = defaultOneInchHose();
-    onePointFiveInchWye = defaultOnePointFiveWye();
     oneInchWye = defaultOneInchWye();
-    onePointFiveInchReducer = defaultOnePointFiveToOneInchReducer();
     kkNozzles = defaultKkNozzles();
     mark3Structures = defaultMark3Structures();
     foldaTankStructures = defaultFoldATankStructures();
-    mark3Kits = defaultMark3PumpsAcres();
     unleadedGas = defaultUnleadedGas();
     twoCycleOil = defaultTwoCycleOil();
     foam = defaultFoam();
-  }
-
-  void initializeAllProperties() {
-    initializeSavedProperties();
-    initializeUnsavedProperties();
   }
 
   int defaultTrunkLineLength() {

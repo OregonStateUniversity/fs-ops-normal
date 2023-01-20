@@ -8,8 +8,34 @@ void main() {
       Estimate estimate;
 
       //Act
-      estimate =
-          Estimate.finalEstimate("name", 1, 0, "time", 1200, 600, 300, 6);
+      estimate = Estimate.finalEstimate(
+          "name",
+          1,
+          0,
+          "time",
+          1200,
+          600,
+          300,
+          6,
+          25,
+          63,
+          45,
+          25,
+          41,
+          300,
+          84,
+          91,
+          62,
+          31,
+          52,
+          45,
+          78,
+          82,
+          39,
+          42,
+          64,
+          12,
+          15);
 
       //Assert
       expect(estimate.name, equals(1));

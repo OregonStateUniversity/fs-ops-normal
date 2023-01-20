@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:ops_normal/screens/active_estimate_list_screen.dart';
 import '../models/estimate.dart';
-//import '../widgets/bottom_nav_bar.dart';
 
 class EstimateScreen extends StatefulWidget {
   static const routeName = 'estimateScreen';
@@ -23,10 +21,6 @@ class EstimateScreenArgs {
 }
 
 class _EstimateScreenState extends State<EstimateScreen> {
-  //const EstimateScreen({super.key});
-
-  //static const routeName = 'estimateScreen';
-
   @override
   Widget build(BuildContext context) {
     final EstimateScreenArgs args =
@@ -95,10 +89,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
               ],
             ),
           ),
-
           floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
           floatingActionButton: homeButton(),
-          //bottomNavigationBar: const BottomNavBar(goBack: 'engagement')
         ));
   }
 
