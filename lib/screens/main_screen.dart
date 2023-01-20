@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen>
   ];
 
   late TabController _tabController;
-  var _fabVisible = true; //change "final" to "var" if adding nav bar back in
+  var _fabVisible = true;
 
   @override
   void initState() {
