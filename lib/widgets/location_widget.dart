@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/parser.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:location/location.dart';
-import 'dart:math' as math;
 
 class LocationWidget extends StatefulWidget {
   const LocationWidget({super.key});
