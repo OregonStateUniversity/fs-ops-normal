@@ -71,21 +71,18 @@ class _MainScreenState extends State<MainScreen>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: <Widget>[
-            Container(
-              // margin: EdgeInsets.only(right: _fabVisible ? 220 : 0),
-              child: FloatingActionButton(
-                onPressed: () {
-                  _tabController.index = _tabController.index == 0 ? 1 : 0;
-                  setState(() {
-                    _fabVisible = !_fabVisible;
-                  });
-                },
-                tooltip: "toggle home or archive",
-                heroTag: "homeButton",
-                child: _fabVisible
-                    ? const Icon(Icons.archive)
-                    : const Icon(Icons.home),
-              ),
+            FloatingActionButton(
+              onPressed: () {
+                _tabController.index = _tabController.index == 0 ? 1 : 0;
+                setState(() {
+                  _fabVisible = !_fabVisible;
+                });
+              },
+              tooltip: "toggle home or archive",
+              heroTag: "homeButton",
+              child: _fabVisible
+                  ? const Icon(Icons.archive)
+                  : const Icon(Icons.home),
             ),
             HidableFloatingActionButton(
                 visible: _fabVisible,
@@ -93,6 +90,7 @@ class _MainScreenState extends State<MainScreen>
                 tooltip: 'New engagement',
                 child: const Icon(Icons.add)),
             FloatingActionButton(
+              heroTag: "compassButton",
               tooltip: "view compass",
               onPressed: () {
                 setState(() {
@@ -100,7 +98,7 @@ class _MainScreenState extends State<MainScreen>
                 });
                 _tabController.index = 2;
               },
-              child: Icon(Icons.explore_outlined),
+              child: const Icon(Icons.explore_outlined),
             )
           ],
         ),
@@ -118,7 +116,7 @@ class _MainScreenState extends State<MainScreen>
                 floatingActionButtonHandler: floatingActionButtonHandler),
             InactiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler),
-            CompassWidget(),
+            const CompassWidget(),
           ]),
       /*bottomNavigationBar: Container(
             color: Colors.blueGrey[900],
