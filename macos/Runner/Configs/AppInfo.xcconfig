@@ -8,7 +8,7 @@
 PRODUCT_NAME = ops_normal
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = edu.osucascades.opsNormal
+PRODUCT_BUNDLE_IDENTIFIER = edu.osucascades.opsnormal
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
