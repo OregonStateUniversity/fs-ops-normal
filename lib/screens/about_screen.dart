@@ -6,7 +6,7 @@ class AboutScreen extends StatelessWidget {
   static const title = "About";
 
   static const TextAlign align = TextAlign.center;
-  static const sourceCodeURL = "https://github.com/osu-cascades/fs-hose-jockey";
+  static const sourceCodeURL = "https://github.com/osu-cascades/fs-ops-normal";
 
   const AboutScreen({super.key});
 
