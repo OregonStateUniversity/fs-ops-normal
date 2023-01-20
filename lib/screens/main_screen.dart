@@ -118,13 +118,6 @@ class _MainScreenState extends State<MainScreen>
                 popupMenuButtonHandler: popupMenuButtonHandler),
             const CompassWidget(),
           ]),
-      /*bottomNavigationBar: Container(
-            color: Colors.blueGrey[900],
-            child: TabBar(
-                controller: _tabController,
-                tabs: tabs,
-                unselectedLabelColor: Colors.grey,
-                onTap: (index) => setState(() => _fabVisible = (index == 0))))*/
     );
   }
 }
