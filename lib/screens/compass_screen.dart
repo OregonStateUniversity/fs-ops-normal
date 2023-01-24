@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ops_normal/screens/main_screen.dart';
+import '../screens/main_screen.dart';
 import '../widgets/location_widget.dart';
 
-class CompassWidget extends StatefulWidget {
-  const CompassWidget({super.key, this.buildNavBar});
+class CompassScreen extends StatefulWidget {
+  const CompassScreen({super.key, this.buildNavBar});
   final bool? buildNavBar;
   @override
-  State<CompassWidget> createState() => _CompassWidget();
+  State<CompassScreen> createState() => _CompassScreen();
 }
 
-class _CompassWidget extends State<CompassWidget> {
+class _CompassScreen extends State<CompassScreen> {
   @override
   Widget build(BuildContext context) {
     //Disable landscape mode
