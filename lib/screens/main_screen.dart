@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ops_normal/screens/compass_screen.dart';
+import '../screens/compass_screen.dart';
 import 'active_engagement_list_screen.dart';
 import 'inactive_engagement_list_screen.dart';
 import '../event_handlers/floating_action_button_handler.dart';
@@ -116,7 +116,7 @@ class _MainScreenState extends State<MainScreen>
                 floatingActionButtonHandler: floatingActionButtonHandler),
             InactiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler),
-            const CompassWidget(),
+            const CompassScreen(),
           ]),
     );
   }

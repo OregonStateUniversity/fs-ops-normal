@@ -235,7 +235,7 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const CompassWidget(
+                    builder: (context) => const CompassScreen(
                       buildNavBar: true,
                     ),
                   ),
