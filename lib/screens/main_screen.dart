@@ -20,10 +20,10 @@ class _MainScreenState extends State<MainScreen>
   static const List<Tab> tabs = <Tab>[
     Tab(text: 'Home', icon: Icon(Icons.home)),
     Tab(text: 'Archive', icon: Icon(Icons.archive)),
-    Tab(
+    /*Tab(
       text: 'Compass',
       icon: Icon(Icons.explore_outlined),
-    )
+    )*/
   ];
 
   late TabController _tabController;
@@ -96,7 +96,8 @@ class _MainScreenState extends State<MainScreen>
                 setState(() {
                   _fabVisible = false;
                 });
-                _tabController.index = 2;
+                //_tabController.index = 2;
+                Navigator.pushNamed(context, CompassScreen.routeName);
               },
               child: const Icon(Icons.explore_outlined),
             )
@@ -116,7 +117,7 @@ class _MainScreenState extends State<MainScreen>
                 floatingActionButtonHandler: floatingActionButtonHandler),
             InactiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler),
-            const CompassScreen(),
+            //const CompassScreen(),
           ]),
     );
   }

@@ -9,6 +9,7 @@ import '../widgets/location_widget.dart';
 class CompassScreen extends StatefulWidget {
   const CompassScreen({super.key, this.buildNavBar});
   final bool? buildNavBar;
+  static const routeName = "compass";
   @override
   State<CompassScreen> createState() => _CompassScreen();
 }
@@ -45,8 +46,8 @@ class _CompassScreen extends State<CompassScreen> {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const MainScreen()));
+                    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainScreen()));
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
                   child: const Icon(Icons.home),
                 )
