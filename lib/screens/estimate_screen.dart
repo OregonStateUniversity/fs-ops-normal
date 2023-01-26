@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/estimate.dart';
+import 'package:share_plus/share_plus.dart';
 
 class EstimateScreen extends StatefulWidget {
   static const routeName = 'estimateScreen';
@@ -66,7 +67,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
-                Container(child: floatingActionButtonAcres(estimate, context)),
+                //Container(child: floatingActionButtonAcres(estimate, context)),
+                Container(child: shareAcresButton(estimate)),
                 const SizedBox(
                     height: 50,
                     width: double
@@ -84,8 +86,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
-                Container(
-                    child: floatingActionButtonStructures(estimate, context)),
+                //Container(child: floatingActionButtonStructures(estimate, context)),
+                Container(child: shareStructuresButton(estimate)),
               ],
             ),
           ),
@@ -142,6 +144,31 @@ class _EstimateScreenState extends State<EstimateScreen> {
       },
       icon: const Icon(Icons.copy),
       label: const Text("Copy"),
+    );
+  }
+
+  Widget? shareAcresButton(estimate) {
+    String subject =
+        "Acres Order"; //add estimate name to subject once names are implemented
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Share.share(estimate.flatFireOrderText(), subject: subject);
+      },
+      icon: const Icon(Icons.share),
+      label: const Text("share"),
+      heroTag: "shareAcres",
+    );
+  }
+
+  Widget? shareStructuresButton(estimate) {
+    String subject = "Structures Order";
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Share.share(estimate.structureFireOrderText(), subject: subject);
+      },
+      icon: const Icon(Icons.share),
+      label: const Text("share"),
+      heroTag: "shareStructures",
     );
   }
 }
