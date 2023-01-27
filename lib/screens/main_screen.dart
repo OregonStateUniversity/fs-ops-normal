@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen>
   ];
 
   late TabController _tabController;
-  var _fabVisible = true;
+  var _addEngagementButtonVisible = true;
 
   @override
   void initState() {
@@ -75,17 +75,17 @@ class _MainScreenState extends State<MainScreen>
               onPressed: () {
                 _tabController.index = _tabController.index == 0 ? 1 : 0;
                 setState(() {
-                  _fabVisible = !_fabVisible;
+                  _addEngagementButtonVisible = !_addEngagementButtonVisible;
                 });
               },
               tooltip: "toggle home or archive",
               heroTag: "homeButton",
-              child: _fabVisible
+              child: _addEngagementButtonVisible
                   ? const Icon(Icons.archive)
                   : const Icon(Icons.home),
             ),
             HidableFloatingActionButton(
-                visible: _fabVisible,
+                visible: _addEngagementButtonVisible,
                 onPressed: () => floatingActionButtonHandler.onPressed(),
                 tooltip: 'New engagement',
                 child: const Icon(Icons.add)),
@@ -94,10 +94,16 @@ class _MainScreenState extends State<MainScreen>
               tooltip: "view compass",
               onPressed: () {
                 setState(() {
-                  _fabVisible = false;
+                  _addEngagementButtonVisible = false;
                 });
                 //_tabController.index = 2;
-                Navigator.pushNamed(context, CompassScreen.routeName);
+                Navigator.pushNamed(context, CompassScreen.routeName)
+                    .then((value) {
+                  _tabController.index = 0;
+                  setState(() {
+                    _addEngagementButtonVisible = true;
+                  });
+                });
               },
               child: const Icon(Icons.explore_outlined),
             )
