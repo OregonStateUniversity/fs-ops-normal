@@ -7,8 +7,9 @@ import '../screens/main_screen.dart';
 import '../widgets/location_widget.dart';
 
 class CompassScreen extends StatefulWidget {
-  const CompassScreen({super.key, this.buildNavBar});
-  final bool? buildNavBar;
+  //const CompassScreen({super.key, this.buildNavBar});
+  const CompassScreen({super.key});
+  //final bool? buildNavBar;
   static const routeName = "compass";
   @override
   State<CompassScreen> createState() => _CompassScreen();
@@ -22,39 +23,40 @@ class _CompassScreen extends State<CompassScreen> {
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: const HSLColor.fromAHSL(1, 0, 0, 0.05).toColor(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: () {
-        if (widget.buildNavBar == null) {
-          return null;
-        } else if (widget.buildNavBar == true) {
-          return Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                      blurRadius: 1,
-                      spreadRadius: 1,
-                      color: Color.fromARGB(67, 255, 255, 255))
-                ],
-                borderRadius: BorderRadius.circular(50),
-                color: const Color.fromARGB(32, 133, 131, 131)),
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainScreen()));
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
-                  },
-                  child: const Icon(Icons.home),
-                )
+        //if (widget.buildNavBar == null) {
+        //return null;
+        //} else if (widget.buildNavBar == true) {
+        /*return Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 1,
+                    spreadRadius: 1,
+                    color: Color.fromARGB(67, 255, 255, 255))
               ],
-            ),
-          );
-        }
+              borderRadius: BorderRadius.circular(50),
+              color: const Color.fromARGB(32, 133, 131, 131)),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainScreen()));
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                },
+                child: const Icon(Icons.home),
+              )
+            ],
+          ),
+        );*/
+        //}
       }(),
       body: Builder(builder: (context) {
         return Column(
