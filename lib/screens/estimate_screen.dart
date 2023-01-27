@@ -67,7 +67,6 @@ class _EstimateScreenState extends State<EstimateScreen> {
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
-                //Container(child: floatingActionButtonAcres(estimate, context)),
                 Container(child: shareAcresButton(estimate)),
                 const SizedBox(
                     height: 50,
@@ -86,8 +85,28 @@ class _EstimateScreenState extends State<EstimateScreen> {
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
-                //Container(child: floatingActionButtonStructures(estimate, context)),
                 Container(child: shareStructuresButton(estimate)),
+                const SizedBox(
+                    height: 50,
+                    width: double
+                        .infinity), //invisible container to make column max-width
+                const Text(
+                  "Notes",
+                  style: TextStyle(
+                      color: Colors.orange,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                SelectableText(
+                  estimate.noteSection(),
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                    height: 50,
+                    width: double
+                        .infinity), //invisible container to make column max-width
               ],
             ),
           ),
@@ -152,7 +171,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
         "Acres Order"; //add estimate name to subject once names are implemented
     return FloatingActionButton.extended(
       onPressed: () {
-        Share.share(estimate.flatFireOrderText(), subject: subject);
+        Share.share(estimate.flatFireOrderTextAndNotes(), subject: subject);
       },
       icon: const Icon(Icons.share),
       label: const Text("share"),
@@ -164,7 +183,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
     String subject = "Structures Order";
     return FloatingActionButton.extended(
       onPressed: () {
-        Share.share(estimate.structureFireOrderText(), subject: subject);
+        Share.share(estimate.structureFireOrderTextAndNotes(),
+            subject: subject);
       },
       icon: const Icon(Icons.share),
       label: const Text("share"),

@@ -482,6 +482,17 @@ class Estimate {
     }
   }
 
+  String noteSection() {
+    String notesStr = "\n- Incident Response Name:\n"
+        "- POC Name:\n"
+        "- POC Number:\n"
+        "- Dispatch Center:\n"
+        "- Drop Points:\n"
+        "- Delivery Instructions:\n"
+        "- Comments:\n";
+    return notesStr;
+  }
+
   String flatFireOrderText() {
     String str = "Trunk Line: $trunkLineLength ft.\n"
         "Lat Line: $latLineLength ft.\n"
@@ -501,7 +512,6 @@ class Estimate {
         "Gatorade (Pallets): $gatoradePallets\n"
         "MRE (Pallets): $mrePallets\n"
         "Port-a-Potties: $portaPottiesPallets\n\n";
-
     return str;
   }
 
@@ -519,6 +529,63 @@ class Estimate {
         "2 Cycle Oil (Quart): $twoCycleOil\n"
         "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
         "Foam (Cans): $foam\n";
+    return str;
+  }
+
+  String flatFireOrderTextAndNotes() {
+    String str = "Trunk Line: $trunkLineLength ft.\n"
+        "Lat Line: $latLineLength ft.\n"
+        "Toy Hose: $toyLineLength ft.\n\n";
+
+    str += "1.5\" Gated Wye: $onePointFiveInchWye\n"
+        "1.5\" Reducers: $onePointFiveInchReducer\n"
+        "1\"-3/4\" Reducers: $fittings\n"
+        "Forester Nozzles: $fittings\n"
+        "Toy Nozzles: $fittings\n"
+        "Toy Wye: $fittings\n\n";
+
+    str += "Folda-tank: $foldaTanks\n"
+        "Mark 3 + Kits: $mark3Kits\n"
+        "Pump Mix (Cans): $pumpCans\n\n";
+    str += "Water (Pallets): $waterPallets\n"
+        "Gatorade (Pallets): $gatoradePallets\n"
+        "MRE (Pallets): $mrePallets\n"
+        "Port-a-Potties: $portaPottiesPallets\n\n";
+
+    str += "\nNotes\n"
+        "- Incident Response Name:\n"
+        "- POC Name:\n"
+        "- POC Number:\n"
+        "- Dispatch Center:\n"
+        "- Drop Points:\n"
+        "- Delivery Instructions:\n"
+        "- Comments:\n";
+    return str;
+  }
+
+  String structureFireOrderTextAndNotes() {
+    String str = "\nSprinkler Kits: $sprinklerKits\n"
+        "1.5 hose: $onePointFiveHose\n"
+        "1.0 hose: $oneInchHose\n\n"
+        "1.5 Gated Wye: $onePointFiveInchWye\n"
+        "1.0 Gated Wye: $oneInchWye\n"
+        "1.5-1.0 Reducer: $onePointFiveInchReducer\n"
+        "KK Nozzles: $kkNozzles\n\n"
+        "Mark 3 Pumps & Kits: $mark3Structures\n"
+        "Fold-a-Tanks: $foldaTankStructures\n\n"
+        "Unleaded Gas (Gallons): $unleadedGas\n"
+        "2 Cycle Oil (Quart): $twoCycleOil\n"
+        "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
+        "Foam (Cans): $foam\n";
+
+    str += "\nNotes\n"
+        "- Incident Response Name:\n"
+        "- POC Name:\n"
+        "- POC Number:\n"
+        "- Dispatch Center:\n"
+        "- Drop Points:\n"
+        "- Delivery Instructions:\n"
+        "- Comments:\n";
     return str;
   }
 
