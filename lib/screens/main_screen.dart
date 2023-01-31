@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../screens/compass_screen.dart';
 import 'active_engagement_list_screen.dart';
 import 'inactive_engagement_list_screen.dart';
+import '../screens/compass_screen.dart';
 import '../event_handlers/floating_action_button_handler.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../widgets/hidable_floating_action_button.dart';
@@ -17,17 +17,17 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-  static const List<Tab> tabs = <Tab>[
-    Tab(text: 'Home', icon: Icon(Icons.home)),
-    Tab(text: 'Archive', icon: Icon(Icons.archive)),
-    /*Tab(
-      text: 'Compass',
-      icon: Icon(Icons.explore_outlined),
-    )*/
-  ];
 
   late TabController _tabController;
   var _addEngagementButtonVisible = true;
+
+  final popupMenuButtonHandler = PopupMenuButtonHandler();
+  final floatingActionButtonHandler = FloatingActionButtonHandler();
+  
+  static const List<Tab> tabs = <Tab>[
+    Tab(text: 'Home', icon: Icon(Icons.home)),
+    Tab(text: 'Archive', icon: Icon(Icons.archive))
+  ];
 
   @override
   void initState() {
@@ -45,9 +45,6 @@ class _MainScreenState extends State<MainScreen>
     _tabController.dispose();
     super.dispose();
   }
-
-  final popupMenuButtonHandler = PopupMenuButtonHandler();
-  final floatingActionButtonHandler = FloatingActionButtonHandler();
 
   @override
   Widget build(BuildContext context) {
