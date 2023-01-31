@@ -67,6 +67,7 @@ flutter:
     - assets/icon/icon.png
     - assets/IRPG_2018.pdf
     - assets/IRPG_2022.pdf
-    - assets/RedBook.pdf
+    - assets/RedBook2020.pdf
+    - assets/RedBook2023.pdf
     - assets/db/schema_1.sql.txt
     - assets/images/compass_style_clean.svg

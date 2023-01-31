@@ -6,7 +6,7 @@ class RedBookScreen extends StatelessWidget {
   RedBookScreen({super.key});
   static const title = "Red Book";
   static const routeName = 'redBook';
-  static const pdfFileName = 'assets/RedBook.pdf';
+  static const pdfFileName = 'assets/RedBook2023.pdf';
 
   final pdfController =
       PdfController(document: PdfDocument.openAsset(pdfFileName));
