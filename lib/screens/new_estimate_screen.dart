@@ -73,13 +73,13 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
             hint: const Text('Select Fuel Type'),
             value: fireTypeVal,
             icon: const Icon(Icons.arrow_drop_down),
-            isExpanded: true,
-            onChanged: (String? value) {
-              // This is called when the user selects an item.
+            isExpanded: true, 
+            onChanged: (String? value) {  // user selected an item
               setState(() {
                 fireTypeVal = value!;
                 });
             },
+            // entries in the dropdown
             items: fireType.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
@@ -99,6 +99,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 fireShapeVal = value!;
                 });
             },
+            // entries in the dropdown
             items: fireShape.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
