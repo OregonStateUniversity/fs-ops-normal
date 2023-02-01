@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ops_normal/screens/compass_screen.dart';
 import 'package:pdfx/pdfx.dart';
-//import '../widgets/bottom_nav_bar.dart';
+
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';

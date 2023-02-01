@@ -7,7 +7,6 @@ import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
-//import '../widgets/bottom_nav_bar.dart';
 
 class ActiveEstimateListScreen extends StatefulWidget {
   static const routeName = 'engagement';
