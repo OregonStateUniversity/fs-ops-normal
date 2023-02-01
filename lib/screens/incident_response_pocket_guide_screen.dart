@@ -6,7 +6,7 @@ import 'package:pdfx/pdfx.dart';
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';
   static const title = "Pocket Guide";
-  static const pdfFileName = 'assets/RedBook2023.pdf';
+  static const pdfFileName = 'assets/IRPG_2022.pdf';
 
   final pdfController =
       PdfController(document: PdfDocument.openAsset(pdfFileName));
