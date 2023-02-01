@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ops_normal/screens/compass_screen.dart';
 import 'package:pdfx/pdfx.dart';
 //import '../widgets/bottom_nav_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';
   static const title = "Pocket Guide";
-  static const pdfFileName = 'assets/IRPG_2022.pdf';
+  static const pdfFileName = 'assets/RedBook2023.pdf';
 
   final pdfController =
       PdfController(document: PdfDocument.openAsset(pdfFileName));
@@ -20,6 +21,15 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: 150,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CompassScreen()));
+                },
+                child: Image.asset('assets/images/compass_image.png')),
+          ),
           Expanded(child: pdfView()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
