@@ -17,13 +17,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
   var _addEngagementButtonVisible = true;
 
   final popupMenuButtonHandler = PopupMenuButtonHandler();
   final floatingActionButtonHandler = FloatingActionButtonHandler();
-  
+
   static const List<Tab> tabs = <Tab>[
     Tab(text: 'Home', icon: Icon(Icons.home)),
     Tab(text: 'Archive', icon: Icon(Icons.archive))
@@ -90,17 +89,7 @@ class _MainScreenState extends State<MainScreen>
               heroTag: "compassButton",
               tooltip: "view compass",
               onPressed: () {
-                setState(() {
-                  _addEngagementButtonVisible = false;
-                });
-                //_tabController.index = 2;
-                Navigator.pushNamed(context, CompassScreen.routeName)
-                    .then((value) {
-                  _tabController.index = 0;
-                  setState(() {
-                    _addEngagementButtonVisible = true;
-                  });
-                });
+                Navigator.pushNamed(context, CompassScreen.routeName);
               },
               child: const Icon(Icons.explore_outlined),
             )

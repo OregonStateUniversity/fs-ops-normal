@@ -1,77 +1,82 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'bottom_icon.dart';
+import '../screens/compass_screen.dart';
+import '../widgets/hidable_floating_action_button.dart';
 
 class BottomNavBar extends StatefulWidget {
+  const BottomNavBar(
+      {Key? key,
+      required this.goBack,
+      required this.isMainScreen,
+      required this.toggle,
+      required this.tabIndex,
+      required this.addButtonVisible,
+      required this.addButtonHandler})
+      : super(key: key);
+
   final String goBack;
-  const BottomNavBar({Key? key, required this.goBack}) : super(key: key);
+  final bool isMainScreen;
+  final Function toggle;
+  final int tabIndex;
+  final bool addButtonVisible;
+  final Function addButtonHandler;
 
   @override
-  BottomNavBarState createState() => BottomNavBarState();
+  State<BottomNavBar> createState() {
+    return _BottomNavBarState();
+  }
 }
 
-class BottomNavBarState extends State<BottomNavBar> {
+class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
-    return AnimatedBottomNavigationBar.builder(
-      itemCount: iconList.length,
-      activeIndex: _bottomNavIndex,
-      gapLocation: GapLocation.center,
-      notchSmoothness: NotchSmoothness.softEdge,
-      tabBuilder: (int index, bool isActive) {
-        const Color yellow99 = Color.fromRGBO(255, 227, 99, 1);
-        final color = isActive ? yellow99 : Colors.white;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              iconList[index].icon,
-              size: 24,
-              color: color,
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: AutoSizeText(
-                iconList[index].name,
-                maxLines: 1,
-                style: TextStyle(color: color),
-                group: autoSizeGroup,
-              ),
-            )
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+                blurRadius: 1,
+                spreadRadius: 1,
+                color: Color.fromARGB(67, 255, 255, 255))
           ],
-        );
-      },
-      backgroundColor: (Colors.blueGrey[900]!),
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.popUntil(context, ModalRoute.withName('/'));
-            _onTap(index);
-            break;
-          case 1:
-            Navigator.popUntil(context, ModalRoute.withName(widget.goBack));
-            _onTap(index);
-            break;
-        }
-      },
+          borderRadius: BorderRadius.circular(50),
+          color: const Color.fromARGB(32, 133, 131, 131)),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        // direction: Axis.horizontal,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+        children: <Widget>[
+          FloatingActionButton(
+            onPressed: () {
+              if (widget.isMainScreen) {
+                widget.toggle();
+              } else {
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              }
+              setState(() {});
+            },
+            tooltip: "toggle home or archive",
+            heroTag: "homeButton",
+            child: widget.tabIndex == 1
+                ? const Icon(Icons.archive)
+                : const Icon(Icons.home),
+          ),
+          HidableFloatingActionButton(
+              visible: widget.addButtonVisible,
+              onPressed: () => widget.addButtonHandler,
+              tooltip: 'New engagement',
+              child: const Icon(Icons.add)),
+          FloatingActionButton(
+            heroTag: "compassButton",
+            tooltip: "view compass",
+            onPressed: () {
+              Navigator.pushNamed(context, CompassScreen.routeName);
+            },
+            child: const Icon(Icons.explore_outlined),
+          )
+        ],
+      ),
     );
-  }
-
-  int? activeIndex;
-  var _bottomNavIndex = 3;
-  final autoSizeGroup = AutoSizeGroup();
-
-  List<BottomIcon> iconList = [
-    BottomIcon("Home", Icons.home_filled),
-    BottomIcon("Archive", Icons.archive)
-  ];
-
-  void _onTap(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
   }
 }
