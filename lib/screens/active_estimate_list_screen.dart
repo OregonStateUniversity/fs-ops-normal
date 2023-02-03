@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/bottom_nav_bar.dart';
+import '../widgets/hidable_floating_action_button.dart';
 import 'compass_screen.dart';
 import 'new_estimate_screen.dart';
 import 'estimate_screen.dart';
@@ -46,41 +48,51 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
   Widget build(BuildContext context) {
     if (estimates.isEmpty == true) {
       return Scaffold(
-          resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            automaticallyImplyLeading: true,
-            title: RichText(
-              text: TextSpan(
-                  style: const TextStyle(fontSize: 22, color: Colors.white),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: widget.engagement.name,
-                      style: const TextStyle(fontSize: 22),
-                    ),
-                    TextSpan(
-                        text:
-                            "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
-                        style: const TextStyle(fontSize: 14))
-                  ]),
-            ),
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          title: RichText(
+            text: TextSpan(
+                style: const TextStyle(fontSize: 22, color: Colors.white),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: widget.engagement.name,
+                    style: const TextStyle(fontSize: 22),
+                  ),
+                  TextSpan(
+                      text:
+                          "\nCreated ${DateTimeFormatter.format(widget.engagement.createdAt)}",
+                      style: const TextStyle(fontSize: 14))
+                ]),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("No Estimates Created Yet"),
-                ],
-              )
-            ],
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          //floatingActionButton: floatAccButton(widget.engagement),
-          floatingActionButton: buttonsWrap(widget.engagement)
-          //bottomNavigationBar: const BottomNavBar(goBack: '/'),
-          );
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text("No Estimates Created Yet"),
+              ],
+            )
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        //floatingActionButton: floatAccButton(widget.engagement),
+        floatingActionButton: BottomNavBar(
+            addButton: HidableFloatingActionButton(
+                visible: true,
+                onPressed: () {
+                  Navigator.pushNamed(context, NewEstimateScreen.routeName,
+                          arguments: widget.engagement)
+                      .then((value) {
+                    loadEstimates();
+                  });
+                },
+                tooltip: 'New engagement',
+                child: const Icon(Icons.add))),
+        //bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      );
     }
     return Scaffold(
       appBar: AppBar(
@@ -211,41 +223,18 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       //floatingActionButton: floatAccButton(widget.engagement),
       // floatingActionButton: buttonsWrap(widget.engagement)
-      floatingActionButton: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                  blurRadius: 1,
-                  spreadRadius: 1,
-                  color: Color.fromARGB(67, 255, 255, 255))
-            ],
-            borderRadius: BorderRadius.circular(50),
-            color: const Color.fromARGB(32, 133, 131, 131)),
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            floatAccButton(widget.engagement)!,
-            homeButton()!,
-            FloatingActionButton(
-              heroTag: 'compassButton',
+      floatingActionButton: BottomNavBar(
+          addButton: HidableFloatingActionButton(
+              visible: true,
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const CompassScreen(
-                        //buildNavBar: true,
-                        ),
-                  ),
-                );
+                Navigator.pushNamed(context, NewEstimateScreen.routeName,
+                        arguments: widget.engagement)
+                    .then((value) {
+                  loadEstimates();
+                });
               },
-              child: const Icon(Icons.explore_outlined),
-            )
-          ],
-        ),
-      ),
-      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
+              tooltip: 'New engagement',
+              child: const Icon(Icons.add))),
     );
   }
 

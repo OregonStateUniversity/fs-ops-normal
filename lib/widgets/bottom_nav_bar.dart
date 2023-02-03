@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
 import '../screens/compass_screen.dart';
-import '../widgets/hidable_floating_action_button.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar(
-      {Key? key,
-      required this.goBack,
-      required this.isMainScreen,
-      required this.toggle,
-      required this.tabIndex,
-      required this.addButtonVisible,
-      required this.addButtonHandler})
+      {Key? key, this.showHome = true, this.addButton, this.leftButtonFunction})
       : super(key: key);
 
-  final String goBack;
-  final bool isMainScreen;
-  final Function toggle;
-  final int tabIndex;
-  final bool addButtonVisible;
-  final Function addButtonHandler;
+  final bool? showHome;
+  final Function? leftButtonFunction;
+  final Widget? addButton;
 
   @override
   State<BottomNavBar> createState() {
@@ -49,24 +39,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
         children: <Widget>[
           FloatingActionButton(
             onPressed: () {
-              if (widget.isMainScreen) {
-                widget.toggle();
+              if (widget.leftButtonFunction != null) {
+                widget.leftButtonFunction!();
               } else {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
               }
-              setState(() {});
             },
             tooltip: "toggle home or archive",
             heroTag: "homeButton",
-            child: widget.tabIndex == 1
-                ? const Icon(Icons.archive)
-                : const Icon(Icons.home),
+            // ignore: unnecessary_null_comparison
+            child: widget.showHome!
+                ? const Icon(Icons.home)
+                : const Icon(Icons.archive),
           ),
-          HidableFloatingActionButton(
-              visible: widget.addButtonVisible,
-              onPressed: () => widget.addButtonHandler,
-              tooltip: 'New engagement',
-              child: const Icon(Icons.add)),
+          widget.addButton!,
           FloatingActionButton(
             heroTag: "compassButton",
             tooltip: "view compass",

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import '../widgets/bottom_nav_bar.dart';
+import '../widgets/hidable_floating_action_button.dart';
 import 'active_engagement_list_screen.dart';
 import 'inactive_engagement_list_screen.dart';
-import '../screens/compass_screen.dart';
 import '../event_handlers/floating_action_button_handler.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
-import '../widgets/hidable_floating_action_button.dart';
 import '../widgets/side_drawer.dart';
 import '../widgets/sort_popup_menu_button.dart';
 
@@ -49,53 +49,17 @@ class _MainScreenState extends State<MainScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                  blurRadius: 1,
-                  spreadRadius: 1,
-                  color: Color.fromARGB(67, 255, 255, 255))
-            ],
-            borderRadius: BorderRadius.circular(50),
-            color: const Color.fromARGB(32, 133, 131, 131)),
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          // direction: Axis.horizontal,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: () {
-                _tabController.index = _tabController.index == 0 ? 1 : 0;
-                setState(() {
-                  _addEngagementButtonVisible = !_addEngagementButtonVisible;
-                });
-              },
-              tooltip: "toggle home or archive",
-              heroTag: "homeButton",
-              child: _addEngagementButtonVisible
-                  ? const Icon(Icons.archive)
-                  : const Icon(Icons.home),
-            ),
-            HidableFloatingActionButton(
-                visible: _addEngagementButtonVisible,
-                onPressed: () => floatingActionButtonHandler.onPressed(),
-                tooltip: 'New engagement',
-                child: const Icon(Icons.add)),
-            FloatingActionButton(
-              heroTag: "compassButton",
-              tooltip: "view compass",
-              onPressed: () {
-                Navigator.pushNamed(context, CompassScreen.routeName);
-              },
-              child: const Icon(Icons.explore_outlined),
-            )
-          ],
-        ),
-      ),
+      floatingActionButton: BottomNavBar(
+          leftButtonFunction: () {
+            toggle();
+            setState(() {});
+          },
+          showHome: _tabController.index == 0 ? false : true,
+          addButton: HidableFloatingActionButton(
+              visible: _addEngagementButtonVisible,
+              onPressed: () => floatingActionButtonHandler.onPressed(),
+              tooltip: 'New engagement',
+              child: const Icon(Icons.add))),
       drawer: const SideDrawer(),
       appBar: AppBar(title: const Text('Ops Normal'), actions: [
         SortPopupMenuButton(popupMenuButtonHandler: popupMenuButtonHandler)
@@ -109,8 +73,12 @@ class _MainScreenState extends State<MainScreen>
                 floatingActionButtonHandler: floatingActionButtonHandler),
             InactiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler),
-            //const CompassScreen(),
           ]),
     );
+  }
+
+  toggle() {
+    _tabController.index = _tabController.index == 0 ? 1 : 0;
+    _addEngagementButtonVisible = !_addEngagementButtonVisible;
   }
 }
