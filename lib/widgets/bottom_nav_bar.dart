@@ -36,33 +36,44 @@ class _BottomNavBarState extends State<BottomNavBar> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-        children: <Widget>[
-          FloatingActionButton(
-            onPressed: () {
-              if (widget.leftButtonFunction != null) {
-                widget.leftButtonFunction!();
-              } else {
-                Navigator.popUntil(context, ModalRoute.withName('/'));
-              }
-            },
-            tooltip: "toggle home or archive",
-            heroTag: "homeButton",
-            // ignore: unnecessary_null_comparison
-            child: widget.showHome!
-                ? const Icon(Icons.home)
-                : const Icon(Icons.archive),
-          ),
-          widget.addButton!,
-          FloatingActionButton(
-            heroTag: "compassButton",
-            tooltip: "view compass",
-            onPressed: () {
-              Navigator.pushNamed(context, CompassScreen.routeName);
-            },
-            child: const Icon(Icons.explore_outlined),
-          )
-        ],
+        children: navButtons(),
       ),
+    );
+  }
+
+  List<Widget> navButtons() {
+    List<Widget> buttons = [leftButton(), compassButton()];
+    if (widget.addButton != null) {
+      buttons.insert(1, widget.addButton!);
+    }
+    return buttons;
+  }
+
+  Widget leftButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        if (widget.leftButtonFunction != null) {
+          widget.leftButtonFunction!();
+        } else {
+          Navigator.popUntil(context, ModalRoute.withName('/'));
+        }
+      },
+      tooltip: "toggle home or archive",
+      heroTag: "homeButton",
+      // ignore: unnecessary_null_comparison
+      child:
+          widget.showHome! ? const Icon(Icons.home) : const Icon(Icons.archive),
+    );
+  }
+
+  Widget compassButton() {
+    return FloatingActionButton(
+      heroTag: "compassButton",
+      tooltip: "view compass",
+      onPressed: () {
+        Navigator.pushNamed(context, CompassScreen.routeName);
+      },
+      child: const Icon(Icons.explore_outlined),
     );
   }
 }

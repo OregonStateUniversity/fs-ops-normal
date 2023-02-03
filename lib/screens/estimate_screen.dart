@@ -113,7 +113,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
               ),
             ),
             floatingActionButtonLocation:
-                FloatingActionButtonLocation.startFloat,
+                FloatingActionButtonLocation.centerDocked,
             floatingActionButton: const BottomNavBar()));
   }
 
