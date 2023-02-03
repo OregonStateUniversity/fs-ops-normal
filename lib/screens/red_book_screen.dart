@@ -29,10 +29,11 @@ class RedBookScreen extends StatelessWidget {
                 child: ElevatedButton(
                     child: const Text("Go To"),
                     onPressed: () {
-                      pdfController
-                          .jumpToPage(int.parse(pageController.text) + 22);
-                      FocusScope.of(context).unfocus();
-                      pageController.clear();
+                      pageController.text == "" ? pageController.clear():
+                        pdfController
+                            .jumpToPage(int.parse(pageController.text) + 22);
+                        FocusScope.of(context).unfocus();
+                        pageController.clear();
                     }),
               ),
               Expanded(
