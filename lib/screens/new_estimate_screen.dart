@@ -5,7 +5,7 @@ import '../models/engagement.dart';
 import '../utils/date_time_formatter.dart';
 
 //const List<String> fireShape = <String>['Shape 1', 'Shape 2', 'Shape 3'];
-const List<String> fireType = <String>['Brush', 'Big Trees', 'Small Trees', 'Medium Trees', 'Mixed'];
+const List<String> fireType = <String>['Grass', 'Timber'];
 const List<String> fireShape = <String>['assets/images/fireShape1.png',
 'assets/images/fireShape2.png',
 'assets/images/fireShape3.png',
@@ -59,6 +59,14 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   errorText: _acreageInputIsValid ? null : 'error',
                   border: OutlineInputBorder())),
           const Padding(padding: EdgeInsets.all(10)),
+          // button for acre calculation popup
+          const Text('--OR--'),
+          OutlinedButton(
+              onPressed: () {
+                _dialogBuilder(context);
+              },
+              child: const Text("Calculate Acerage")),
+          const Padding(padding: EdgeInsets.all(10)),
           // structures text box
           TextField(
               controller: myControllerStructure,
@@ -69,7 +77,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   border: OutlineInputBorder())),
           const Padding(padding: EdgeInsets.all(10)),
           // fire type dropdown
-          DropdownButton<String>(
+          /*DropdownButton<String>(
             hint: const Text('Select Fuel Type'),
             value: fireTypeVal,
             icon: const Icon(Icons.arrow_drop_down),
@@ -106,7 +114,8 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                 child: Image.asset(value)
               );
             }).toList(),),
-          const Padding(padding: EdgeInsets.all(10)),
+          const Padding(padding: EdgeInsets.all(10)),*/
+          // button to generate estimate
           OutlinedButton(
               onPressed: () {
                 var acreseDouble = double.parse(myControllerAcreage.text);
@@ -130,4 +139,61 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
       ),
     );
   }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Fire Parameters'),
+          content: const Text('Enter the perimeter in chains (1 chain = 66ft) and select the rough shape to caclulate the acreage.'),
+          actions: <Widget>[
+
+            // text box to enter fire perimeter in chains
+            TextField(
+              controller: myControllerAcreage,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                  labelText: 'Enter Perimeter (in chains)',
+                  errorText: _acreageInputIsValid ? null : 'error',
+                  border: OutlineInputBorder())),
+            const Padding(padding: EdgeInsets.all(10)),
+
+            // dropdown to select fire shape
+            DropdownButton<String>(
+            hint: const Text('Select Fire Shape'),
+            value: fireShapeVal,
+            icon: const Icon(Icons.arrow_drop_down),
+            isExpanded: true,
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+              setState(() {
+                fireShapeVal = value;
+              });
+            },
+            // entries in the dropdown
+            items: fireShape.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Image.asset(value)
+              );
+            }).toList(),),
+
+            // button to generate acreage
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Calculate Acreage'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  
 }
