@@ -48,18 +48,6 @@ class _MainScreenState extends State<MainScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: BottomNavBar(
-          leftButtonFunction: () {
-            toggle();
-            setState(() {});
-          },
-          showHome: _tabController.index == 0 ? false : true,
-          addButton: HidableFloatingActionButton(
-              visible: _addEngagementButtonVisible,
-              onPressed: () => floatingActionButtonHandler.onPressed(),
-              tooltip: 'New engagement',
-              child: const Icon(Icons.add))),
       drawer: const SideDrawer(),
       appBar: AppBar(title: const Text('Ops Normal'), actions: [
         SortPopupMenuButton(popupMenuButtonHandler: popupMenuButtonHandler)
@@ -74,6 +62,18 @@ class _MainScreenState extends State<MainScreen>
             InactiveEngagementListScreen(
                 popupMenuButtonHandler: popupMenuButtonHandler),
           ]),
+      bottomNavigationBar: BottomNavBar(
+          leftButtonFunction: () {
+            toggle();
+            setState(() {});
+          },
+          showHome: _tabController.index == 0 ? false : true),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: HidableFloatingActionButton(
+          visible: _addEngagementButtonVisible,
+          tooltip: "add engagement",
+          onPressed: () => floatingActionButtonHandler.onPressed(),
+          child: const Icon(Icons.add)),
     );
   }
 

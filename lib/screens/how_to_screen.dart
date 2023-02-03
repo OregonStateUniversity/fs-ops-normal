@@ -44,8 +44,7 @@ class HowToScreen extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: const BottomNavBar());
+        bottomNavigationBar: const BottomNavBar());
   }
 
   Widget _cardItem(String title, String description) {

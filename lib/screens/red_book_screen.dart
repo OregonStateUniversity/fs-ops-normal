@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 
+import '../widgets/bottom_nav_bar.dart';
+
 class RedBookScreen extends StatelessWidget {
   RedBookScreen({super.key});
   static const title = "Red Book";
@@ -50,7 +52,7 @@ class RedBookScreen extends StatelessWidget {
           )
         ],
       ),
-      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 

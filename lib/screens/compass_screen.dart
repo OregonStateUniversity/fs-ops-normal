@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/svg.dart';
-import '../screens/main_screen.dart';
 import '../widgets/location_widget.dart';
 
 class CompassScreen extends StatefulWidget {

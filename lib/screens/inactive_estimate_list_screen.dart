@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/bottom_nav_bar.dart';
 import 'estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
@@ -76,100 +77,84 @@ class _InactiveEstimateListScreenState
             )
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/'));
-              setState(() {});
-            },
-            heroTag: 'homeButton',
-            child: const Icon(Icons.home)),
-        //bottomNavigationBar: const BottomNavBar(goBack: '/'),
+        bottomNavigationBar: const BottomNavBar(),
       );
     }
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          title: RichText(
-            text: TextSpan(
-                style: const TextStyle(fontSize: 22, color: Colors.white),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: widget.engagement.name,
-                    style: const TextStyle(fontSize: 22),
-                  ),
-                  TextSpan(
-                      text: "\nCreated on: ${widget.engagement.createdAt}",
-                      style: const TextStyle(fontSize: 14))
-                ]),
-          ),
-          actions: <Widget>[
-            PopupMenuButton(
-                icon: Transform.rotate(
-                  angle: 90 * 3.1415927 / 180,
-                  child: const Icon(Icons.code),
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: RichText(
+          text: TextSpan(
+              style: const TextStyle(fontSize: 22, color: Colors.white),
+              children: <TextSpan>[
+                TextSpan(
+                  text: widget.engagement.name,
+                  style: const TextStyle(fontSize: 22),
                 ),
-                offset: const Offset(0, 30),
-                itemBuilder: (context) => [
-                      const PopupMenuItem(
-                        value: 1,
-                        child: Text("Oldest"),
-                      ),
-                      const PopupMenuItem(
-                        value: 2,
-                        child: Text("Newest"),
-                      ),
-                      const PopupMenuItem(
-                        value: 3,
-                        child: Text("Size"),
-                      ),
-                    ],
-                onSelected: (dynamic value) {
-                  if (value == 1) {
-                    setState(() {
-                      estimates
-                          .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
-                    });
-                  } else if (value == 2) {
-                    setState(() {
-                      estimates
-                          .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
-                    });
-                  } else if (value == 3) {
-                    setState(() {
-                      estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
-                    });
-                  }
-                }),
-          ],
+                TextSpan(
+                    text: "\nCreated on: ${widget.engagement.createdAt}",
+                    style: const TextStyle(fontSize: 14))
+              ]),
         ),
-        body: Scrollbar(
-            child: ListView.builder(
-                padding: const EdgeInsets.all(10),
-                itemCount: estimates.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text('Estimate ${estimates[index].name}',
-                        style: const TextStyle(fontSize: 22)),
-                    subtitle: Text(
-                      '${estimates[index].acres.toString()} Acres\nCreated on: ${estimates[index].timeStamp}\n',
-                      style: const TextStyle(fontSize: 18),
+        actions: <Widget>[
+          PopupMenuButton(
+              icon: Transform.rotate(
+                angle: 90 * 3.1415927 / 180,
+                child: const Icon(Icons.code),
+              ),
+              offset: const Offset(0, 30),
+              itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 1,
+                      child: Text("Oldest"),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(context, EstimateScreen.routeName,
-                          arguments: estimates[index]);
-                    },
-                  );
-                })),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/'));
-              setState(() {});
-            },
-            heroTag: 'homeButton',
-            child: const Icon(Icons.home))
-        //bottomNavigationBar: const BottomNavBar(goBack: '/'),
-        );
+                    const PopupMenuItem(
+                      value: 2,
+                      child: Text("Newest"),
+                    ),
+                    const PopupMenuItem(
+                      value: 3,
+                      child: Text("Size"),
+                    ),
+                  ],
+              onSelected: (dynamic value) {
+                if (value == 1) {
+                  setState(() {
+                    estimates
+                        .sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
+                  });
+                } else if (value == 2) {
+                  setState(() {
+                    estimates
+                        .sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+                  });
+                } else if (value == 3) {
+                  setState(() {
+                    estimates.sort((a, b) => b.acres!.compareTo(a.acres!));
+                  });
+                }
+              }),
+        ],
+      ),
+      body: Scrollbar(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemCount: estimates.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Estimate ${estimates[index].name}',
+                      style: const TextStyle(fontSize: 22)),
+                  subtitle: Text(
+                    '${estimates[index].acres.toString()} Acres\nCreated on: ${estimates[index].timeStamp}\n',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, EstimateScreen.routeName,
+                        arguments: estimates[index]);
+                  },
+                );
+              })),
+      bottomNavigationBar: const BottomNavBar(),
+    );
   }
 }

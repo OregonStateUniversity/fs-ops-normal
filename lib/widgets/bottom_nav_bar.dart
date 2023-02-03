@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import '../screens/compass_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar(
-      {Key? key, this.showHome = true, this.addButton, this.leftButtonFunction})
+  const BottomNavBar({Key? key, this.showHome = true, this.leftButtonFunction})
       : super(key: key);
 
   final bool? showHome;
   final Function? leftButtonFunction;
-  final Widget? addButton;
 
   @override
   State<BottomNavBar> createState() {
@@ -17,63 +15,57 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  late bool leftButtonFunctionProvided =
+      widget.leftButtonFunction == null ? false : true;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          boxShadow: const [
-            BoxShadow(
-                blurRadius: 1,
-                spreadRadius: 1,
-                color: Color.fromARGB(67, 255, 255, 255))
-          ],
-          borderRadius: BorderRadius.circular(50),
-          color: const Color.fromARGB(32, 133, 131, 131)),
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        // direction: Axis.horizontal,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BottomNavigationBar(
+      items: navButtons(),
+      iconSize: 35,
+      onTap: (int index) {
+        setState(() {});
+        switch (index) {
+          case 0:
+            if (leftButtonFunctionProvided) {
+              widget.leftButtonFunction!();
+            } else {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            }
+            break;
+          case 1:
+            showCompass();
+            break;
 
-        children: navButtons(),
-      ),
+          case 2:
+            showCompass();
+            break;
+        }
+      },
     );
   }
 
-  List<Widget> navButtons() {
-    List<Widget> buttons = [leftButton(), compassButton()];
-    if (widget.addButton != null) {
-      buttons.insert(1, widget.addButton!);
-    }
+  showCompass() {
+    Navigator.pushNamed(context, CompassScreen.routeName);
+  }
+
+  List<BottomNavigationBarItem> navButtons() {
+    List<BottomNavigationBarItem> buttons = [leftButton(), compassButton()];
     return buttons;
   }
 
-  Widget leftButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        if (widget.leftButtonFunction != null) {
-          widget.leftButtonFunction!();
-        } else {
-          Navigator.popUntil(context, ModalRoute.withName('/'));
-        }
-      },
-      tooltip: "toggle home or archive",
-      heroTag: "homeButton",
-      // ignore: unnecessary_null_comparison
-      child:
+  BottomNavigationBarItem leftButton() {
+    return BottomNavigationBarItem(
+      label: "",
+      icon:
           widget.showHome! ? const Icon(Icons.home) : const Icon(Icons.archive),
     );
   }
 
-  Widget compassButton() {
-    return FloatingActionButton(
-      heroTag: "compassButton",
-      tooltip: "view compass",
-      onPressed: () {
-        Navigator.pushNamed(context, CompassScreen.routeName);
-      },
-      child: const Icon(Icons.explore_outlined),
+  BottomNavigationBarItem compassButton() {
+    return const BottomNavigationBarItem(
+      label: "",
+      icon: Icon(Icons.explore_outlined),
     );
   }
 }

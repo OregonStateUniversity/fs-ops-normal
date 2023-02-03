@@ -112,9 +112,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
                 ],
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: const BottomNavBar()));
+            bottomNavigationBar: const BottomNavBar()));
   }
 
   Widget? homeButton() {
