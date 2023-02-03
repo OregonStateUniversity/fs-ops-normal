@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/how_to_instructions_strings.dart';
-//import '../widgets/bottom_nav_bar.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class HowToScreen extends StatelessWidget {
   static const routeName = 'howto';
@@ -13,39 +13,38 @@ class HowToScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(title),
-      ),
-      body: Semantics(
-        label: "A list of instructions about how to use Ops Normal",
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Align(
-                alignment: FractionalOffset.center,
-                child: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      _cardItem(HowToCreateEngagementAndOrder.title,
-                          HowToCreateEngagementAndOrder.description),
-                      _cardItem(HowToDeleteEngagementOrOrder.title,
-                          HowToDeleteEngagementOrOrder.description),
-                      _cardItem(HowToArchiveEngagement.title,
-                          HowToArchiveEngagement.description),
-                      _cardItem(HowToUnarchiveEngagement.title,
-                          HowToUnarchiveEngagement.description),
-                      const Divider(),
-                    ],
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: Semantics(
+          label: "A list of instructions about how to use Ops Normal",
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Align(
+                  alignment: FractionalOffset.center,
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        _cardItem(HowToCreateEngagementAndOrder.title,
+                            HowToCreateEngagementAndOrder.description),
+                        _cardItem(HowToDeleteEngagementOrOrder.title,
+                            HowToDeleteEngagementOrOrder.description),
+                        _cardItem(HowToArchiveEngagement.title,
+                            HowToArchiveEngagement.description),
+                        _cardItem(HowToUnarchiveEngagement.title,
+                            HowToUnarchiveEngagement.description),
+                        const Divider(),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
-      ),
-      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
-    );
+        bottomNavigationBar: const BottomNavBar());
   }
 
   Widget _cardItem(String title, String description) {

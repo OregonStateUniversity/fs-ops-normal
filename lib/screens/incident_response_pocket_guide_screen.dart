@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ops_normal/screens/compass_screen.dart';
 import 'package:pdfx/pdfx.dart';
-//import '../widgets/bottom_nav_bar.dart';
+
+import '../widgets/bottom_nav_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';
@@ -20,6 +22,15 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: 150,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const CompassScreen()));
+                },
+                child: Image.asset('assets/images/compass_image.png')),
+          ),
           Expanded(child: pdfView()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +63,7 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
           )
         ],
       ),
-      //bottomNavigationBar: const BottomNavBar(goBack: '/'),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 
