@@ -63,15 +63,123 @@ class _EstimateScreenState extends State<EstimateScreen> {
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold),
                   ),
-                  SelectableText(
-                    estimate.flatFireOrderText(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.bold),
+                  const SizedBox(
+                      height: 20,
+                      width: double
+                          .infinity), //invisible container to make column max-width
+                  DataTable(
+                    dataRowHeight: 30,
+                    headingRowColor:
+                        MaterialStateColor.resolveWith((states) => Colors.grey),
+                    border: TableBorder.all(
+                        color: const Color.fromARGB(255, 83, 83, 83)),
+                    columns: const [
+                      DataColumn(
+                          label: Text('Name',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('NFES #',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Quantity',
+                              style: TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold)))
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        const DataCell(Text('Truck Line')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.trunkLineLength.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Lat Line')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.latLineLength.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Toy Line')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.toyLineLength.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.5" Gated Wye')),
+                        const DataCell(Text('000231')),
+                        DataCell(Text(estimate.onePointFiveInchWye.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.5" Reducers')),
+                        const DataCell(Text('000010')),
+                        DataCell(
+                            Text(estimate.onePointFiveInchReducer.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1"-3/4" Reducers')),
+                        const DataCell(Text('000733')),
+                        DataCell(Text(estimate.fittings.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Forester Nozzles')),
+                        const DataCell(Text('000024')),
+                        DataCell(Text(estimate.fittings.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Toy Nozzles')),
+                        const DataCell(Text('007387')),
+                        DataCell(Text(estimate.fittings.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Toy Wye')),
+                        const DataCell(Text('000904')),
+                        DataCell(Text(estimate.fittings.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Fold-a-Tanks')),
+                        const DataCell(Text('000664')),
+                        DataCell(Text(estimate.foldaTanks.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Mark3 + Kits')),
+                        const DataCell(Text('003870')),
+                        DataCell(Text(estimate.mark3Kits.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Pump Mix (Cans)')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.pumpCans.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Water Pallets')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.waterPallets.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Gatorade Pallets')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.gatoradePallets.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('MRE Pallets')),
+                        const DataCell(Text('001842')),
+                        DataCell(Text(estimate.mrePallets.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Port-a-Potties')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.portaPottiesPallets.toString()))
+                      ]),
+                    ],
                   ),
+                  const SizedBox(
+                      height: 30,
+                      width: double
+                          .infinity), //invisible container to make column max-width
                   Container(child: shareAcresButton(estimate)),
                   const SizedBox(
-                      height: 50,
+                      height: 30,
                       width: double
                           .infinity), //invisible container to make column max-width
                   const Text(
@@ -81,32 +189,151 @@ class _EstimateScreenState extends State<EstimateScreen> {
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold),
                   ),
-                  SelectableText(
-                    estimate.structureFireOrderText(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.bold),
-                  ),
-                  Container(child: shareStructuresButton(estimate)),
                   const SizedBox(
-                      height: 50,
+                      height: 20,
                       width: double
                           .infinity), //invisible container to make column max-width
-                  const Text(
-                    "Notes",
-                    style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold),
+                  DataTable(
+                    dataRowHeight: 30,
+                    headingRowColor:
+                        MaterialStateColor.resolveWith((states) => Colors.grey),
+                    border: TableBorder.all(
+                        color: const Color.fromARGB(255, 83, 83, 83)),
+                    columns: const [
+                      DataColumn(
+                          label: Text('Name',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('NFES #',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Quantity',
+                              style: TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold)))
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        const DataCell(Text('Sprinkler Kits')),
+                        const DataCell(Text('001048')),
+                        DataCell(Text(estimate.sprinklerKits.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.5" Hose')),
+                        const DataCell(Text('001239')),
+                        DataCell(Text(estimate.onePointFiveHose.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.0" Hose')),
+                        const DataCell(Text('001238')),
+                        DataCell(Text(estimate.oneInchHose.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.5" Gated Wye')),
+                        const DataCell(Text('000231')),
+                        DataCell(Text(estimate.onePointFiveInchWye.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.0" Gated Wye')),
+                        const DataCell(Text('000259')),
+                        DataCell(Text(estimate.oneInchWye.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('1.0" - 1.5" Reducer')),
+                        const DataCell(Text('000010')),
+                        DataCell(
+                            Text(estimate.onePointFiveInchReducer.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('KK Nozzles')),
+                        const DataCell(Text('001081')),
+                        DataCell(Text(estimate.kkNozzles.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Mark3 Pumps & Kits')),
+                        const DataCell(Text('003870')),
+                        DataCell(Text(estimate.mark3Structures.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Fold-a-Tanks')),
+                        const DataCell(Text('000664')),
+                        DataCell(Text(estimate.foldaTanks.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Unleaded Gas')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.unleadedGas.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('2-Cycle Oil (Quart)')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.twoCycleOil.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Port-a-Potties')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.portaPottiesPallets.toString()))
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Foam (Cans)')),
+                        const DataCell(Text('N/A')),
+                        DataCell(Text(estimate.foam.toString()))
+                      ]),
+                    ],
                   ),
-                  SelectableText(
-                    estimate.noteSection(),
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.bold),
-                  ),
+                  const SizedBox(height: 30, width: double.infinity),
+                  Container(child: shareStructuresButton(estimate)),
                   const SizedBox(
-                      height: 50,
+                      height: 30,
+                      width: double
+                          .infinity), //invisible container to make column max-width
+                  const SizedBox(
+                      height: 30,
+                      width: double
+                          .infinity), //invisible container to make column max-width
+                  DataTable(dataRowHeight: 30, columns: const [
+                    DataColumn(
+                        label: Text(
+                      'Notes',
+                      style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn(label: Text(''))
+                  ], rows: const [
+                    DataRow(cells: [
+                      DataCell(Text('Incident Response Name')),
+                      DataCell(SizedBox(width: 140, child: Text('')))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('POC Name')),
+                      DataCell(Text(''))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('POC Number')),
+                      DataCell(Text(''))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Dispatch Center')),
+                      DataCell(Text(''))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Drop Points')),
+                      DataCell(Text(''))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Delivery Instructions')),
+                      DataCell(Text(''))
+                    ]),
+                    DataRow(
+                        cells: [DataCell(Text('Comments')), DataCell(Text(''))])
+                  ]),
+                  const SizedBox(
+                      height: 30,
                       width: double
                           .infinity), //invisible container to make column max-width
                 ],

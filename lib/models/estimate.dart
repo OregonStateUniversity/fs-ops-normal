@@ -482,53 +482,42 @@ class Estimate {
     }
   }
 
-  String noteSection() {
-    String notesStr = "\n- Incident Response Name:\n"
-        "- POC Name:\n"
-        "- POC Number:\n"
-        "- Dispatch Center:\n"
-        "- Drop Points:\n"
-        "- Delivery Instructions:\n"
-        "- Comments:\n";
-    return notesStr;
-  }
-
   String flatFireOrderText() {
-    String str = "Trunk Line: $trunkLineLength ft.\n"
-        "Lat Line: $latLineLength ft.\n"
-        "Toy Hose: $toyLineLength ft.\n\n";
+    String str = "Trunk Line:  $trunkLineLength ft.\n"
+        "Lat Line:  $latLineLength ft.\n"
+        "Toy Hose:  $toyLineLength ft.\n\n";
 
-    str += "1.5\" Gated Wye: $onePointFiveInchWye\n"
-        "1.5\" Reducers: $onePointFiveInchReducer\n"
-        "1\"-3/4\" Reducers: $fittings\n"
-        "Forester Nozzles: $fittings\n"
-        "Toy Nozzles: $fittings\n"
-        "Toy Wye: $fittings\n\n";
+    str += "1.5\" Gated Wye (NFES# 000231):  $onePointFiveInchWye\n"
+        "1.5\" Reducers :  $onePointFiveInchReducer\n"
+        "1\"-3/4\" Reducers (NFES# 000733):  $fittings\n"
+        "Forester Nozzles (NFES# 000024):  $fittings\n"
+        "Toy Nozzles (NFES# 007387):  $fittings\n"
+        "Toy Wye (NFES# 000904):  $fittings\n\n";
 
-    str += "Folda-tank: $foldaTanks\n"
-        "Mark 3 + Kits: $mark3Kits\n"
-        "Pump Mix (Cans): $pumpCans\n\n";
-    str += "Water (Pallets): $waterPallets\n"
-        "Gatorade (Pallets): $gatoradePallets\n"
-        "MRE (Pallets): $mrePallets\n"
-        "Port-a-Potties: $portaPottiesPallets\n\n";
+    str += "Folda-tank (NFES# 000664):  $foldaTanks\n"
+        "Mark 3 + Kits (NFES# 003870):  $mark3Kits\n"
+        "Pump Mix (Cans):  $pumpCans\n\n";
+    str += "Water (Pallets):  $waterPallets\n"
+        "Gatorade (Pallets):  $gatoradePallets\n"
+        "MRE (Pallets) (NFES# 001842):  $mrePallets\n"
+        "Port-a-Potties:  $portaPottiesPallets\n\n";
     return str;
   }
 
   String structureFireOrderText() {
-    String str = "\nSprinkler Kits: $sprinklerKits\n"
-        "1.5 hose: $onePointFiveHose\n"
-        "1.0 hose: $oneInchHose\n\n"
-        "1.5 Gated Wye: $onePointFiveInchWye\n"
-        "1.0 Gated Wye: $oneInchWye\n"
-        "1.5-1.0 Reducer: $onePointFiveInchReducer\n"
-        "KK Nozzles: $kkNozzles\n\n"
-        "Mark 3 Pumps & Kits: $mark3Structures\n"
-        "Fold-a-Tanks: $foldaTankStructures\n\n"
-        "Unleaded Gas (Gallons): $unleadedGas\n"
-        "2 Cycle Oil (Quart): $twoCycleOil\n"
-        "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
-        "Foam (Cans): $foam\n";
+    String str = "\nSprinkler Kits (NFES# 001048): $sprinklerKits\n"
+        "1.5 hose (NFES# 001239):  $onePointFiveHose\n"
+        "1.0 hose (NFES# 001238):  $oneInchHose\n\n"
+        "1.5 Gated Wye (NFES# 000231):  $onePointFiveInchWye\n"
+        "1.0 Gated Wye (NFES# 000259):  $oneInchWye\n"
+        "1.5-1.0 Reducer (NFES# 000010):  $onePointFiveInchReducer\n"
+        "KK Nozzles (NFES# 001081):  $kkNozzles\n\n"
+        "Mark 3 Pumps & Kits (NFES# 003870): $mark3Structures\n"
+        "Fold-a-Tanks (NFES# 000664):  $foldaTankStructures\n\n"
+        "Unleaded Gas (Gallons):  $unleadedGas\n"
+        "2 Cycle Oil (Quart):  $twoCycleOil\n"
+        "Port-a-Potties (1500 Gallon):  $portaPottiesPallets\n"
+        "Foam (Cans):  $foam\n";
     return str;
   }
 
