@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
-
+import '../widgets/page_search_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
 
 class RedBookScreen extends StatelessWidget {
@@ -22,35 +22,7 @@ class RedBookScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(child: pdfView()),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: ElevatedButton(
-                    child: const Text("Go To"),
-                    onPressed: () {
-                      pageController.text == "" ? pageController.clear():
-                        pdfController
-                            .jumpToPage(int.parse(pageController.text) + 22);
-                        FocusScope.of(context).unfocus();
-                        pageController.clear();
-                    }),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: TextField(
-                    controller: pageController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: "Page Number"),
-                  ),
-                ),
-              )
-            ],
-          )
+          PageSearchBar(pageController: pageController, pdfController: pdfController, pageBuffer: 22,)
         ],
       ),
       bottomNavigationBar: const BottomNavBar(),
