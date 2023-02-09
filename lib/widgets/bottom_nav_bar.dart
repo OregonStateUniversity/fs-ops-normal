@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import '../screens/compass_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key, this.showHome = true, this.leftButtonFunction})
+  const BottomNavBar(
+      {Key? key,
+      this.showHome = true,
+      this.leftButtonFunction,
+      this.showCompassGreen = false})
       : super(key: key);
 
   final bool? showHome;
   final Function? leftButtonFunction;
+  final bool? showCompassGreen;
 
   @override
   State<BottomNavBar> createState() {
@@ -57,15 +62,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
   BottomNavigationBarItem leftButton() {
     return BottomNavigationBarItem(
       label: "",
-      icon:
-          widget.showHome! ? const Icon(Icons.home) : const Icon(Icons.archive),
+      icon: widget.showHome!
+          ? Icon(Icons.home,
+              color: widget.showCompassGreen! ? Colors.grey : Colors.green)
+          : const Icon(Icons.archive),
     );
   }
 
   BottomNavigationBarItem compassButton() {
-    return const BottomNavigationBarItem(
+    return BottomNavigationBarItem(
       label: "",
-      icon: Icon(Icons.explore_outlined),
+      icon: widget.showCompassGreen!
+          ? const Icon(Icons.explore_outlined, color: Colors.green)
+          : const Icon(Icons.explore_outlined),
     );
   }
 }
