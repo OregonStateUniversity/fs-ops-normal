@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'inactive_estimate_list_screen.dart';
+import 'estimate_list_screen.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
@@ -116,8 +116,8 @@ class InactiveEngagementListScreenState
             engagement: engagement);
         if (!mounted) return;
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return InactiveEstimateListScreen(
-              engagement: engagement, estimates: estimates);
+          return EstimateListScreen(
+              engagement: engagement, estimates: estimates, isActive: false);
         }));
       },
     );
