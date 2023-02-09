@@ -7,6 +7,13 @@ class AboutScreen extends StatelessWidget {
 
   static const TextAlign align = TextAlign.center;
   static const sourceCodeURL = "https://github.com/osu-cascades/fs-ops-normal";
+  static const createdBy =
+      "Created By \nBen Shiffman, Aimee Bogle, \nAzzam Muthanna, Ian Snyder, \nErin O'Connell, Kelson Denton, \nJosh C., Kyle H. for";
+  static const createdFor = "U.S. Forest Service";
+  static const about =
+      "Ops Normal is an application designed for wildland firefighters to quickly estimate the amount of equipment that they will need to fight a fire.";
+  static const sourceCodeText =
+      "\nThe source code for this project can be found at: ";
 
   const AboutScreen({super.key});
 
@@ -25,22 +32,21 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    "Created By \nBen Shiffman, Aimee Bogle, \nAzzam Muthanna, Ian Snyder, \nErin O'Connell, Kelson Denton, \nJosh C., Kyle H. for",
+                    createdBy,
                     textAlign: align,
                   ),
                   const Text(
-                    "U.S. Forest Service",
-                    textAlign: align,
-                  ),
-                  const Divider(),
-                  const Text(
-                    "Ops Normal is an application designed for wildland firefighters to "
-                    "quickly estimate the amount of equipment that they will need to fight a fire.",
+                    createdFor,
                     textAlign: align,
                   ),
                   const Divider(),
                   const Text(
-                    "\nThe source code for this project can be found at: ",
+                    about,
+                    textAlign: align,
+                  ),
+                  const Divider(),
+                  const Text(
+                    sourceCodeText,
                     textAlign: align,
                   ),
                   TextButton(

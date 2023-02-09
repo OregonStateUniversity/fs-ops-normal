@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'active_estimate_list_screen.dart';
+import 'estimate_list_screen.dart';
 import '../event_handlers/popup_menu_button_handler.dart';
 import '../event_handlers/floating_action_button_handler.dart';
 import '../models/engagement.dart';
@@ -131,8 +131,11 @@ class ActiveEngagementListScreenState
                 engagement: engagement)
             .then((estimates) => {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ActiveEstimateListScreen(
-                        engagement: engagement, estimates: estimates);
+                    return EstimateListScreen(
+                      engagement: engagement,
+                      estimates: estimates,
+                      isActive: true,
+                    );
                   }))
                 });
       },

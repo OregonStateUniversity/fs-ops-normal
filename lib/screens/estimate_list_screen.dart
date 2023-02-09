@@ -8,22 +8,26 @@ import '../persistence/database_manager.dart';
 import '../persistence/estimate_dao.dart';
 import '../utils/date_time_formatter.dart';
 
-class ActiveEstimateListScreen extends StatefulWidget {
+class EstimateListScreen extends StatefulWidget {
   static const routeName = 'engagement';
   final Engagement engagement;
   final List<Estimate> estimates;
+  final bool isActive;
 
-  const ActiveEstimateListScreen(
-      {Key? key, required this.engagement, required this.estimates})
+  const EstimateListScreen(
+      {Key? key,
+      required this.engagement,
+      required this.estimates,
+      required this.isActive})
       : super(key: key);
 
   @override
-  State<ActiveEstimateListScreen> createState() {
-    return _ActiveEstimateListScreenState();
+  State<EstimateListScreen> createState() {
+    return _EstimateListScreenState();
   }
 }
 
-class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
+class _EstimateListScreenState extends State<EstimateListScreen> {
   late List<Estimate> estimates = widget.estimates;
 
   @override
@@ -187,10 +191,12 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
                         ),
                       );
                     })),
-        bottomNavigationBar: const BottomNavBar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-            onPressed: () => addEstimate(), child: const Icon(Icons.add)));
+        floatingActionButton: widget.isActive
+            ? FloatingActionButton(
+                onPressed: () => addEstimate(), child: const Icon(Icons.add))
+            : null,
+        bottomNavigationBar: const BottomNavBar());
   }
 
   addEstimate() {
@@ -200,45 +206,5 @@ class _ActiveEstimateListScreenState extends State<ActiveEstimateListScreen> {
       loadEstimates();
       setState(() {});
     });
-  }
-
-  Widget? floatAccButton(engagement) {
-    if (engagement.active == 0) {
-      return null;
-    }
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.pushNamed(context, NewEstimateScreen.routeName,
-                arguments: engagement)
-            .then((value) {
-          loadEstimates();
-        });
-      },
-      tooltip: 'New Estimate',
-      child: const Icon(Icons.add),
-    );
-  }
-
-  Widget? homeButton() {
-    return FloatingActionButton(
-        onPressed: () {
-          Navigator.popUntil(context, ModalRoute.withName('/'));
-          setState(() {});
-        },
-        heroTag: 'homeButton',
-        child: const Icon(Icons.home));
-  }
-
-  Widget? buttonsWrap(engagement) {
-    return Wrap(
-        //will break to another line on overflow
-        direction: Axis.horizontal, //use vertical to show  on vertical axis
-        children: <Widget>[
-          Container(
-              margin: const EdgeInsets.only(right: 220.0),
-              child: homeButton()), //button first
-
-          Container(child: floatAccButton(engagement)), // button second,
-        ]);
   }
 }

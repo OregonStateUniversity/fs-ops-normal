@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ops_normal/screens/compass_screen.dart';
 import 'package:pdfx/pdfx.dart';
-
 import '../widgets/bottom_nav_bar.dart';
+import '../widgets/page_search_bar.dart';
 
 class IncidentResponsePocketGuideScreen extends StatelessWidget {
   static const routeName = 'pocketGuide';
@@ -22,45 +22,9 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 150,
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const CompassScreen()));
-                },
-                child: Image.asset('assets/images/compass_image.png')),
-          ),
+          const PdfViewer(),
           Expanded(child: pdfView()),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: ElevatedButton(
-                    child: const Text("Go To"),
-                    onPressed: () {
-                      pageController.text == "" ? pageController.clear():
-                        pdfController
-                            .jumpToPage(int.parse(pageController.text) + 16);
-                        FocusScope.of(context).unfocus();
-                        pageController.clear();
-                    }),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: TextField(
-                    controller: pageController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: "Page Number"),
-                  ),
-                ),
-              )
-            ],
-          )
+          PageSearchBar(pageController: pageController, pdfController: pdfController, pageBuffer: 16,)
         ],
       ),
       bottomNavigationBar: const BottomNavBar(),
@@ -70,4 +34,25 @@ class IncidentResponsePocketGuideScreen extends StatelessWidget {
   Widget pdfView() => PdfView(
         controller: pdfController,
       );
+}
+
+// widget that displays pdf that is swipeable and compass image
+class PdfViewer extends StatelessWidget {
+  const PdfViewer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const CompassScreen()));
+          },
+          child: Image.asset('assets/images/compass_image.png')
+        ),
+    );
+  }
 }
