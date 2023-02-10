@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wiredash/wiredash.dart';
 import '../screens/about_screen.dart';
 import '../screens/red_book_screen.dart';
 import '../screens/how_to_screen.dart';
@@ -36,6 +37,9 @@ class SideDrawer extends StatelessWidget {
               "Incident Response Pocket Guide",
               () => Navigator.pushNamed(
                   context, IncidentResponsePocketGuideScreen.routeName)),
+          _drawerItem(Icons.feedback, "Feedback", () {
+            Wiredash.of(context).show();
+          })
         ],
       ),
     );
