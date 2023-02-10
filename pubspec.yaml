@@ -45,6 +45,7 @@ dependencies:
   flutter_compass: ^0.7.0
   location: ^4.4.0
   share_plus: ^6.3.0
+  wiredash: ^1.0.0
 
 dev_dependencies:
   flutter_test:
