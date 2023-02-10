@@ -58,8 +58,9 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   border: OutlineInputBorder())),
           OutlinedButton(
               onPressed: () {
+                var acreseDouble = double.parse(myControllerAcreage.text);
                 var estimate = Estimate(
-                    acres: int.parse(myControllerAcreage.text),
+                    acres: acreseDouble.toInt(),
                     structures: int.parse(myControllerStructure.text),
                     timeStamp: DateTimeFormatter.format(DateTime.now()));
                 myControllerAcreage.text.isNotEmpty
