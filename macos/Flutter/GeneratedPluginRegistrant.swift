@@ -10,7 +10,7 @@ import location
 import path_provider_foundation
 import pdfx
 import share_plus
-import shared_preferences_macos
+import shared_preferences_foundation
 import sqflite
 import url_launcher_macos
 
