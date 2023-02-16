@@ -18,10 +18,7 @@ class CompassScreen extends StatefulWidget {
 class _CompassScreen extends State<CompassScreen>
     with SingleTickerProviderStateMixin {
   bool showRealCompass = false;
-  late final AnimationController _controller = AnimationController(
-    duration: const Duration(milliseconds: 300),
-    vsync: this,
-  );
+  late final AnimationController _controller;
   late final Animation<Offset> _offsetAnimation = Tween<Offset>(
     begin: const Offset(0, 1),
     end: const Offset(0, 0),
@@ -29,6 +26,15 @@ class _CompassScreen extends State<CompassScreen>
     parent: _controller,
     curve: Curves.easeInOut,
   ));
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+  }
 
   @override
   void dispose() {
@@ -62,7 +68,9 @@ class _CompassScreen extends State<CompassScreen>
               children: children);
         },
       ),
-      bottomNavigationBar: const BottomNavBar(showCompassGreen: true,),
+      bottomNavigationBar: const BottomNavBar(
+        showCompassGreen: true,
+      ),
     );
   }
 
@@ -87,7 +95,7 @@ class _CompassScreen extends State<CompassScreen>
             ),
             OutlinedButton(
                 onPressed: (() => setShowCompassImage()),
-                child: Text("Show compass"))
+                child: const Text("Show compass"))
           ],
         ),
       ),
