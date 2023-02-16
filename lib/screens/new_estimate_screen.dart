@@ -65,21 +65,39 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         children: <Widget>[
           const Padding(padding: EdgeInsets.all(10)),
           // acres text box
-          TextField(
-              controller: myControllerAcreage,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                  labelText: 'Enter Acreage',
-                  errorText: _acreageInputIsValid ? null : 'error',
-                  border: OutlineInputBorder())),
-          const Padding(padding: EdgeInsets.all(10)),
-          // button for acre calculation popup
-          const Text('--OR--'),
-          OutlinedButton(
-              onPressed: () {
-                showInformationDialog(context);
-              },
-              child: const Text("Calculate Acerage")),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              // text box for acreage
+              Expanded(
+                flex: 4,
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  controller: myControllerAcreage,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Enter Acreage',
+                    errorText: _acreageInputIsValid ? null : 'error',
+                    border: OutlineInputBorder())),
+              ),
+              const Padding(padding: EdgeInsets.all(10)),
+              const Expanded(
+                child: Text('- OR -', textAlign: TextAlign.center,)
+              ),
+              const Padding(padding: EdgeInsets.all(10)),
+              // button for acreage calculation popup
+              Expanded(
+                flex: 2,
+                child: OutlinedButton(
+                  onPressed: () {
+                    showInformationDialog(context);
+                  },
+                  child: const Text("Calculate Acerage", textAlign: TextAlign.center)
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(10)),
+            ]
+          ),
           const Padding(padding: EdgeInsets.all(10)),
           // structures text box
           TextField(
@@ -109,7 +127,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                       )
                     : ArgumentError.notNull('Value Can\'t Be Empty');
               },
-              child: const Text("New Estimate")),
+              child: const Text("Generate Estimate")),
         ],
       ),
     );
