@@ -4,6 +4,15 @@ import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../utils/date_time_formatter.dart';
 
+//const List<String> fireShape = <String>['Shape 1', 'Shape 2', 'Shape 3'];
+const List<String> fireType = <String>['Brush', 'Big Trees', 'Small Trees', 'Medium Trees', 'Mixed'];
+const List<String> fireShape = <String>['assets/images/fireShape1.png',
+'assets/images/fireShape2.png',
+'assets/images/fireShape3.png',
+'assets/images/fireShape4.png',
+'assets/images/fireShape5.png',
+'assets/images/fireShape6.png'];
+
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimateScreen';
   static const title = "NewEstimateScreen";
@@ -17,17 +26,17 @@ class NewEstimateScreen extends StatefulWidget {
 class _NewEstimateScreenState extends State<NewEstimateScreen> {
   var formKey = GlobalKey<FormState>();
 
+  var fireShapeVal = null;
+  var fireTypeVal = null;
+
+  var imgs = Image.asset("assets/images/fireShape1.png");
+
   var myControllerAcreage = TextEditingController(text: " ");
   var myControllerStructure = TextEditingController(text: " ");
 
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
-  //final _selectedIndex = 0;
-
-  /*void _onItemTapped(int index) {
-    Navigator.pushNamed(context, ActiveEngagementListScreen.routeName);
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +50,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
       body: ListView(
         children: <Widget>[
           const Padding(padding: EdgeInsets.all(10)),
+          // acres text box
           TextField(
               controller: myControllerAcreage,
               keyboardType: TextInputType.number,
@@ -49,6 +59,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   errorText: _acreageInputIsValid ? null : 'error',
                   border: OutlineInputBorder())),
           const Padding(padding: EdgeInsets.all(10)),
+          // structures text box
           TextField(
               controller: myControllerStructure,
               keyboardType: TextInputType.number,
@@ -56,6 +67,45 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
                   labelText: 'Enter Structures',
                   errorText: _structureInputIsValid ? null : 'error',
                   border: OutlineInputBorder())),
+          const Padding(padding: EdgeInsets.all(10)),
+          // fire type dropdown
+          DropdownButton<String>(
+            hint: const Text('Select Fuel Type'),
+            value: fireTypeVal,
+            icon: const Icon(Icons.arrow_drop_down),
+            isExpanded: true,
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+              setState(() {
+                fireTypeVal = value!;
+                });
+            },
+            items: fireType.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),),
+          const Padding(padding: EdgeInsets.all(10)),
+          // fire shape dropdown
+          DropdownButton<String>(
+            hint: const Text('Select Fire Shape'),
+            value: fireShapeVal,
+            icon: const Icon(Icons.arrow_drop_down),
+            isExpanded: true,
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+              setState(() {
+                fireShapeVal = value!;
+                });
+            },
+            items: fireShape.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Image.asset(value)
+              );
+            }).toList(),),
+          const Padding(padding: EdgeInsets.all(10)),
           OutlinedButton(
               onPressed: () {
                 var acreseDouble = double.parse(myControllerAcreage.text);
@@ -77,23 +127,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               child: const Text("New Estimate")),
         ],
       ),
-      /*bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: (Colors.blueGrey[900]!),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: (Colors.blueGrey[900]!),
-        onTap: _onItemTapped,
-      ),*/
     );
   }
 }
