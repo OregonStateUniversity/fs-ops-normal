@@ -5,7 +5,7 @@ class Constants {
   Constants({this.wiredashID = "", this.wiredashSecret = ""});
 
   factory Constants.fromJson(Map<String, dynamic> jsonMap) {
-    return new Constants(
+    return Constants(
         wiredashID: jsonMap["wiredash_id"],
         wiredashSecret: jsonMap["wiredash_secret"]);
   }

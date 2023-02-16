@@ -16,24 +16,24 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final Future<Constants> _constants =
-      ConstantsLoader(constantsPath: "../assets/constants.json").load();
+      ConstantsLoader(constantsPath: "assets/constants.json").load();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Constants>(
         future: _constants,
         builder: (BuildContext context, AsyncSnapshot<Constants> snapshot) {
-          String wiredash_id = "";
-          String wiredash_secret = "";
-          //if (snapshot.hasData) {
-          wiredash_id = snapshot.data!.wiredashID;
-          wiredash_secret = snapshot.data!.wiredashSecret;
-          //}
+          String wiredashID = "";
+          String wiredashSecret = "";
+          if (snapshot.hasData) {
+            wiredashID = snapshot.data!.wiredashID;
+            wiredashSecret = snapshot.data!.wiredashSecret;
+          }
           //else if (snapshot.hasError) {}
           //else {}
           return Wiredash(
-              projectId: wiredash_id,
-              secret: wiredash_secret,
+              projectId: wiredashID,
+              secret: wiredashSecret,
               child: MaterialApp(
                   title: App.appTitle,
                   routes: RouteMap.routes,
