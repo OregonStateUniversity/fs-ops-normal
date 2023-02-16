@@ -72,7 +72,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               Expanded(
                 flex: 4,
                 child: TextField(
-                  textAlign: TextAlign.center,
                   controller: myControllerAcreage,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
