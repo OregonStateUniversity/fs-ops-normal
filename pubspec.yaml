@@ -65,6 +65,7 @@ flutter_icons:
 flutter:
   uses-material-design: true
   assets:
+    - assets/constants.json
     - assets/icon/icon.png
     - assets/IRPG_2018.pdf
     - assets/IRPG_2022.pdf
