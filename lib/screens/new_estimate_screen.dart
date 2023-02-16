@@ -1,9 +1,12 @@
 import 'package:flash/flash.dart';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
 import '../models/engagement.dart';
 import '../utils/date_time_formatter.dart';
+import 'dart:math';
 
 const List<String> fireType = <String>['Grass', 'Timber'];
 const List<String> fireShape = [
@@ -79,45 +82,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           const Padding(padding: EdgeInsets.all(10)),
           structuresField(),
           const Padding(padding: EdgeInsets.all(10)),
-          // fire type dropdown
-          /*DropdownButton<String>(
-            hint: const Text('Select Fuel Type'),
-            value: fireTypeVal,
-            icon: const Icon(Icons.arrow_drop_down),
-            isExpanded: true, 
-            onChanged: (String? value) {  // user selected an item
-              setState(() {
-                fireTypeVal = value!;
-                });
-            },
-            // entries in the dropdown
-            items: fireType.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),),
-          const Padding(padding: EdgeInsets.all(10)),
-          // fire shape dropdown
-          DropdownButton<String>(
-            hint: const Text('Select Fire Shape'),
-            value: fireShapeVal,
-            icon: const Icon(Icons.arrow_drop_down),
-            isExpanded: true,
-            onChanged: (String? value) {
-              // This is called when the user selects an item.
-              setState(() {
-                fireShapeVal = value!;
-                });
-            },
-            // entries in the dropdown
-            items: fireShape.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Image.asset(value)
-              );
-            }).toList(),),
-          const Padding(padding: EdgeInsets.all(10)),*/
           // button to generate estimate
           OutlinedButton(
               onPressed: () {
@@ -146,48 +110,49 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
   Future<void> showInformationDialog(BuildContext context) async {
     return await showDialog(
-        context: context,
-        builder: (context) {
-          bool isChecked = false;
-          return StatefulBuilder(builder: (context, setState) {
-            return AlertDialog(
-              content: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // enter perimeter of fire
-                      TextFormField(
-                        controller: myControllerPerimeter,
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          return value != "" ? null : "Enter Perimeter in Chains";
-                        },
-                        decoration:
-                            const InputDecoration(hintText: "Please Enter Perimeter"),
-                      ),
-                      // select fire shape
-                      DropdownButton<String>(
-                        hint: const Text('Select Fire Shape'),
-                        value: fireShapeVal,
-                        icon: const Icon(Icons.arrow_drop_down),
-                        isExpanded: true,
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            fireShapeVal = value!;
-                            });
-                        },
-                        // entries in the dropdown
-                        items: fireShape.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Image.asset(value)
-                          );
-                        }).toList(),),
-                    ],
-                  )),
-              title: Text('Enter perimeter in chains and select rough shape.'),
+      context: context,
+      builder: (context) {
+        bool isChecked = false;
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            content: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // enter perimeter of fire
+                  // structures text box
+                  TextField(
+                    controller: myControllerPerimeter,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Enter Perimeter in Chains',
+                      errorText: _structureInputIsValid ? null : 'error',
+                      border: OutlineInputBorder()
+                    )
+                  ),
+                  // select fire shape
+                  DropdownButton<String>(
+                    hint: const Text('Select Fire Shape'),
+                    value: fireShapeVal,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    isExpanded: true,
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        fireShapeVal = value!;
+                      });
+                    },
+                    // entries in the dropdown
+                    items: fireShape.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Image.asset(value)
+                      );
+                    }).toList(),),
+                  ],
+                )),
+              title: const Text('Enter perimeter in chains and select rough shape.'),
               actions: <Widget>[
                 InkWell(
                   child: Text('OK   '),
@@ -206,35 +171,35 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         
   }
 
+  // calculates acreage of a fire given its shape and perimeter in chains
   String calculateAcreage() {
     int? fireShapeNum = fireShapeMap[fireShapeVal];
     int? perimeter = int.parse(myControllerPerimeter.text);
     double calcAcres = 0;
     switch(fireShapeNum) {
-      /// CALCULATIONS INCORRECT PLACEHOLDERS, NEED TO UPDATE
+      /// CALCULATIONS BASED ON WILDLAND FIRE TABLE DATA POINTS
+      /// INACCURATE FOR LOWER PERIMETER VALUES
       case 1:  // fire is a circle
-        calcAcres = perimeter * 0.7;
+        calcAcres = 0.007 * pow(perimeter, 2) - 0.0041 * perimeter;
         break;
       case 2:  // fire is tall rectangle
-        calcAcres = perimeter * 0.6;
+        calcAcres = 0.006 * pow(perimeter, 2) + 0.0034 * perimeter;
         break;
       case 3:  // shape is triangle or sideways rectangle
-        calcAcres = perimeter * 0.5;
+        calcAcres = 0.0049 * pow(perimeter, 2) + 0.0044 * perimeter;
         break;
       case 4:  // fire is close to square
-        calcAcres = perimeter * 0.4;
+        calcAcres = 0.004 * pow(perimeter, 2) + 0.0006 * perimeter;
         break;
       case 5:  // amoeba shape 1
-        calcAcres = perimeter * 0.3;
+        calcAcres = 0.003 * pow(perimeter, 2) + 0.0014 * perimeter;
         break;
       case 6:  // amoeba shape 2
-        calcAcres = perimeter * 0.2;
+        calcAcres = 0.0027 * pow(perimeter, 2) - 0.0319 * perimeter;
         break;
     }
     return calcAcres.toString();
   }
-
-
   
 
   Widget acreageField() {
