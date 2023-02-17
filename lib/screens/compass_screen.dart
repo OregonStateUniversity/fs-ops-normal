@@ -7,9 +7,7 @@ import '../widgets/bottom_nav_bar.dart';
 import '../widgets/location_widget.dart';
 
 class CompassScreen extends StatefulWidget {
-  //const CompassScreen({super.key, this.buildNavBar});
   const CompassScreen({super.key});
-  //final bool? buildNavBar;
   static const routeName = "compass";
   @override
   State<CompassScreen> createState() => _CompassScreen();
@@ -47,13 +45,7 @@ class _CompassScreen extends State<CompassScreen>
     //Disable landscape mode
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    List<Widget> children = [];
-    if (!showRealCompass) {
-      children = <Widget>[_buildCompassImage()];
-    } else {
-      //show a real compass
-      children = <Widget>[Expanded(child: _buildCompass())];
-    }
+
     return Scaffold(
       appBar: AppBar(),
       // backgroundColor: const HSLColor.fromAHSL(1, 0, 0, 0.05).toColor(),
@@ -65,7 +57,7 @@ class _CompassScreen extends State<CompassScreen>
         builder: (context) {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: children);
+              children: buildChildren());
         },
       ),
       bottomNavigationBar: const BottomNavBar(
@@ -100,6 +92,13 @@ class _CompassScreen extends State<CompassScreen>
         ),
       ),
     );
+  }
+
+  List<Widget> buildChildren() {
+    if (!showRealCompass) {
+      return [_buildCompassImage()];
+    }
+    return [Expanded(child: _buildCompass())];
   }
 
   void setShowCompassImage() {
