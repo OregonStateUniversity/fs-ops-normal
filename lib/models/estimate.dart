@@ -483,12 +483,12 @@ class Estimate {
   }
 
   String flatFireOrderText() {
-    String str = "Trunk Line:  $trunkLineLength ft.\n"
-        "Lat Line:  $latLineLength ft.\n"
-        "Toy Hose:  $toyLineLength ft.\n\n";
+    String str = "Trunk Line (NFES#: 001239):  $trunkLineLength ft.\n"
+        "Lat Line (NFES#: 001238):  $latLineLength ft.\n"
+        "Toy Hose (NFES#: 001016):  $toyLineLength ft.\n\n";
 
     str += "1.5\" Gated Wye (NFES# 000231):  $onePointFiveInchWye\n"
-        "1.5\" Reducers :  $onePointFiveInchReducer\n"
+        "1.5\" Reducers (NFES#: 000010):  $onePointFiveInchReducer\n"
         "1\"-3/4\" Reducers (NFES# 000733):  $fittings\n"
         "Forester Nozzles (NFES# 000024):  $fittings\n"
         "Toy Nozzles (NFES# 007387):  $fittings\n"
@@ -522,9 +522,9 @@ class Estimate {
   }
 
   String flatFireOrderTextAndNotes() {
-    String str = "Trunk Line: $trunkLineLength ft.\n"
-        "Lat Line: $latLineLength ft.\n"
-        "Toy Hose: $toyLineLength ft.\n\n";
+    String str = "Trunk Line (NFES#: 001239): $trunkLineLength ft.\n"
+        "Lat Line (NFES#:001238): $latLineLength ft.\n"
+        "Toy Hose (NFES#: 001016): $toyLineLength ft.\n\n";
 
     str += "1.5\" Gated Wye (NFES#: 000231): $onePointFiveInchWye\n"
         "1.5\" Reducers (NFES#: 000010): $onePointFiveInchReducer\n"
@@ -541,13 +541,14 @@ class Estimate {
         "MRE (Pallets) (NFES#: 001842): $mrePallets\n"
         "Port-a-Potties: $portaPottiesPallets\n\n";
 
-    str += "\nNotes\n"
+    str += "\nTips for General Message\n"
         "- Incident Response Name:\n"
         "- POC Name:\n"
         "- POC Number:\n"
         "- Dispatch Center:\n"
         "- Drop Points:\n"
         "- Delivery Instructions:\n"
+        "- Time/Date Needed:\n"
         "- Comments:\n";
     return str;
   }
@@ -567,13 +568,14 @@ class Estimate {
         "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
         "Foam (Cans): $foam\n";
 
-    str += "\nNotes\n"
+    str += "\nTips for General Message\n"
         "- Incident Response Name:\n"
         "- POC Name:\n"
         "- POC Number:\n"
         "- Dispatch Center:\n"
         "- Drop Points:\n"
         "- Delivery Instructions:\n"
+        "- Time/Date Needed:\n"
         "- Comments:\n";
     return str;
   }

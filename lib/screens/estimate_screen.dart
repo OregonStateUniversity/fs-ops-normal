@@ -68,8 +68,10 @@ class _EstimateScreenState extends State<EstimateScreen> {
                   _spacerSizedBox(30.0), // Spacer box
                   // Structures Order Share button
                   Container(child: shareStructuresButton(estimate)),
-                  _spacerSizedBox(30.0), // Spacer box
+                  _spacerSizedBox(35.0), // Spacer box
                   // Notes DataTable
+                  _titleTextWidget(
+                      "Tips for General Message", Colors.orange, 25.0),
                   _notesDataTable(estimate),
                   _spacerSizedBox(30.0), // Spacer box
                 ],
@@ -204,9 +206,9 @@ class _EstimateScreenState extends State<EstimateScreen> {
             _dataColumn("Quantity", Colors.black, 15.0)
           ],
           rows: [
-            _estimateDataRow('Truck Line', 'N/A', estimate.trunkLineLength),
-            _estimateDataRow('Lat Line', 'N/A', estimate.latLineLength),
-            _estimateDataRow('Toy Line', 'N/A', estimate.toyLineLength),
+            _estimateDataRow('Truck Line', '001239', estimate.trunkLineLength),
+            _estimateDataRow('Lat Line', '001238', estimate.latLineLength),
+            _estimateDataRow('Toy Line', '001016', estimate.toyLineLength),
             _estimateDataRow(
                 '1.5" Gated Wye', '000231', estimate.onePointFiveInchWye),
             _estimateDataRow(
@@ -267,18 +269,24 @@ class _EstimateScreenState extends State<EstimateScreen> {
 
   SizedBox _notesDataTable(estimate) {
     return SizedBox(
-        width: double.infinity, //invisible container to make column max-width
-        child: DataTable(dataRowHeight: 30, horizontalMargin: 20, columns: [
-          _dataColumn("Notes", Colors.orange, 25.0),
-          _dataColumn(" ", Colors.orange, 25.0)
-        ], rows: [
-          _notesDataRow('Incident Response Name'),
-          _notesDataRow('POC Name'),
-          _notesDataRow('POC Number'),
-          _notesDataRow('Dispatch Center'),
-          _notesDataRow('Drop Points'),
-          _notesDataRow('Delivery Instructions'),
-          _notesDataRow('Comments')
-        ]));
+        width: double.infinity,
+        child: DataTable(
+            dataRowHeight: 31,
+            headingRowHeight: 10,
+            horizontalMargin: 15,
+            columns: [
+              _dataColumn("", Colors.orange, 20.0),
+              _dataColumn("", Colors.orange, 20.0)
+            ],
+            rows: [
+              _notesDataRow('Incident Response Name'),
+              _notesDataRow('POC Name'),
+              _notesDataRow('POC Number'),
+              _notesDataRow('Dispatch Center'),
+              _notesDataRow('Drop Points'),
+              _notesDataRow('Delivery Instructions'),
+              _notesDataRow('Time/Date Needed'),
+              _notesDataRow('Comments')
+            ]));
   }
 }
