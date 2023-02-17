@@ -67,8 +67,8 @@ List instructionList = [
       ],
       "Now that the order is done and copied to your clipboard you now send it to the individual who processes the delivery",
       [
-        "Once you are done and want to create another order, tap the 'Back' button and it will take you back to the list of orders with your newly created order there as well\n"
-            "To go back and create another engagement tap the 'Home' button."
+        "Once you are done and want to create another order, tap the 'Back' button and it will take you back to the list of orders with your newly created order there as well",
+        "To go back and create another engagement tap the 'Home' button."
       ]
     ]
   },
