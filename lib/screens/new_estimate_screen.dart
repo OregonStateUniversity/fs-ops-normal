@@ -106,7 +106,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
   void flashError() {
     context.showFlashDialog(
-      title: const Text("Invalid input"),
+      title: const Text("Invalid Input"),
       content: const Text(
           "Please enter non-negative integers for Acreage and Structures."),
       negativeActionBuilder: (context, controller, setState) {
@@ -114,7 +114,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           onPressed: () {
             controller.dismiss();
           },
-          child: const Text("dismiss"),
+          child: const Text("Dismiss"),
         );
       },
     );
