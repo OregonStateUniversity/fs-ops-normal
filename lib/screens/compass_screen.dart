@@ -61,7 +61,7 @@ class _CompassScreen extends State<CompassScreen>
         },
       ),
       bottomNavigationBar: const BottomNavBar(
-        showCompassGreen: true,
+        onCompassScreen: true,
       ),
     );
   }

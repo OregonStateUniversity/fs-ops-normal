@@ -6,12 +6,12 @@ class BottomNavBar extends StatefulWidget {
       {Key? key,
       this.showHome = true,
       this.leftButtonFunction,
-      this.showCompassGreen = false})
+      this.onCompassScreen = false})
       : super(key: key);
 
   final bool? showHome;
   final Function? leftButtonFunction;
-  final bool? showCompassGreen;
+  final bool? onCompassScreen;
 
   @override
   State<BottomNavBar> createState() {
@@ -39,11 +39,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             }
             break;
           case 1:
-            showCompass();
-            break;
-
-          case 2:
-            showCompass();
+            if (!widget.onCompassScreen!) {
+              showCompass();
+            }
             break;
         }
       },
@@ -63,18 +61,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return BottomNavigationBarItem(
       label: "",
       icon: widget.showHome!
-          ? Icon(Icons.home,
-              color: widget.showCompassGreen! ? Colors.grey : Colors.green)
-          : const Icon(Icons.archive),
+          ? const Icon(Icons.home, color: Colors.green)
+          : const Icon(Icons.archive, color: Colors.green),
     );
   }
 
   BottomNavigationBarItem compassButton() {
     return BottomNavigationBarItem(
       label: "",
-      icon: widget.showCompassGreen!
-          ? const Icon(Icons.explore_outlined, color: Colors.green)
-          : const Icon(Icons.explore_outlined),
+      icon: widget.onCompassScreen!
+          ? const Icon(Icons.explore_outlined)
+          : const Icon(Icons.explore_outlined, color: Colors.green),
     );
   }
 }
