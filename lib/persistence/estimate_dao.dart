@@ -8,7 +8,7 @@ class EstimateDAO {
       "SELECT * FROM estimates WHERE engagementId = ? ORDER BY createdAt DESC;";
   static const sqlDelete = "DELETE FROM estimates WHERE id = ?;";
   static const sqlInsert =
-      "INSERT INTO estimates(engagementId, name, createdAt, acres, structures, truckLineLength, latLineLength, toyLineLength, fittings, onePointFiveInchWye, onePointFiveInchReducer, foldaTanks, mark3Kits, pumpCans, waterPallets, gatoradePallets, mrePallets, portaPottiesPallets, sprinklerKits, onePointFiveHose, oneInchHose, oneInchWye, kkNozzles, mark3Structures, foldaTankStructures, unleadedGas, twoCycleOil, foam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      "INSERT INTO estimates(engagementId, name, createdAt, acres, structures, perimeter, truckLineLength, latLineLength, toyLineLength, fittings, onePointFiveInchWye, onePointFiveInchReducer, foldaTanks, mark3Kits, pumpCans, waterPallets, gatoradePallets, mrePallets, portaPottiesPallets, sprinklerKits, onePointFiveHose, oneInchHose, oneInchWye, kkNozzles, mark3Structures, foldaTankStructures, unleadedGas, twoCycleOil, foam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
   static Future<List<Estimate>> estimates(
       {required DatabaseManager databaseManager,
@@ -34,6 +34,7 @@ class EstimateDAO {
       dto.createdAt.toString(),
       dto.acres,
       dto.structures,
+      dto.perimeter,
       dto.truckLineLength,
       dto.latLineLength,
       dto.toyLineLength,

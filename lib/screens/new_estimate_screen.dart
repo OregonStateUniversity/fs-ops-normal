@@ -80,16 +80,44 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
               },
               child: const Text("Calculate Acerage")),
           const Padding(padding: EdgeInsets.all(10)),
-          structuresField(),
+          // Structures input
+          TextField(
+              controller: myControllerStructure,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                  labelText: 'Enter Structures',
+                  errorText: _structureInputIsValid ? null : 'error',
+                  border: OutlineInputBorder())),
+          // Fire Shape dropdown
           const Padding(padding: EdgeInsets.all(10)),
-          // button to generate estimate
+          DropdownButton<String>(
+            hint: const Text('Select Fire Shape'),
+            value: fireShapeVal,
+            icon: const Icon(Icons.arrow_drop_down),
+            isExpanded: true,
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+               setState(() {
+                fireShapeVal = value!;
+              });
+            },
+            // entries in the dropdown
+            items: fireShape.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Image.asset(value)
+              );
+            }).toList(),),
+          const Padding(padding: EdgeInsets.all(10)),
+          // Button to generate estimate
           OutlinedButton(
               onPressed: () {
                 var acreseDouble = double.parse(myControllerAcreage.text);
                 var estimate = Estimate(
-                    acres: acreseDouble.toInt(),
-                    structures: int.parse(myControllerStructure.text),         
-                    timeStamp: DateTimeFormatter.format(DateTime.now()));
+                  perimeter: calculatePerimeter(),
+                  acres: acreseDouble.toInt(),
+                  structures: int.parse(myControllerStructure.text),
+                  timeStamp: DateTimeFormatter.format(DateTime.now()));
                 myControllerAcreage.text.isNotEmpty
                     ? Navigator.push(
                         context,
@@ -107,98 +135,34 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
     );
   }
 
-
-  Future<void> showInformationDialog(BuildContext context) async {
-    return await showDialog(
-      context: context,
-      builder: (context) {
-        bool isChecked = false;
-        return StatefulBuilder(builder: (context, setState) {
-          return AlertDialog(
-            content: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // enter perimeter of fire
-                  // structures text box
-                  TextField(
-                    controller: myControllerPerimeter,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Enter Perimeter in Chains',
-                      errorText: _structureInputIsValid ? null : 'error',
-                      border: OutlineInputBorder()
-                    )
-                  ),
-                  // select fire shape
-                  DropdownButton<String>(
-                    hint: const Text('Select Fire Shape'),
-                    value: fireShapeVal,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpanded: true,
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        fireShapeVal = value!;
-                      });
-                    },
-                    // entries in the dropdown
-                    items: fireShape.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Image.asset(value)
-                      );
-                    }).toList(),),
-                  ],
-                )),
-              title: const Text('Enter perimeter in chains and select rough shape.'),
-              actions: <Widget>[
-                InkWell(
-                  child: Text('OK   '),
-                  onTap: () {
-                    if (true) {
-                      myControllerAcreage.text = calculateAcreage();
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-              ],
-            );
-          });
-        });
-
-        
-  }
-
   // calculates acreage of a fire given its shape and perimeter in chains
-  String calculateAcreage() {
+  int calculatePerimeter() {
     int? fireShapeNum = fireShapeMap[fireShapeVal];
-    int? perimeter = int.parse(myControllerPerimeter.text);
-    double calcAcres = 0;
+    int? acresInput = int.parse(myControllerAcreage.text);
+    double calcPerimeter = 0;
     switch(fireShapeNum) {
       /// CALCULATIONS BASED ON WILDLAND FIRE TABLE DATA POINTS
       /// INACCURATE FOR LOWER PERIMETER VALUES
       case 1:  // fire is a circle
-        calcAcres = 0.007 * pow(perimeter, 2) - 0.0041 * perimeter;
+        calcPerimeter = 780.48 * pow(acresInput, 0.5061);
         break;
       case 2:  // fire is tall rectangle
-        calcAcres = 0.006 * pow(perimeter, 2) + 0.0034 * perimeter;
+        calcPerimeter = 845.16 * pow(acresInput, 0.5045);
         break;
       case 3:  // shape is triangle or sideways rectangle
-        calcAcres = 0.0049 * pow(perimeter, 2) + 0.0044 * perimeter;
+        calcPerimeter = 920.6 * pow(acresInput, 0.5089);
         break;
       case 4:  // fire is close to square
-        calcAcres = 0.004 * pow(perimeter, 2) + 0.0006 * perimeter;
+        calcPerimeter = 1017.4 * pow(acresInput, 0.5185);
         break;
       case 5:  // amoeba shape 1
-        calcAcres = 0.003 * pow(perimeter, 2) + 0.0014 * perimeter;
+        calcPerimeter = 1185.8 * pow(acresInput, 0.5171);
         break;
       case 6:  // amoeba shape 2
-        calcAcres = 0.0027 * pow(perimeter, 2) - 0.0319 * perimeter;
+        calcPerimeter = 1433.7 * pow(acresInput, 0.5215);
         break;
     }
-    return calcAcres.toString();
+    return calcPerimeter.round();
   }
   
 

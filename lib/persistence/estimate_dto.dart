@@ -7,6 +7,7 @@ class EstimateDTO {
   final DateTime createdAt;
   final int acres;
   final int structures;
+  final int perimeter;
   final int truckLineLength;
   final int latLineLength;
   final int toyLineLength;
@@ -37,6 +38,7 @@ class EstimateDTO {
       required this.createdAt,
       required this.acres,
       required this.structures,
+      required this.perimeter,
       required this.truckLineLength,
       required this.latLineLength,
       required this.toyLineLength,
@@ -68,6 +70,7 @@ class EstimateDTO {
         createdAt = estimate.createdAt!,
         acres = estimate.acres!,
         structures = estimate.structures!,
+        perimeter = estimate.perimeter!,
         truckLineLength = estimate.toyLineLength!,
         latLineLength = estimate.latLineLength!,
         toyLineLength = estimate.toyLineLength!,
@@ -94,5 +97,5 @@ class EstimateDTO {
 
   @override
   String toString() =>
-      'EngagementId: $engagementId, Name: $name, Created At: $createdAt, acres: $acres, Structures: $structures, Truck Line: $truckLineLength, Lat Line: $latLineLength, Toy Line: $toyLineLength, Fittings: $fittings, 1.5 Inch Wye: $onePointFiveInchWye, 1.5 Inch Reducer: $onePointFiveInchReducer, Folda-Tanks: $foldaTanks, Mark3 Kits: $mark3Kits, Pump Mix Cans: $pumpCans, Water Pallets: $waterPallets, Gatorade Pallets: $gatoradePallets, MRE Pallets: $mrePallets, Porta-Potty Pallets: $portaPottiesPallets, Sprinkler Kits: $sprinklerKits, 1.5 Hose: $onePointFiveHose, 1 Inch Hose: $oneInchHose, 1 Inch Wye: $oneInchWye, KK Nozzles: $kkNozzles, Mark 3 Structures: $mark3Structures, Folda-Tanks Structures: $foldaTankStructures, Unleaded Gas: $unleadedGas, Two-Cycle Oil: $twoCycleOil, Foam: $foam';
+      'EngagementId: $engagementId, Name: $name, Created At: $createdAt, acres: $acres, Structures: $structures, Perimeter: $perimeter, Truck Line: $truckLineLength, Lat Line: $latLineLength, Toy Line: $toyLineLength, Fittings: $fittings, 1.5 Inch Wye: $onePointFiveInchWye, 1.5 Inch Reducer: $onePointFiveInchReducer, Folda-Tanks: $foldaTanks, Mark3 Kits: $mark3Kits, Pump Mix Cans: $pumpCans, Water Pallets: $waterPallets, Gatorade Pallets: $gatoradePallets, MRE Pallets: $mrePallets, Porta-Potty Pallets: $portaPottiesPallets, Sprinkler Kits: $sprinklerKits, 1.5 Hose: $onePointFiveHose, 1 Inch Hose: $oneInchHose, 1 Inch Wye: $oneInchWye, KK Nozzles: $kkNozzles, Mark 3 Structures: $mark3Structures, Folda-Tanks Structures: $foldaTankStructures, Unleaded Gas: $unleadedGas, Two-Cycle Oil: $twoCycleOil, Foam: $foam';
 }
