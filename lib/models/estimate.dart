@@ -11,6 +11,7 @@ class Estimate {
   String? timeStamp;
   int? acres;
   int? structures;
+  int? perimeter;
 
   int? trunkLineLength;
   int? latLineLength;
@@ -53,6 +54,7 @@ class Estimate {
     this.timeStamp,
     this.acres = 0,
     this.structures = 0,
+    this.perimeter = 0
   }) {
     initializeSavedProperties();
   }
@@ -62,6 +64,7 @@ class Estimate {
       this.acres,
       this.structures,
       this.timeStamp,
+      this.perimeter,
       trunk,
       lat,
       toy,
@@ -115,6 +118,7 @@ class Estimate {
       this.acres,
       this.structures,
       this.timeStamp,
+      this.perimeter,
       trunk,
       lat,
       toy,
@@ -167,6 +171,7 @@ class Estimate {
       json["name"],
       json["acres"],
       json["structures"],
+      json["perimeter"],
       json["timeStamp"],
       json["trunkLineLength"],
       json["latLineLength"],
@@ -543,6 +548,7 @@ class Estimate {
 
     str += "\nNotes\n"
         "- Incident Response Name:\n"
+        "- Perimeter: $perimeter ft.\n"
         "- POC Name:\n"
         "- POC Number:\n"
         "- Dispatch Center:\n"
@@ -583,6 +589,7 @@ class Estimate {
         'timeStamp': timeStamp,
         'acres': acres,
         'structures': structures,
+        'perimeter': perimeter,
         'trunkLineLength': trunkLineLength,
         'latLineLength': latLineLength,
         'toyLineLength': toyLineLength,
@@ -615,6 +622,7 @@ class Estimate {
         createdAt = DateTime.parse(map['createdAt']),
         acres = map['acres'],
         structures = map['structures'],
+        perimeter = map['perimeter'],
         trunkLineLength = map['truckLineLength'],
         latLineLength = map['latLineLength'],
         toyLineLength = map['toyLineLength'],

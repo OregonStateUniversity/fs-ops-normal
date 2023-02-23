@@ -148,6 +148,7 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                             orderField.acres,
                             widget.estimate?.structures,
                             widget.estimate?.timeStamp,
+                            widget.estimate?.perimeter,
                             orderField.trunkLineLength,
                             orderField.latLineLength,
                             orderField.toyLineLength,

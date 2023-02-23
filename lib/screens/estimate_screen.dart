@@ -176,10 +176,10 @@ class _EstimateScreenState extends State<EstimateScreen> {
     ]);
   }
 
-  DataRow _notesDataRow(name) {
+  DataRow _notesDataRow(name, info) {
     return DataRow(cells: [
       DataCell(Text(name)),
-      const DataCell(SizedBox(width: 140, child: Text('')))
+      DataCell(Text(info))
     ]);
   }
 
@@ -270,15 +270,17 @@ class _EstimateScreenState extends State<EstimateScreen> {
         width: double.infinity, //invisible container to make column max-width
         child: DataTable(dataRowHeight: 30, horizontalMargin: 20, columns: [
           _dataColumn("Notes", Colors.orange, 25.0),
-          _dataColumn(" ", Colors.orange, 25.0)
-        ], rows: [
-          _notesDataRow('Incident Response Name'),
-          _notesDataRow('POC Name'),
-          _notesDataRow('POC Number'),
-          _notesDataRow('Dispatch Center'),
-          _notesDataRow('Drop Points'),
-          _notesDataRow('Delivery Instructions'),
-          _notesDataRow('Comments')
+          _dataColumn(" ", Colors.orange, 25.0),
+        ], 
+        rows: [
+          _notesDataRow('Approximate Fire Perimeter', '${estimate.perimeter.toString()} ft.'),
+          _notesDataRow('Incident Response Name', ''),
+          _notesDataRow('POC Name', ''),
+          _notesDataRow('POC Number', ''),
+          _notesDataRow('Dispatch Center', ''),
+          _notesDataRow('Drop Points', ''),
+          _notesDataRow('Delivery Instructions', ''),
+          _notesDataRow('Comments', '')
         ]));
   }
 }
