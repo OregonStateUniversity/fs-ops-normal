@@ -46,6 +46,7 @@ dependencies:
   location: ^4.4.0
   share_plus: ^6.3.0
   wiredash: ^1.0.0
+  flash: ^2.0.5
 
 dev_dependencies:
   flutter_test:
