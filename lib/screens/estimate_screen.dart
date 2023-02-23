@@ -73,7 +73,10 @@ class _EstimateScreenState extends State<EstimateScreen> {
                   _titleTextWidget(
                       "Tips for General Message", Colors.orange, 25.0),
                   _notesDataTable(estimate),
+                  _spacerSizedBox(30.0),
+                  Container(child: shareEverythingButton(estimate)),
                   _spacerSizedBox(30.0), // Spacer box
+                  // Spacer box
                 ],
               ),
             ),
@@ -98,7 +101,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
         Share.share(estimate.flatFireOrderTextAndNotes(), subject: subject);
       },
       icon: const Icon(Icons.share),
-      label: const Text("share"),
+      label: const Text("Share Acres"),
       heroTag: "shareAcres",
     );
   }
@@ -111,8 +114,20 @@ class _EstimateScreenState extends State<EstimateScreen> {
             subject: subject);
       },
       icon: const Icon(Icons.share),
-      label: const Text("share"),
+      label: const Text("Share Structures"),
       heroTag: "shareStructures",
+    );
+  }
+
+  Widget? shareEverythingButton(estimate) {
+    String subject = "Acres and Structures Order";
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Share.share(estimate.everythingOrderTextAndNotes(), subject: subject);
+      },
+      icon: const Icon(Icons.share),
+      label: const Text("Share Everything"),
+      heroTag: "shareEverything",
     );
   }
 
