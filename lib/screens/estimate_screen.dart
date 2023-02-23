@@ -90,47 +90,6 @@ class _EstimateScreenState extends State<EstimateScreen> {
         child: const Icon(Icons.home));
   }
 
-  Widget floatingActionButtonAcres(estimate, context) {
-    return FloatingActionButton(
-        heroTag: "CopyAcres",
-        child: const Icon(Icons.copy),
-        onPressed: () {
-          Clipboard.setData(ClipboardData(text: estimate.flatFireOrderText()))
-              .then((value) =>
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Copied to Clipboard"),
-                  )));
-        });
-  }
-
-  Widget floatingActionButtonStructures(estimate, context) {
-    return FloatingActionButton(
-        heroTag: "CopyStructures",
-        child: const Icon(Icons.copy),
-        onPressed: () {
-          Clipboard.setData(
-                  ClipboardData(text: estimate.structureFireOrderText()))
-              .then((value) =>
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Copied to Clipboard"),
-                  )));
-        });
-  }
-
-  Widget floatAccButton(estimate, context) {
-    return FloatingActionButton.extended(
-      onPressed: () {
-        Clipboard.setData(ClipboardData(text: estimate.toCopyString())).then(
-            (value) =>
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Copied to Clipboard"),
-                )));
-      },
-      icon: const Icon(Icons.copy),
-      label: const Text("Copy"),
-    );
-  }
-
   Widget? shareAcresButton(estimate) {
     String subject =
         "Acres Order"; //add estimate name to subject once names are implemented
