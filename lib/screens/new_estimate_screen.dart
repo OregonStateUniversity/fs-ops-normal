@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'modify_estimate_screen.dart';
@@ -26,12 +24,6 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
 
-  //final _selectedIndex = 0;
-
-  /*void _onItemTapped(int index) {
-    Navigator.pushNamed(context, ActiveEngagementListScreen.routeName);
-  }*/
-
   @override
   Widget build(BuildContext context) {
     final Engagement? engagement =
@@ -42,47 +34,14 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         title: const Text('New Estimate Screen'),
       ),
       body: ListView(
+        padding: EdgeInsets.all(10),
         children: <Widget>[
           const Padding(padding: EdgeInsets.all(10)),
-          TextField(
-              controller: myControllerAcreage,
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: false, decimal: false),
-              decoration: const InputDecoration(
-                  labelText: 'Enter Acreage',
-                  errorText: _acreageInputIsValid ? null : 'error',
-                  border: OutlineInputBorder())),
+          acreageField(),
           const Padding(padding: EdgeInsets.all(10)),
-          TextField(
-              controller: myControllerStructure,
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: false, decimal: false),
-              decoration: const InputDecoration(
-                  labelText: 'Enter Structures',
-                  errorText: _structureInputIsValid ? null : 'error',
-                  border: OutlineInputBorder())),
-          OutlinedButton(
-              onPressed: () {
-                int acres = 0;
-                int structures = 0;
-                bool validInput = true;
-
-                try {
-                  acres = int.parse(myControllerAcreage.text);
-                  structures = int.parse(myControllerStructure.text);
-                } catch (e) {
-                  validInput = false;
-                }
-
-                if (validInput) {
-                  createNewEstimate(acres, structures, engagement);
-                } else {
-                  flashError();
-                  myControllerAcreage.clear();
-                  myControllerStructure.clear();
-                }
-              },
-              child: const Text("New Estimate")),
+          structuresField(),
+          const Padding(padding: EdgeInsets.all(10)),
+          newEstimateButton(engagement!),
         ],
       ),
     );
@@ -118,5 +77,54 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         );
       },
     );
+  }
+
+  Widget acreageField() {
+    return TextField(
+        controller: myControllerAcreage,
+        keyboardType: const TextInputType.numberWithOptions(
+            signed: false, decimal: false),
+        decoration: const InputDecoration(
+            labelText: 'Enter Acreage',
+            errorText: _acreageInputIsValid ? null : 'error',
+            border: OutlineInputBorder()));
+  }
+
+  Widget structuresField() {
+    return TextField(
+        controller: myControllerStructure,
+        keyboardType: const TextInputType.numberWithOptions(
+            signed: false, decimal: false),
+        decoration: const InputDecoration(
+            labelText: 'Enter Structures',
+            errorText: _structureInputIsValid ? null : 'error',
+            border: OutlineInputBorder()));
+  }
+
+  Widget newEstimateButton(Engagement engagement) {
+    return FloatingActionButton.extended(
+        onPressed: () {
+          int acres = 0;
+          int structures = 0;
+          bool validInput = true;
+
+          try {
+            acres = int.parse(myControllerAcreage.text);
+            structures = int.parse(myControllerStructure.text);
+          } catch (e) {
+            validInput = false;
+          }
+
+          if (validInput) {
+            createNewEstimate(acres, structures, engagement);
+          } else {
+            flashError();
+            myControllerAcreage.clear();
+            myControllerStructure.clear();
+          }
+        },
+        backgroundColor: Colors.green,
+        icon: const Icon(Icons.add),
+        label: const Text("New Estimate"));
   }
 }
