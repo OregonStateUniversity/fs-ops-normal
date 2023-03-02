@@ -522,26 +522,19 @@ class Estimate {
   }
 
   String flatFireOrderTextAndNotes() {
-    String str = "Trunk Line (NFES#: 001239): $trunkLineLength ft.\n"
-        "Lat Line (NFES#:001238): $latLineLength ft.\n"
-        "Toy Hose (NFES#: 001016): $toyLineLength ft.\n\n";
+    String str = flatFireOrderText();
+    str += fireNotes();
+    return str;
+  }
 
-    str += "1.5\" Gated Wye (NFES#: 000231): $onePointFiveInchWye\n"
-        "1.5\" Reducers (NFES#: 000010): $onePointFiveInchReducer\n"
-        "1\"-3/4\" Reducers (NFES#: 000733): $fittings\n"
-        "Forester Nozzles (NFES#: 000024): $fittings\n"
-        "Toy Nozzles (NFES#: 007387): $fittings\n"
-        "Toy Wye (NFES#: 000904): $fittings\n\n";
+  String structureFireOrderTextAndNotes() {
+    String str = structureFireOrderText();
+    str += fireNotes();
+    return str;
+  }
 
-    str += "Fold-a-tank (NFES#: 000664): $foldaTanks\n"
-        "Mark 3 + Kits (NFES# 003870): $mark3Kits\n"
-        "Pump Mix (Cans): $pumpCans\n\n";
-    str += "Water (Pallets): $waterPallets\n"
-        "Gatorade (Pallets): $gatoradePallets\n"
-        "MRE (Pallets) (NFES#: 001842): $mrePallets\n"
-        "Port-a-Potties: $portaPottiesPallets\n\n";
-
-    str += "\nTips for General Message\n"
+  String fireNotes() {
+    String str = "\nTips for General Message\n"
         "- Incident Response Name:\n"
         "- POC Name:\n"
         "- POC Number:\n"
@@ -553,30 +546,8 @@ class Estimate {
     return str;
   }
 
-  String structureFireOrderTextAndNotes() {
-    String str = "\nSprinkler Kits (NFES#: 001048): $sprinklerKits\n"
-        "1.5 hose (NFES#: 001239): $onePointFiveHose\n"
-        "1.0 hose (NFES#: 001238): $oneInchHose\n\n"
-        "1.5 Gated Wye (NFES#: 000231): $onePointFiveInchWye\n"
-        "1.0 Gated Wye (NFES#: 000259): $oneInchWye\n"
-        "1.5-1.0 Reducer (NFES#: 000010): $onePointFiveInchReducer\n"
-        "KK Nozzles (NFES#: 001081): $kkNozzles\n\n"
-        "Mark 3 Pumps & Kits (NFES#: 003870): $mark3Structures\n"
-        "Fold-a-Tanks (NFES#: 000664): $foldaTankStructures\n\n"
-        "Unleaded Gas (Gallons): $unleadedGas\n"
-        "2 Cycle Oil (Quart): $twoCycleOil\n"
-        "Port-a-Potties (1500 Gallon): $portaPottiesPallets\n"
-        "Foam (Cans): $foam\n";
-
-    str += "\nTips for General Message\n"
-        "- Incident Response Name:\n"
-        "- POC Name:\n"
-        "- POC Number:\n"
-        "- Dispatch Center:\n"
-        "- Drop Points:\n"
-        "- Delivery Instructions:\n"
-        "- Time/Date Needed:\n"
-        "- Comments:\n";
+  String everythingOrderTextAndNotes() {
+    String str = flatFireOrderText() + structureFireOrderText() + fireNotes();
     return str;
   }
 

@@ -42,13 +42,11 @@ class HowToScreen extends StatelessWidget {
         readOnly: false,
         label: "Dropdown description for how to use Ops Normal",
         child: Card(
-          child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 10, left: 20.0, right: 20.0, bottom: 10.0),
-              child: ExpansionTile(
-                title: Text(title),
-                children: [description],
-              )),
+          child: ExpansionTile(
+            childrenPadding: const EdgeInsets.symmetric(horizontal: 15),
+            title: Text(title),
+            children: [description],
+          ),
         ));
   }
 
@@ -70,6 +68,7 @@ class OrderedList extends StatelessWidget {
       required this.listItems,
       required this.listStyle,
       this.listNestedOrder = 0});
+
   final ListStyle listStyle;
   final List listItems;
   final int listNestedOrder;
@@ -93,8 +92,7 @@ class OrderedList extends StatelessWidget {
         ));
         continue;
       }
-      children.add(
-          itemRow(ith: Text(numericCounter.toString()), item: listItems[i]));
+      children.add(itemRow(ith: Text("$numericCounter."), item: listItems[i]));
       numericCounter++;
     }
     return Container(
@@ -125,12 +123,12 @@ class OrderedList extends StatelessWidget {
   }
 
   Widget _buildAlphabetList(listItems, int listNestedOrder) {
-    debugPrint(listItems.toString());
     return Container(
       margin: EdgeInsets.only(left: (listNestedOrder * 30)),
       child: Column(children: [
         for (var i = 0; i < listItems.length; i++)
-          itemRow(ith: Text(String.fromCharCode(i + 65)), item: listItems[i])
+          itemRow(
+              ith: Text("${String.fromCharCode(i + 65)}."), item: listItems[i])
       ]),
     );
   }
