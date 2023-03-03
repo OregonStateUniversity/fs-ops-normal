@@ -69,7 +69,9 @@ class _DmsDdToggleState extends State<DmsDdToggle> {
                 ),
               ),
             ]),
-        // _defaultUnit1,
+        const SizedBox(
+          height: 8,
+        ),
         buildDdDms(),
         Row(
           children: [
@@ -120,12 +122,12 @@ class _DmsDdToggleState extends State<DmsDdToggle> {
             title: "Longitude",
             data: widget.longitude,
             icon: longitudeIcon,
-            color: const Color.fromARGB(255, 255, 162, 0)),
+            color: const Color.fromARGB(215, 234, 186, 104)),
         buildCard(
             title: "Latitude",
             data: widget.latitude,
             icon: latitudeIcon,
-            color: const Color.fromARGB(255, 255, 162, 0))
+            color: const Color.fromARGB(215, 234, 186, 104))
       ],
     );
   }
