@@ -6,7 +6,11 @@
 	<string>To get location and direction</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To get location and direction</string>
-	
+
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  	<string>Avenza</string>
+	</array>	
 
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
