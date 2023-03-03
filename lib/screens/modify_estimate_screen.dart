@@ -5,6 +5,7 @@ import '../models/engagement.dart';
 import '../persistence/database_manager.dart';
 import '../persistence/estimate_dao.dart';
 import '../persistence/estimate_dto.dart';
+import '../widgets/modify_item_row.dart';
 
 class OrderFields {
   int? acres;
@@ -31,6 +32,7 @@ class OrderFields {
   int? unleadedGas;
   int? twoCycleOil;
   int? foam;
+
 }
 
 class ModifyEstimateScreen extends StatefulWidget {
@@ -91,7 +93,9 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  trunkLineRow(),
+                  ModifyItemRow(initialValue: widget.estimate?.trunkLineLength.toString(), 
+                  onOrderFieldChanged: (newTrunkLen) => orderField.trunkLineLength = newTrunkLen, 
+                  labelText: 'Trunk Line',),
                   const SizedBox(height: 20.0),
                   latLineRow(),
                   const SizedBox(height: 20.0),
