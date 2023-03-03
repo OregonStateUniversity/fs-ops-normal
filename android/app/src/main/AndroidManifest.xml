@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/> 
     
+    <queries>
+        <package android:name="com.Avenza" /> // your android package name
+    </queries>
    <application
         android:label="Ops Normal"
         android:name="${applicationName}"
@@ -34,6 +37,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.HOME"/> 
+                <category android:name="android.intent.category.DEFAULT"/>  
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
