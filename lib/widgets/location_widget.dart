@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:location/location.dart';
+import 'package:ops_normal/widgets/dms_dd_toggle.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
 
 class LocationWidget extends StatefulWidget {
   const LocationWidget({super.key});
@@ -79,129 +81,14 @@ class _LocationWidgetState extends State<LocationWidget> {
     });
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 500),
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            longitudeIcon,
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Longitude',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 15),
-                              ),
-                            ),
-                            Text(
-                              longitude.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: Colors.green),
-                            )
-                          ]),
-                    ),
-                  )),
-                  Expanded(
-                      child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            latitudeIcon,
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                'Latitude',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 15),
-                              ),
-                            ),
-                            Text(
-                              latitude.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: Colors.green),
-                            )
-                          ]),
-                    ),
-                  )),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 100,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            altitudeIcon,
-                            const Text(
-                              'Altitude',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 15),
-                            ),
-                            Text(
-                              altitude.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: Colors.green),
-                            )
-                          ]),
-                    ),
-                  )),
-                  // Expanded(
-                  //     child: Card(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(8.0),
-                  //     child: Column(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //         crossAxisAlignment: CrossAxisAlignment.center,
-                  //         children: [
-                  //           speedIcon,
-                  //           const Text(
-                  //             'Speed',
-                  //             style: TextStyle(
-                  //                 fontWeight: FontWeight.w500, fontSize: 15),
-                  //           ),
-                  //           Text(
-                  //             speed.toString(),
-                  //             style: const TextStyle(
-                  //                 fontWeight: FontWeight.w500,
-                  //                 fontSize: 15,
-                  //                 color: Colors.green),
-                  //           )
-                  //         ]),
-                  //   ),
-                  // )),
-                ],
-              ),
-            ),
+            DmsDdToggle(
+                longitude: longitude.toString(),
+                latitude: latitude.toString(),
+                altitude: altitude.toString()),
             const SizedBox(
               height: 10,
             ),
@@ -226,12 +113,29 @@ class _LocationWidgetState extends State<LocationWidget> {
                 child: const ListTile(
                   leading: Icon(Icons.copy_all_outlined),
                   title: Text("Copy coordinates"),
+                )),
+            const Spacer(),
+            ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 139, 109, 64))),
+                onPressed: () {},
+                child: ListTile(
+                  title: const Text("Launch Avenza"),
+                  onTap: () => launchAvanza(),
                 ))
           ],
         ),
       ),
     );
   }
+}
+
+void launchAvanza() async {
+  await LaunchApp.openApp(
+      androidPackageName: "com.Avenza",
+      iosUrlScheme: "Avenza://",
+      appStoreLink: "itms-apps://itunes.apple.com/us/app/avenza-maps-offline-mapping/id388424049");
 }
 
 /// svg-icons
