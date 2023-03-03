@@ -76,20 +76,24 @@ class _CompassScreen extends State<CompassScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.only(left: 18),
-              child: SizedBox(
-                height: 350,
-                child: GestureDetector(
-                    onTap: (() => setShowCompassImage()),
-                    child: Image.asset('assets/images/compass_image.png')),
-              ),
-            ),
+            _buildStaticCompassImage(),
             OutlinedButton(
                 onPressed: (() => setShowCompassImage()),
                 child: const Text("Show compass"))
           ],
         ),
+      ),
+    );
+  }
+
+  Container _buildStaticCompassImage() {
+    return Container(
+      padding: const EdgeInsets.only(left: 18),
+      child: SizedBox(
+        height: 350,
+        child: GestureDetector(
+            onTap: (() => setShowCompassImage()),
+            child: Image.asset('assets/images/compass_image.png')),
       ),
     );
   }
@@ -144,48 +148,8 @@ class _CompassScreen extends State<CompassScreen>
               Expanded(
                 child: Stack(
                   children: [
-                    Container(
-                      color: Colors.transparent,
-                      padding: const EdgeInsets.all(15),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            compassBoxShadow(
-                                spreadRadius: 1,
-                                blueRadius: 5,
-                                color:
-                                    const Color.fromARGB(255, 169, 169, 169)),
-                            compassBoxShadow(
-                                blueRadius: 50,
-                                spreadRadius: -60,
-                                color: const Color.fromARGB(255, 255, 255, 255))
-                          ],
-                          shape: BoxShape.circle,
-                          color: const Color.fromARGB(189, 255, 255, 255),
-                        ),
-                        child: Transform.rotate(
-                          angle: ((direction > 0 ? direction : 0) *
-                              (math.pi / 180) *
-                              -1),
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: SvgPicture.asset(
-                              "assets/images/compass_style_clean.svg",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        "$ang˚",
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 65, 151, 70),
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
+                    _buildDynamicCompass(direction: direction),
+                    _buildCompassDigital(ang: ang),
                   ],
                 ),
               ),
@@ -208,5 +172,50 @@ class _CompassScreen extends State<CompassScreen>
         spreadRadius: spreadRadius,
         offset: Offset.zero,
         color: color);
+  }
+
+  Widget _buildDynamicCompass({direction}) {
+    return Container(
+      color: Colors.transparent,
+      padding: const EdgeInsets.all(15),
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          boxShadow: [
+            compassBoxShadow(
+                spreadRadius: 1,
+                blueRadius: 5,
+                color: const Color.fromARGB(255, 169, 169, 169)),
+            compassBoxShadow(
+                blueRadius: 50,
+                spreadRadius: -60,
+                color: const Color.fromARGB(255, 255, 255, 255))
+          ],
+          shape: BoxShape.circle,
+          color: const Color.fromARGB(189, 255, 255, 255),
+        ),
+        child: Transform.rotate(
+          angle: ((direction > 0 ? direction : 0) * (math.pi / 180) * -1),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: SvgPicture.asset(
+              "assets/images/compass_style_clean.svg",
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCompassDigital({ang}) {
+    return Center(
+      child: Text(
+        "$ang˚",
+        style: const TextStyle(
+            color: Color.fromARGB(255, 65, 151, 70),
+            fontSize: 30,
+            fontWeight: FontWeight.w700),
+      ),
+    );
   }
 }
