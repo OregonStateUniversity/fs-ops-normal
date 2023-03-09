@@ -93,53 +93,117 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  ModifyItemRow(initialValue: widget.estimate?.trunkLineLength.toString(), 
-                  onOrderFieldChanged: (newTrunkLen) => orderField.trunkLineLength = newTrunkLen, 
-                  labelText: 'Trunk Line',),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.trunkLineLength.toString(), 
+                    onOrderFieldChanged: (newTrunkLen) => orderField.trunkLineLength = newTrunkLen, 
+                    labelText: 'Trunk Line',),
                   const SizedBox(height: 20.0),
                   latLineRow(),
                   const SizedBox(height: 20.0),
-                  toyLineRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.toyLineLength.toString(), 
+                    onOrderFieldChanged: (newToyLine) => orderField.toyLineLength = newToyLine, 
+                    labelText: 'Toy Line',),
                   const SizedBox(height: 20.0),
-                  fittingsRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.fittings.toString(), 
+                    onOrderFieldChanged: (newFittings) => orderField.fittingsField = newFittings, 
+                    labelText: 'Various Fittings',),
                   const SizedBox(height: 20.0),
-                  onePointFiveWyeRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.onePointFiveInchWye.toString(), 
+                    onOrderFieldChanged: (newOnePointFiveInchWye) => orderField.onePointFiveInchWye = newOnePointFiveInchWye, 
+                    labelText: '1.5" Wye',),
                   const SizedBox(height: 20.0),
-                  onePointFiveRedRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.onePointFiveInchReducer.toString(), 
+                    onOrderFieldChanged: (newOnePointFiveInchRed) => orderField.onePointFiveInchReducer = newOnePointFiveInchRed, 
+                    labelText: '1.5" Reducer',),
                   const SizedBox(height: 20.0),
-                  foldaTanksRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.foldaTanks.toString(), 
+                    onOrderFieldChanged: (newFoldaTanks) => orderField.foldaTanks = newFoldaTanks, 
+                    labelText: 'Fold-a-Tanks',),
                   const SizedBox(height: 20.0),
-                  mark3KitsRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.mark3Kits.toString(), 
+                    onOrderFieldChanged: (newMark3Kits) => orderField.mark3Kits = newMark3Kits, 
+                    labelText: 'Mark 3 + Kits',),
                   const SizedBox(height: 20.0),
-                  pumpCansRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.pumpCans.toString(), 
+                    onOrderFieldChanged: (newPumpCans) => orderField.pumpCans = newPumpCans, 
+                    labelText: 'Pump Cans',),
                   const SizedBox(height: 20.0),
-                  waterPalletsRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.waterPallets.toString(), 
+                    onOrderFieldChanged: (newWaterPallets) => orderField.waterPallets = newWaterPallets, 
+                    labelText: 'Water Pallets',),
                   const SizedBox(height: 20.0),
-                  gatoradePalletsRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.gatoradePallets.toString(), 
+                    onOrderFieldChanged: (newGatoradePallets) => orderField.gatoradePallets = newGatoradePallets, 
+                    labelText: 'Gatorade Pallets',),
                   const SizedBox(height: 20.0),
-                  mrePalletsRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.mrePallets.toString(), 
+                    onOrderFieldChanged: (newMrePallets) => orderField.mrePallets = newMrePallets, 
+                    labelText: 'MRE Pallets',),
                   const SizedBox(height: 20.0),
-                  portaPottiesRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.portaPottiesPallets.toString(), 
+                    onOrderFieldChanged: (newPortaPotties) => orderField.portaPotties = newPortaPotties, 
+                    labelText: 'Port-a-Potties',),
                   const SizedBox(height: 20.0),
-                  sprinklersRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.sprinklerKits.toString(), 
+                    onOrderFieldChanged: (newSprinklerKits) => orderField.sprinklerKits = newSprinklerKits, 
+                    labelText: 'Sprinkler Kits',),
                   const SizedBox(height: 20.0),
-                  onePointFiveHoseRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.onePointFiveHose.toString(), 
+                    onOrderFieldChanged: (newOnePointFiveInchHose) => orderField.onePointFiveHose = newOnePointFiveInchHose, 
+                    labelText: '1.5" Hose',),
                   const SizedBox(height: 20.0),
-                  oneInchHoseRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.oneInchHose.toString(), 
+                    onOrderFieldChanged: (newOneInchHose) => orderField.oneInchHose = newOneInchHose, 
+                    labelText: '1" Hose',),
                   const SizedBox(height: 20.0),
-                  oneInchWyeRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.oneInchWye.toString(), 
+                    onOrderFieldChanged: (newOneInchWye) => orderField.oneInchWye = newOneInchWye, 
+                    labelText: '1" Wye',),
                   const SizedBox(height: 20.0),
-                  kkNozzlesRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.kkNozzles.toString(), 
+                    onOrderFieldChanged: (newKkNozzles) => orderField.kkNozzles = newKkNozzles, 
+                    labelText: 'KK Nozzles',),
                   const SizedBox(height: 20.0),
-                  mark3StructuresRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.mark3Structures.toString(), 
+                    onOrderFieldChanged: (newMark3Structures) => orderField.mark3Structures = newMark3Structures, 
+                    labelText: 'Mark 3 Pump + Kits',),
                   const SizedBox(height: 20.0),
-                  foldaTankStructuresRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.foldaTankStructures.toString(), 
+                    onOrderFieldChanged: (newFoldaTankStructures) => orderField.foldaTankStructures = newFoldaTankStructures, 
+                    labelText: 'Fold-a-Tanks Structures',),
                   const SizedBox(height: 20.0),
-                  unleadedGasRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.unleadedGas.toString(), 
+                    onOrderFieldChanged: (newUnleadedGas) => orderField.unleadedGas = newUnleadedGas, 
+                    labelText: 'Unleaded Gas',),
                   const SizedBox(height: 20.0),
-                  twoCycleOilRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.twoCycleOil.toString(), 
+                    onOrderFieldChanged: (newOnePointFiveInchHose) => orderField.twoCycleOil = newOnePointFiveInchHose, 
+                    labelText: 'Two-Cycle Oil',),
                   const SizedBox(height: 20.0),
-                  foamRow(),
+                  ModifyItemRow(
+                    initialValue: widget.estimate?.foam.toString(), 
+                    onOrderFieldChanged: (newOnePointFiveInchHose) => orderField.foam = newOnePointFiveInchHose, 
+                    labelText: 'Foam (Cans)',),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: () {
@@ -200,40 +264,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
     );
   }
 
-  Widget trunkLineRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.trunkLineLength.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Trunk Line',
-              suffixText: 'ft.',
-            ),
-            onSaved: (value) {
-              orderField.trunkLineLength = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget latLineRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -257,720 +287,6 @@ class _ModifyEstimateScreenState extends State<ModifyEstimateScreen> {
             },
             onSaved: (value) {
               orderField.latLineLength = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget toyLineRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.toyLineLength.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Toy Line',
-              suffixText: 'ft.',
-            ),
-            onSaved: (value) {
-              orderField.toyLineLength = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget fittingsRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.fittings.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Various Fittings',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.fittingsField = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget onePointFiveWyeRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.onePointFiveInchWye.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '1.5" Wye',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.onePointFiveInchWye = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget onePointFiveRedRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.onePointFiveInchReducer.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '1.5" Reducer',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.onePointFiveInchReducer = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget foldaTanksRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.foldaTanks.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Fold-a-Tanks',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.foldaTanks = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget mark3KitsRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.mark3Kits.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Mark 3 + Kits',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.mark3Kits = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget pumpCansRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.pumpCans.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Pump Cans',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.pumpCans = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget waterPalletsRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.waterPallets.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Water Pallets',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.waterPallets = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget gatoradePalletsRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.gatoradePallets.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Gatorade Pallets',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.gatoradePallets = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget mrePalletsRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.mrePallets.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'MRE Pallets',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.mrePallets = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget portaPottiesRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.portaPottiesPallets.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Port-a-Potties',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.portaPotties = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget sprinklersRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.sprinklerKits.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Sprinker Kits',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.sprinklerKits = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget onePointFiveHoseRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.onePointFiveHose.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '1.5" Hose',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.onePointFiveHose = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget oneInchHoseRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.oneInchHose.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '1" Hose',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.oneInchHose = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget oneInchWyeRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.oneInchWye.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '1" Wye',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.oneInchWye = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget kkNozzlesRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.kkNozzles.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'KK Nozzles',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.kkNozzles = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget mark3StructuresRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.mark3Structures.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Mark 3 Pump + Kits',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.mark3Structures = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget foldaTankStructuresRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.foldaTankStructures.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Fold-a-Tanks Structures',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.foldaTankStructures = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget unleadedGasRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.unleadedGas.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Unleaded Gas',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.unleadedGas = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget twoCycleOilRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.twoCycleOil.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Two-Cycle Oil',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.twoCycleOil = int.parse(value!);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Needs some value";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget foamRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Flexible(
-          flex: 2,
-          child: TextFormField(
-            initialValue: widget.estimate?.foam.toString(),
-            style: const TextStyle(
-              fontSize: 35.0,
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Foam (Cans)',
-              suffixText: 'ea.',
-            ),
-            onSaved: (value) {
-              orderField.foam = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
