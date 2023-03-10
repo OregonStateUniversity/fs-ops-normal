@@ -34,7 +34,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         title: const Text('New Estimate Screen'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         children: <Widget>[
           const Padding(padding: EdgeInsets.all(10)),
           acreageField(),

@@ -1,6 +1,8 @@
 PODS:
   - device_info_plus (0.0.1):
     - Flutter
+  - external_app_launcher (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_compass (0.0.1):
     - Flutter
@@ -29,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - external_app_launcher (from `.symlinks/plugins/external_app_launcher/ios`)
   - Flutter (from `Flutter`)
   - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
@@ -47,6 +50,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
+  external_app_launcher:
+    :path: ".symlinks/plugins/external_app_launcher/ios"
   Flutter:
     :path: Flutter
   flutter_compass:
@@ -70,6 +75,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
+  external_app_launcher: ad55ac844aa21f2d2197d7cec58ff0d0dc40bbc0
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

@@ -483,8 +483,9 @@ class Estimate {
   }
 
   String flatFireOrderText() {
-    String str = "Trunk Line (NFES#: 001239):  $trunkLineLength ft.\n"
-        "Lat Line (NFES#: 001238):  $latLineLength ft.\n"
+    String str =
+        "Trunk Line & 1.5\" Synthetic Hose (NFES#: 001239):  $trunkLineLength ft.\n"
+        "1\" Lateral Line (NFES#: 001238):  $latLineLength ft.\n"
         "Toy Hose (NFES#: 001016):  $toyLineLength ft.\n\n";
 
     str += "1.5\" Gated Wye (NFES# 000231):  $onePointFiveInchWye\n"

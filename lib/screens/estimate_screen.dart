@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../models/estimate.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -170,7 +169,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
         width: double.infinity,
         child: DataTable(
           horizontalMargin: 15,
-          dataRowHeight: 30,
+          dataRowHeight: 35,
           headingRowColor:
               MaterialStateColor.resolveWith((states) => Colors.grey),
           border: TableBorder.all(color: const Color.fromARGB(255, 83, 83, 83)),
@@ -180,8 +179,10 @@ class _EstimateScreenState extends State<EstimateScreen> {
             _dataColumn("Quantity", Colors.black, 15.0)
           ],
           rows: [
-            _estimateDataRow('Truck Line', '001239', estimate.trunkLineLength),
-            _estimateDataRow('Lat Line', '001238', estimate.latLineLength),
+            _estimateDataRow('Trunk Line &\n 1.5" Synthetic Hose', '001239',
+                estimate.trunkLineLength),
+            _estimateDataRow(
+                '1" Lateral Line', '001238', estimate.latLineLength),
             _estimateDataRow('Toy Line', '001016', estimate.toyLineLength),
             _estimateDataRow(
                 '1.5" Gated Wye', '000231', estimate.onePointFiveInchWye),
