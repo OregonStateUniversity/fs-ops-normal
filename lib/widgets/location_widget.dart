@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,6 +17,7 @@ class LocationWidget extends StatefulWidget {
 
 class _LocationWidgetState extends State<LocationWidget> {
   final Location location = Location();
+  late final locationStream;
   dynamic heading = '-',
       longitude = '-',
       latitude = '-',
@@ -22,7 +26,34 @@ class _LocationWidgetState extends State<LocationWidget> {
   @override
   void initState() {
     getLocationInfo();
+    locationStream = LazyStreamLocation().stream.listen((event) {
+      updateLocationFromStream(event as LocationData);
+    });
+
     super.initState();
+    // locationStream.listen((currentLocation) {
+    //   // Use current location
+    // });
+  }
+
+  void updateLocationFromStream(currentLocation) async {
+    if (mounted) {
+      setState(() {
+        heading = currentLocation.heading;
+        longitude = currentLocation.latitude;
+        latitude = currentLocation.longitude;
+        altitude = currentLocation.altitude;
+        speed = currentLocation.speed;
+      });
+      debugPrint(currentLocation.toString());
+      // debugPrint("new location -updated");
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    locationStream.cancel();
   }
 
   getLocationInfo() async {
@@ -48,6 +79,7 @@ class _LocationWidgetState extends State<LocationWidget> {
         debugPrint("please enable location");
       }
     }
+  
 
     locationData = await location.getLocation();
     if (mounted) {
@@ -65,20 +97,6 @@ class _LocationWidgetState extends State<LocationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      // Use current location
-      if (mounted) {
-        setState(() {
-          heading = currentLocation.heading;
-          longitude = currentLocation.latitude;
-          latitude = currentLocation.longitude;
-          altitude = currentLocation.altitude;
-          speed = currentLocation.speed;
-        });
-        debugPrint(currentLocation.toString());
-        debugPrint("new location -updated");
-      }
-    });
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ConstrainedBox(
@@ -133,9 +151,35 @@ class _LocationWidgetState extends State<LocationWidget> {
 
 void launchAvanza() async {
   await LaunchApp.openApp(
+      openStore: true,
       androidPackageName: "com.Avenza",
-      iosUrlScheme: "Avenza://",
-      appStoreLink: "itms-apps://itunes.apple.com/us/app/avenza-maps-offline-mapping/id388424049");
+      iosUrlScheme: "avenza://",
+      appStoreLink:
+          "itms-apps://itunes.apple.com/us/app/avenza-maps-offline-mapping/id388424049");
+}
+
+class LazyStreamLocation {
+  bool initial = true;
+  Location location = Location();
+  LazyStreamLocation() {
+    _controler.onCancel = () => _controler.done;
+    Timer.periodic(const Duration(seconds: 2), (t) async {
+      if (!_controler.hasListener) {
+        _controler.sink.done;
+        _controler.close();
+        return;
+      }
+
+      final LocationData data = await location.getLocation();
+      _controler.sink.add(data);
+      timer++;
+    });
+  }
+  var timer = 1;
+  final _controler = StreamController(onCancel: () {});
+  void closeStream() {}
+
+  Stream get stream => _controler.stream;
 }
 
 /// svg-icons

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -116,10 +117,11 @@ class _CompassScreen extends State<CompassScreen>
     // double width = MediaQuery.of(context).size.width;
     // double height = MediaQuery.of(context).size.height;
     // might need to accound for padding on iphones
+
     return SlideTransition(
       position: _offsetAnimation,
-      child: StreamBuilder<CompassEvent>(
-        stream: FlutterCompass.events,
+      child: StreamBuilder<dynamic>(
+        stream: LazyStream().stream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Error reading heading: ${snapshot.error}');
@@ -218,4 +220,27 @@ class _CompassScreen extends State<CompassScreen>
       ),
     );
   }
+}
+
+class LazyStream {
+  bool initial = true;
+  LazyStream() {
+    if (initial) {
+      () async {
+        final data = await FlutterCompass.events!.first;
+        _controler.sink.add(data);
+      }();
+      initial = false;
+      return;
+    }
+    Timer.periodic(const Duration(seconds: 2), (t) async {
+      final data = await FlutterCompass.events!.first;
+      _controler.sink.add(data);
+
+      timer++;
+    });
+  }
+  var timer = 1;
+  final _controler = StreamController();
+  Stream get stream => _controler.stream;
 }
