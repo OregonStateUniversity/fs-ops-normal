@@ -84,7 +84,7 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           // Fire Shape dropdown
           const Padding(padding: EdgeInsets.all(10)),
           DropdownButton<String>(
-            hint: const Text('Select Fire Shape'),
+            hint: const Text('Select Fire Shape (Optional)'),
             value: fireShapeVal,
             icon: const Icon(Icons.arrow_drop_down),
             isExpanded: true,
