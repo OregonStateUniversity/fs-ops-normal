@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,7 @@ class LocationWidget extends StatefulWidget {
 
 class _LocationWidgetState extends State<LocationWidget> {
   final Location location = Location();
-  late final locationStream;
+  late  final StreamSubscription locationStream;
   dynamic heading = '-',
       longitude = '-',
       latitude = '-',
@@ -79,7 +78,6 @@ class _LocationWidgetState extends State<LocationWidget> {
         debugPrint("please enable location");
       }
     }
-  
 
     locationData = await location.getLocation();
     if (mounted) {
