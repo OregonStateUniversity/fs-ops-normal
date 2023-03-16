@@ -111,6 +111,10 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
           try {
             acres = int.parse(myControllerAcreage.text);
             structures = int.parse(myControllerStructure.text);
+
+            if (acres < 1 || structures < 0) {
+              throw (1);
+            }
           } catch (e) {
             validInput = false;
           }
