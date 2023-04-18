@@ -79,7 +79,6 @@ class _LocationWidgetState extends State<LocationWidget> {
         debugPrint("please enable location");
       }
     }
-  
 
     locationData = await location.getLocation();
     if (mounted) {
@@ -136,9 +135,20 @@ class _LocationWidgetState extends State<LocationWidget> {
             ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 139, 109, 64))),
+                        const Color.fromARGB(255, 255, 255, 255))),
                 onPressed: () {},
                 child: ListTile(
+                  trailing: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Image.asset(
+                      'assets/icon/avenza_icon.png',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
                   title: const Text("Launch Avenza"),
                   onTap: () => launchAvanza(),
                 ))
@@ -150,10 +160,14 @@ class _LocationWidgetState extends State<LocationWidget> {
 }
 
 void launchAvanza() async {
+  var isAppInstalledResult = await LaunchApp.isAppInstalled(
+      androidPackageName: 'com.Avenza', iosUrlScheme: 'avenzamaps://');
+  debugPrint("is App install $isAppInstalledResult ");
+
   await LaunchApp.openApp(
-      openStore: true,
+      openStore: !isAppInstalledResult,
       androidPackageName: "com.Avenza",
-      iosUrlScheme: "avenza://",
+      iosUrlScheme: "avenzamaps://",
       appStoreLink:
           "itms-apps://itunes.apple.com/us/app/avenza-maps-offline-mapping/id388424049");
 }
