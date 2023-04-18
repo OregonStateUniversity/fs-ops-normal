@@ -76,3 +76,4 @@ flutter:
     - assets/db/schema_1.sql.txt
     - assets/images/compass_style_clean.svg
     - assets/images/compass_image.png
+    - assets/icon/avenza_icon.png

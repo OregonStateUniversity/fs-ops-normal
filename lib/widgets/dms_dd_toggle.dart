@@ -119,15 +119,15 @@ class _DmsDdToggleState extends State<DmsDdToggle> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         buildCard(
-            title: "Longitude",
-            data: widget.longitude,
-            icon: longitudeIcon,
-            color: const Color.fromARGB(215, 234, 186, 104)),
+          title: "Longitude",
+          data: widget.longitude,
+          icon: longitudeIcon,
+        ),
         buildCard(
-            title: "Latitude",
-            data: widget.latitude,
-            icon: latitudeIcon,
-            color: const Color.fromARGB(215, 234, 186, 104))
+          title: "Latitude",
+          data: widget.latitude,
+          icon: latitudeIcon,
+        )
       ],
     );
   }
