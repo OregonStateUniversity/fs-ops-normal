@@ -76,3 +76,10 @@ flutter:
     - assets/db/schema_1.sql.txt
     - assets/images/compass_style_clean.svg
     - assets/images/compass_image.png
+    - assets/images/fireShape1.png
+    - assets/images/fireShape2.png
+    - assets/images/fireShape3.png
+    - assets/images/fireShape4.png
+    - assets/images/fireShape5.png
+    - assets/images/fireShape6.png
+

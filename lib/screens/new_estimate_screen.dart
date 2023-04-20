@@ -22,6 +22,23 @@ const Map<String, int> fireShapeMap = {
   'assets/images/fireShape4.png': 4,
   'assets/images/fireShape5.png': 5,
   'assets/images/fireShape6.png': 6};
+import 'dart:math';
+
+const List<String> fireType = <String>['Grass', 'Timber'];
+const List<String> fireShape = [
+  'assets/images/fireShape1.png',
+  'assets/images/fireShape2.png',
+  'assets/images/fireShape3.png',
+  'assets/images/fireShape4.png',
+  'assets/images/fireShape5.png',
+  'assets/images/fireShape6.png'];
+const Map<String, int> fireShapeMap = {
+  'assets/images/fireShape1.png': 1,
+  'assets/images/fireShape2.png': 2,
+  'assets/images/fireShape3.png': 3,
+  'assets/images/fireShape4.png': 4,
+  'assets/images/fireShape5.png': 5,
+  'assets/images/fireShape6.png': 6};
 
 class NewEstimateScreen extends StatefulWidget {
   static const routeName = 'newEstimateScreen';
@@ -43,8 +60,17 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
 
   var imgs = null;
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  var fireShapeVal = null;
+  var fireTypeVal = null;
+  var firePerimeter = null;
+
+  var imgs = null;
+
   var myControllerAcreage = TextEditingController(text: " ");
   var myControllerStructure = TextEditingController(text: " ");
+  var myControllerPerimeter = TextEditingController(text: " ");
   var myControllerPerimeter = TextEditingController(text: " ");
 
   static const bool _acreageInputIsValid = true;
@@ -216,4 +242,35 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
       },
     );
   }
+
+  // calculates acreage of a fire given its shape and perimeter in chains
+  int calculatePerimeter() {
+    int? fireShapeNum = fireShapeMap[fireShapeVal];
+    int? acresInput = int.parse(myControllerAcreage.text);
+    double calcPerimeter = 0;
+    switch(fireShapeNum) {
+      /// CALCULATIONS BASED ON WILDLAND FIRE TABLE DATA POINTS
+      /// INACCURATE FOR LOWER PERIMETER VALUES
+      case 1:  // fire is a circle
+        calcPerimeter = 780.48 * pow(acresInput, 0.5061);
+        break;
+      case 2:  // fire is tall rectangle
+        calcPerimeter = 845.16 * pow(acresInput, 0.5045);
+        break;
+      case 3:  // shape is triangle or sideways rectangle
+        calcPerimeter = 920.6 * pow(acresInput, 0.5089);
+        break;
+      case 4:  // fire is close to square
+        calcPerimeter = 1017.4 * pow(acresInput, 0.5185);
+        break;
+      case 5:  // amoeba shape 1
+        calcPerimeter = 1185.8 * pow(acresInput, 0.5171);
+        break;
+      case 6:  // amoeba shape 2
+        calcPerimeter = 1433.7 * pow(acresInput, 0.5215);
+        break;
+    }
+    return calcPerimeter.round();
+  }
+  
 }
