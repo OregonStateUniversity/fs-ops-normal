@@ -1,6 +1,5 @@
 import 'package:flash/flash.dart';
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'modify_estimate_screen.dart';
 import '../models/estimate.dart';
@@ -42,16 +41,11 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
   var fireTypeVal = null;
   var firePerimeter = null;
 
-<<<<<<< HEAD
-  var myControllerAcreage = TextEditingController(text: "");
-  var myControllerStructure = TextEditingController(text: "");
-=======
   var imgs = null;
 
   var myControllerAcreage = TextEditingController(text: " ");
   var myControllerStructure = TextEditingController(text: " ");
   var myControllerPerimeter = TextEditingController(text: " ");
->>>>>>> 847fd18 (Resolving conflicts)
 
   static const bool _acreageInputIsValid = true;
   static const bool _structureInputIsValid = true;
@@ -69,67 +63,16 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: <Widget>[
-          const Padding(padding: EdgeInsets.all(10)),
           acreageField(),
           const Padding(padding: EdgeInsets.all(10)),
-          // button for acre calculation popup
-          const Text('--OR--'),
-          OutlinedButton(
-              onPressed: () {
-                showInformationDialog(context);
-              },
-              child: const Text("Calculate Acerage")),
-          const Padding(padding: EdgeInsets.all(10)),
           // Structures input
-          TextField(
-              controller: myControllerStructure,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                  labelText: 'Enter Structures',
-                  errorText: _structureInputIsValid ? null : 'error',
-                  border: OutlineInputBorder())),
+          structuresField(),
           // Fire Shape dropdown
           const Padding(padding: EdgeInsets.all(10)),
-          DropdownButton<String>(
-            hint: const Text('Select Fire Shape (Optional)'),
-            value: fireShapeVal,
-            icon: const Icon(Icons.arrow_drop_down),
-            isExpanded: true,
-            onChanged: (String? value) {
-              // This is called when the user selects an item.
-               setState(() {
-                fireShapeVal = value!;
-              });
-            },
-            // entries in the dropdown
-            items: fireShape.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Image.asset(value)
-              );
-            }).toList(),),
+          shapeDropDown(),
           const Padding(padding: EdgeInsets.all(10)),
           // Button to generate estimate
-          OutlinedButton(
-              onPressed: () {
-                var acreseDouble = double.parse(myControllerAcreage.text);
-                var estimate = Estimate(
-                  perimeter: calculatePerimeter(),
-                  acres: acreseDouble.toInt(),
-                  structures: int.parse(myControllerStructure.text),
-                  timeStamp: DateTimeFormatter.format(DateTime.now()));
-                myControllerAcreage.text.isNotEmpty
-                    ? Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ModifyEstimateScreen(
-                                  estimate: estimate,
-                                  engagement: engagement,
-                                )),
-                      )
-                    : ArgumentError.notNull('Value Can\'t Be Empty');
-              },
-              child: const Text("Generate Estimate")),
+          newEstimateButton(engagement!)
         ],
       ),
     );
@@ -188,6 +131,28 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
             border: OutlineInputBorder()));
   }
 
+  Widget shapeDropDown() {
+    return DropdownButton<String>(
+            hint: const Text('Select Fire Shape (Optional)'),
+            value: fireShapeVal,
+            icon: const Icon(Icons.arrow_drop_down),
+            isExpanded: true,
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+               setState(() {
+                fireShapeVal = value!;
+              });
+            },
+            // entries in the dropdown
+            items: fireShape.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Image.asset(value)
+              );
+            }).toList(),
+          );
+  }
+
   Widget newEstimateButton(Engagement engagement) {
     return FloatingActionButton.extended(
         onPressed: () {
@@ -217,5 +182,38 @@ class _NewEstimateScreenState extends State<NewEstimateScreen> {
         backgroundColor: Colors.green,
         icon: const Icon(Icons.add),
         label: const Text("New Estimate"));
+  }
+
+  void createNewEstimate(int acres, int structures, Engagement? engagement) {
+    var estimate = Estimate(
+        perimeter: calculatePerimeter(),
+        acres: acres,
+        structures: structures,
+        timeStamp: DateTimeFormatter.format(DateTime.now()));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ModifyEstimateScreen(
+                estimate: estimate,
+                engagement: engagement,
+              )),
+    );
+  }
+
+  void flashError() {
+    context.showFlashDialog(
+      title: const Text("Invalid Input"),
+      content: const Text(
+          "Please enter non-negative integers for Acreage and Structures."),
+      negativeActionBuilder: (context, controller, setState) {
+        return TextButton(
+          onPressed: () {
+            controller.dismiss();
+          },
+          child: const Text("Dismiss"),
+        );
+      },
+    );
   }
 }

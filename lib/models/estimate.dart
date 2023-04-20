@@ -528,39 +528,8 @@ class Estimate {
   }
 
   String flatFireOrderTextAndNotes() {
-<<<<<<< HEAD
     String str = flatFireOrderText();
     str += fireNotes();
-=======
-    String str = "Trunk Line: $trunkLineLength ft.\n"
-        "Lat Line: $latLineLength ft.\n"
-        "Toy Hose: $toyLineLength ft.\n\n";
-
-    str += "1.5\" Gated Wye (NFES#: 000231): $onePointFiveInchWye\n"
-        "1.5\" Reducers (NFES#: 000010): $onePointFiveInchReducer\n"
-        "1\"-3/4\" Reducers (NFES#: 000733): $fittings\n"
-        "Forester Nozzles (NFES#: 000024): $fittings\n"
-        "Toy Nozzles (NFES#: 007387): $fittings\n"
-        "Toy Wye (NFES#: 000904): $fittings\n\n";
-
-    str += "Fold-a-tank (NFES#: 000664): $foldaTanks\n"
-        "Mark 3 + Kits (NFES# 003870): $mark3Kits\n"
-        "Pump Mix (Cans): $pumpCans\n\n";
-    str += "Water (Pallets): $waterPallets\n"
-        "Gatorade (Pallets): $gatoradePallets\n"
-        "MRE (Pallets) (NFES#: 001842): $mrePallets\n"
-        "Port-a-Potties: $portaPottiesPallets\n\n";
-
-    str += "\nNotes\n"
-        "- Incident Response Name:\n"
-        "- Perimeter: $perimeter ft.\n"
-        "- POC Name:\n"
-        "- POC Number:\n"
-        "- Dispatch Center:\n"
-        "- Drop Points:\n"
-        "- Delivery Instructions:\n"
-        "- Comments:\n";
->>>>>>> e541c1a (Added perimeter calculation to estimate generation. References #264)
     return str;
   }
 

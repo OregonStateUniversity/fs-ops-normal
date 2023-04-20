@@ -244,7 +244,6 @@ class _EstimateScreenState extends State<EstimateScreen> {
 
   SizedBox _notesDataTable(estimate) {
     return SizedBox(
-<<<<<<< HEAD
         width: double.infinity,
         child: DataTable(
             dataRowHeight: 31,
@@ -255,31 +254,16 @@ class _EstimateScreenState extends State<EstimateScreen> {
               _dataColumn("", Colors.orange, 20.0)
             ],
             rows: [
-              _notesDataRow('Incident Response Name'),
-              _notesDataRow('POC Name'),
-              _notesDataRow('POC Number'),
-              _notesDataRow('Dispatch Center'),
-              _notesDataRow('Drop Points'),
-              _notesDataRow('Delivery Instructions'),
-              _notesDataRow('Time/Date Needed'),
-              _notesDataRow('Comments')
+              _notesDataRow('Fire Perimeter', 
+                estimate.perimeter.toString() == '0' ? 'No fire shape entered' : '${estimate.perimeter.toString()} ft.'),
+              _notesDataRow('Incident Response Name', ''),
+              _notesDataRow('POC Name', ''),
+              _notesDataRow('POC Number', ''),
+              _notesDataRow('Dispatch Center', ''),
+              _notesDataRow('Drop Points', ''),
+              _notesDataRow('Delivery Instructions', ''),
+              _notesDataRow('Time/Date Needed', ''),
+              _notesDataRow('Comments', '')
             ]));
-=======
-        width: double.infinity, //invisible container to make column max-width
-        child: DataTable(dataRowHeight: 30, horizontalMargin: 20, columns: [
-          _dataColumn("Notes", Colors.orange, 25.0),
-          _dataColumn(" ", Colors.orange, 25.0),
-        ], 
-        rows: [
-          _notesDataRow('Approximate Fire Perimeter', '${estimate.perimeter.toString()} ft.'),
-          _notesDataRow('Incident Response Name', ''),
-          _notesDataRow('POC Name', ''),
-          _notesDataRow('POC Number', ''),
-          _notesDataRow('Dispatch Center', ''),
-          _notesDataRow('Drop Points', ''),
-          _notesDataRow('Delivery Instructions', ''),
-          _notesDataRow('Comments', '')
-        ]));
->>>>>>> e541c1a (Added perimeter calculation to estimate generation. References #264)
   }
 }
