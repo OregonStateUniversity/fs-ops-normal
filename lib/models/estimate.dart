@@ -471,15 +471,9 @@ class Estimate {
   int defaultFoam() {
     if (structures! == 0) {
       return 0;
-    } else if (structures! < 10) {
-      return 5;
-    } else if (structures! < 40) {
-      return 5;
-    } else if (structures! > 40) {
-      return 5;
     } else {
-      return 0;
-    }
+      return 5;
+    }      
   }
 
   String flatFireOrderText() {

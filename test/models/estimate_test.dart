@@ -1067,54 +1067,16 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    // Foam
-
-    test('Defualt Foam - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultFoam();
-
-      //Assert
-      expect(actual, equals(expected));
+    group('defaultFoam', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultFoam(), equals(0));
+      });
+      test('5 when there are structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 10);
+        expect(estimate.defaultFoam(), equals(5));
+      });
     });
 
-    test('Defualt Foam - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 5;
-
-      //Act
-      var actual = estimate.defaultFoam();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Foam - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 5;
-
-      //Act
-      var actual = estimate.defaultFoam();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Foam - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 5;
-
-      //Act
-      var actual = estimate.defaultFoam();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
   });
 }
