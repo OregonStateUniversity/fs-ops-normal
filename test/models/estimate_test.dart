@@ -918,55 +918,24 @@ void main() {
     });
 
     // Unleaded Gas
+    group('defaultUnleadedGas', () {
+      
+      test('Defualt Unleaded Gas - Structures: x < 10', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultUnleadedGas(), equals(30));
+      });
 
-    test('Defualt Unleaded Gas - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
+      test('Defualt Unleaded Gas - Structures: 10 < x < 40', () {
+        Estimate estimate = Estimate(acres: 0, structures: 20);
+        expect(estimate.defaultUnleadedGas(), equals(90));
+      });
 
-      //Act
-      var actual = estimate.defaultUnleadedGas();
-
-      //Assert
-      expect(actual, equals(expected));
+      test('Defualt Unleaded Gas - Structures: x > 40', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultUnleadedGas(), equals(300));
+      });
     });
-
-    test('Defualt Unleaded Gas - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 30;
-
-      //Act
-      var actual = estimate.defaultUnleadedGas();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Unleaded Gas - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 90;
-
-      //Act
-      var actual = estimate.defaultUnleadedGas();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Unleaded Gas - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 300;
-
-      //Act
-      var actual = estimate.defaultUnleadedGas();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
+    
     // Two Cycle Oil
 
     test('Defualt Two Cycle Oil - Structures: 0', () {
