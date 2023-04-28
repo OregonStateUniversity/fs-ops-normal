@@ -427,9 +427,7 @@ class Estimate {
   }
 
   int defaultUnleadedGas() {
-    if (structures! == 0) {
-      return 0;
-    } else if (structures! < 10) {
+    if (structures! < 10) {
       return 30;
     } else if (structures! < 40) {
       return 90;
@@ -471,15 +469,9 @@ class Estimate {
   int defaultFoam() {
     if (structures! == 0) {
       return 0;
-    } else if (structures! < 10) {
-      return 5;
-    } else if (structures! < 40) {
-      return 5;
-    } else if (structures! > 40) {
-      return 5;
     } else {
-      return 0;
-    }
+      return 5;
+    }      
   }
 
   String flatFireOrderText() {

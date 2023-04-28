@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -76,21 +78,43 @@ class _LocationWidgetState extends State<LocationWidget> {
       permissionGranted = await location.requestPermission();
       if (permissionGranted != PermissionStatus.granted) {
         debugPrint("please enable location");
+
+        showDialog(context: context, 
+        builder: (BuildContext context) {
+          return AlertDialog(
+          title: const Text('Location Permission Needed'),
+          content: const Text('Location permission must be '
+          'enabled for this application on your device '
+          'to use the compass feature. Visit your device '
+          'settings for this app to enable them.'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              },
+            ),
+          ],
+        );
+        });
       }
     }
-
-    locationData = await location.getLocation();
-    if (mounted) {
-      setState(() {
-        heading = locationData.heading;
-        longitude = locationData.longitude;
-        latitude = locationData.latitude;
-        altitude = locationData.altitude;
-        speed = locationData.speed;
-      });
+    else {
+      locationData = await location.getLocation();
+      if (mounted) {
+        setState(() {
+          heading = locationData.heading;
+          longitude = locationData.longitude;
+          latitude = locationData.latitude;
+          altitude = locationData.altitude;
+          speed = locationData.speed;
+        });
+      }
+      debugPrint("location is ${locationData.toString()}");
     }
-
-    debugPrint("location is ${locationData.toString()}");
   }
 
   @override
@@ -182,10 +206,13 @@ class LazyStreamLocation {
         _controler.close();
         return;
       }
-
-      final LocationData data = await location.getLocation();
-      _controler.sink.add(data);
-      timer++;
+      try {
+        final LocationData data = await location.getLocation();
+        _controler.sink.add(data);
+        timer++;
+      } catch (e) {
+        debugPrint('Location services not enabled');
+      }
     });
   }
   var timer = 1;
