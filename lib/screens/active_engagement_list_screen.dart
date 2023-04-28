@@ -60,7 +60,7 @@ class ActiveEngagementListScreenState
     };
   }
 
-  void loadEngagements() async {
+  void loadEngagements({bool notFirstOpen = true}) async {
     engagements = await EngagementDAO.activeEngagements(
         databaseManager: DatabaseManager.getInstance());
     setState(() {});
@@ -68,8 +68,21 @@ class ActiveEngagementListScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center, children: _bodyChildren());
+    if (engagements == null) {
+      return const Center(
+        child: SizedBox(
+          height: 50,
+          width: 50,
+          child: CircularProgressIndicator(
+            strokeWidth: 1.5,
+          ),
+        ),
+      );
+    } else {
+      return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: _bodyChildren());
+    }
   }
 
   Widget _emptyListPrompt() => const Text("No engagements created yet.");
