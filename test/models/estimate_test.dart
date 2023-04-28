@@ -919,7 +919,6 @@ void main() {
 
     // Unleaded Gas
     group('defaultUnleadedGas', () {
-      
       test('Defualt Unleaded Gas - Structures: x < 10', () {
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultUnleadedGas(), equals(30));
@@ -935,7 +934,7 @@ void main() {
         expect(estimate.defaultUnleadedGas(), equals(300));
       });
     });
-    
+
     // Two Cycle Oil
 
     test('Defualt Two Cycle Oil - Structures: 0', () {
@@ -1035,18 +1034,27 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-    test('Defualt defaultFoldATankStructures - Structure: x > 0 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 16;
-
-      //Act
-      var actual = estimate.defaultFoldATankStructures();
-
-      //Assert
-      expect(actual, equals(expected));
+    
+    group("defaultFoldATankStructures", () {
+      test('Defualt defaultFoldATankStructures - Structure: x = 0 ', () {
+        //Arrange
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        var expected = 0;
+        //Act
+        var actual = estimate.defaultFoldATankStructures();
+        //Assert
+        expect(actual, equals(expected));
+      });
+      test('Defualt defaultFoldATankStructures - Structure: x > 0 ', () {
+        //Arrange
+        Estimate estimate = Estimate(acres: 0, structures: 20);
+        var expected = 16;
+        //Act
+        var actual = estimate.defaultFoldATankStructures();
+        //Assert
+        expect(actual, equals(expected));
+      });
     });
-
     group('defaultFoam', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
