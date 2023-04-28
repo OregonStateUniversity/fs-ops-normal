@@ -1066,6 +1066,17 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
+    test('Defualt defaultFoldATankStructures - Structure: x > 0 ', () {
+      //Arrange
+      Estimate estimate = Estimate(acres: 0, structures: 20);
+      var expected = 16;
+
+      //Act
+      var actual = estimate.defaultFoldATankStructures();
+
+      //Assert
+      expect(actual, equals(expected));
+    });
 
     group('defaultFoam', () {
       test('0 when there are no structures', () {
@@ -1077,6 +1088,5 @@ void main() {
         expect(estimate.defaultFoam(), equals(5));
       });
     });
-
   });
 }
