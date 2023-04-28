@@ -961,53 +961,27 @@ void main() {
     });
 
     // Porta Potties Structure
-
-    test('Defualt Porta Potties Structure - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultPortaPottiesStructures();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Porta Potties Structure - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 5;
-
-      //Act
-      var actual = estimate.defaultPortaPottiesStructures();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Porta Potties Structure - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 6;
-
-      //Act
-      var actual = estimate.defaultPortaPottiesStructures();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Porta Potties Structure - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 10;
-
-      //Act
-      var actual = estimate.defaultPortaPottiesStructures();
-
-      //Assert
-      expect(actual, equals(expected));
+    group('defaultPortaPottiesStructures', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultPortaPottiesStructures(), equals(0));
+      });
+      test('5 when there is less than 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultPortaPottiesStructures(), equals(5));
+      });
+      test('6 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultPortaPottiesStructures(), equals(6));
+      });
+      test('10 when there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
+        expect(estimate.defaultPortaPottiesStructures(), equals(10));
+      });
+      test('10 when there is more than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultPortaPottiesStructures(), equals(10));
+      });
     });
 
     group("defaultFoldATankStructures", () {
