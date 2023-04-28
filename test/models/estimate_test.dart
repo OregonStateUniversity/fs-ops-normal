@@ -937,52 +937,27 @@ void main() {
 
     // Two Cycle Oil
 
-    test('Defualt Two Cycle Oil - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultTwoCycleOil();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Two Cycle Oil - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 6;
-
-      //Act
-      var actual = estimate.defaultTwoCycleOil();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Two Cycle Oil - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 18;
-
-      //Act
-      var actual = estimate.defaultTwoCycleOil();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt Two Cycle Oil - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 60;
-
-      //Act
-      var actual = estimate.defaultTwoCycleOil();
-
-      //Assert
-      expect(actual, equals(expected));
+    group('defaultTwoCycleOil', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultTwoCycleOil(), equals(0));
+      });
+      test('6 when there is less than 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultTwoCycleOil(), equals(6));
+      });
+      test('18 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultTwoCycleOil(), equals(6));
+      });
+      test('18 when there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
+        expect(estimate.defaultTwoCycleOil(), equals(18));
+      });
+      test('60 when there is more than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultTwoCycleOil(), equals(60));
+      });
     });
 
     // Porta Potties Structure
@@ -1034,7 +1009,7 @@ void main() {
       //Assert
       expect(actual, equals(expected));
     });
-    
+
     group("defaultFoldATankStructures", () {
       test('Defualt defaultFoldATankStructures - Structure: x = 0 ', () {
         //Arrange
