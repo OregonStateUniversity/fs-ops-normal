@@ -768,103 +768,52 @@ void main() {
     });
 
     // OnePointFiveToOneInchReducer
+    group('defaultOnePointFiveToOneInchReducer', () {
+      test('Default OnePointFiveToOneInchReducer - Structures: 0', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultKkNozzles(), equals(0));
+      });
 
-    test('Default OnePointFiveToOneInchReducer - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
+      test('Default OnePointFiveToOneInchReducer - Structures: 0 < x < 10 ',
+          () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultKkNozzles(), equals(20));
+      });
 
-      //Act
-      var actual = estimate.defaultOnePointFiveToOneInchReducer();
+      test('Default OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ',
+          () {
+        Estimate estimate = Estimate(acres: 0, structures: 20);
+        expect(estimate.defaultKkNozzles(), equals(20));
+      });
 
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default OnePointFiveToOneInchReducer - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 20;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveToOneInchReducer();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 20;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveToOneInchReducer();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default OnePointFiveToOneInchReducer - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 30;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveToOneInchReducer();
-
-      //Assert
-      expect(actual, equals(expected));
+      test('Default OnePointFiveToOneInchReducer - Structures: x > 40 ', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultKkNozzles(), equals(30));
+      });
     });
 
     // KK Nozzles
+    group('defaultKKNozzles', () {
+      test('Default KK Nozzles   - Structures: 0', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultKkNozzles(), equals(0));
+      });
 
-    test('Default KK Nozzles   - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
+      test('Default KK Nozzles  - Structures: 0 < x < 10 ', () {
+        //Arrange
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultKkNozzles(), equals(20));
+      });
 
-      //Act
-      var actual = estimate.defaultKkNozzles();
+      test('Default KK Nozzles  - Structures: 10 < x < 40 ', () {
+        Estimate estimate = Estimate(acres: 0, structures: 20);
+        expect(estimate.defaultKkNozzles(), equals(20));
+      });
 
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default KK Nozzles  - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 20;
-
-      //Act
-      var actual = estimate.defaultKkNozzles();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default KK Nozzles  - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 20;
-
-      //Act
-      var actual = estimate.defaultKkNozzles();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default KK Nozzles  - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 30;
-
-      //Act
-      var actual = estimate.defaultKkNozzles();
-
-      //Assert
-      expect(actual, equals(expected));
+      test('Default KK Nozzles  - Structures: x > 40 ', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultKkNozzles(), equals(30));
+      });
     });
 
     // Mark 3 Structures
