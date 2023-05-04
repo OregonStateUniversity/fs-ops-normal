@@ -315,7 +315,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 4;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 10;
     } else if (structures! > 40) {
       return 13;
@@ -329,7 +329,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 3000;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 5000;
     } else if (structures! > 40) {
       return 7000;
@@ -343,7 +343,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 20;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 35;
     } else if (structures! > 40) {
       return 50;
@@ -357,7 +357,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 10;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 40;
     } else if (structures! > 40) {
       return 50;
@@ -371,7 +371,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 20;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 40;
     } else if (structures! > 40) {
       return 50;
@@ -385,7 +385,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 20;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 20;
     } else if (structures! > 40) {
       return 30;
@@ -399,7 +399,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 20;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 20;
     } else if (structures! > 40) {
       return 30;
@@ -413,7 +413,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 3;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 6;
     } else if (structures! > 40) {
       return 10;
@@ -443,7 +443,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 6;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 18;
     } else if (structures! > 40) {
       return 60;
@@ -457,7 +457,7 @@ class Estimate {
       return 0;
     } else if (structures! < 10) {
       return 5;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 6;
     } else if (structures! > 40) {
       return 10;
@@ -471,7 +471,7 @@ class Estimate {
       return 0;
     } else {
       return 5;
-    }      
+    }
   }
 
   String flatFireOrderText() {
