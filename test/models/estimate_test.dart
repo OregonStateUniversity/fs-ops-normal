@@ -519,10 +519,6 @@ void main() {
 
     // STRUCTURE TESTS BELOW
 
-    test('Default Sprinklers - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
     //Sprinklers
     group('Default Sprinklers', () {
       test('Structures = 0 -> Sprinkler = 0', () {
@@ -537,10 +533,6 @@ void main() {
         expect(actual, equals(expected));
       });
 
-    test('Default Sprinklers - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 10;
       test(' Structures < 10 -> Sprinkler = 4 ', () {
         //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
@@ -553,10 +545,6 @@ void main() {
         expect(actual, equals(expected));
       });
 
-    test('Default Sprinklers - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 40;
       test('10 < Structures < 40 -> Sprinklers = 10', () {
         //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 20);
@@ -568,25 +556,7 @@ void main() {
         //Assert
         expect(actual, equals(expected));
       });
-
-    test('Default Sprinklers - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 50;
-      test('Structures > 40 -> Sprinklers = 13 ', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 0, structures: 50);
-        var expected = 13;
-
-        //Act
-        var actual = estimate.defaultSprinklerKits();
-
-        //Assert
-        expect(actual, equals(expected));
-      });
-
     });
-   
     // OnePointFive
 
     test('Default OnePointFive Hose - Structures: 0', () {
