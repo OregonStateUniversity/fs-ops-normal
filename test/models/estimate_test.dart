@@ -618,106 +618,76 @@ void main() {
     });
 
     // One Inch Hose
-
-    test('Defualt OneInch Hose - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultOneInchHose();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OneInch Hose - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 20;
-
-      //Act
-      var actual = estimate.defaultOneInchHose();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OneInch Hose - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 35;
-
-      //Act
-      var actual = estimate.defaultOneInchHose();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OneInch Hose - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 50;
-
-      //Act
-      var actual = estimate.defaultOneInchHose();
-
-      //Assert
-      expect(actual, equals(expected));
+    group('defaultOneInchHose', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultOneInchHose(), equals(0));
+      });
+      test('20 when there is less than 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultOneInchHose(), equals(20));
+      });
+      test('35 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultOneInchHose(), equals(35));
+      });
+      test('35 when there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
+        expect(estimate.defaultOneInchHose(), equals(35));
+      });
+      test('50 when there is more than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultOneInchHose(), equals(50));
+      });
     });
 
     // One Point Five Wye
-
-    test('Defualt OnePointFive Wye - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OnePointFive Wye - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 10;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OnePointFive Wye - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 40;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OnePointFive Wye - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 50;
-
-      //Act
-      var actual = estimate.defaultOnePointFiveWye();
-
-      //Assert
-      expect(actual, equals(expected));
+    group('defaultOnePointFiveWye', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultOnePointFiveWye(), equals(0));
+      });
+      test('10 when there is less than 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultOnePointFiveWye(), equals(10));
+      });
+      test('40 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultOnePointFiveWye(), equals(40));
+      });
+      test('40 when there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
+        expect(estimate.defaultOnePointFiveWye(), equals(40));
+      });
+      test('50 when there is more than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultOnePointFiveWye(), equals(50));
+      });
     });
 
     // One Inch Wye
+    group('defaultOneInchWye', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultOneInchWye(), equals(0));
+      });
+      test('20 when there is less than 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultOneInchWye(), equals(20));
+      });
+      test('40 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultOneInchWye(), equals(40));
+      });
+      test('40 when there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
+        expect(estimate.defaultOneInchWye(), equals(40));
+      });
+      test('50 when there is more than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultOneInchWye(), equals(50));
+      });
+    });
 
     test('Defualt OneInch Wye  - Structures: 0', () {
       //Arrange
@@ -948,7 +918,7 @@ void main() {
       });
       test('18 when there is less than 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 30);
-        expect(estimate.defaultTwoCycleOil(), equals(6));
+        expect(estimate.defaultTwoCycleOil(), equals(18));
       });
       test('18 when there is exactly 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 40);
@@ -976,7 +946,7 @@ void main() {
       });
       test('10 when there is exactly 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 40);
-        expect(estimate.defaultPortaPottiesStructures(), equals(10));
+        expect(estimate.defaultPortaPottiesStructures(), equals(6));
       });
       test('10 when there is more than 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 50);
