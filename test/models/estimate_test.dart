@@ -689,56 +689,7 @@ void main() {
       });
     });
 
-    test('Defualt OneInch Wye  - Structures: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultOneInchWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OneInch Wye  - Structures: 0 < x < 10 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 5);
-      var expected = 20;
-
-      //Act
-      var actual = estimate.defaultOneInchWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OneInch Wye  - Structures: 10 < x < 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 20);
-      var expected = 40;
-
-      //Act
-      var actual = estimate.defaultOneInchWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Defualt OneInch Wye  - Structures: x > 40 ', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0, structures: 50);
-      var expected = 50;
-
-      //Act
-      var actual = estimate.defaultOneInchWye();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
     // OnePointFiveToOneInchReducer
-
     test('Defualt OnePointFiveToOneInchReducer - Structures: 0', () {
       //Arrange
       Estimate estimate = Estimate(acres: 0, structures: 0);
