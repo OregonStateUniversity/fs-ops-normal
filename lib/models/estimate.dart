@@ -429,7 +429,7 @@ class Estimate {
   int defaultUnleadedGas() {
     if (structures! < 10) {
       return 30;
-    } else if (structures! < 40) {
+    } else if (structures! <= 40) {
       return 90;
     } else if (structures! > 40) {
       return 300;
