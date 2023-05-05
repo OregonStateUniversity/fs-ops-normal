@@ -547,18 +547,31 @@ void main() {
         Estimate estimate = Estimate(acres: 0, structures: 0);
         expect(estimate.defaultSprinklerKits(), 0);
       });
+<<<<<<< HEAD
       test('4 when there are less than 10 structures', () {
+=======
+
+      test(' Structures < 10 -> Sprinkler = 4 ', () {
+        //Arrange
+>>>>>>> 245864774720a3751f90768ba75816b49846a12c
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
+<<<<<<< HEAD
       test('4 when there are exactly 10 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
       test('10 when there are between 10 and 40 structures', () {
+=======
+
+      test('10 < Structures < 40 -> Sprinklers = 10', () {
+        //Arrange
+>>>>>>> 245864774720a3751f90768ba75816b49846a12c
         Estimate estimate = Estimate(acres: 0, structures: 20);
         expect(estimate.defaultSprinklerKits(), 10);
       });
+<<<<<<< HEAD
       test('10 when there are 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 40);
         expect(estimate.defaultSprinklerKits(), 10);
@@ -567,6 +580,21 @@ void main() {
         Estimate estimate = Estimate(acres: 0, structures: 50);
         expect(estimate.defaultSprinklerKits(), 13);
       });
+=======
+    });
+    // OnePointFive
+
+    test('Default OnePointFive Hose - Structures: 0', () {
+      //Arrange
+      Estimate estimate = Estimate(acres: 0, structures: 0);
+      var expected = 0;
+
+      //Act
+      var actual = estimate.defaultOnePointFiveHose();
+
+      //Assert
+      expect(actual, equals(expected));
+>>>>>>> 245864774720a3751f90768ba75816b49846a12c
     });
 
     // OnePointFive Inch Hose
