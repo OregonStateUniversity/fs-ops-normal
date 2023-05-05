@@ -495,70 +495,30 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('Default PortaPotties - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
 
-      //Act
-      var actual = estimate.defaultPortaPottiesAcres();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default PortaPotties - Acres: 20', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 20);
-      var expected = 2;
-
-      //Act
-      var actual = estimate.defaultPortaPottiesAcres();
-
-      //Assert
-      expect(actual, equals(expected));
+    // PortaPotties
+    group('defaultPortaPottiesAcres', () {
+      test('0 when acres are 0', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultPortaPottiesAcres(), 0);
+      });
+      test('2 when acres are 20', () {
+        Estimate estimate = Estimate(acres: 20);
+        expect(estimate.defaultPortaPottiesAcres(), 2);
+      });
+      test('3 when acres are 32', () {
+        Estimate estimate = Estimate(acres: 32);
+        expect(estimate.defaultPortaPottiesAcres(), 3);
+      });
+      test('4 when acres are 48', () {
+        Estimate estimate = Estimate(acres: 48);
+        expect(estimate.defaultPortaPottiesAcres(), 4);
+      });
     });
 
     // STRUCTURE TESTS BELOW
 
     //Sprinklers
-    group('Default Sprinklers', () {
-      test('Structures = 0 -> Sprinkler = 0', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 0, structures: 0);
-        var expected = 0;
-
-        //Act
-        var actual = estimate.defaultSprinklerKits();
-
-        //Assert
-        expect(actual, equals(expected));
-      });
-
-      test(' Structures < 10 -> Sprinkler = 4 ', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 0, structures: 5);
-        var expected = 4;
-
-        //Act
-        var actual = estimate.defaultSprinklerKits();
-
-        //Assert
-        expect(actual, equals(expected));
-      });
-
-      test('10 < Structures < 40 -> Sprinklers = 10', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 0, structures: 20);
-        var expected = 10;
-
-        //Act
-        var actual = estimate.defaultSprinklerKits();
-
-        //Assert
-        expect(actual, equals(expected));
-      });
-    });
 
     group('defaultSprinklerKits', () {
       test('0 when there are no structures', () {
