@@ -560,6 +560,33 @@ void main() {
       });
     });
 
+    group('defaultSprinklerKits', () {
+      test('0 when there are no structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 0);
+        expect(estimate.defaultSprinklerKits(), 0);
+      });
+      test('4 when there are less than 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultSprinklerKits(), 4);
+      });
+      test('4 when there are exactly 10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultSprinklerKits(), 4);
+      });
+      test('10 when there are between 10 and 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 20);
+        expect(estimate.defaultSprinklerKits(), 10);
+      });
+      test('10 when there are 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
+        expect(estimate.defaultSprinklerKits(), 10);
+      });
+      test('13 when there are greater than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 50);
+        expect(estimate.defaultSprinklerKits(), 13);
+      });
+    });
+
     // OnePointFive Inch Hose
     group('defaultOnePointFiveInchHose', () {
       test('0 when there are no structures', () {
