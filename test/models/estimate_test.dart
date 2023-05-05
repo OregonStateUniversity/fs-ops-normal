@@ -496,24 +496,19 @@ void main() {
     });
 
     group('defaultMrePallets', () {
-      test('0 when acres are 0', () {
+
+      test('0 when acres are less than 20', () {
         Estimate estimate = Estimate(acres: 0);
         expect(estimate.defaultMrePallets(), 0);
       });
-      test('0 when acres are 15', () {
-        Estimate estimate = Estimate(acres: 0);
-        expect(estimate.defaultMrePallets(), 0);
-      });
+
       test('1 when acres are 20', () {
         Estimate estimate = Estimate(acres: 20);
         expect(estimate.defaultMrePallets(), 1);
       });
-      test('2 when acres are 42', () {
+
+      test('One for every 20 acres', () {
         Estimate estimate = Estimate(acres: 42);
-        expect(estimate.defaultMrePallets(), 2);
-      });
-      test('2 when acres are 55', () {
-        Estimate estimate = Estimate(acres: 55);
         expect(estimate.defaultMrePallets(), 2);
       });
     });
@@ -538,6 +533,7 @@ void main() {
       });
     });
 
+
     // STRUCTURE TESTS BELOW
 
     //Sprinklers
@@ -548,32 +544,28 @@ void main() {
         expect(estimate.defaultSprinklerKits(), 0);
       });
 
-      test('4 when there are less than 10 structures', () {
+      test(' Structures < 10 -> Sprinkler = 4 ', () {
+        //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
-
       test('4 when there are exactly 10 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
-
-      test('10 when there are between 10 and 40 structures', () {
-
+      test('10 < Structures < 40 -> Sprinklers = 10', () {
+        //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 20);
         expect(estimate.defaultSprinklerKits(), 10);
       });
-
       test('10 when there are 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 40);
         expect(estimate.defaultSprinklerKits(), 10);
       });
-      
       test('13 when there are greater than 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 50);
         expect(estimate.defaultSprinklerKits(), 13);
       });
- 
     });
 
     // OnePointFive Inch Hose
