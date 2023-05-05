@@ -495,6 +495,28 @@ void main() {
       expect(actual, equals(expected));
     });
 
+    group('defaultMrePallets', () {
+      test('0 when acres are 0', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultMrePallets(), 0);
+      });
+      test('0 when acres are 15', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultMrePallets(), 0);
+      });
+      test('1 when acres are 20', () {
+        Estimate estimate = Estimate(acres: 20);
+        expect(estimate.defaultMrePallets(), 1);
+      });
+      test('2 when acres are 42', () {
+        Estimate estimate = Estimate(acres: 42);
+        expect(estimate.defaultMrePallets(), 2);
+      });
+      test('2 when acres are 55', () {
+        Estimate estimate = Estimate(acres: 55);
+        expect(estimate.defaultMrePallets(), 2);
+      });
+    });
 
     // PortaPotties
     group('defaultPortaPottiesAcres', () {
