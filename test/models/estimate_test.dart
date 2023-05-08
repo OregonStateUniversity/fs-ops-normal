@@ -231,76 +231,39 @@ void main() {
   });
 
   group('Estimate default methods', () {
-    test('Default Trunk Line Length - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 1000;
-
-      //Act
-      var actual = estimate.defaultTrunkLineLength();
-
-      //Assert
-      expect(actual, equals(expected));
+    group('defaultTrunkLineLength', () {
+      test('1000 if acres is 0', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(1000, estimate.defaultTrunkLineLength());
+      });
+      test('3000 if acres is 10 (1000 base + 200 per acre)', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(3000, estimate.defaultTrunkLineLength());
+      });
     });
 
-    test('Default Trunk Line Length - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 3000;
+    group('defaultLatLineLength', () {
+      test('500 if acres is 0', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(500, estimate.defaultLatLineLength());
+      });
 
-      //Act
-      var actual = estimate.defaultTrunkLineLength();
-
-      //Assert
-      expect(actual, equals(expected));
+      test('1500 if acres is 10 (500 base + 100 per acre)', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(1500, estimate.defaultLatLineLength());
+      });
     });
 
-    test('Default Lat Line Length - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 500;
+    group('defaultToyLineLength', () {
+      test('250 if acres is 0', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(250, estimate.defaultToyLineLength());
+      });
 
-      //Act
-      var actual = estimate.defaultLatLineLength();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default Lat Line Length - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 1500;
-
-      //Act
-      var actual = estimate.defaultLatLineLength();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default Toy Line Length - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 250;
-
-      //Act
-      var actual = estimate.defaultToyLineLength();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default Toy Line Length - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 750;
-
-      //Act
-      var actual = estimate.defaultToyLineLength();
-
-      //Assert
-      expect(actual, equals(expected));
+      test('750 if acres is 10 (250 base + 50 per acre)', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(750, estimate.defaultToyLineLength());
+      });
     });
 
     test('Default Fittings - Acres: 0', () {
@@ -425,7 +388,6 @@ void main() {
 
     // MRE Pallets
     group('defaultMrePallets', () {
-
       test('0 when acres are less than 20', () {
         Estimate estimate = Estimate(acres: 0);
         expect(estimate.defaultMrePallets(), 0);
@@ -461,7 +423,6 @@ void main() {
         expect(estimate.defaultPortaPottiesAcres(), 4);
       });
     });
-
 
     // STRUCTURE TESTS BELOW
     //Sprinklers
