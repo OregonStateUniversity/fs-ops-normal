@@ -351,54 +351,23 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('Default Mark3Pumps - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultMark3PumpsAcres();
-
-      //Assert
-      expect(actual, equals(expected));
+    // Mark 3 Pumps Acres
+    group('defaultMark3PumpsAcres', () {
+      test('0 when acres are less than 10', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultMark3PumpsAcres(), 0);
+      });
+      test('1 when acres are equal to 10', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(estimate.defaultMark3PumpsAcres(), 1);
+      });
+      test('1 for every 10 acres', () {
+        Estimate estimate = Estimate(acres: 24);
+        expect(estimate.defaultMark3PumpsAcres(), 2);
+      });
     });
 
-    test('Default Mark3Pumps - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 1;
-
-      //Act
-      var actual = estimate.defaultMark3PumpsAcres();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default Mark3Kits - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.calculateMark3KitsAcres();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default Mark3Kits - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 1;
-
-      //Act
-      var actual = estimate.calculateMark3KitsAcres();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
+    // Mark 3 kits acres
     group('calculateMark3KitsAcres', () {
       test('0 when acres are less than 10', () {
         Estimate estimate = Estimate(acres: 0);
