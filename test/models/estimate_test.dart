@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:test/test.dart';
 import 'package:ops_normal/models/estimate.dart';
 
@@ -399,102 +397,55 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('Default Mark3PumpMix - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultPumpMixCansAcres();
-
-      //Assert
-      expect(actual, equals(expected));
+    //  Mark 3 Pump Mix Cans
+    group('defaultPumpMixCansAcres', () {
+      test('0 when acres are less than 10', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultPumpMixCansAcres(), 0);
+      });
+      test('6 when acres are equal to 10', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(estimate.defaultPumpMixCansAcres(), 6);
+      });
+      test('6 for every 10 acres', () {
+        Estimate estimate = Estimate(acres: 42);
+        expect(estimate.defaultPumpMixCansAcres(), 24);
+      });
     });
 
-    test('Default Mark3PumpMix - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 6;
-
-      //Act
-      var actual = estimate.defaultPumpMixCansAcres();
-
-      //Assert
-      expect(actual, equals(expected));
+    // Water Pallets
+    group('defaultWaterPallets', () {
+      test('0 when acres are less than 20', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultWaterPallets(), 0);
+      });
+      test('1 when acres are equal to 20', () {
+        Estimate estimate = Estimate(acres: 20);
+        expect(estimate.defaultWaterPallets(), 1);
+      });
+      test('1 for every 20 acres', () {
+        Estimate estimate = Estimate(acres: 42);
+        expect(estimate.defaultWaterPallets(), 2);
+      });
     });
 
-    test('Default WaterPallets - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultWaterPallets();
-
-      //Assert
-      expect(actual, equals(expected));
+    // Gatorade Pallets
+    group('defaultGatoradePallets', () {
+      test('0 when acres are less than 20', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultGatoradePallets(), 0);
+      });
+      test('1 when acres are equal 20', () {
+        Estimate estimate = Estimate(acres: 20);
+        expect(estimate.defaultGatoradePallets(), 1);
+      });
+      test('1 for every 20 acres', () {
+        Estimate estimate = Estimate(acres: 42);
+        expect(estimate.defaultGatoradePallets(), 2);
+      });
     });
 
-    test('Default WaterPallets - Acres: 20', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 20);
-      var expected = 1;
-
-      //Act
-      var actual = estimate.defaultWaterPallets();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default GatoradePallets - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultGatoradePallets();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default GatoradePallets - Acres: 20', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 20);
-      var expected = 1;
-
-      //Act
-      var actual = estimate.defaultGatoradePallets();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default MREPallets - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultMrePallets();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default MREPallets - Acres: 20', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 20);
-      var expected = 1;
-
-      //Act
-      var actual = estimate.defaultMrePallets();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
+    // MRE Pallets
     group('defaultMrePallets', () {
 
       test('0 when acres are less than 20', () {
@@ -535,7 +486,6 @@ void main() {
 
 
     // STRUCTURE TESTS BELOW
-
     //Sprinklers
 
     group('defaultSprinklerKits', () {
@@ -553,8 +503,8 @@ void main() {
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
-      test('10 < Structures < 40 -> Sprinklers = 10', () {
-        //Arrange
+
+      test('10 when there are between 10 and 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 20);
         expect(estimate.defaultSprinklerKits(), 10);
       });
