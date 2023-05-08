@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:test/test.dart';
 import 'package:ops_normal/models/estimate.dart';
 
@@ -395,6 +397,21 @@ void main() {
 
       //Assert
       expect(actual, equals(expected));
+    });
+
+    group('calculateMark3KitsAcres', () {
+      test('0 when acres are less than 10', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.calculateMark3KitsAcres(), 0);
+      });
+      test('1 when acres are equal to 10', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(estimate.calculateMark3KitsAcres(), 1);
+      });
+      test('1 for every 10 acres', () {
+        Estimate estimate = Estimate(acres: 24);
+        expect(estimate.calculateMark3KitsAcres(), 2);
+      });
     });
 
     //  Mark 3 Pump Mix Cans
