@@ -327,28 +327,20 @@ void main() {
       expect(actual, equals(expected));
     });
 
-    test('Default FoldaTanks - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 0;
-
-      //Act
-      var actual = estimate.defaultFoldaTanksAcres();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('Default FoldaTanks - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 2;
-
-      //Act
-      var actual = estimate.defaultFoldaTanksAcres();
-
-      //Assert
-      expect(actual, equals(expected));
+    // Fold-a-Tank Acres
+    group('defaultFoldaTankAcres', () {
+      test('0 when acres are less than 10', () {
+        Estimate estimate = Estimate(acres: 0);
+        expect(estimate.defaultFoldaTanksAcres(), 0);
+      });
+      test('2 when acres are equal to 10', () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(estimate.defaultFoldaTanksAcres(), 2);
+      });
+      test('1 for every 5 acres', () {
+        Estimate estimate = Estimate(acres: 24);
+        expect(estimate.defaultFoldaTanksAcres(), 4);
+      });
     });
 
     // Mark 3 Pumps Acres
