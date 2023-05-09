@@ -584,23 +584,23 @@ void main() {
 
     // KK Nozzles
     group('defaultKKNozzles', () {
-      test('Default KK Nozzles   - Structures: 0', () {
+      test('0 When there are no structure', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
         expect(estimate.defaultKkNozzles(), equals(0));
       });
 
-      test('Default KK Nozzles  - Structures: 0 < x < 10 ', () {
+      test('20 When there is less than 40 structures ', () {
         //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultKkNozzles(), equals(20));
       });
 
-      test('Default KK Nozzles  - Structures: 10 < x < 40 ', () {
-        Estimate estimate = Estimate(acres: 0, structures: 20);
+      test('20 When there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
         expect(estimate.defaultKkNozzles(), equals(20));
       });
 
-      test('Default KK Nozzles  - Structures: x > 40 ', () {
+      test('30 When there is more than 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 50);
         expect(estimate.defaultKkNozzles(), equals(30));
       });
