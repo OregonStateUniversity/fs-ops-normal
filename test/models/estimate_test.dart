@@ -266,28 +266,45 @@ void main() {
       });
     });
 
-    test('Default Fittings - Acres: 0', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 0);
-      var expected = 5;
+    group("defaultFittings", () {
+      test('5 when there is no acres - one hundredth of Latline ', () {
+        //Arrange
 
-      //Act
-      var actual = estimate.defaultFittings();
+        Estimate estimate = Estimate(acres: 0);
+        //expected = ((((acres * 200) + 1000) / 2) / 100);
+        var expected = 5;
+        //Act
+        var actual = estimate.defaultFittings();
 
-      //Assert
-      expect(actual, equals(expected));
-    });
+        //Assert
+        expect(actual, equals(expected));
+      });
 
-    test('Default Fittings - Acres: 10', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = 15;
+      test('15 when there is exactly 10 acres - one hundredth of Latline ', () {
+        //Arrange
+        Estimate estimate = Estimate(acres: 10);
 
-      //Act
-      var actual = estimate.defaultFittings();
+        //expected = ((((acres * 200) + 1000) / 2) / 100);
+        var expected = 15;
+        //Act
+        var actual = estimate.defaultFittings();
 
-      //Assert
-      expect(actual, equals(expected));
+        //Assert
+        expect(actual, equals(expected));
+      });
+
+      test('105 when there is exactly 100 acres - one hundredth of Latline ',
+          () {
+        //Arrange
+        Estimate estimate = Estimate(acres: 100);
+        //expected = ((((acres * 200) + 1000) / 2) / 100);
+        var expected = 105;
+        //Act
+        var actual = estimate.defaultFittings();
+
+        //Assert
+        expect(actual, equals(expected));
+      });
     });
 
     // Fold-a-Tank Acres
@@ -559,48 +576,53 @@ void main() {
 
     // OnePointFiveToOneInchReducer
     group('defaultOnePointFiveToOneInchReducer', () {
-      test('Default OnePointFiveToOneInchReducer - Structures: 0', () {
+      test('0 when there is no structure', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
-        expect(estimate.defaultKkNozzles(), equals(0));
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(0));
       });
 
-      test('Default OnePointFiveToOneInchReducer - Structures: 0 < x < 10 ',
-          () {
+      test('20 when there is less than 10 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 5);
-        expect(estimate.defaultKkNozzles(), equals(20));
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
+      });
+      test('20 when there is exactly  10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 10);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
       });
 
-      test('Default OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ',
-          () {
-        Estimate estimate = Estimate(acres: 0, structures: 20);
-        expect(estimate.defaultKkNozzles(), equals(20));
+      test('20 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
       });
-
-      test('Default OnePointFiveToOneInchReducer - Structures: x > 40 ', () {
-        Estimate estimate = Estimate(acres: 0, structures: 50);
-        expect(estimate.defaultKkNozzles(), equals(30));
+      test('20 when there is exactly  40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
+      });
+      test('30 when there is more than 40 structures ', () {
+        Estimate estimate = Estimate(acres: 0, structures: 55);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(30));
       });
     });
 
     // KK Nozzles
     group('defaultKKNozzles', () {
-      test('Default KK Nozzles   - Structures: 0', () {
+      test('0 When there are no structure', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
         expect(estimate.defaultKkNozzles(), equals(0));
       });
 
-      test('Default KK Nozzles  - Structures: 0 < x < 10 ', () {
+      test('20 When there is less than 40 structures ', () {
         //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultKkNozzles(), equals(20));
       });
 
-      test('Default KK Nozzles  - Structures: 10 < x < 40 ', () {
-        Estimate estimate = Estimate(acres: 0, structures: 20);
+      test('20 When there is exactly 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 40);
         expect(estimate.defaultKkNozzles(), equals(20));
       });
 
-      test('Default KK Nozzles  - Structures: x > 40 ', () {
+      test('30 When there is more than 40 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 50);
         expect(estimate.defaultKkNozzles(), equals(30));
       });
