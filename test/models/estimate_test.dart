@@ -559,27 +559,34 @@ void main() {
 
     // OnePointFiveToOneInchReducer
     group('defaultOnePointFiveToOneInchReducer', () {
-      test('Default OnePointFiveToOneInchReducer - Structures: 0', () {
+      test('0 when there is no structure', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
-        expect(estimate.defaultKkNozzles(), equals(0));
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(0));
       });
 
-      test('Default OnePointFiveToOneInchReducer - Structures: 0 < x < 10 ',
-          () {
+      test('20 when there is less than 10 structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 5);
-        expect(estimate.defaultKkNozzles(), equals(20));
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
+      });
+      test('20 when there is exactly  10 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 10);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
       });
 
-      test('Default OnePointFiveToOneInchReducer - Structures: 10 < x < 40 ',
+        test('20 when there is less than 40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 30);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
+      });
+        test('20 when there is exactly  40 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 5);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(20));
+      });
+      test('30 when there is more than 40 structures ',
           () {
-        Estimate estimate = Estimate(acres: 0, structures: 20);
-        expect(estimate.defaultKkNozzles(), equals(20));
+        Estimate estimate = Estimate(acres: 0, structures: 55);
+        expect(estimate.defaultOnePointFiveToOneInchReducer(), equals(30));
       });
 
-      test('Default OnePointFiveToOneInchReducer - Structures: x > 40 ', () {
-        Estimate estimate = Estimate(acres: 0, structures: 50);
-        expect(estimate.defaultKkNozzles(), equals(30));
-      });
     });
 
     // KK Nozzles
