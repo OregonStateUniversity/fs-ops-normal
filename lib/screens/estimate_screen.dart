@@ -168,8 +168,9 @@ class _EstimateScreenState extends State<EstimateScreen> {
     return SizedBox(
         width: double.infinity,
         child: DataTable(
-          horizontalMargin: 15,
+          horizontalMargin: 10,
           dataRowHeight: 35,
+          columnSpacing: 20,
           headingRowColor:
               MaterialStateColor.resolveWith((states) => Colors.grey),
           border: TableBorder.all(color: const Color.fromARGB(255, 83, 83, 83)),
@@ -209,8 +210,9 @@ class _EstimateScreenState extends State<EstimateScreen> {
     return SizedBox(
       width: double.infinity,
       child: DataTable(
-        horizontalMargin: 15,
+        horizontalMargin: 10,
         dataRowHeight: 30,
+        columnSpacing: 20,
         headingRowColor:
             MaterialStateColor.resolveWith((states) => Colors.grey),
         border: TableBorder.all(color: const Color.fromARGB(255, 83, 83, 83)),
