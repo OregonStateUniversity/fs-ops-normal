@@ -451,7 +451,6 @@ void main() {
       });
 
       test(' Structures < 10 -> Sprinkler = 4 ', () {
-        //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
@@ -612,7 +611,6 @@ void main() {
       });
 
       test('20 When there is less than 40 structures ', () {
-        //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultKkNozzles(), equals(20));
       });
@@ -719,23 +717,13 @@ void main() {
     });
 
     group("defaultFoldATankStructures", () {
-      test('Default defaultFoldATankStructures - Structure: x = 0 ', () {
-        //Arrange
+      test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
-        var expected = 0;
-        //Act
-        var actual = estimate.defaultFoldATankStructures();
-        //Assert
-        expect(actual, equals(expected));
+        expect(0, estimate.defaultFoldATankStructures());
       });
-      test('Default defaultFoldATankStructures - Structure: x > 0 ', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 0, structures: 20);
-        var expected = 16;
-        //Act
-        var actual = estimate.defaultFoldATankStructures();
-        //Assert
-        expect(actual, equals(expected));
+      test('16 when there are 21 structures', () {
+        Estimate estimate = Estimate(acres: 0, structures: 21);
+        expect(16, estimate.defaultFoldATankStructures());
       });
     });
     group('defaultFoam', () {
