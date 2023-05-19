@@ -184,43 +184,24 @@ void main() {
     });
 
     group("defaultFittings", () {
-      test('5 when there is no acres - one hundredth of Latline ', () {
-        //Arrange
-
-        Estimate estimate = Estimate(acres: 0);
-        //expected = ((((acres * 200) + 1000) / 2) / 100);
-        var expected = 5;
-        //Act
-        var actual = estimate.defaultFittings();
-
-        //Assert
-        expect(actual, equals(expected));
-      });
-
-      test('15 when there is exactly 10 acres - one hundredth of Latline ', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 10);
-
-        //expected = ((((acres * 200) + 1000) / 2) / 100);
-        var expected = 15;
-        //Act
-        var actual = estimate.defaultFittings();
-
-        //Assert
-        expect(actual, equals(expected));
-      });
-
-      test('105 when there is exactly 100 acres - one hundredth of Latline ',
+      test('5 when there are no acres (one hundredth of Latline truncated)',
           () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 100);
-        //expected = ((((acres * 200) + 1000) / 2) / 100);
-        var expected = 105;
-        //Act
-        var actual = estimate.defaultFittings();
+        Estimate estimate = Estimate(acres: 0);
+        expect(5, estimate.defaultFittings());
+      });
 
-        //Assert
-        expect(actual, equals(expected));
+      test(
+          '15 when there is exactly 10 acres (one hundredth of Latline truncated)',
+          () {
+        Estimate estimate = Estimate(acres: 10);
+        expect(15, estimate.defaultFittings());
+      });
+
+      test(
+          '105 when there is exactly 100 acres (one hundredth of Latline truncated)',
+          () {
+        Estimate estimate = Estimate(acres: 100);
+        expect(105, estimate.defaultFittings());
       });
     });
 
@@ -368,7 +349,6 @@ void main() {
       });
 
       test(' Structures < 10 -> Sprinkler = 4 ', () {
-        //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultSprinklerKits(), 4);
       });
@@ -529,7 +509,6 @@ void main() {
       });
 
       test('20 When there is less than 40 structures ', () {
-        //Arrange
         Estimate estimate = Estimate(acres: 0, structures: 5);
         expect(estimate.defaultKkNozzles(), equals(20));
       });
@@ -636,23 +615,15 @@ void main() {
     });
 
     group("defaultFoldATankStructures", () {
-      test('Default defaultFoldATankStructures - Structure: x = 0 ', () {
-        //Arrange
+      test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
-        var expected = 0;
-        //Act
-        var actual = estimate.defaultFoldATankStructures();
-        //Assert
-        expect(actual, equals(expected));
+        expect(0, estimate.defaultFoldATankStructures());
       });
-      test('Default defaultFoldATankStructures - Structure: x > 0 ', () {
-        //Arrange
-        Estimate estimate = Estimate(acres: 0, structures: 20);
-        var expected = 16;
-        //Act
-        var actual = estimate.defaultFoldATankStructures();
-        //Assert
-        expect(actual, equals(expected));
+      test(
+          '16 when there are 21 structures (one fifth of structures truncated, times 4)',
+          () {
+        Estimate estimate = Estimate(acres: 0, structures: 21);
+        expect(16, estimate.defaultFoldATankStructures());
       });
     });
     group('defaultFoam', () {
