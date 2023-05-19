@@ -94,7 +94,13 @@ void main() {
       Estimate estimate = Estimate(acres: 1);
       // estimate.acres = 1;
       var expected =
-          "{name: -1, timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200, latLineLength: 600, toyLineLength: 300, fittings: 6}";
+          "{name: , timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200,"
+          " latLineLength: 600, toyLineLength: 300, fittings: 6, onePointFiveInchWye: 0"
+          ", onePointFiveInchReducer: 0, foldaTanks: 0, mark3Kits: 0, pumpCans: 0, "
+          "waterPallets: 0, gatoradePallets: 0, mrePallets: 0, portaPottiesPallets: 0, "
+          "sprinklerKits: 0, onePointFiveHose: 0, oneInchHose: 0, oneInchWye: 0, "
+          "kkNozzles: 0, mark3Structures: 0, foldaTankStructures: 0, unleadedGas: 30, "
+          "twoCycleOil: 0, foam: 0}";
 
       //Act
       var estimateJson = estimate.toJson().toString();
