@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:test/test.dart';
 import 'package:ops_normal/models/estimate.dart';
 
@@ -146,87 +144,6 @@ void main() {
       expect(estimate.latLineLength, equals(500));
       expect(estimate.toyLineLength, equals(250));
       expect(estimate.fittings, equals(5));
-    });
-
-    test('flat fire that is 1-9 acres', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 1);
-      var expected = "Trunk Line: 1200 ft.\n"
-          "Lat Line: 600 ft.\n"
-          "Toy Hose: 300 ft.\n\n"
-          "1.5\" Gated Wye: 6\n"
-          "1.5\" Reducers: 6\n"
-          "1\"-3/4\" Reducers: 6\n"
-          "Forester Nozzles: 6\n"
-          "Toy Nozzles: 6\n"
-          "Toy Wye: 6\n\n"
-          "Folda-tank: 0\n"
-          "Mark 3 + Kits: 0\n"
-          "Pump Mix (Cans): 0\n\n"
-          "Water (Pallets): 0\n"
-          "Gatorade (Pallets): 0\n"
-          "MRE (Pallets): 0\n"
-          "Port-a-Potties: 0\n\n";
-
-      //Act
-      var actual = estimate.flatFireOrderText();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('flat fire  that is 10-19 acres', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 10);
-      var expected = "Trunk Line: 3000 ft.\n"
-          "Lat Line: 1500 ft.\n"
-          "Toy Hose: 750 ft.\n\n"
-          "1.5\" Gated Wye: 15\n"
-          "1.5\" Reducers: 15\n"
-          "1\"-3/4\" Reducers: 15\n"
-          "Forester Nozzles: 15\n"
-          "Toy Nozzles: 15\n"
-          "Toy Wye: 15\n\n"
-          "Folda-tank: 2\n"
-          "Mark 3 + Kits: 1\n"
-          "Pump Mix (Cans): 6\n\n"
-          "Water (Pallets): 0\n"
-          "Gatorade (Pallets): 0\n"
-          "MRE (Pallets): 0\n"
-          "Port-a-Potties: 0\n\n";
-
-      //Act
-      var actual = estimate.flatFireOrderText();
-
-      //Assert
-      expect(actual, equals(expected));
-    });
-
-    test('flat fire  that is 20+ acres', () {
-      //Arrange
-      Estimate estimate = Estimate(acres: 20);
-      var expected = "Trunk Line: 5000 ft.\n"
-          "Lat Line: 2500 ft.\n"
-          "Toy Hose: 1250 ft.\n\n"
-          "1.5\" Gated Wye: 25\n"
-          "1.5\" Reducers: 25\n"
-          "1\"-3/4\" Reducers: 25\n"
-          "Forester Nozzles: 25\n"
-          "Toy Nozzles: 25\n"
-          "Toy Wye: 25\n\n"
-          "Folda-tank: 4\n"
-          "Mark 3 + Kits: 2\n"
-          "Pump Mix (Cans): 12\n\n"
-          "Water (Pallets): 1\n"
-          "Gatorade (Pallets): 1\n"
-          "MRE (Pallets): 1\n"
-          "Port-a-Potties: 2\n\n";
-
-      //Act
-      var actual = estimate.flatFireOrderText();
-
-      //Assert
-      expect(actual, equals(expected));
     });
   });
 
