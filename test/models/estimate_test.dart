@@ -211,7 +211,6 @@ void main() {
       });
     });
 
-    // Fold-a-Tank Acres
     group('defaultFoldaTankAcres', () {
       test('0 when acres are less than 10', () {
         Estimate estimate = Estimate(acres: 0);
@@ -227,7 +226,6 @@ void main() {
       });
     });
 
-    // Mark 3 Pumps Acres
     group('defaultMark3PumpsAcres', () {
       test('0 when acres are less than 10', () {
         Estimate estimate = Estimate(acres: 0);
@@ -243,7 +241,6 @@ void main() {
       });
     });
 
-    // Mark 3 kits acres
     group('calculateMark3KitsAcres', () {
       test('0 when acres are less than 10', () {
         Estimate estimate = Estimate(acres: 0);
@@ -259,7 +256,6 @@ void main() {
       });
     });
 
-    //  Mark 3 Pump Mix Cans
     group('defaultPumpMixCansAcres', () {
       test('0 when acres are less than 10', () {
         Estimate estimate = Estimate(acres: 0);
@@ -275,7 +271,6 @@ void main() {
       });
     });
 
-    // Water Pallets
     group('defaultWaterPallets', () {
       test('0 when acres are less than 20', () {
         Estimate estimate = Estimate(acres: 0);
@@ -291,7 +286,6 @@ void main() {
       });
     });
 
-    // Gatorade Pallets
     group('defaultGatoradePallets', () {
       test('0 when acres are less than 20', () {
         Estimate estimate = Estimate(acres: 0);
@@ -307,7 +301,6 @@ void main() {
       });
     });
 
-    // MRE Pallets
     group('defaultMrePallets', () {
       test('0 when acres are less than 20', () {
         Estimate estimate = Estimate(acres: 0);
@@ -325,7 +318,6 @@ void main() {
       });
     });
 
-    // PortaPotties
     group('defaultPortaPottiesAcres', () {
       test('0 when acres are 0', () {
         Estimate estimate = Estimate(acres: 0);
@@ -346,8 +338,6 @@ void main() {
     });
 
     // STRUCTURE TESTS BELOW
-    //Sprinklers
-
     group('defaultSprinklerKits', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -377,7 +367,6 @@ void main() {
       });
     });
 
-    // OnePointFive Inch Hose
     group('defaultOnePointFiveInchHose', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -405,7 +394,6 @@ void main() {
       });
     });
 
-    // One Inch Hose
     group('defaultOneInchHose', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -429,7 +417,6 @@ void main() {
       });
     });
 
-    // One Point Five Wye
     group('defaultOnePointFiveWye', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -453,7 +440,6 @@ void main() {
       });
     });
 
-    // One Inch Wye
     group('defaultOneInchWye', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -477,7 +463,6 @@ void main() {
       });
     });
 
-    // OnePointFiveToOneInchReducer
     group('defaultOnePointFiveToOneInchReducer', () {
       test('0 when there is no structure', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -507,7 +492,6 @@ void main() {
       });
     });
 
-    // KK Nozzles
     group('defaultKKNozzles', () {
       test('0 When there are no structure', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -530,7 +514,6 @@ void main() {
       });
     });
 
-    // Mark 3 Structures
     group('defaultMark3Structures', () {
       test('Default Mark3Structures - Structures: 0', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
@@ -553,7 +536,6 @@ void main() {
       });
     });
 
-    // Unleaded Gas
     group('defaultUnleadedGas', () {
       test('Default Unleaded Gas - Structures: x < 10', () {
         Estimate estimate = Estimate(acres: 0, structures: 5);
@@ -570,8 +552,6 @@ void main() {
         expect(estimate.defaultUnleadedGas(), equals(300));
       });
     });
-
-    // Two Cycle Oil
 
     group('defaultTwoCycleOil', () {
       test('0 when there are no structures', () {
@@ -596,7 +576,6 @@ void main() {
       });
     });
 
-    // Porta Potties Structure
     group('defaultPortaPottiesStructures', () {
       test('0 when there are no structures', () {
         Estimate estimate = Estimate(acres: 0, structures: 0);
