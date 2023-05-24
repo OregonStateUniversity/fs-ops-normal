@@ -81,26 +81,25 @@ void main() {
           24);
 
       //Assert
-      expect(estimate.name, equals(1));
+      expect(estimate.name, equals("name"));
       expect(estimate.acres, equals(1));
       expect(estimate.trunkLineLength, equals(1200));
       expect(estimate.latLineLength, equals(600));
       expect(estimate.toyLineLength, equals(300));
-      expect(estimate.fittings, equals(6));
+      expect(estimate.fittings, equals(24));
     });
 
     test('toJson', () {
       //Arrange
       Estimate estimate = Estimate(acres: 1);
-      // estimate.acres = 1;
       var expected =
-          "{name: , timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200,"
-          " latLineLength: 600, toyLineLength: 300, fittings: 6, onePointFiveInchWye: 0"
-          ", onePointFiveInchReducer: 0, foldaTanks: 0, mark3Kits: 0, pumpCans: 0, "
-          "waterPallets: 0, gatoradePallets: 0, mrePallets: 0, portaPottiesPallets: 0, "
-          "sprinklerKits: 0, onePointFiveHose: 0, oneInchHose: 0, oneInchWye: 0, "
-          "kkNozzles: 0, mark3Structures: 0, foldaTankStructures: 0, unleadedGas: 30, "
-          "twoCycleOil: 0, foam: 0}";
+        "{name: , timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200,"
+        " latLineLength: 600, toyLineLength: 300, fittings: 6, onePointFiveInchWye: 0"
+        ", onePointFiveInchReducer: 0, foldaTanks: 0, mark3Kits: 0, pumpCans: 0, "
+        "waterPallets: 0, gatoradePallets: 0, mrePallets: 0, portaPottiesPallets: 0, "
+        "sprinklerKits: 0, onePointFiveHose: 0, oneInchHose: 0, oneInchWye: 0, "
+        "kkNozzles: 0, mark3Structures: 0, foldaTankStructures: 0, unleadedGas: 30, "
+        "twoCycleOil: 0, foam: 0}";
 
       //Act
       var estimateJson = estimate.toJson().toString();
@@ -111,8 +110,7 @@ void main() {
 
     test('fromJson', () {
       //Arrange
-      Estimate estimate = Estimate();
-      estimate.acres = 1;
+      Estimate estimate = Estimate(acres: 1);
       var estimateToJson = estimate.toJson();
 
       //Act
@@ -121,8 +119,7 @@ void main() {
       //Assert
       expect(estimate.name, equals(estimateFromJson.name));
       expect(estimate.acres, equals(estimateFromJson.acres));
-      expect(
-          estimate.trunkLineLength, equals(estimateFromJson.trunkLineLength));
+      expect(estimate.trunkLineLength, equals(estimateFromJson.trunkLineLength));
       expect(estimate.latLineLength, equals(estimateFromJson.latLineLength));
       expect(estimate.toyLineLength, equals(estimateFromJson.toyLineLength));
       expect(estimate.fittings, equals(estimateFromJson.fittings));
