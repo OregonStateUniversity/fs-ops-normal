@@ -38,7 +38,7 @@ void main() {
           15);
 
       //Assert
-      expect(estimate.name, equals(1));
+      expect(estimate.name, equals("name"));
       expect(estimate.acres, equals(1));
       expect(estimate.trunkLineLength, equals(1200));
       expect(estimate.latLineLength, equals(600));
