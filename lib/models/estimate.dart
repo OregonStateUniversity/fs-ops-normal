@@ -171,7 +171,6 @@ class Estimate {
       json["trunkLineLength"],
       json["latLineLength"],
       json["toyLineLength"],
-      json["fittings"],
       json["onePointFiveInchWye"],
       json["onePointFiveInchReducer"],
       json["foldaTanks"],
@@ -190,7 +189,8 @@ class Estimate {
       json["foldaTankStructures"],
       json["unleadedGas"],
       json["twoCycleOil"],
-      json["foam"] ?? 0);
+      json["foam"] ?? 0,
+      json["fittings"]);
 
   void initializeSavedProperties() {
     trunkLineLength = defaultTrunkLineLength();
