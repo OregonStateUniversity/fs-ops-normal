@@ -223,7 +223,7 @@ class Estimate {
   }
 
   int defaultLatLineLength() {
-    if (acres! >= 0) {
+    if (acres! < 20) {
       return (trunkLine! ~/ 2).toInt();
     } else {
       return 0;
@@ -231,7 +231,7 @@ class Estimate {
   }
 
   int defaultToyLineLength() {
-    if (acres! >= 0) {
+    if (acres! < 20) {
       return (latLine! ~/ 2).toInt();
     } else {
       return 0;
@@ -239,7 +239,7 @@ class Estimate {
   }
 
   int defaultFittings() {
-    if (acres! >= 0) {
+    if (acres! < 20) {
       return (latLine! ~/ 100).toInt();
     } else {
       return 0;
@@ -279,34 +279,34 @@ class Estimate {
   }
 
   int defaultWaterPallets() {
-    if (acres! >= 20) {
-      return (acres! ~/ 20).toInt();
-    } else {
+    if (acres! < 20) {
       return 0;
+    } else {
+      return (acres! ~/ 20).toInt();
     }
   }
 
   int defaultGatoradePallets() {
-    if (acres! >= 20) {
-      return (acres! ~/ 20).toInt();
-    } else {
+    if (acres! < 20) {
       return 0;
+    } else {
+      return (acres! ~/ 20).toInt();
     }
   }
 
   int defaultMrePallets() {
-    if (acres! >= 20) {
-      return (acres! ~/ 20).toInt();
-    } else {
+    if (acres! < 20) {
       return 0;
+    } else {
+      return (acres! ~/ 20).toInt();
     }
   }
 
   int defaultPortaPottiesAcres() {
-    if (acres! >= 20) {
-      return (acres! ~/ 10).toInt();
-    } else {
+    if (acres! < 20) {
       return 0;
+    } else {
+      return (acres! ~/ 10).toInt();
     }
   }
 
