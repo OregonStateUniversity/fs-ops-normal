@@ -4,10 +4,8 @@ import 'package:ops_normal/models/estimate.dart';
 void main() {
   group('An Estimate', () {
     test('using finalEstimate named constructor', () {
-      //Arrange
       Estimate estimate;
 
-      //Act
       estimate = Estimate.finalEstimate(
           "name",
           1,
@@ -37,7 +35,6 @@ void main() {
           12,
           15);
 
-      //Assert
       expect(estimate.name, equals("name"));
       expect(estimate.acres, equals(1));
       expect(estimate.trunkLineLength, equals(1200));
@@ -47,10 +44,8 @@ void main() {
     });
 
     test('using jsonConvF named constructor', () {
-      //Arrange
       Estimate estimate;
 
-      //Act
       estimate = Estimate.jsonConvF(
           "name",
           1,
@@ -80,7 +75,6 @@ void main() {
           36,
           24);
 
-      //Assert
       expect(estimate.name, equals("name"));
       expect(estimate.acres, equals(1));
       expect(estimate.trunkLineLength, equals(1200));
@@ -90,7 +84,6 @@ void main() {
     });
 
     test('toJson', () {
-      //Arrange
       Estimate estimate = Estimate(acres: 1);
       var expected =
         "{name: , timeStamp: null, acres: 1, structures: 0, trunkLineLength: 1200,"
@@ -101,22 +94,17 @@ void main() {
         "kkNozzles: 0, mark3Structures: 0, foldaTankStructures: 0, unleadedGas: 30, "
         "twoCycleOil: 0, foam: 0}";
 
-      //Act
       var estimateJson = estimate.toJson().toString();
 
-      //Assert
       expect(estimateJson, equals(expected));
     });
 
     test('fromJson', () {
-      //Arrange
       Estimate estimate = Estimate(acres: 1);
       var estimateToJson = estimate.toJson();
 
-      //Act
       var estimateFromJson = Estimate.fromJson(estimateToJson);
 
-      //Assert
       expect(estimate.name, equals(estimateFromJson.name));
       expect(estimate.acres, equals(estimateFromJson.acres));
       expect(estimate.trunkLineLength, equals(estimateFromJson.trunkLineLength));
@@ -126,10 +114,8 @@ void main() {
     });
 
     test('has initial acre calculations', () {
-      //Arrange
       Estimate estimate = Estimate(acres: 1);
 
-      //Assert
       expect(estimate.acres, equals(1));
       expect(estimate.trunkLineLength, equals(1200));
       expect(estimate.latLineLength, equals(600));
@@ -138,10 +124,8 @@ void main() {
     });
 
     test('has initial structure calculations', () {
-      //Arrange
       Estimate estimate = Estimate(acres: 0, structures: 1);
 
-      //Assert
       expect(estimate.acres, equals(0));
       expect(estimate.trunkLineLength, equals(1000));
       expect(estimate.latLineLength, equals(500));
